@@ -1,0 +1,51 @@
+.product-form__buttons .button:before, .button: after {
+  box-shadow: unset;
+}
+
+section video{
+ width: 100%;
+    margin: 0px 0;
+    padding: 0;
+}
+
+
+@media (max-width: 767px) {
+  
+  /* body {
+    overflow: unset !important;
+  } */
+  
+      #shopify-chat:not(body.scroll-cls #shopify-chat) {
+        display: none;
+      }
+  
+      .button,
+      .shopify-challenge__button,
+      .customer button,
+      button.shopify-payment-button__button--unbranded,
+      shop-pay-wallet-button *{
+        min-height: 40px !important;
+        padding: 0 2rem;
+        font-size: 15px;
+      }
+  
+      .jdgm-write-rev-link.jdgm-write-rev-link,
+      .zrx-sticky-atc-main-button{
+        max-width: fit-content !important;        
+        padding: 1.1rem 1.5rem !important;
+      }
+      
+      .product-slider.main-slider .custom-arrow{
+        width: 25px;
+        height: 25px;
+        padding: 0px;
+      }
+  
+      .product-slider.main-slider .custom-arrow svg {
+        width: 20px;
+        height: 20px;
+      }
+
+
+  
+}

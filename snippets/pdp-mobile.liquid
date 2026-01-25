@@ -1,0 +1,238 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<style>
+  .product-slider {
+  max-width: 600px;
+  margin: auto;
+}
+
+.product-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 400px;
+    min-height: 400px;
+}
+
+.custom-arrow {
+    background: rgb(0 0 0 / 98%);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+  .custom-arrow svg {
+    width: 20px;
+    height: 25px;
+}
+  
+.custom-arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.slick-prev{
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.slick-next {
+    right: 10px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+  .main-slider {
+    position: relative;
+  }
+  
+    .slick-next:before,.slick-prev:before{
+      display:none;    
+    }
+
+  .slick-dots {
+    bottom: 0px !important;
+  }
+
+  .slick-dots li button:before {
+    opacity: 1 !important;
+    color: #ffffff !important;
+}
+
+  .slick-dots li.slick-active button:before {
+    color: #193c46 !important;
+    font-size: 10px !important;
+}
+
+  .slick-dots li {
+    margin: 0 0px !important;
+}
+
+
+.product-featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-height: 400px;
+    min-height: 400px;
+}
+
+
+
+.js-fallback-image {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+  z-index: 1;
+}
+
+.js-fallback-image.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute; 
+  z-index: 0;
+  width: 100%;
+}
+
+.main-slider {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+  display: none;
+}
+
+.main-slider.fade-in {
+  display: block; 
+  opacity: 1;
+  visibility: visible;
+}
+
+
+</style>
+
+
+    <div class="product-featured-image js-fallback-image">
+      <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title | escape }}" loading="lazy" />
+    </div>
+    
+ 
+    <div class="product-slider main-slider" >
+      {% for media in product.media %}
+        {% if media.media_type == 'image' %}
+          <div>
+            <img src="{{ media.preview_image | img_url: 'master' }}" alt="{{ media.alt | escape }}" loading="lazy" />
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+ 
+  <script>
+    $(document).ready(function(){
+      const $slider = $('.main-slider');
+      const $fallback = $('.js-fallback-image');
+    
+      $slider.on('init', function() {
+        $fallback.addClass('fade-out');
+    
+        setTimeout(() => {
+          $fallback.css('display', 'none');
+        }, 400); 
+       
+        $slider.addClass('fade-in');
+      });
+    
+      setTimeout(() => {
+        $slider.slick({
+          slidesToShow: 1,
+          arrows: true,
+          dots: true,
+          infinite: false,
+          speed: 150,
+          fade: false,
+          cssEase: 'ease-out',
+          edgeFriction: 0,
+          draggable: true,
+          swipe: true,
+          swipeToSlide: true,
+          touchThreshold: 1,
+          touchMove: true,
+          waitForAnimate: false,
+          mobileFirst: true,
+          accessibility: false,
+          useTransform: true,
+          prevArrow: `<button type="button" class="slick-prev custom-arrow">      
+            <svg width="20" height="20" viewBox="0 0 25 26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>`,
+          nextArrow: `<button type="button" class="slick-next custom-arrow">
+            <svg width="20" height="20" viewBox="0 0 25 26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 6 15 12 9 18" />
+            </svg>
+          </button>`
+        });
+      }, 300);
+    
+      
+      $fallback.css('display', 'block');
+    
+        let startX = 0;
+      let startY = 0;
+      const minSwipeDistance = 15; 
+    
+      $slider.on('touchstart', function(e) {
+        startX = e.originalEvent.touches[0].clientX;
+        startY = e.originalEvent.touches[0].clientY;
+      });
+    
+      $slider.on('touchmove', function(e) {
+        if (!startX || !startY) return;
+        
+        let currentX = e.originalEvent.touches[0].clientX;
+        let currentY = e.originalEvent.touches[0].clientY;
+        
+        let diffX = startX - currentX;
+        let diffY = startY - currentY;
+        
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > minSwipeDistance) {
+          if (diffX > 0) {
+            $(this).slick('slickNext');
+          } else {
+            $(this).slick('slickPrev');
+          }
+          startX = 0;
+          startY = 0;
+        }
+      });        
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+

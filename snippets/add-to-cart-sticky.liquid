@@ -1,0 +1,39 @@
+<div class="sticky-atc-wrapper">
+  <form method="post" action="/cart/add">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+    <button type="submit" class="sticky-atc-button">
+      Add to Cart
+    </button>
+  </form>
+</div>
+
+
+<style>
+  .sticky-atc-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: auto;
+}
+
+.sticky-atc-button {
+  background-color: #000;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Optional: Hover Effect */
+.sticky-atc-button:hover {
+  background-color: #333;
+}
+
+</style>
