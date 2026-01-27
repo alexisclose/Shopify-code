@@ -35,13 +35,6 @@
             "page": ""
           }
         },
-        "text_BxeAKe": {
-          "type": "text",
-          "settings": {
-            "text": "See more reviews on <a href=\"https://www.trustpilot.com/review/elcarteltastings.com\" target=\"_blank\" title=\"https://www.trustpilot.com/review/elcarteltastings.com\">Trustpilot</a>",
-            "text_style": "body"
-          }
-        },
         "price": {
           "type": "price",
           "settings": {}
@@ -103,7 +96,6 @@
         "variant_picker",
         "judge_me_reviews_preview_badge_rMk6ri",
         "popup_wBpPGG",
-        "text_BxeAKe",
         "price",
         "description",
         "collapsible_tab_GLJYqE",
