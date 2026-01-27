@@ -140,6 +140,53 @@
         "padding_bottom": 36
       }
     },
+    "image_with_text_AGAJew": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_EdMLDG": {
+          "type": "heading",
+          "settings": {
+            "heading": "<em>Made from the best available materials</em>",
+            "heading_size": "h1"
+          }
+        },
+        "text_mBKwmP": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>We want your whisky journey to last that's why we've made this journal in the highest quality sustainable leather with heavy 120gsm fountain pen friendly paper.</em></p>",
+            "text_style": "subtitle"
+          }
+        },
+        "button_H3WaEA": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "shopify://products/whisky-tasting-gift-box-12-tubes",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_EdMLDG",
+        "text_mBKwmP",
+        "button_H3WaEA"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/image00001.jpg",
+        "height": "adapt",
+        "desktop_image_width": "large",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -881,6 +928,7 @@
   },
   "order": [
     "main",
+    "image_with_text_AGAJew",
     "related-products",
     "ss_featured_collection_15_6BpDMf",
     "ss_slider_2_RM8cQz",
