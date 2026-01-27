@@ -516,7 +516,7 @@
       ".product__title {margin-top: 0 !important; padding-top: 0 !important;}",
       ".main-content__inner-container:has(.product) {overflow: visible;}",
       "/* Adjusts the main product title size */.product__title h1 {font-size: 3rem !important; /* Standard is usually 2.5rem or 3rem */ letter-spacing: 0.5px;}",
-      "/* Adjusts the size on mobile specifically if needed */@media (max-width: 749px) {.product__title h1 {font-size: 2rem !important; }}"
+      "/* Adjusts the size on mobile specifically if needed */@media (max-width: 749px) {.product__title h1 {font-size: 2.2rem !important; }}"
     ]
   }
 }
