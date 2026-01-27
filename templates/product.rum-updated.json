@@ -174,7 +174,7 @@
         "heading_xzhpTA": {
           "type": "heading",
           "settings": {
-            "heading": "Discover the Whiskies",
+            "heading": "Discover the Rums",
             "heading_size": "h1"
           }
         }
@@ -189,6 +189,263 @@
         "full_width": true,
         "padding_top": 72,
         "padding_bottom": 52
+      }
+    },
+    "ss_featured_collection_15_zhEAUC": {
+      "type": "ss-featured-collection-15",
+      "blocks": {
+        "featured_ndjMMg": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/Image_for_bottle_8.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Takamaka Dark Spiced </strong>is a spiced rum from the Seychelles, crafted by the Trois Frères Distillery on the island of Mahé. Made from locally grown sugarcane and infused with a secret blend of natural spices and botanicals, this rum delivers a rich and warming profile. Expect notes of vanilla, cinnamon, nutmeg, and a hint of tropical fruit, rounded off with a subtle smokiness. <br/><br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#e9e1fc"
+          }
+        },
+        "featured_DPmtBb": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/7.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Plantation Gran Añejo</strong> is a premium rum blend from Guatemala and Belize, aged 3 to 6 years in ex-bourbon barrels and finished in French Ferrand cognac casks. It features a rich, smooth profile with notes of vanilla, caramel, tropical fruits, and subtle spices, complemented by hints of tobacco and oak.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#e0fcee"
+          }
+        },
+        "featured_hAraC7": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/6.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Appleton Estate Signature Blend</strong> is a Jamaican rum crafted from a blend of pot and column still rums, aged for an average of four years in ex-bourbon barrels. It offers a fruit-forward profile with notes of dried apricot, fresh peach, and subtle hints of molasses, complemented by vanilla and brown sugar .<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_xKHjAz": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/Image_for_bottle_7.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Flor de Caña 7 Year Old</strong> is a premium Nicaraguan rum crafted by Compañía Licorera de Nicaragua, a family-owned distillery established in 1890 at the base of the San Cristóbal volcano. This rum is renowned for its commitment to sustainability, being both carbon-neutral and Fair Trade certified, and is distilled using 100% renewable energy.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_4UaDcr": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/5.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Mount Gay Eclipse</strong> is a Barbadian rum produced by Mount Gay Distilleries, recognized as the world's oldest commercial rum producer, established in 1703. This rum is crafted from a blend of pot and column still distillates, aged for up to two years in ex-bourbon barrels. It offers a light-bodied profile with notes of vanilla, caramel, and subtle oak.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_rdWgAH": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/11.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>El Dorado 12 Year Old</strong> is a premium Demerara rum from Guyana, crafted by Demerara Distillers Limited. It blends rums aged at least 12 years in ex-bourbon casks, utilizing both wooden and metal Coffey stills. This rum offers a rich profile with notes of tropical fruits, spice, honey, and dark sugar. </p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_abFkD6": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/13_3a502cb6-4c72-488a-9cb6-5c6fb713f17a.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Pampero Aniversario </strong>is a premium Venezuelan rum crafted by Industrias Pampero to commemorate the distillery's 25th anniversary in 1963. Blended from rums aged between 4 and 6 years in whisky and sherry casks, it offers a rich profile with notes of caramel, vanilla, cocoa, and subtle spices like cinnamon and nutmeg.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_iLqDry": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/10.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Diplomático Mantuano</strong> is a Venezuelan rum crafted from a blend of molasses and sugar cane honey, aged up to eight years in ex-bourbon and malt whisky casks. It features a rich flavor profile with notes of dried fruits, vanilla, and subtle spices, complemented by hints of oak and a touch of sweetness.</p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#e3edd0"
+          }
+        },
+        "featured_TjVWYg": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/12.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Don Papa Masskara</strong> is a flavored rum from the Philippines, inspired by the vibrant Masskara Festival. Crafted from molasses and aged in American oak barrels, it is infused with calamansi (a native citrus), siling labuyo chili, and tropical honey . This blend results in a sweet, citrus-forward profile with notes of honey, caramel, and vanilla, complemented by a subtle chili warmth.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#eaf5f6"
+          }
+        },
+        "featured_yWA7eK": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/9.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Ron Abuelo 7 Años</strong> is a Panamanian rum produced by Varela Hermanos, aged for seven years in ex-bourbon oak barrels. It offers a balanced flavor profile with notes of vanilla, caramel, dried fruits, and subtle spices, complemented by a smooth, medium-bodied texture. <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fce0f6"
+          }
+        },
+        "featured_hDcNat": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/Image_for_bottle_9.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Goslings Black Seal </strong>is a rich and full-bodied dark rum from Bermuda, produced by the Gosling family since the mid-1800s. Aged in charred oak barrels, this iconic rum is known for its deep flavor and smooth character. It offers layered notes of molasses, caramel, vanilla, and baking spices, with a hint of smoke and a dry, balanced finish. <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_yiXV6R": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/4.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Bacardi Reserva Ocho</strong> is a Cuban golden rum aged for a minimum of eight years in American white oak barrels, inspired by a family recipe dating back to 1862. It offers a rich and mellow flavor profile featuring notes of dried apricot, banana leaf, oak, and spices, with a smooth, well-rounded finish.</p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        }
+      },
+      "block_order": [
+        "featured_ndjMMg",
+        "featured_DPmtBb",
+        "featured_hAraC7",
+        "featured_xKHjAz",
+        "featured_4UaDcr",
+        "featured_rdWgAH",
+        "featured_abFkD6",
+        "featured_iLqDry",
+        "featured_TjVWYg",
+        "featured_yWA7eK",
+        "featured_hDcNat",
+        "featured_yiXV6R"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_custom": false,
+        "heading_font": "serif",
+        "heading_size": 40,
+        "heading_size_mobile": 34,
+        "heading_height": 130,
+        "heading_align": "center",
+        "heading_align_mobile": "center",
+        "collection": "",
+        "collection_show": 10,
+        "slider_gap": 32,
+        "slider_gap_mobile": 16,
+        "slider_view_mobile": 1.2,
+        "slider_mt": 48,
+        "slider_mt_mobile": 32,
+        "image_width": 300,
+        "image_radius": 0,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "slide_content_width": 300,
+        "content_align": "left",
+        "content_align_mobile": "center",
+        "content_vertical_align": "center",
+        "title_custom": false,
+        "title_font": "bevan_n4",
+        "title_size": 18,
+        "title_size_mobile": 18,
+        "title_height": 130,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "text_height": 150,
+        "text_mt": 12,
+        "text_mt_mobile": 12,
+        "button_text": "Shop now",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 16,
+        "button_size_mobile": 16,
+        "button_height": 100,
+        "button_padding_horizontal": 36,
+        "button_padding_horizontal_mobile": 36,
+        "button_padding_vertical": 14,
+        "button_padding_vertical_mobile": 14,
+        "button_radius": 100,
+        "button_border_thickness": 1,
+        "button_mt": 24,
+        "button_mt_mobile": 24,
+        "button_style": "outline",
+        "arrow_size": 48,
+        "arrow_size_mobile": 40,
+        "arrow_icon_size": 10,
+        "arrow_icon_size_mobile": 8,
+        "arrow_border_thickness": 0,
+        "arrow_radius": 100,
+        "arrow_hover_effect": "color",
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "title_color": "#121212",
+        "text_color": "#121212",
+        "image_border_color": "#121212",
+        "button_color": "#ffffff",
+        "button_hover_color": "#121212",
+        "button_bg_color": "#121212",
+        "button_bg_hover_color": "#ffffff",
+        "button_border_color": "#121212",
+        "button_border_hover_color": "#121212",
+        "arrow_color": "#121212",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#121212",
+        "arrow_border_color": "#121212",
+        "arrow_border_hover_color": "#121212",
+        "heading_color": "#121212",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 84,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
       }
     },
     "ss_featured_collection_15_Feadje": {
@@ -1291,6 +1548,7 @@
     "related-products",
     "custom_liquid_a3TKjQ",
     "rich_text_3a9YRj",
+    "ss_featured_collection_15_zhEAUC",
     "ss_featured_collection_15_Feadje",
     "rich_text_gbi6cK",
     "ss_featured_collection_15_6BpDMf",
