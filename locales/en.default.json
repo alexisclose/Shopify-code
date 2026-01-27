@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -181,22 +190,42 @@
       "duties_and_taxes_included": "Duties and taxes included.",
       "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
     },
-    "features": {
-      "gift": {
-        "title": "A special whisky every day",
-        "description": "Perfect gift to please a spirits enthusiast."
+"features": {
+      "whisky": {
+        "gift": {
+          "title": "A special whisky every day",
+          "description": "Perfect gift to please a spirits enthusiast."
+        },
+        "tasting": {
+          "title": "A Digital tasting Experience.",
+          "description": "Discover your Whisky Profile with our AI Algorithm."
+        },
+        "vial": {
+          "title": "1 vial = 1 glass.",
+          "description": "The perfect serve to taste."
+        },
+        "discovering": {
+          "title": "Simply discovering good whisky.",
+          "description": "Premium, fun, and accessible to all."
+        }
       },
-      "tasting": {
-        "title": "A Digital tasting Experience.",
-        "description": "Discover your Whisky Profile with our AI Algorithm."
-      },
-      "vial": {
-        "title": "1 vial = 1 glass.",
-        "description": "The perfect serve to taste."
-      },
-      "discovering": {
-        "title": "Simply discovering good whisky.",
-        "description": "Premium, fun, and accessible to all."
+      "rum": {
+        "gift": {
+          "title": "A special rum every day",
+          "description": "Perfect gift to please a rum enthusiast."
+        },
+        "tasting": {
+          "title": "A Digital tasting Experience.",
+          "description": "Discover your Rum Profile with our AI Algorithm."
+        },
+        "vial": {
+          "title": "1 vial = 1 glass.",
+          "description": "The perfect serve to taste."
+        },
+        "discovering": {
+          "title": "Simply discovering good rum.",
+          "description": "Premium, fun, and accessible to all."
+        }
       }
     }
   },
