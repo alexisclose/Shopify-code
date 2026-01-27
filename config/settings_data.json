@@ -515,7 +515,8 @@
       "/* Best-Seller Badge */.product-badge--best-seller {display: block !important; width: fit-content !important; margin-left: auto !important; margin-right: auto !important; margin-top: 0 !important; margin-bottom: 0px !important; background-color: #000000 !important; color: #ffffff !important; padding: 4px 8px !important; border-radius: 10px !important; font-size: 10px !important; font-weight: 700 !important; text-transform: capitalize !important; letter-spacing: 0.02em !important; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;}",
       ".product__title {margin-top: 0 !important; padding-top: 0 !important;}",
       ".main-content__inner-container:has(.product) {overflow: visible;}",
-      "/* Make product title smaller */"
+      "/* Adjusts the main product title size */.product__title h1 {font-size: 3rem !important; /* Standard is usually 2.5rem or 3rem */ letter-spacing: 0.5px;}",
+      "/* Adjusts the size on mobile specifically if needed */@media (max-width: 749px) {.product__title h1 {font-size: 2rem !important; }}"
     ]
   }
 }
