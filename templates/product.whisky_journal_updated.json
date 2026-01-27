@@ -38,7 +38,7 @@
             "custom_liquid": "<div style=\"margin: 16px 0;\">\n  <label style=\"display: block; font-size: 13px; font-weight: 700; margin-bottom: 12px; color: #1a3d5c; text-transform: uppercase; letter-spacing: 1px;\">Select Your Color:</label>\n</div>"
           }
         },
-        "variant_picker": {
+        "variant_picker_gKQpkj": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
@@ -109,7 +109,7 @@
         "popup_wBpPGG",
         "price",
         "custom_liquid_ggN4pw",
-        "variant_picker",
+        "variant_picker_gKQpkj",
         "buy_buttons",
         "custom_liquid_9yGaAT",
         "custom_liquid_zCmbKz",
