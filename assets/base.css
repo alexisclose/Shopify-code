@@ -4292,4 +4292,7 @@ body.template-product--whisky .product-form__submit {
     margin-bottom: 12px !important;
   }
 }
- 
+ .product__title {
+  font-size: 2px; /* adjust to your preferred size */
+  line-height: 1.2; /* optional: spacing */
+}
