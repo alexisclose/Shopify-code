@@ -161,8 +161,9 @@
     },
     "custom_liquid_a3TKjQ": {
       "type": "custom-liquid",
+      "custom_css": [],
       "settings": {
-        "custom_liquid": "<style>\nvideo {\nwidth: 110%;\nheight: auto;\ndisplay: block;\nmargin: -38px;\n}\n</style>\n<video muted autoplay playsinline loop>\n    <source src=\"https://cdn.shopify.com/videos/c/o/v/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video/mp4\">\n    <https://cdn.shopify.com/videos/c/o/v/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video/mp4\">\n</video>",
+        "custom_liquid": "<style>\n  /* Use a unique class to avoid affecting other videos on your site */\n  .custom-journal-video {\n    width: 100%; /* Changed to 100% to prevent horizontal scrolling */\n    height: auto;\n    display: block;\n    /* Adjust this number: -50px moves it up, 0px is default, 50px moves it down */\n    margin-top: -50px !important; \n    position: relative;\n    z-index: 1;\n  }\n\n  /* This part removes the empty space Shopify sections often add at the top */\n  #shopify-section-{{ section.id }} {\n    padding-top: 0 !important;\n    margin-top: 0 !important;\n  }\n</style>\n\n<video \n  class=\"custom-journal-video\" \n  muted \n  autoplay \n  playsinline \n  loop \n  preload=\"metadata\">\n    <source src=\"https://cdn.shopify.com/videos/c/o/v/8767ac1f54e84339aa11e9286feab240.mp4\" type=\"video/mp4\">\n    Your browser does not support the video tag.\n</video>",
         "color_scheme": "scheme-62be9fda-23e4-4803-99e8-263f77702745",
         "padding_top": 84,
         "padding_bottom": 0
