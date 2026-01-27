@@ -1,4 +1,12 @@
-.product-form__buttons .button:before, .button: after {
+body.template-product--rum .product-form__submit,
+body.template-product--rum-updated .product-form__submit {
+  font-size: 16px !important;
+  min-height: 40px !important;
+  padding: 0 2rem !important;
+  white-space: nowrap;
+}
+
+.product-form__buttons .button:before, .button::after {
   box-shadow: unset;
 }
 
