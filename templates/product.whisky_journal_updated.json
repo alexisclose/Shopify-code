@@ -34,12 +34,14 @@
         },
         "custom_liquid_ggN4pw": {
           "type": "custom_liquid",
+          "disabled": true,
           "settings": {
             "custom_liquid": "<div style=\"margin: 16px 0;\">\n  <label style=\"display: block; font-size: 13px; font-weight: 700; margin-bottom: 12px; color: #1a3d5c; text-transform: uppercase; letter-spacing: 1px;\">Select Your Color:</label>\n</div>"
           }
         },
         "variant_picker_gKQpkj": {
           "type": "variant_picker",
+          "disabled": true,
           "settings": {
             "picker_type": "button",
             "swatch_shape": "circle"
