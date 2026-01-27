@@ -4242,5 +4242,5 @@ html, body {
 /* Make rum buy button same size as whisky */
 .template-product-rum .product-form__buttons,
 .template-product-rum-updated .product-form__buttons {
-  max-width: 420px;
+  max-width: 300px;
 }
