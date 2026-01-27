@@ -1252,8 +1252,8 @@
         "button_yH4nxt": {
           "type": "button",
           "settings": {
-            "button_label": "Discover rum",
-            "button_link": "shopify://products/rum-tasting-gift-box-12-tubes",
+            "button_label": "Discover Whisky",
+            "button_link": "shopify://products/whisky-tasting-gift-box-12-tubes",
             "button_style_secondary": false
           }
         }
