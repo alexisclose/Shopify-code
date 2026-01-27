@@ -4239,8 +4239,9 @@ html, body {
   }
 }
 
-/* Make rum buy button same size as whisky */
-.template-product-rum .product-form__buttons,
+/* Make rum (product.rum-updated.json) buy button same size as whisky */
 .template-product-rum-updated .product-form__buttons {
-  max-width: 300px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
 }
