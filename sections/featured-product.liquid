@@ -100,6 +100,39 @@
               {%- case block.type -%}
                 {%- when '@app' -%}
                   {% render block %}
+                {%- when 'series_switcher' -%}
+                  <div class="series-switcher-container" {{ block.shopify_attributes }}>
+                    {%- liquid
+                      assign current_handle = product.handle
+                      assign p1 = block.settings.product_1
+                      assign p2 = block.settings.product_2
+                      assign p3 = block.settings.product_3
+                    -%}
+                    
+                    <div class="series-switcher-buttons">
+                      {%- if p1 != blank -%}
+                        <a href="{{ p1.url }}" class="series-button {% if current_handle == p1.handle %}active{% endif %}">
+                          <span class="series-flag">{{ block.settings.product_1_flag }}</span>
+                          <span class="series-label">{{ block.settings.product_1_label }}</span>
+                        </a>
+                      {%- endif -%}
+
+                      {%- if p2 != blank -%}
+                        <a href="{{ p2.url }}" class="series-button {% if current_handle == p2.handle %}active{% endif %}">
+                          <span class="series-flag">{{ block.settings.product_2_flag }}</span>
+                          <span class="series-label">{{ block.settings.product_2_label }}</span>
+                        </a>
+                      {%- endif -%}
+
+                      {%- if p3 != blank -%}
+                        <a href="{{ p3.url }}" class="series-button {% if current_handle == p3.handle %}active{% endif %}">
+                          <span class="series-flag">{{ block.settings.product_3_flag }}</span>
+                          <span class="series-label">{{ block.settings.product_3_label }}</span>
+                        </a>
+                      {%- endif -%}
+                    </div>
+                  </div>
+
                 {%- when 'text' -%}
                   <p
                     class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
@@ -699,6 +732,70 @@
           "default": true,
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+        }
+      ]
+    },
+    {
+      "type": "series_switcher",
+      "name": "Series Switcher",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Link sibling products here (e.g. Japanese, Scotch, World)."
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product 1 (e.g. Scotch)"
+        },
+        {
+          "type": "text",
+          "id": "product_1_label",
+          "label": "Label 1",
+          "default": "Scotch",
+          "info": "Text to display on button"
+        },
+        {
+          "type": "text",
+          "id": "product_1_flag",
+          "label": "Flag 1",
+          "default": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+          "info": "Emoji flag"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product 2 (e.g. Japanese)"
+        },
+        {
+          "type": "text",
+          "id": "product_2_label",
+          "label": "Label 2",
+          "default": "Japanese"
+        },
+        {
+          "type": "text",
+          "id": "product_2_flag",
+          "label": "Flag 2",
+          "default": "🇯🇵"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product 3 (e.g. World)"
+        },
+        {
+          "type": "text",
+          "id": "product_3_label",
+          "label": "Label 3",
+          "default": "World"
+        },
+        {
+          "type": "text",
+          "id": "product_3_flag",
+          "label": "Flag 3",
+          "default": "🌍"
         }
       ]
     },
