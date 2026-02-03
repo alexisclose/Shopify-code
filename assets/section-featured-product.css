@@ -87,3 +87,36 @@
 .featured-product media-gallery[data-desktop-layout='thumbnail'] .product__media-list {
   display: block !important;
 }
+
+/* Featured product custom styles (moved from index.json custom_css) */
+.featured-product .product-title,
+.featured-product .product__title,
+.featured-product h1.product-title,
+.featured-product .product-info__title,
+.featured-product .product__title h1 {
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
+.featured-product .product__price,
+.featured-product .product-price,
+.featured-product .price,
+.featured-product .product__info-container .price,
+.featured-product .product-form__price {
+  text-align: center !important;
+  justify-content: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.featured-product .price__container {
+  text-align: center !important;
+  justify-content: center !important;
+}
+
+@media screen and (max-width: 749px) {
+  .featured-product .product__media-list {
+    margin-bottom: 0.5rem !important;
+  }
+}

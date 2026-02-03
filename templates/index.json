@@ -318,12 +318,7 @@
         "custom_liquid_kHkkHE",
         "text_VdDg7K"
       ],
-      "custom_css": [
-        ".product-title,.product__title,h1.product-title,.product-info__title,.product__title h1 {font-weight: 600 !important; text-align: center !important;}",
-        ".product__price,.product-price,.price,.product__info-container .price,.product-form__price {text-align: center !important; justify-content: center !important; display: flex !important; flex-direction: column !important; align-items: center !important;}",
-        ".price__container {text-align: center !important; justify-content: center !important;}",
-        "@media screen and (max-width: 749px) { .featured-product .product__media-list { margin-bottom: 0.5rem !important; } }"
-      ],
+      "custom_css": [],
       "settings": {
         "product": "whisky-tasting-gift-box-12-tubes",
         "color_scheme": "scheme-62be9fda-23e4-4803-99e8-263f77702745",
