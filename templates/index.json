@@ -1,1 +1,569 @@
-{"sections":{"ss_video_banner_BMxawt":{"type":"ss-video-banner","blocks":{"slide_HjVMp7":{"type":"slide","settings":{"autoplay":true,"video":"shopify:\/\/files\/videos\/copy_29FB6E3E-CDB8-4266-8A6B-3B8C78C2F311.mp4","video_url":"","title":"<h1>Gift an Unforgettable Tasting Experience <\/h1>","subtitle":"","button":"DISCOVER","button_url":"shopify:\/\/products\/whisky-tasting-gift-box-12-tubes","second_button":"","second_button_url":"shopify:\/\/products\/rum-tasting-gift-box-12-tubes"}}},"block_order":["slide_HjVMp7"],"custom_css":["\/* Force EB Garamond on video banner for all devices *\/.ab-banner-content-template--27585298235733__ss_video_banner_BMxawt h1,.ab-banner-content-template--27585298235733__ss_video_banner_BMxawt h2,.ab-banner-content-template--27585298235733__ss_video_banner_BMxawt .ab-banner-title-template--27585298235733__ss_video_banner_BMxawt,.ab-banner-title-template--27585298235733__ss_video_banner_BMxawt {font-family: \"EB Garamond\", serif !important;}"],"settings":{"height":700,"height_mobile":480,"overlay_opacity":9,"interval":5,"image_object_fit":"cover","vertical_alignment":"center","horizontal_alignment":"center","title_custom":false,"title_font":"josefin_sans_n4","title_size":50,"title_size_mobile":30,"title_height":130,"subtitle_custom":false,"subtitle_font":"josefin_sans_n4","subtitle_size":16,"subtitle_size_mobile":16,"subtitle_height":130,"subtitle_mt":20,"buttons_mt":20,"buttons_gap":20,"button_custom":true,"button_font":"montserrat_n6","button_size":16,"button_size_mobile":12,"button_height":120,"button_padding_vertical":16,"button_padding_vertical_mobile":16,"button_padding_horizontal":32,"button_padding_horizontal_mobile":32,"button_radius":36,"button_border_thickness":0,"button_color":"#000000","button_hover_color":"#ffffff","button_bg_color":"#ffffff","button_bg_hover_color":"#000000","button_border_color":"#000000","button_border_hover_color":"#000000","second_button_color":"#000000","second_button_hover_color":"#ffffff","second_button_bg_color":"#ffffff","second_button_bg_hover_color":"#000000","second_button_border_color":"#000000","second_button_border_hover_color":"#000000","title_color":"#ffffff","subtitle_color":"#ffffff","overlay_color":"#000000","background_color":"#535353","padding_top":0,"padding_bottom":0,"padding_horizontal":3,"padding_horizontal_mobile":1.5,"margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"section_width":120,"section_radius":0,"lazy":false}},"image_banner_e4P99A":{"type":"image-banner","blocks":{"heading_hLgzF7":{"type":"heading","settings":{"heading":"Tasting gift boxes of whisky and rum that never failed to surprise and delight.                          Help your enthusiast become an expert.","heading_size":"h2"}},"text_caheUJ":{"type":"text","settings":{"text":"","text_style":"body"}},"buttons_NrpeNG":{"type":"buttons","settings":{"button_label_1":"Shop whisky","button_link_1":"shopify:\/\/products\/whisky-tasting-gift-box-12-tubes","button_style_secondary_1":false,"button_label_2":"Shop rum","button_link_2":"shopify:\/\/products\/rum-tasting-gift-box-12-tubes","button_style_secondary_2":false}}},"block_order":["heading_hLgzF7","text_caheUJ","buttons_NrpeNG"],"disabled":true,"custom_css":["@media screen and (max-width: 750px) {.banner, slideshow-component {display: none; }}"],"settings":{"image":"shopify:\/\/shop_images\/DSC00098-min.jpg","image_overlay_opacity":0,"image_height":"large","image_behavior":"none","desktop_content_position":"bottom-left","desktop_content_alignment":"left","show_text_box":false,"color_scheme":"scheme-4","stack_images_on_mobile":true,"mobile_content_alignment":"center","show_text_below":true}},"image_banner_6kGeGz":{"type":"image-banner","blocks":{"heading_AHQdFd":{"type":"heading","settings":{"heading":"Tasting sets to taste and learn about your favorite spirits. Perfect for gifting or treating yourself.","heading_size":"h2"}},"text_NfFKWn":{"type":"text","settings":{"text":"","text_style":"body"}},"buttons_wMB4fz":{"type":"buttons","settings":{"button_label_1":"Shop whisky","button_link_1":"shopify:\/\/products\/whisky-tasting-gift-box-12-tubes","button_style_secondary_1":false,"button_label_2":"Shop rum","button_link_2":"shopify:\/\/products\/rum-tasting-gift-box-12-tubes","button_style_secondary_2":false}}},"block_order":["heading_AHQdFd","text_NfFKWn","buttons_wMB4fz"],"disabled":true,"custom_css":["@media (max-width: 768px) {.banner__box {height: 600px; \/* Set your desired height *\/ background-size: cover; \/* Ensures the background image covers the entire area *\/ background-position: center; \/* Center the background image *\/ }}","@media screen and (min-width: 750px) {.banner, slideshow-component {display: none; }}","@media (max-width: 768px) {.banner__heading.inline-richtext.h2 {position: relative; top: 370px; }}","@media (max-width: 768px) {.banner__buttons {position: relative; top: 350px; }}"],"settings":{"image":"shopify:\/\/shop_images\/DSC00097-min.jpg","image_overlay_opacity":0,"image_height":"large","image_behavior":"none","desktop_content_position":"middle-center","desktop_content_alignment":"center","show_text_box":true,"color_scheme":"scheme-4","stack_images_on_mobile":false,"mobile_content_alignment":"left","show_text_below":false}},"rich_text_aerWpP":{"type":"rich-text","blocks":{"text_QDNKhT":{"type":"text","settings":{"text":"<p>Explore the world of whisky and rum by tasting handpicked samples, each with a detailed guide to help you enjoy and understand the flavors.<\/p><h3><\/h3>"}}},"block_order":["text_QDNKhT"],"disabled":true,"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-4","full_width":true,"padding_top":76,"padding_bottom":68}},"featured_product_xyk8kz":{"type":"featured-product","blocks":{"judge_me_reviews_preview_badge_KgcMrj":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}},"title_L8Axex":{"type":"title","settings":{"heading_size":"h1"}},"price_HiaYbh":{"type":"price","settings":{}},"variant_picker_BxNeY8":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"quantity_selector_c7cP9R":{"type":"quantity_selector","settings":{}},"buy_buttons_jieYtz":{"type":"buy_buttons","settings":{"show_dynamic_checkout":true,"show_gift_card_recipient":true}}},"block_order":["judge_me_reviews_preview_badge_KgcMrj","title_L8Axex","price_HiaYbh","variant_picker_BxNeY8","quantity_selector_c7cP9R","buy_buttons_jieYtz"],"disabled":true,"name":"t:sections.featured-product.presets.name","settings":{"product":"whisky-tasting-gift-box-12-tubes","color_scheme":"scheme-62be9fda-23e4-4803-99e8-263f77702745","secondary_background":false,"media_size":"medium","constrain_to_viewport":true,"media_fit":"cover","media_position":"left","image_zoom":"lightbox","hide_variants":false,"enable_video_looping":false,"padding_top":36,"padding_bottom":36}},"featured_collection":{"type":"featured-collection","settings":{"collection":"rum-tasting-gift-box","products_to_show":2,"title":"Our Best-Sellers","heading_size":"h2","description":"","show_description":false,"description_style":"body","columns_desktop":2,"enable_desktop_slider":false,"full_width":false,"show_view_all":true,"view_all_style":"solid","color_scheme":"scheme-62be9fda-23e4-4803-99e8-263f77702745","image_ratio":"square","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":false,"padding_top":44,"padding_bottom":36}},"multirow_NGrXae":{"type":"multirow","blocks":{"row_EMQPEk":{"type":"row","settings":{"image":"shopify:\/\/shop_images\/DSC00196-2.jpg","caption":"","heading":"Taste","text":"<p>Each tasting set from El Cartel is carefully put together by experts, ensuring a varied and refined flavor experience.<\/p>","button_label":"","button_link":""}},"row_rcBCEX":{"type":"row","settings":{"image":"shopify:\/\/shop_images\/DSC00120.jpg","caption":"","heading":"Learn","text":"<p>The whisky and rum tastings come with a booklet containing details about each drink, helping you discover and appreciate all the flavors.<\/p><p><\/p>","button_label":"","button_link":""}},"row_qepGGt":{"type":"row","settings":{"image":"shopify:\/\/shop_images\/DSC00048.jpg","caption":"","heading":"Enjoy, or gift the joy","text":"<p>The luxurious gift box and carefully selected drinks make it a perfect gift for any occasion, creating a special and enjoyable experience.<\/p>","button_label":"","button_link":""}}},"block_order":["row_EMQPEk","row_rcBCEX","row_qepGGt"],"settings":{"image_height":"medium","desktop_image_width":"medium","image_layout":"alternate-left","heading_size":"h1","text_style":"body","button_style":"secondary","desktop_content_position":"middle","desktop_content_alignment":"center","mobile_content_alignment":"center","section_color_scheme":"scheme-62be9fda-23e4-4803-99e8-263f77702745","row_color_scheme":"scheme-62be9fda-23e4-4803-99e8-263f77702745","padding_top":36,"padding_bottom":36}},"collapsible_content_Uzjjze":{"type":"collapsible-content","blocks":{"collapsible_row_qBXUh8":{"type":"collapsible_row","settings":{"heading":"1. What is included in an El Cartel tasting gift box?","icon":"check_mark","row_content":"<p>Each El Cartel <a href=\"\/products\/whisky-tasting-gift-box-12-tubes\" title=\"Whisky tasting gift box\">tasting gift box <\/a>contains carefully curated liquor samples in 25ml bottles, arranged in a luxury box. You'll also find an informative guide detailing the origin, tasting notes, and unique characteristics of each selection, helping you experience each sample fully.<\/p>","page":""}},"collapsible_row_mAAgkL":{"type":"collapsible_row","settings":{"heading":"2. What types of tasting gift boxes do you offer?","icon":"check_mark","row_content":"<p>El Cartel offers two distinct tasting boxes : a <a href=\"\/products\/whisky-tasting-gift-box-12-tubes\" title=\"Whisky tasting gift box\">whisky tasting box <\/a>and a <a href=\"\/products\/rum-tasting-gift-box-12-tubes\" title=\"Rum tasting gift box\">rum tasting box<\/a>. Each tasting box includes a variety of high-quality, hand-picked samples to ensure a refined tasting experience.<\/p>","page":""}},"collapsible_row_Ac3UQR":{"type":"collapsible_row","settings":{"heading":"3. Is El Cartel suitable for corporate gifts or special events?","icon":"check_mark","row_content":"<p>Absolutely. Our <a href=\"\/products\/whisky-tasting-gift-box-12-tubes\" title=\"Whisky tasting gift box\">tasting gift boxes<\/a> make thoughtful and elegant gifts for clients, partners, or event attendees. Contact us for bulk order options and to add a customized message.<\/p>","page":""}},"collapsible_row_a3V8NY":{"type":"collapsible_row","settings":{"heading":"4. Who is El Cartel's tasting gift box ideal for?","icon":"check_mark","row_content":"<p>Our <a href=\"\/products\/whisky-tasting-gift-box-12-tubes\" title=\"Whisky tasting gift box\">whisky tasting boxes<\/a> and <a href=\"\/products\/rum-tasting-gift-box-12-tubes\" title=\"Rum tasting gift box\">rum tasting boxes<\/a> are perfect for anyone interested in exploring high-quality liquors in an accessible yet sophisticated way. They make great gifts for enthusiasts or anyone curious about whisky or rum.<\/p>","page":""}},"collapsible_row_tLyJNt":{"type":"collapsible_row","settings":{"heading":"5. Is 25ML enough for tasting?","icon":"check_mark","row_content":"<p>Yes, 25ml is generally considered a perfect amount for tasting. This portion size provides enough of the liquor to capture its full flavor profile, allowing you to appreciate its aroma, body, and finish without overwhelming the palate. It's also commonly used in professional tastings, where the goal is to sample and compare flavors rather than to consume in large quantities. <\/p>","page":""}}},"block_order":["collapsible_row_qBXUh8","collapsible_row_mAAgkL","collapsible_row_Ac3UQR","collapsible_row_a3V8NY","collapsible_row_tLyJNt"],"settings":{"caption":"","heading":"FAQ's","heading_size":"h1","heading_alignment":"center","layout":"none","container_color_scheme":"scheme-62be9fda-23e4-4803-99e8-263f77702745","color_scheme":"scheme-62be9fda-23e4-4803-99e8-263f77702745","open_first_collapsible_row":false,"image_ratio":"adapt","desktop_layout":"image_second","padding_top":36,"padding_bottom":36}},"featured_blog_GGiWHt":{"type":"featured-blog","disabled":true,"settings":{"blog":"news","post_limit":4,"heading":"Blog posts","heading_size":"h1","columns_desktop":4,"show_view_all":true,"show_image":true,"show_date":true,"show_author":false,"color_scheme":"scheme-62be9fda-23e4-4803-99e8-263f77702745","padding_top":36,"padding_bottom":36}},"173144467618ef5574":{"type":"apps","blocks":{"judge_me_reviews_featured_carousel_ja6QTb":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/featured_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","disabled":true,"settings":{"maxwidth":1080}}},"block_order":["judge_me_reviews_featured_carousel_ja6QTb"],"settings":{"include_margins":true}},"174904528143330cc3":{"type":"apps","blocks":{"judge_me_reviews_featured_carousel_kf7t4M":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/featured_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","disabled":true,"settings":{"maxwidth":1080}}},"block_order":["judge_me_reviews_featured_carousel_kf7t4M"],"settings":{"include_margins":true}}},"order":["ss_video_banner_BMxawt","image_banner_e4P99A","image_banner_6kGeGz","rich_text_aerWpP","featured_product_xyk8kz","featured_collection","multirow_NGrXae","collapsible_content_Uzjjze","featured_blog_GGiWHt","173144467618ef5574","174904528143330cc3"]}
+{
+  "sections": {
+    "ss_video_banner_BMxawt": {
+      "type": "ss-video-banner",
+      "blocks": {
+        "slide_HjVMp7": {
+          "type": "slide",
+          "settings": {
+            "autoplay": true,
+            "video": "shopify://files/videos/copy_29FB6E3E-CDB8-4266-8A6B-3B8C78C2F311.mp4",
+            "video_url": "",
+            "title": "<h1>Gift an Unforgettable Tasting Experience </h1>",
+            "subtitle": "",
+            "button": "DISCOVER",
+            "button_url": "shopify://products/whisky-tasting-gift-box-12-tubes",
+            "second_button": "",
+            "second_button_url": "shopify://products/rum-tasting-gift-box-12-tubes"
+          }
+        }
+      },
+      "block_order": [
+        "slide_HjVMp7"
+      ],
+      "custom_css": [
+        "/* Force EB Garamond on video banner for all devices */.ab-banner-content-template--27585298235733__ss_video_banner_BMxawt h1,.ab-banner-content-template--27585298235733__ss_video_banner_BMxawt h2,.ab-banner-content-template--27585298235733__ss_video_banner_BMxawt .ab-banner-title-template--27585298235733__ss_video_banner_BMxawt,.ab-banner-title-template--27585298235733__ss_video_banner_BMxawt {font-family: \"EB Garamond\", serif !important;}"
+      ],
+      "settings": {
+        "height": 700,
+        "height_mobile": 480,
+        "overlay_opacity": 9,
+        "interval": 5,
+        "image_object_fit": "cover",
+        "vertical_alignment": "center",
+        "horizontal_alignment": "center",
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 50,
+        "title_size_mobile": 30,
+        "title_height": 130,
+        "subtitle_custom": false,
+        "subtitle_font": "josefin_sans_n4",
+        "subtitle_size": 16,
+        "subtitle_size_mobile": 16,
+        "subtitle_height": 130,
+        "subtitle_mt": 20,
+        "buttons_mt": 20,
+        "buttons_gap": 20,
+        "button_custom": true,
+        "button_font": "montserrat_n6",
+        "button_size": 16,
+        "button_size_mobile": 12,
+        "button_height": 120,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 32,
+        "button_padding_horizontal_mobile": 32,
+        "button_radius": 36,
+        "button_border_thickness": 0,
+        "button_color": "#000000",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "#ffffff",
+        "button_bg_hover_color": "#000000",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "second_button_color": "#000000",
+        "second_button_hover_color": "#ffffff",
+        "second_button_bg_color": "#ffffff",
+        "second_button_bg_hover_color": "#000000",
+        "second_button_border_color": "#000000",
+        "second_button_border_hover_color": "#000000",
+        "title_color": "#ffffff",
+        "subtitle_color": "#ffffff",
+        "overlay_color": "#000000",
+        "background_color": "#535353",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 3,
+        "padding_horizontal_mobile": 1.5,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "section_width": 120,
+        "section_radius": 0,
+        "lazy": false
+      }
+    },
+    "image_banner_e4P99A": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_hLgzF7": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tasting gift boxes of whisky and rum that never failed to surprise and delight.                          Help your enthusiast become an expert.",
+            "heading_size": "h2"
+          }
+        },
+        "text_caheUJ": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "buttons_NrpeNG": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop whisky",
+            "button_link_1": "shopify://products/whisky-tasting-gift-box-12-tubes",
+            "button_style_secondary_1": false,
+            "button_label_2": "Shop rum",
+            "button_link_2": "shopify://products/rum-tasting-gift-box-12-tubes",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_hLgzF7",
+        "text_caheUJ",
+        "buttons_NrpeNG"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media screen and (max-width: 750px) {.banner, slideshow-component {display: none; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/DSC00098-min.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": false,
+        "color_scheme": "scheme-4",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "image_banner_6kGeGz": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_AHQdFd": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tasting sets to taste and learn about your favorite spirits. Perfect for gifting or treating yourself.",
+            "heading_size": "h2"
+          }
+        },
+        "text_NfFKWn": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_style": "body"
+          }
+        },
+        "buttons_wMB4fz": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop whisky",
+            "button_link_1": "shopify://products/whisky-tasting-gift-box-12-tubes",
+            "button_style_secondary_1": false,
+            "button_label_2": "Shop rum",
+            "button_link_2": "shopify://products/rum-tasting-gift-box-12-tubes",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_AHQdFd",
+        "text_NfFKWn",
+        "buttons_wMB4fz"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 768px) {.banner__box {height: 600px; /* Set your desired height */ background-size: cover; /* Ensures the background image covers the entire area */ background-position: center; /* Center the background image */ }}",
+        "@media screen and (min-width: 750px) {.banner, slideshow-component {display: none; }}",
+        "@media (max-width: 768px) {.banner__heading.inline-richtext.h2 {position: relative; top: 370px; }}",
+        "@media (max-width: 768px) {.banner__buttons {position: relative; top: 350px; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/DSC00097-min.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "scheme-4",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "left",
+        "show_text_below": false
+      }
+    },
+    "rich_text_aerWpP": {
+      "type": "rich-text",
+      "blocks": {
+        "text_QDNKhT": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Explore the world of whisky and rum by tasting handpicked samples, each with a detailed guide to help you enjoy and understand the flavors.</p><h3></h3>"
+          }
+        }
+      },
+      "block_order": [
+        "text_QDNKhT"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 76,
+        "padding_bottom": 68
+      }
+    },
+    "featured_product_xyk8kz": {
+      "type": "featured-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "judge_me_reviews_preview_badge_rMk6ri": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "custom_liquid_ggN4pw": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"whisky-type-selector\" data-section-id=\"{{ section.id }}\">\n  <label class=\"selector-label\">Select Your Whisky Type:</label>\n  <div class=\"type-buttons\">\n    <button type=\"button\" class=\"type-button selected\" data-type=\"Scotch\">\n      <span class=\"flag\">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>\n      <span class=\"name\">Scotch</span>\n      <span class=\"badge\">Most Popular</span>\n    </button>\n    <button type=\"button\" class=\"type-button\" data-type=\"Japanese\">\n      <span class=\"flag\">🇯🇵</span>\n      <span class=\"name\">Japanese</span>\n    </button>\n  </div>\n</div>\n\n<script>\n(function() {\n  let productData = null;\n  let selectedVariantId = null;\n  const sectionId = '{{ section.id }}';\n  const containerSelector = `[data-section-id=\"${sectionId}\"]`;\n  let scope = null;\n  let addBtn = null;\n\n  fetch('/products/whisky-tasting-gift-box-12-tubes.js')\n    .then(r => r.json())\n    .then(data => {\n      productData = data;\n      console.log('✅ Product data loaded:', data.variants.length, 'variants');\n      // Wait for DOM to be fully ready before initializing\n      if (document.readyState === 'loading') {\n        document.addEventListener('DOMContentLoaded', init);\n      } else {\n        // DOM already ready, but use a small delay to ensure all blocks rendered\n        setTimeout(init, 100);\n      }\n    });\n\n  function init() {\n    const selfDiv = document.querySelector(containerSelector);\n    if (selfDiv) {\n      scope = selfDiv.closest('.product__info-container') || selfDiv.closest('section');\n    }\n    if (!scope) scope = document.body;\n    \n    console.log('🔍 Scope:', scope);\n\n    // Hide Collection picker\n    scope.querySelectorAll('label, legend, .form__label').forEach(el => {\n      if (el.textContent.trim() === 'Collection') {\n        const container = el.closest('.product-form__input, .selector-wrapper');\n        if (container) container.style.display = 'none';\n      }\n    });\n\n    // Custom buttons\n    selfDiv.querySelectorAll('.type-button').forEach(btn => {\n      btn.addEventListener('click', function(e) {\n        e.preventDefault();\n        selfDiv.querySelectorAll('.type-button').forEach(b => b.classList.remove('selected'));\n        this.classList.add('selected');\n        const themeDropdown = scope.querySelector('select[name*=\"options\"][name*=\"Collection\"]');\n        if (themeDropdown) {\n          themeDropdown.value = this.dataset.type;\n          themeDropdown.dispatchEvent(new Event('change', { bubbles: true }));\n        }\n        updateVariant();\n      });\n    });\n\n    scope.addEventListener('change', e => {\n      if (e.target.matches('select[name*=\"options\"]')) updateVariant();\n    });\n\n    // Find Add to Cart button NOW (after DOM is ready)\n    addBtn = scope.querySelector('button[name=\"add\"], .product-form__submit');\n    console.log('🛒 Add button found:', !!addBtn);\n    \n    if (addBtn) {\n      // Attach direct listener\n      addBtn.addEventListener('click', handleClick, true);\n      const form = addBtn.closest('form');\n      if (form) form.addEventListener('submit', handleClick, true);\n    }\n\n    updateVariant();\n  }\n\n  function handleClick(e) {\n    if (!selectedVariantId) return;\n    \n    e.preventDefault();\n    e.stopPropagation();\n    e.stopImmediatePropagation();\n\n    console.log('🚀 Adding variant:', selectedVariantId);\n    \n    const btn = addBtn;\n    const origHTML = btn.innerHTML;\n    btn.innerHTML = '<span>Adding...</span>';\n    btn.disabled = true;\n\n    fetch(window.Shopify.routes.root + 'cart/add.js', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ items: [{ id: selectedVariantId, quantity: 1 }] })\n    })\n    .then(r => r.json())\n    .then(data => {\n      console.log('✅ Added:', data);\n      window.location.href = '/cart';\n    })\n    .catch(err => {\n      console.error('❌', err);\n      btn.innerHTML = origHTML;\n      btn.disabled = false;\n      alert('Error adding to cart');\n    });\n  }\n\n  function updateVariant() {\n    if (!productData || !scope) return;\n    \n    const collSel = scope.querySelector('select[name*=\"options\"][name*=\"Collection\"]');\n    const sizeSel = scope.querySelector('select[name*=\"options\"][name*=\"Size\"]');\n    if (!collSel) return;\n\n    const coll = collSel.value;\n    const size = sizeSel ? sizeSel.value : null;\n    \n    const variant = productData.variants.find(v => \n      v.option1 === coll && (!size || v.option2 === size)\n    );\n\n    if (variant) {\n      selectedVariantId = variant.id;\n      const price = '€' + (variant.price / 100).toFixed(2).replace('.', ',');\n      \n      // Update button price\n      const btnPrice = scope.querySelector('.button-price');\n      if (btnPrice) btnPrice.textContent = price;\n      \n      // Update main price\n      const mainPrice = scope.querySelector('.price-item--regular');\n      if (mainPrice) mainPrice.innerHTML = '<span class=\"money\">' + price + '</span>';\n      \n      if (addBtn) addBtn.disabled = !variant.available;\n      \n      console.log('🔹 Variant:', variant.title, variant.id);\n    } else {\n      selectedVariantId = null;\n    }\n  }\n})();\n</script>"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "dropdown",
+            "swatch_shape": "square"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "custom_liquid_9yGaAT": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% assign today_wday = 'now' | date: \"%w\" | plus: 0 %}\n{% assign today_ts = 'now' | date: \"%s\" | plus: 0 %}\n\n{% case today_wday %}\n  {% when 1 %} {% assign days_until_delivery = 2 %}\n  {% when 2 %} {% assign days_until_delivery = 2 %}\n  {% when 3 %} {% assign days_until_delivery = 2 %}\n  {% when 4 %} {% assign days_until_delivery = 4 %}\n  {% when 5 %} {% assign days_until_delivery = 3 %}\n  {% when 6 %} {% assign days_until_delivery = 3 %}\n  {% when 0 %} {% assign days_until_delivery = 2 %}\n{% endcase %}\n\n{% assign delivery_seconds = days_until_delivery | times: 86400 %}\n{% assign delivery_timestamp = today_ts | plus: delivery_seconds %}\n{% assign day_name = delivery_timestamp | date: \"%A\" %}\n{% assign day_number = delivery_timestamp | date: \"%e\" %}\n{% assign month_name = delivery_timestamp | date: \"%B\" %}\n\n{% case request.locale.iso_code %}\n\n  {% when \"nl\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Maandag\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Dinsdag\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Woensdag\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Donderdag\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vrijdag\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Zaterdag\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Zondag\" %}\n    {% endcase %}\n    {% case month_name %}\n      {% when \"January\" %} {% assign month_name = \"januari\" %}\n      {% when \"February\" %} {% assign month_name = \"februari\" %}\n      {% when \"March\" %} {% assign month_name = \"maart\" %}\n      {% when \"April\" %} {% assign month_name = \"april\" %}\n      {% when \"May\" %} {% assign month_name = \"mei\" %}\n      {% when \"June\" %} {% assign month_name = \"juni\" %}\n      {% when \"July\" %} {% assign month_name = \"juli\" %}\n      {% when \"August\" %} {% assign month_name = \"augustus\" %}\n      {% when \"September\" %} {% assign month_name = \"september\" %}\n      {% when \"October\" %} {% assign month_name = \"oktober\" %}\n      {% when \"November\" %} {% assign month_name = \"november\" %}\n      {% when \"December\" %} {% assign month_name = \"december\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Levering op <strong>\" | append: delivery_date | append: \"</strong>\" %}\n\n  {% when \"fr\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Lundi\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Mardi\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Mercredi\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Jeudi\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vendredi\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Samedi\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Dimanche\" %}\n    {% endcase %}\n    {% case month_name %}\n      {% when \"January\" %} {% assign month_name = \"janvier\" %}\n      {% when \"February\" %} {% assign month_name = \"février\" %}\n      {% when \"March\" %} {% assign month_name = \"mars\" %}\n      {% when \"April\" %} {% assign month_name = \"avril\" %}\n      {% when \"May\" %} {% assign month_name = \"mai\" %}\n      {% when \"June\" %} {% assign month_name = \"juin\" %}\n      {% when \"July\" %} {% assign month_name = \"juillet\" %}\n      {% when \"August\" %} {% assign month_name = \"août\" %}\n      {% when \"September\" %} {% assign month_name = \"septembre\" %}\n      {% when \"October\" %} {% assign month_name = \"octobre\" %}\n      {% when \"November\" %} {% assign month_name = \"novembre\" %}\n      {% when \"December\" %} {% assign month_name = \"décembre\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Livraison le <strong>\" | append: delivery_date | append: \"</strong>\" %}\n\n  {% when \"de\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Montag\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Dienstag\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Mittwoch\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Donnerstag\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Freitag\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Samstag\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Sonntag\" %}\n    {% endcase %}\n    {% case month_name %}\n      {% when \"January\" %} {% assign month_name = \"Januar\" %}\n      {% when \"February\" %} {% assign month_name = \"Februar\" %}\n      {% when \"March\" %} {% assign month_name = \"März\" %}\n      {% when \"April\" %} {% assign month_name = \"April\" %}\n      {% when \"May\" %} {% assign month_name = \"Mai\" %}\n      {% when \"June\" %} {% assign month_name = \"Juni\" %}\n      {% when \"July\" %} {% assign month_name = \"Juli\" %}\n      {% when \"August\" %} {% assign month_name = \"August\" %}\n      {% when \"September\" %} {% assign month_name = \"September\" %}\n      {% when \"October\" %} {% assign month_name = \"Oktober\" %}\n      {% when \"November\" %} {% assign month_name = \"November\" %}\n      {% when \"December\" %} {% assign month_name = \"Dezember\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \". \" | append: month_name %}\n    {% assign delivery_message = \"Lieferung bis <strong>\" | append: delivery_date | append: \"</strong>\" %}\n\n  {% else %}\n    {% assign formatted_date = delivery_timestamp | date: \"%A %e %B\" %}\n    {% assign delivery_message = \"Delivery by <strong>\" | append: formatted_date | append: \"</strong>\" %}\n\n{% endcase %}\n\n<style>\n  .el-cartel-delivery {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 14px;\n    margin-top: 15px;\n    color: #121212;\n    font-family: inherit;\n  }\n\n  .el-cartel-dot {\n    width: 8px;\n    height: 8px;\n    border-radius: 50%;\n    background-color: #00e676;\n    margin-right: 10px;\n    animation: soft-flicker 1.6s infinite;\n    box-shadow: 0 0 6px rgba(0, 230, 118, 0.8);\n  }\n\n  @keyframes soft-flicker {\n    0%, 100% {\n      opacity: 1;\n      box-shadow: 0 0 6px rgba(0, 230, 118, 0.8);\n    }\n    50% {\n      opacity: 0.4;\n      box-shadow: 0 0 2px rgba(0, 230, 118, 0.4);\n    }\n  }\n</style>\n\n<div class=\"el-cartel-delivery\">\n  <span class=\"el-cartel-dot\"></span>\n  <span>{{ delivery_message }}</span>\n</div>"
+          }
+        },
+        "custom_liquid_zCmbKz": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"payment-icons\">\n  <span class=\"payment-icons-label\"></span>\n  <div class=\"payment-icons-list\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0874/9711/3941/files/visa.svg?v=1766913999\" alt=\"Visa\" class=\"payment-icon\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0874/9711/3941/files/mastercard.svg?v=1766913999\" alt=\"Mastercard\" class=\"payment-icon\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0874/9711/3941/files/american-express.svg?v=1766913999\" alt=\"Amex\" class=\"payment-icon\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0874/9711/3941/files/paypal.svg?v=1766913999\" alt=\"PayPal\" class=\"payment-icon\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0874/9711/3941/files/apple-pay.svg?v=1766913998\" alt=\"Apple Pay\" class=\"payment-icon\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0874/9711/3941/files/bancontact.svg?v=1766914043\" alt=\"Bancontact\" class=\"payment-icon\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0874/9711/3941/files/klarna.svg?v=1766913998\" alt=\"Klarna\" class=\"payment-icon\">\n  </div>\n</div>\n\n<style>\n.payment-icons {\n  text-align: center;\n  margin: 16px 0;\n  padding: 12px 0;\n  border-top: none !important;\n}\n\n.payment-icons-label {\n  font-size: 12px;\n  color: #666;\n  text-transform: uppercase;\n  letter-spacing: 0.5px;\n  display: block;\n  margin-bottom: 8px;\n  font-weight: 600;\n}\n\n.payment-icons-list {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 12px;\n}\n\n.payment-icon {\n  height: 18px;\n  width: auto;\n  opacity: 1;\n  transition: all 0.2s;\n}\n\n.payment-icon:hover {\n  opacity: 0.8;\n  transform: translateY(-2px);\n}\n\n@media (max-width: 749px) {\n  .payment-icons {\n    margin: 12px 0;\n    padding: 8px 0;\n  }\n  \n  .payment-icons-label {\n    font-size: 14px;\n  }\n  \n  .payment-icon {\n    height: 18px;\n  }\n  \n  .payment-icons-list {\n    gap: 6px;\n  }\n}\n</style>"
+          }
+        },
+        "custom_liquid_C9byWQ": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"product-features\">\n  <style>\n    .product-features {\n      padding: 0 0 20px 0 !important;\n    }\n    \n    .product-feature-item {\n      display: flex;\n      align-items: flex-start;\n      margin-bottom: 18px;\n    }\n    \n    .feature-icon {\n      flex-shrink: 0;\n      width: 50px;\n      height: 50px;\n      background-color: #6B3541;\n      border-radius: 50%;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      margin-right: 20px;\n    }\n    \n    .feature-icon svg {\n      width: 25px;\n      height: 25px;\n      fill: #F5F5DC;\n    }\n    \n    .feature-content {\n      flex: 1;\n      padding-top: 8px;\n    }\n    \n    .feature-content strong {\n      color: #193C46;\n      font-size: 16px;\n      font-weight: 700;\n      display: block;\n      margin-bottom: 2px;\n    }\n    \n    .feature-content p {\n      color: #193C46;\n      font-size: 16px;\n      line-height: 1.5;\n      margin: 0;\n    }\n    \n    @media (max-width: 768px) {\n      .feature-icon {\n        width: 40px;\n        height: 40px;\n      }\n      \n      .feature-content strong {\n        font-size: 14px;\n      }\n      \n      .feature-content p {\n        font-size: 14px;\n      }\n    }\n  </style>\n  \n  <!-- Feature 1: Gift -->\n  <div class=\"product-feature-item\">\n    <div class=\"feature-icon\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n        <path d=\"M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z\"/>\n      </svg>\n    </div>\n    <div class=\"feature-content\">\n      <strong>{{ 'products.features.whisky.gift.title' | t }}</strong>\n      <p>{{ 'products.features.whisky.gift.description' | t }}</p>\n    </div>\n  </div>\n  \n  <!-- Feature 2: Digital Tasting -->\n  <div class=\"product-feature-item\">\n    <div class=\"feature-icon\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n        <path d=\"M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z\"/>\n      </svg>\n    </div>\n    <div class=\"feature-content\">\n      <strong>{{ 'products.features.whisky.tasting.title' | t }}</strong>\n      <p>{{ 'products.features.whisky.tasting.description' | t }}</p>\n    </div>\n  </div>\n  \n  <!-- Feature 3: Vial -->\n  <div class=\"product-feature-item\">\n    <div class=\"feature-icon\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n        <path d=\"M21 5V3H3v2l8 9v5H6v2h12v-2h-5v-5l8-9zM7.43 7L5.66 5h12.69l-1.78 2H7.43z\"/>\n      </svg>\n    </div>\n    <div class=\"feature-content\">\n      <strong>{{ 'products.features.whisky.vial.title' | t }}</strong>\n      <p>{{ 'products.features.whisky.vial.description' | t }}</p>\n    </div>\n  </div>\n  \n  <!-- Feature 4: Discovering -->\n  <div class=\"product-feature-item\">\n    <div class=\"feature-icon\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\">\n        <path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/>\n      </svg>\n    </div>\n    <div class=\"feature-content\">\n      <strong>{{ 'products.features.whisky.discovering.title' | t }}</strong>\n      <p>{{ 'products.features.whisky.discovering.description' | t }}</p>\n    </div>\n  </div>\n</div>"
+          }
+        },
+        "collapsible_tab_GLJYqE": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Package includes:",
+            "icon": "check_mark",
+            "content": "<ul><li>12 different rum samples of 25ML each (34%-40% Vol.)</li><li>Booklet with detailed explanation of each rum sample</li><li>Luxury gift box</li></ul><p>🚩 Made in the Netherlands</p><p></p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_cMNkXd": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Delivery information",
+            "icon": "check_mark",
+            "content": "<h3><em><strong>What are the usual delivery times?<br/></strong></em></h3><p>For orders of in-stock products, the delivery time is usually fast and can vary between 1 to 4 business days, depending on the chosen shipping method and the destination.</p><h3><em><strong>Satisfaction Guaranteed or Your Money Back</strong></em></h3><p>If the product has not yet been shipped and you have not received the shipping confirmation email, you can request to cancel your order by contacting us.</p><p>If you have received the product and no longer like it or wish to exchange it, you have 30 days to return it to us.</p><p>Simply send us a message through the contact page so we can provide you with a return label, completely at our expense.</p><p>Once we receive the package, we can proceed with an exchange or issue you a full refund.</p>",
+            "page": ""
+          }
+        },
+        "custom_liquid_kHkkHE": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<script>\n// Comprehensive cart debugging\n(function() {\n  console.log('🔍 Cart debugger loaded');\n  \n  // Method 1: Intercept form submission\n  document.addEventListener('submit', function(e) {\n    if (e.target.matches('form[action*=\"/cart/add\"]')) {\n      console.log('📋 FORM SUBMIT DETECTED');\n      console.log('Form:', e.target);\n      \n      const formData = new FormData(e.target);\n      console.log('=== Form Data Being Sent ===');\n      for (let [key, value] of formData.entries()) {\n        console.log('  ' + key + ':', value);\n      }\n      \n      const variantId = formData.get('id');\n      console.log('🎯 Variant ID being added:', variantId);\n      \n      // Look up what this variant should be\n      fetch('/products/whisky-tasting-gift-box-12-tubes.js')\n        .then(r => r.json())\n        .then(p => {\n          const v = p.variants.find(x => x.id == variantId);\n          if (v) {\n            console.log('📦 This variant is:', v.title, '- Price:', v.price / 100);\n          }\n        });\n    }\n  }, true);\n  \n  // Method 2: Intercept fetch/AJAX requests\n  const originalFetch = window.fetch;\n  window.fetch = function(...args) {\n    const url = args[0];\n    \n    if (typeof url === 'string' && url.includes('/cart/add')) {\n      console.log('🌐 AJAX CART ADD DETECTED');\n      console.log('URL:', url);\n      \n      if (args[1] && args[1].body) {\n        console.log('Body:', args[1].body);\n        \n        // If it's FormData\n        if (args[1].body instanceof FormData) {\n          for (let [key, value] of args[1].body.entries()) {\n            console.log('  ' + key + ':', value);\n          }\n        }\n        // If it's JSON\n        else if (typeof args[1].body === 'string') {\n          try {\n            const data = JSON.parse(args[1].body);\n            console.log('JSON data:', data);\n            console.log('🎯 Variant ID in AJAX:', data.id);\n          } catch(e) {}\n        }\n      }\n    }\n    \n    return originalFetch.apply(this, args);\n  };\n  \n  // Method 3: Intercept XMLHttpRequest\n  const originalXHR = window.XMLHttpRequest;\n  window.XMLHttpRequest = function() {\n    const xhr = new originalXHR();\n    const originalSend = xhr.send;\n    \n    xhr.send = function(data) {\n      if (xhr._url && xhr._url.includes('/cart/add')) {\n        console.log('📡 XHR CART ADD DETECTED');\n        console.log('Data:', data);\n      }\n      return originalSend.apply(this, arguments);\n    };\n    \n    const originalOpen = xhr.open;\n    xhr.open = function(method, url) {\n      xhr._url = url;\n      return originalOpen.apply(this, arguments);\n    };\n    \n    return xhr;\n  };\n})();\n</script>"
+          }
+        },
+        "text_VdDg7K": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Our whisky tasting collection is a finely curated selection of some of the best Single malt whisky's.",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "judge_me_reviews_preview_badge_rMk6ri",
+        "price",
+        "custom_liquid_ggN4pw",
+        "variant_picker",
+        "custom_liquid_C9byWQ",
+        "buy_buttons",
+        "custom_liquid_9yGaAT",
+        "custom_liquid_zCmbKz",
+        "collapsible_tab_GLJYqE",
+        "collapsible_tab_cMNkXd",
+        "custom_liquid_kHkkHE",
+        "text_VdDg7K"
+      ],
+      "custom_css": [
+        ".product-title,.product__title,h1.product-title,.product-info__title,.product__title h1 {font-weight: 600 !important; text-align: center !important;}",
+        ".product__price,.product-price,.price,.product__info-container .price,.product-form__price {text-align: center !important; justify-content: center !important; display: flex !important; flex-direction: column !important; align-items: center !important;}",
+        ".price__container {text-align: center !important; justify-content: center !important;}",
+        "@media screen and (max-width: 749px) { .featured-product .product__media-list { margin-bottom: 0.5rem !important; } }"
+      ],
+      "settings": {
+        "product": "whisky-tasting-gift-box-12-tubes",
+        "color_scheme": "scheme-62be9fda-23e4-4803-99e8-263f77702745",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "media_position": "left",
+        "image_zoom": "none",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "mobile_thumbnails": "show",
+        "enable_sticky_info": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "rum-tasting-gift-box",
+        "products_to_show": 2,
+        "title": "Our Best-Sellers",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 2,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-62be9fda-23e4-4803-99e8-263f77702745",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "multirow_NGrXae": {
+      "type": "multirow",
+      "blocks": {
+        "row_EMQPEk": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/DSC00196-2.jpg",
+            "caption": "",
+            "heading": "Taste",
+            "text": "<p>Each tasting set from El Cartel is carefully put together by experts, ensuring a varied and refined flavor experience.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "row_rcBCEX": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/DSC00120.jpg",
+            "caption": "",
+            "heading": "Learn",
+            "text": "<p>The whisky and rum tastings come with a booklet containing details about each drink, helping you discover and appreciate all the flavors.</p><p></p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "row_qepGGt": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/DSC00048.jpg",
+            "caption": "",
+            "heading": "Enjoy, or gift the joy",
+            "text": "<p>The luxurious gift box and carefully selected drinks make it a perfect gift for any occasion, creating a special and enjoyable experience.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_EMQPEk",
+        "row_rcBCEX",
+        "row_qepGGt"
+      ],
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "image_layout": "alternate-left",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "scheme-62be9fda-23e4-4803-99e8-263f77702745",
+        "row_color_scheme": "scheme-62be9fda-23e4-4803-99e8-263f77702745",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collapsible_content_Uzjjze": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_qBXUh8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "1. What is included in an El Cartel tasting gift box?",
+            "icon": "check_mark",
+            "row_content": "<p>Each El Cartel <a href=\"/products/whisky-tasting-gift-box-12-tubes\" title=\"Whisky tasting gift box\">tasting gift box </a>contains carefully curated liquor samples in 25ml bottles, arranged in a luxury box. You'll also find an informative guide detailing the origin, tasting notes, and unique characteristics of each selection, helping you experience each sample fully.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_mAAgkL": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "2. What types of tasting gift boxes do you offer?",
+            "icon": "check_mark",
+            "row_content": "<p>El Cartel offers two distinct tasting boxes : a <a href=\"/products/whisky-tasting-gift-box-12-tubes\" title=\"Whisky tasting gift box\">whisky tasting box </a>and a <a href=\"/products/rum-tasting-gift-box-12-tubes\" title=\"Rum tasting gift box\">rum tasting box</a>. Each tasting box includes a variety of high-quality, hand-picked samples to ensure a refined tasting experience.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Ac3UQR": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "3. Is El Cartel suitable for corporate gifts or special events?",
+            "icon": "check_mark",
+            "row_content": "<p>Absolutely. Our <a href=\"/products/whisky-tasting-gift-box-12-tubes\" title=\"Whisky tasting gift box\">tasting gift boxes</a> make thoughtful and elegant gifts for clients, partners, or event attendees. Contact us for bulk order options and to add a customized message.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_a3V8NY": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "4. Who is El Cartel's tasting gift box ideal for?",
+            "icon": "check_mark",
+            "row_content": "<p>Our <a href=\"/products/whisky-tasting-gift-box-12-tubes\" title=\"Whisky tasting gift box\">whisky tasting boxes</a> and <a href=\"/products/rum-tasting-gift-box-12-tubes\" title=\"Rum tasting gift box\">rum tasting boxes</a> are perfect for anyone interested in exploring high-quality liquors in an accessible yet sophisticated way. They make great gifts for enthusiasts or anyone curious about whisky or rum.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_tLyJNt": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "5. Is 25ML enough for tasting?",
+            "icon": "check_mark",
+            "row_content": "<p>Yes, 25ml is generally considered a perfect amount for tasting. This portion size provides enough of the liquor to capture its full flavor profile, allowing you to appreciate its aroma, body, and finish without overwhelming the palate. It's also commonly used in professional tastings, where the goal is to sample and compare flavors rather than to consume in large quantities. </p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_qBXUh8",
+        "collapsible_row_mAAgkL",
+        "collapsible_row_Ac3UQR",
+        "collapsible_row_a3V8NY",
+        "collapsible_row_tLyJNt"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "FAQ's",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "scheme-62be9fda-23e4-4803-99e8-263f77702745",
+        "color_scheme": "scheme-62be9fda-23e4-4803-99e8-263f77702745",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_blog_GGiWHt": {
+      "type": "featured-blog",
+      "disabled": true,
+      "settings": {
+        "blog": "news",
+        "post_limit": 4,
+        "heading": "Blog posts",
+        "heading_size": "h1",
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "scheme-62be9fda-23e4-4803-99e8-263f77702745",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "173144467618ef5574": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_ja6QTb": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_ja6QTb"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "174904528143330cc3": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_kf7t4M": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_kf7t4M"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "ss_video_banner_BMxawt",
+    "image_banner_e4P99A",
+    "image_banner_6kGeGz",
+    "rich_text_aerWpP",
+    "featured_product_xyk8kz",
+    "featured_collection",
+    "multirow_NGrXae",
+    "collapsible_content_Uzjjze",
+    "featured_blog_GGiWHt",
+    "173144467618ef5574",
+    "174904528143330cc3"
+  ]
+}
