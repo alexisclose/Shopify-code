@@ -120,6 +120,12 @@
     margin-bottom: 0.5rem !important;
   }
 
+  /* Pull thumbnails up closer to the main product image */
+  .featured-product .thumbnail-slider,
+  .featured-product slider-component.thumbnail-slider {
+    margin-top: -2.5rem !important;
+  }
+
   /* Larger product title on mobile */
   .featured-product .product__title,
   .featured-product .product__title h2,
