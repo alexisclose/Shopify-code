@@ -134,3 +134,9 @@
     line-height: 1.2 !important;
   }
 }
+
+/* Add space after collapsible tabs (before shipping timeline) */
+.featured-product .product__accordion .accordion,
+.featured-product .accordion {
+  margin-bottom: 1.5rem;
+}

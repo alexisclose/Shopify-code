@@ -374,5 +374,136 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <!-- Sticky Add to Cart Bar - Mobile Only -->
+    {%- if template.name == 'product' or template.name == 'index' -%}
+    <style>
+      .sticky-atc-bar {
+        display: none;
+        position: fixed;
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        z-index: 999999;
+      }
+
+      .sticky-atc-bar .sticky-atc-button {
+        font-family: var(--font-body-family), sans-serif;
+        background-color: #000000;
+        color: #ffffff;
+        border: 1px solid #000000;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        min-height: 55px;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border-radius: 50px;
+        width: 100%;
+        cursor: pointer;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.35);
+        opacity: 0;
+        transform: translateY(100px);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .sticky-atc-bar.visible .sticky-atc-button {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .sticky-atc-button:active {
+        transform: scale(0.98) !important;
+      }
+
+      @media (max-width: 749px) {
+        .sticky-atc-bar {
+          display: block;
+        }
+        body {
+          padding-bottom: 90px;
+        }
+      }
+    </style>
+
+    <div class="sticky-atc-bar" id="stickyAtcBar">
+      <button class="sticky-atc-button" id="stickyAtcBtn" type="button">
+        ADD TO CART · <span id="stickyPrice">€0,00</span>
+      </button>
+    </div>
+
+    <script>
+      (function() {
+        var stickyBar = document.getElementById('stickyAtcBar');
+        var stickyBtn = document.getElementById('stickyAtcBtn');
+        var stickyPrice = document.getElementById('stickyPrice');
+        var hasScrolledPastButton = false;
+        
+        if (!stickyBar) return;
+        
+        function initStickyBar() {
+          var mainButton = document.querySelector('button[name="add"], .product-form__submit');
+          if (!mainButton) return;
+          
+          // Get initial price
+          var priceEl = mainButton.querySelector('.button-price') || document.querySelector('.price-item--regular');
+          if (priceEl) {
+            stickyPrice.textContent = priceEl.textContent.trim();
+          }
+          
+          function checkVisibility() {
+            var rect = mainButton.getBoundingClientRect();
+            var buttonBelowViewport = rect.top > window.innerHeight;
+            var buttonAboveViewport = rect.bottom < 0;
+            
+            // Only show sticky bar after we've scrolled PAST the main button
+            if (buttonAboveViewport) {
+              hasScrolledPastButton = true;
+              stickyBar.classList.add('visible');
+            } else {
+              stickyBar.classList.remove('visible');
+            }
+          }
+          
+          var ticking = false;
+          window.addEventListener('scroll', function() {
+            if (!ticking) {
+              requestAnimationFrame(function() {
+                checkVisibility();
+                ticking = false;
+              });
+              ticking = true;
+            }
+          });
+          
+          checkVisibility();
+          
+          stickyBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            mainButton.click();
+          });
+          
+          // Watch for price changes
+          var observer = new MutationObserver(function() {
+            var updatedPrice = mainButton.querySelector('.button-price') || document.querySelector('.price-item--regular');
+            if (updatedPrice) {
+              stickyPrice.textContent = updatedPrice.textContent.trim();
+            }
+          });
+          observer.observe(mainButton, { childList: true, subtree: true, characterData: true });
+        }
+        
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initStickyBar);
+        } else {
+          setTimeout(initStickyBar, 100);
+        }
+      })();
+    </script>
+    {%- endif -%}
   </body>
 </html>
