@@ -81,7 +81,7 @@
           "settings": {
             "heading": "Content of this tasting set",
             "icon": "check_mark",
-            "content": "<ul><li>12 exceptional whiskies of 25ML each that celebrate Scotch & Irish whisky making </li><li>Booklet with detailed explanation of each whisky </li><li>Luxury gift box</li></ul><p>🚩 Made in the Netherlands</p><p></p>",
+            "content": "<ul><li><h5>12 exceptional whiskies of 25ML each that celebrate Scotch & Irish whisky making </h5></li><li><h5>Booklet with detailed explanation of each whisky </h5></li><li><h5>Luxury gift box</h5></li></ul><h5>🚩 Made in the Netherlands</h5><p></p>",
             "page": ""
           }
         },
