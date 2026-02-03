@@ -81,7 +81,7 @@
           "settings": {
             "heading": "Content of this tasting set",
             "icon": "check_mark",
-            "content": "<ul><li><h4>12 exceptional whiskies of 25ML each that celebrate Scotch & Irish whisky making </h4></li><li><h4>Booklet with detailed explanation of each whisky </h4></li><li><h4>Luxury gift box</h4></li></ul><h4>🚩 Made in the Netherlands</h4><p></p>",
+            "content": "<ul><li><strong>12 exceptional whiskies</strong> of 25ML each that celebrate Scotch & Irish whisky making </li><li><strong>Booklet</strong> <strong>with detailed explanation</strong> of each whisky </li><li><strong>Luxury gift box</strong></li></ul><p>🚩 Made in the Netherlands</p><p></p>",
             "page": ""
           }
         },
@@ -90,7 +90,7 @@
           "settings": {
             "heading": "Delivery information",
             "icon": "check_mark",
-            "content": "<h3><em><strong>What are the usual delivery times?<br/></strong></em></h3><p>For orders of in-stock products, the delivery time is usually fast and can vary between 1 to 4 business days, depending on the chosen shipping method and the destination.</p><h3><em><strong>Satisfaction Guaranteed or Your Money Back</strong></em></h3><p>If the product has not yet been shipped and you have not received the shipping confirmation email, you can request to cancel your order by contacting us.</p><p>If you have received the product and no longer like it or wish to exchange it, you have 30 days to return it to us.</p><p>Simply send us a message through the contact page so we can provide you with a return label, completely at our expense.</p><p>Once we receive the package, we can proceed with an exchange or issue you a full refund.</p>",
+            "content": "<p><strong>What are the usual delivery times?<br/></strong></p><p>For orders of in-stock products, the delivery time is usually fast and can vary between 1 to 4 business days, depending on the chosen shipping method and the destination.</p><p><strong>Satisfaction Guaranteed or Your Money Back</strong></p><p>If the product has not yet been shipped and you have not received the shipping confirmation email, you can request to cancel your order by contacting us.</p><p>If you have received the product and no longer like it or wish to exchange it, you have 30 days to return it to us.</p><p>Simply send us a message through the contact page so we can provide you with a return label, completely at our expense.</p><p>Once we receive the package, we can proceed with an exchange or issue you a full refund.</p>",
             "page": ""
           }
         },
