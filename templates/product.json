@@ -991,8 +991,8 @@
         "text_a4zRmt": {
           "type": "text",
           "settings": {
-            "text": "<p><em>Give the gift your special person is waiting for, with an educational journey through the world of premium whisky. </em></p>",
-            "text_style": "subtitle"
+            "text": "<p>Give the gift your special person is waiting for, with an educational journey through the world of premium whisky. </p>",
+            "text_style": "body"
           }
         },
         "button_9LTG4w": {
