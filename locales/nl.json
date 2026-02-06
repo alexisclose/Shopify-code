@@ -644,5 +644,38 @@
     "delivered": "Bezorgd",
     "awards_text": "Deze whisky's hebben meerdere prijzen gewonnen",
     "discover_whiskies": "Ontdek de Whisky's"
+  },
+  "modal": {
+    "modal": {
+      "label": "Mediagalerij"
+    },
+    "facets": {
+      "filter_and_operator_subtitle": "Match alles",
+      "apply": "Toepassen",
+      "clear": "Duidelijk",
+      "clear_all": "Verwijder alles",
+      "from": "Van",
+      "filter_and_sort": "Filteren en sorteren",
+      "filters_selected": {
+        "one": "{{ count }} geselecteerd",
+        "other": "{{ count }} geselecteerd"
+      },
+      "filter_selected_accessibility": "{{ type }} ( {{ count }} filters geselecteerd)",
+      "show_more": "Meer weergeven",
+      "show_less": "Minder weergeven",
+      "max_price": "De hoogste prijs is {{ price }}",
+      "product_count": {
+        "one": "{{ product_count }} van {{ count }} product",
+        "other": "{{ product_count }} van {{ count }} producten"
+      },
+      "product_count_simple": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} producten"
+      },
+      "sort_button": "Soort",
+      "sort_by_label": "Sorteren op:",
+      "to": "Naar",
+      "clear_filter": "Filter verwijderen"
+    }
   }
 }
