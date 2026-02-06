@@ -644,5 +644,39 @@
     "delivered": "Geliefert",
     "awards_text": "Diese Whiskys haben mehrere Auszeichnungen gewonnen",
     "discover_whiskies": "Entdecken Sie die Whiskys"
+  },
+  "modal": {
+    "modal": {
+      "label": "Mediengalerie"
+    },
+    "facets": {
+      "filter_and_operator_subtitle": "Alle Matches",
+      "apply": "Anwenden",
+      "clear": "Klar",
+      "clear_all": "Alle entfernen",
+      "from": "Aus",
+      "filter_and_sort": "Filtern und sortieren",
+      "filters_selected": {
+        "one": "{{ count }} ausgewählt",
+        "other": "{{ count }} ausgewählt"
+      },
+      "filter_selected_accessibility": "{{ type }} ( {{ count }} Filter ausgewählt)",
+      "show_more": "Mehr anzeigen",
+      "show_less": "Weniger anzeigen",
+      "max_price": "Der höchste Preis beträgt {{ price }}",
+      "product_count": {
+        "one": "{{ product_count }} von {{ count }} Produkten",
+        "other": "{{ product_count }} von {{ count }} Produkten"
+      },
+      "product_count_simple": {
+        "one": "{{ count }} Produkt",
+        "other": "{{ count }} Produkte"
+      },
+      "reset": "Zurücksetzen",
+      "sort_button": "Sortieren",
+      "sort_by_label": "Sortieren nach:",
+      "to": "Zu",
+      "clear_filter": "Filter entfernen"
+    }
   }
 }
