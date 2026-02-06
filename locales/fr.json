@@ -192,21 +192,41 @@
       "duties_and_taxes_included": "Frais de douane et taxes inclus."
     },
     "features": {
-      "gift": {
-        "title": "Un whisky spécial chaque jour",
-        "description": "Cadeau parfait pour ravir un amateur de spiritueux."
+      "whisky": {
+        "gift": {
+          "title": "Un whisky spécial chaque jour",
+          "description": "Cadeau parfait pour ravir un amateur de spiritueux."
+        },
+        "tasting": {
+          "title": "Une Expérience de Dégustation Guidée.",
+          "description": "Livret avec explication détaillée de chaque whisky."
+        },
+        "vial": {
+          "title": "1 fiole = 1 verre.",
+          "description": "La portion parfaite pour déguster."
+        },
+        "discovering": {
+          "title": "Découvrir simplement du bon whisky.",
+          "description": "Premium, amusant et accessible à tous."
+        }
       },
-      "tasting": {
-        "title": "Une expérience de dégustation numérique.",
-        "description": "Découvrez votre profil Whisky avec notre algorithme IA."
-      },
-      "vial": {
-        "title": "1 fiole = 1 verre.",
-        "description": "La portion parfaite pour déguster."
-      },
-      "discovering": {
-        "title": "Découvrir simplement du bon whisky.",
-        "description": "Premium, amusant et accessible à tous."
+      "rum": {
+        "gift": {
+          "title": "Un rhum spécial chaque jour",
+          "description": "Cadeau parfait pour ravir un amateur de spiritueux."
+        },
+        "tasting": {
+          "title": "Une Expérience de Dégustation Guidée.",
+          "description": "Apprenez-en plus sur les rhums de vos coffrets."
+        },
+        "vial": {
+          "title": "1 fiole = 1 verre.",
+          "description": "La portion parfaite pour déguster."
+        },
+        "discovering": {
+          "title": "Découvrir simplement du bon rhum.",
+          "description": "Premium, amusant et accessible à tous."
+        }
       }
     },
     "modal": {
@@ -569,46 +589,72 @@
   "pagefly": {
     "products": {
       "product": {
-        "regular_price": "Regular price",
-        "sold_out": "Sold out",
-        "unavailable": "Unavailable",
-        "on_sale": "Sale",
-        "quantity": "Quantity",
-        "add_to_cart": "Add to cart",
-        "back_to_collection": "Back to {{ title }}",
-        "view_details": "View details"
+        "regular_price": "Prix habituel",
+        "sold_out": "Épuisé",
+        "unavailable": "Non disponible",
+        "on_sale": "Promotion",
+        "quantity": "Quantité",
+        "add_to_cart": "Ajouter au panier",
+        "back_to_collection": "Retour à {{ title }}",
+        "view_details": "Voir les détails"
       }
     },
     "article": {
-      "tags": "Tags:",
-      "all_topics": "All topics",
-      "by_author": "by {{ author }}",
-      "posted_in": "Posted in",
-      "read_more": "Read more",
-      "back_to_blog": "Back to {{ title }}"
+      "tags": "Tags :",
+      "all_topics": "Tous les sujets",
+      "by_author": "par {{ author }}",
+      "posted_in": "Publié dans",
+      "read_more": "Lire la suite",
+      "back_to_blog": "Retour à {{ title }}"
     },
     "comments": {
-      "title": "Leave a comment",
-      "name": "Name",
-      "email": "Email",
+      "title": "Laisser un commentaire",
+      "name": "Nom",
+      "email": "E-mail",
       "message": "Message",
-      "post": "Post comment",
-      "moderated": "Please note, comments must be approved before they are published",
-      "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
-      "success": "Your comment was posted successfully! Thank you!",
+      "post": "Publier le commentaire",
+      "moderated": "Veuillez noter que les commentaires doivent être approuvés avant d'être publiés",
+      "success_moderated": "Votre commentaire a bien été publié. Nous le publierons sous peu, conformément au processus de modération.",
+      "success": "Votre commentaire a bien été publié ! Merci !",
       "comments_with_count": {
-        "one": "{{ count }} comment",
-        "other": "{{ count }} comments"
+        "one": "{{ count }} commentaire",
+        "other": "{{ count }} commentaires"
       }
     },
     "password_page": {
-      "login_form_message": "Enter store using password:",
-      "login_form_password_label": "Password",
-      "login_form_password_placeholder": "Your password",
-      "login_form_submit": "Enter",
-      "signup_form_email_label": "Email",
-      "signup_form_success": "We will send you an email right before we open!",
-      "password_link": "Enter using password"
+      "login_form_message": "Accéder à la boutique avec un mot de passe :",
+      "login_form_password_label": "Mot de passe",
+      "login_form_password_placeholder": "Votre mot de passe",
+      "login_form_submit": "Saisir",
+      "signup_form_email_label": "E-mail",
+      "signup_form_success": "Nous vous enverrons un e-mail juste avant l'ouverture !",
+      "password_link": "Saisir avec un mot de passe"
     }
+  },
+  "collapsible": {
+    "content": {
+      "heading": "Contenu de ce coffret de dégustation",
+      "body_html": "<ul><li><strong>12 whiskies exceptionnels</strong> de 25ML chacun qui célèbrent la tradition du whisky écossais et irlandais</li><li><strong>Livret avec explication détaillée</strong> de chaque whisky</li><li><strong>Coffret cadeau de luxe</strong></li></ul><p>🚩 Fabriqué aux Pays-Bas</p>"
+    },
+    "delivery": {
+      "heading": "Informations de livraison",
+      "body_html": "<p><strong>Quels sont les délais de livraison habituels ?</strong></p><p>Pour les commandes de produits en stock, le délai de livraison est généralement rapide et peut varier entre 1 à 4 jours ouvrables, selon le mode d'expédition choisi et la destination.</p><p><strong>Satisfaction Garantie ou Remboursement</strong></p><p>Si le produit n'a pas encore été expédié et que vous n'avez pas reçu l'e-mail de confirmation d'expédition, vous pouvez demander l'annulation de votre commande en nous contactant.</p><p>Si vous avez reçu le produit et qu'il ne vous plaît plus ou que vous souhaitez l'échanger, vous avez 30 jours pour nous le retourner.</p><p>Envoyez-nous simplement un message via la page de contact afin que nous puissions vous fournir une étiquette de retour, entièrement à nos frais.</p><p>Une fois que nous recevons le colis, nous pouvons procéder à un échange ou vous rembourser intégralement.</p>"
+    }
+  },
+  "product_page": {
+    "collection_label": "Collection :",
+    "scotch": "Scotch",
+    "japanese": "Japonais",
+    "world": "Monde",
+    "add_to_cart": "Ajouter au panier",
+    "sold_out": "Épuisé",
+    "adding": "Ajout en cours...",
+    "error_adding": "Erreur lors de l'ajout au panier",
+    "prepared": "Préparé",
+    "today": "Aujourd'hui",
+    "shipping": "Expédition",
+    "delivered": "Livré",
+    "awards_text": "Ces whiskies ont remporté plusieurs prix",
+    "discover_whiskies": "Découvrez les Whiskies"
   }
 }

@@ -620,5 +620,31 @@
       "signup_form_success": "We will send you an email right before we open!",
       "password_link": "Enter using password"
     }
+  },
+  "collapsible": {
+    "content": {
+      "heading": "Content of this tasting set",
+      "body_html": "<ul><li><strong>12 exceptional whiskies</strong> of 25ML each that celebrate Scotch & Irish whisky making</li><li><strong>Booklet with detailed explanation</strong> of each whisky</li><li><strong>Luxury gift box</strong></li></ul><p>🚩 Made in the Netherlands</p>"
+    },
+    "delivery": {
+      "heading": "Delivery information",
+      "body_html": "<p><strong>What are the usual delivery times?</strong></p><p>For orders of in-stock products, the delivery time is usually fast and can vary between 1 to 4 business days, depending on the chosen shipping method and the destination.</p><p><strong>Satisfaction Guaranteed or Your Money Back</strong></p><p>If the product has not yet been shipped and you have not received the shipping confirmation email, you can request to cancel your order by contacting us.</p><p>If you have received the product and no longer like it or wish to exchange it, you have 30 days to return it to us.</p><p>Simply send us a message through the contact page so we can provide you with a return label, completely at our expense.</p><p>Once we receive the package, we can proceed with an exchange or issue you a full refund.</p>"
+    }
+  },
+  "product_page": {
+    "collection_label": "Collection:",
+    "scotch": "Scotch",
+    "japanese": "Japanese",
+    "world": "World",
+    "add_to_cart": "Add to Cart",
+    "sold_out": "Sold Out",
+    "adding": "Adding...",
+    "error_adding": "Error adding to cart",
+    "prepared": "Prepared",
+    "today": "Today",
+    "shipping": "Shipping",
+    "delivered": "Delivered",
+    "awards_text": "These whiskies have won multiple awards",
+    "discover_whiskies": "Discover the Whiskies"
   }
 }

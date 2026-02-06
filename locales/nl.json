@@ -191,21 +191,41 @@
       "duties_and_taxes_included": "Douanerechten en belastingen inbegrepen."
     },
     "features": {
-      "gift": {
-        "title": "Elke dag een speciale whisky",
-        "description": "Perfect cadeau voor een liefhebber van sterke dranken."
+      "whisky": {
+        "gift": {
+          "title": "Elke dag een speciale whisky",
+          "description": "Perfect cadeau voor een liefhebber van sterke dranken."
+        },
+        "tasting": {
+          "title": "Een Begeleide Proeverij.",
+          "description": "Boekje met gedetailleerde uitleg over elke whisky."
+        },
+        "vial": {
+          "title": "1 flesje = 1 glas.",
+          "description": "De perfecte portie om te proeven."
+        },
+        "discovering": {
+          "title": "Simpelweg goede whisky ontdekken.",
+          "description": "Premium, leuk en toegankelijk voor iedereen."
+        }
       },
-      "tasting": {
-        "title": "Een digitale proeverij.",
-        "description": "Ontdek je Whisky Profiel met ons AI-algoritme."
-      },
-      "vial": {
-        "title": "1 flesje = 1 glas.",
-        "description": "De perfecte portie om te proeven."
-      },
-      "discovering": {
-        "title": "Simpelweg goede whisky ontdekken.",
-        "description": "Premium, leuk en toegankelijk voor iedereen."
+      "rum": {
+        "gift": {
+          "title": "Elke dag een speciale rum",
+          "description": "Perfect cadeau voor een liefhebber van sterke dranken."
+        },
+        "tasting": {
+          "title": "Een Begeleide Proeverij.",
+          "description": "Leer over de rums in je sets."
+        },
+        "vial": {
+          "title": "1 flesje = 1 glas.",
+          "description": "De perfecte portie om te proeven."
+        },
+        "discovering": {
+          "title": "Simpelweg goede rum ontdekken.",
+          "description": "Premium, leuk en toegankelijk voor iedereen."
+        }
       }
     },
     "modal": {
@@ -557,46 +577,72 @@
   "pagefly": {
     "products": {
       "product": {
-        "regular_price": "Regular price",
-        "sold_out": "Sold out",
-        "unavailable": "Unavailable",
-        "on_sale": "Sale",
-        "quantity": "Quantity",
-        "add_to_cart": "Add to cart",
-        "back_to_collection": "Back to {{ title }}",
-        "view_details": "View details"
+        "regular_price": "Normale prijs",
+        "sold_out": "Uitverkocht",
+        "unavailable": "Niet beschikbaar",
+        "on_sale": "Aanbieding",
+        "quantity": "Aantal",
+        "add_to_cart": "Aan winkelwagen toevoegen",
+        "back_to_collection": "Terug naar {{ title }}",
+        "view_details": "Details bekijken"
       }
     },
     "article": {
       "tags": "Tags:",
-      "all_topics": "All topics",
-      "by_author": "by {{ author }}",
-      "posted_in": "Posted in",
-      "read_more": "Read more",
-      "back_to_blog": "Back to {{ title }}"
+      "all_topics": "Alle onderwerpen",
+      "by_author": "door {{ author }}",
+      "posted_in": "Geplaatst in",
+      "read_more": "Lees meer",
+      "back_to_blog": "Terug naar {{ title }}"
     },
     "comments": {
-      "title": "Leave a comment",
-      "name": "Name",
-      "email": "Email",
-      "message": "Message",
-      "post": "Post comment",
-      "moderated": "Please note, comments must be approved before they are published",
-      "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
-      "success": "Your comment was posted successfully! Thank you!",
+      "title": "Reactie plaatsen",
+      "name": "Naam",
+      "email": "E-mail",
+      "message": "Bericht",
+      "post": "Reactie plaatsen",
+      "moderated": "Let op: reacties moeten worden goedgekeurd voordat ze worden gepubliceerd",
+      "success_moderated": "Je reactie is geplaatst. Wij publiceren het binnenkort, aangezien onze blog wordt gemodereerd.",
+      "success": "Je reactie is geplaatst! Bedankt!",
       "comments_with_count": {
-        "one": "{{ count }} comment",
-        "other": "{{ count }} comments"
+        "one": "{{ count }} reactie",
+        "other": "{{ count }} reacties"
       }
     },
     "password_page": {
-      "login_form_message": "Enter store using password:",
-      "login_form_password_label": "Password",
-      "login_form_password_placeholder": "Your password",
-      "login_form_submit": "Enter",
-      "signup_form_email_label": "Email",
-      "signup_form_success": "We will send you an email right before we open!",
-      "password_link": "Enter using password"
+      "login_form_message": "Ga winkel binnen met wachtwoord:",
+      "login_form_password_label": "Wachtwoord",
+      "login_form_password_placeholder": "Je wachtwoord",
+      "login_form_submit": "Invoeren",
+      "signup_form_email_label": "E-mail",
+      "signup_form_success": "We sturen je een e-mail vlak voordat we openen!",
+      "password_link": "Ga naar binnen met wachtwoord"
     }
+  },
+  "collapsible": {
+    "content": {
+      "heading": "Inhoud van deze proeverij set",
+      "body_html": "<ul><li><strong>12 uitzonderlijke whisky's</strong> van elk 25ML die de Schotse & Ierse whiskytraditie vieren</li><li><strong>Boekje met gedetailleerde uitleg</strong> van elke whisky</li><li><strong>Luxe geschenkdoos</strong></li></ul><p>🚩 Gemaakt in Nederland</p>"
+    },
+    "delivery": {
+      "heading": "Bezorginformatie",
+      "body_html": "<p><strong>Wat zijn de gebruikelijke levertijden?</strong></p><p>Voor bestellingen van voorradige producten is de levertijd meestal snel en kan variëren tussen 1 tot 4 werkdagen, afhankelijk van de gekozen verzendmethode en de bestemming.</p><p><strong>Tevredenheid Gegarandeerd of Geld Terug</strong></p><p>Als het product nog niet is verzonden en je de verzendbevestigingsmail nog niet hebt ontvangen, kun je vragen om je bestelling te annuleren door contact met ons op te nemen.</p><p>Als je het product hebt ontvangen en het niet meer bevalt of je wilt het ruilen, heb je 30 dagen om het naar ons terug te sturen.</p><p>Stuur ons gewoon een bericht via de contactpagina zodat we je een retourlabel kunnen verstrekken, volledig op onze kosten.</p><p>Zodra we het pakket ontvangen, kunnen we overgaan tot een ruil of je een volledige terugbetaling geven.</p>"
+    }
+  },
+  "product_page": {
+    "collection_label": "Collectie:",
+    "scotch": "Scotch",
+    "japanese": "Japans",
+    "world": "Wereld",
+    "add_to_cart": "In winkelwagen",
+    "sold_out": "Uitverkocht",
+    "adding": "Toevoegen...",
+    "error_adding": "Fout bij toevoegen aan winkelwagen",
+    "prepared": "Voorbereid",
+    "today": "Vandaag",
+    "shipping": "Verzending",
+    "delivered": "Bezorgd",
+    "awards_text": "Deze whisky's hebben meerdere prijzen gewonnen",
+    "discover_whiskies": "Ontdek de Whisky's"
   }
 }

@@ -191,6 +191,44 @@
       "duties_included": "Aranceles incluidos.",
       "duties_and_taxes_included": "Aranceles e impuestos incluidos."
     },
+    "features": {
+      "whisky": {
+        "gift": {
+          "title": "Un whisky especial cada día",
+          "description": "El regalo perfecto para un amante de los destilados."
+        },
+        "tasting": {
+          "title": "Una Experiencia de Cata Guiada.",
+          "description": "Folleto con explicación detallada de cada whisky."
+        },
+        "vial": {
+          "title": "1 vial = 1 copa.",
+          "description": "La porción perfecta para degustar."
+        },
+        "discovering": {
+          "title": "Descubrir buen whisky, simplemente.",
+          "description": "Premium, divertido y accesible para todos."
+        }
+      },
+      "rum": {
+        "gift": {
+          "title": "Un ron especial cada día",
+          "description": "El regalo perfecto para un amante de los destilados."
+        },
+        "tasting": {
+          "title": "Una Experiencia de Cata Guiada.",
+          "description": "Aprende sobre los rones de tus sets."
+        },
+        "vial": {
+          "title": "1 vial = 1 copa.",
+          "description": "La porción perfecta para degustar."
+        },
+        "discovering": {
+          "title": "Descubrir buen ron, simplemente.",
+          "description": "Premium, divertido y accesible para todos."
+        }
+      }
+    },
     "modal": {
       "label": "Galería multimedia"
     },
@@ -551,46 +589,72 @@
   "pagefly": {
     "products": {
       "product": {
-        "regular_price": "Regular price",
-        "sold_out": "Sold out",
-        "unavailable": "Unavailable",
-        "on_sale": "Sale",
-        "quantity": "Quantity",
-        "add_to_cart": "Add to cart",
-        "back_to_collection": "Back to {{ title }}",
-        "view_details": "View details"
+        "regular_price": "Precio habitual",
+        "sold_out": "Agotado",
+        "unavailable": "No disponible",
+        "on_sale": "Oferta",
+        "quantity": "Cantidad",
+        "add_to_cart": "Agregar al carrito",
+        "back_to_collection": "Volver a {{ title }}",
+        "view_details": "Ver detalles"
       }
     },
     "article": {
-      "tags": "Tags:",
-      "all_topics": "All topics",
-      "by_author": "by {{ author }}",
-      "posted_in": "Posted in",
-      "read_more": "Read more",
-      "back_to_blog": "Back to {{ title }}"
+      "tags": "Etiquetas:",
+      "all_topics": "Todos los temas",
+      "by_author": "por {{ author }}",
+      "posted_in": "Publicado en",
+      "read_more": "Leer más",
+      "back_to_blog": "Volver a {{ title }}"
     },
     "comments": {
-      "title": "Leave a comment",
-      "name": "Name",
-      "email": "Email",
-      "message": "Message",
-      "post": "Post comment",
-      "moderated": "Please note, comments must be approved before they are published",
-      "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
-      "success": "Your comment was posted successfully! Thank you!",
+      "title": "Deja un comentario",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "message": "Mensaje",
+      "post": "Publicar comentario",
+      "moderated": "Ten en cuenta que los comentarios deben aprobarse antes de que se publiquen",
+      "success_moderated": "Tu comentario se publicó correctamente. Lo publicaremos en breve, cuando se modere nuestro blog.",
+      "success": "Tu comentario se publicó correctamente. ¡Gracias!",
       "comments_with_count": {
-        "one": "{{ count }} comment",
-        "other": "{{ count }} comments"
+        "one": "{{ count }} comentario",
+        "other": "{{ count }} comentarios"
       }
     },
     "password_page": {
-      "login_form_message": "Enter store using password:",
-      "login_form_password_label": "Password",
-      "login_form_password_placeholder": "Your password",
-      "login_form_submit": "Enter",
-      "signup_form_email_label": "Email",
-      "signup_form_success": "We will send you an email right before we open!",
-      "password_link": "Enter using password"
+      "login_form_message": "Entrar a la tienda usando contraseña:",
+      "login_form_password_label": "Contraseña",
+      "login_form_password_placeholder": "Tu contraseña",
+      "login_form_submit": "Ingresar",
+      "signup_form_email_label": "Correo electrónico",
+      "signup_form_success": "¡Te enviaremos un correo electrónico justo antes de abrir!",
+      "password_link": "Entrar usando contraseña"
     }
+  },
+  "collapsible": {
+    "content": {
+      "heading": "Contenido de este set de cata",
+      "body_html": "<ul><li><strong>12 whiskies excepcionales</strong> de 25ML cada uno que celebran la tradición del whisky escocés e irlandés</li><li><strong>Folleto con explicación detallada</strong> de cada whisky</li><li><strong>Caja de regalo de lujo</strong></li></ul><p>🚩 Fabricado en los Países Bajos</p>"
+    },
+    "delivery": {
+      "heading": "Información de entrega",
+      "body_html": "<p><strong>¿Cuáles son los tiempos de entrega habituales?</strong></p><p>Para pedidos de productos en stock, el tiempo de entrega suele ser rápido y puede variar entre 1 y 4 días hábiles, dependiendo del método de envío elegido y el destino.</p><p><strong>Satisfacción Garantizada o Devolución del Dinero</strong></p><p>Si el producto aún no ha sido enviado y no has recibido el correo de confirmación de envío, puedes solicitar la cancelación de tu pedido contactándonos.</p><p>Si has recibido el producto y ya no te gusta o deseas cambiarlo, tienes 30 días para devolverlo.</p><p>Simplemente envíanos un mensaje a través de la página de contacto para que podamos proporcionarte una etiqueta de devolución, completamente a nuestro cargo.</p><p>Una vez que recibamos el paquete, podemos proceder con un cambio o emitirte un reembolso completo.</p>"
+    }
+  },
+  "product_page": {
+    "collection_label": "Colección:",
+    "scotch": "Scotch",
+    "japanese": "Japonés",
+    "world": "Mundo",
+    "add_to_cart": "Agregar al carrito",
+    "sold_out": "Agotado",
+    "adding": "Agregando...",
+    "error_adding": "Error al agregar al carrito",
+    "prepared": "Preparado",
+    "today": "Hoy",
+    "shipping": "Envío",
+    "delivered": "Entregado",
+    "awards_text": "Estos whiskies han ganado múltiples premios",
+    "discover_whiskies": "Descubre los Whiskies"
   }
 }
