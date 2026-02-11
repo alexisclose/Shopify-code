@@ -967,6 +967,7 @@
         "heading_bkYYGN",
         "text_iAC6jz"
       ],
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/Image_for_bottle.svg",
         "height": "small",
