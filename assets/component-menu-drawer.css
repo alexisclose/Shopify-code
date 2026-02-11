@@ -252,15 +252,17 @@ details[open].menu-opening>.menu-drawer__submenu {
   /* Mobile: 80% width so page is visible behind */
   .menu-drawer {
     width: 80%;
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   .menu-drawer__navigation-container {
-    overflow: hidden;
+    overflow-y: hidden;
+    overscroll-behavior: none;
   }
 
   .menu-drawer__inner-submenu {
-    overflow: hidden;
+    overflow-y: hidden;
+    overscroll-behavior: none;
   }
 
   /* Mobile: smaller menu font sizes */

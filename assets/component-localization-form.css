@@ -448,22 +448,3 @@
 .language-selector .disclosure__list {
   min-width: 200px;
 }
-
-/* Mobile: larger touch target for language selector in menu drawer */
-@media screen and (max-width: 749px) {
-  .menu-drawer__localization .localization-form__select {
-    min-height: 5.4rem;
-    padding: 1.5rem 4rem 1.5rem 1.5rem;
-    font-size: 1.4rem;
-  }
-
-  .menu-drawer__localization .disclosure__button {
-    min-height: 5.4rem;
-    padding: 1.2rem 1.5rem;
-  }
-
-  .menu-drawer__localization {
-    position: relative;
-    z-index: 5;
-  }
-}
