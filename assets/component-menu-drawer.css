@@ -282,8 +282,12 @@ details[open].menu-opening>.menu-drawer__submenu {
     font-size: 1.2rem;
   }
 
-  /* Hide login button and country selector */
-  .menu-drawer__utility-links {
+  /* Hide login button and country selector, keep language selector */
+  .menu-drawer__account {
+    display: none !important;
+  }
+
+  #HeaderCountryMobileForm {
     display: none !important;
   }
 }
