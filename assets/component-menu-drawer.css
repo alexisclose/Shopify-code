@@ -239,6 +239,11 @@ details[open].menu-opening>.menu-drawer__submenu {
     transition: none !important;
   }
 
+  /* Mobile: 80% width so page is visible behind */
+  .menu-drawer {
+    width: 80%;
+  }
+
   /* Mobile: smaller menu font sizes */
   .menu-drawer__menu-item {
     font-size: 1.4rem;
