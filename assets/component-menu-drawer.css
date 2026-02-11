@@ -281,4 +281,9 @@ details[open].menu-opening>.menu-drawer__submenu {
   .menu-drawer__account {
     font-size: 1.2rem;
   }
+
+  /* Hide login button and country selector */
+  .menu-drawer__utility-links {
+    display: none !important;
+  }
 }
