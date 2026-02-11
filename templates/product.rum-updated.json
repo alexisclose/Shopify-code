@@ -99,7 +99,7 @@
         "custom_liquid_UBDNHn": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<style>.awards-section{text-align:center;padding:8px 0 20px 0}.awards-text{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:500;font-style:italic;color:#000;margin-bottom:12px}.awards-image{max-width:50%;height:auto;border-radius:8px}@media(max-width:749px){.awards-section{padding:5px 0 15px 0}.awards-text{font-size:15px}.awards-image{max-width:60%}}</style><div class=\"awards-section\"><p class=\"awards-text\">{{ 'product_page.awards_text' | t }}</p><img class=\"awards-image\" src=\"https://cdn.shopify.com/s/files/1/0874/9711/3941/files/Image_for_bottle_2.png?v=1737468681\" alt=\"Award-winning whiskies\" loading=\"lazy\"></div>"
+            "custom_liquid": "<style>.awards-section{text-align:center;padding:8px 0 20px 0}.awards-text{font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:500;font-style:italic;color:#000;margin-bottom:12px}.awards-image{max-width:50%;height:auto;border-radius:8px}@media(max-width:749px){.awards-section{padding:5px 0 15px 0}.awards-text{font-size:15px}.awards-image{max-width:60%}}</style><div class=\"awards-section\"><p class=\"awards-text\">{{ 'product_page.rum_awards_text' | t }}</p><img class=\"awards-image\" src=\"https://cdn.shopify.com/s/files/1/0874/9711/3941/files/Image_for_bottle_2.png?v=1737468681\" alt=\"Award-winning whiskies\" loading=\"lazy\"></div>"
           }
         },
         "custom_liquid_kHkkHE": {
