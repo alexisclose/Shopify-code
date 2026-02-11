@@ -2,7 +2,7 @@
   <form method="post" action="/cart/add">
     <input type="hidden" name="id" value="{{ product.variants.first.id }}">
     <button type="submit" class="sticky-atc-button">
-      Add to Cart
+      {{ 'products.product.add_to_cart' | t }}
     </button>
   </form>
 </div>
