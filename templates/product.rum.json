@@ -1,1 +1,947 @@
-{"sections":{"main":{"type":"main-product","blocks":{"title":{"type":"title","settings":{}},"judge_me_reviews_preview_badge_Ai46hQ":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"price":{"type":"price","settings":{}},"text_QfQ4En":{"type":"text","settings":{"text":"See more reviews on <a href=\"https:\/\/www.trustpilot.com\/review\/elcarteltastings.com\" target=\"_blank\" title=\"https:\/\/www.trustpilot.com\/review\/elcarteltastings.com\">Trustpilot<\/a>","text_style":"body"}},"description":{"type":"description","settings":{}},"text_GXhLJ7":{"type":"text","disabled":true,"settings":{"text":"Our rum tasting collection is a finely curated selection of some of the world's best rums.","text_style":"body"}},"quantity_selector":{"type":"quantity_selector","disabled":true,"settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":true,"show_gift_card_recipient":true}},"custom_liquid_fFGPrh":{"type":"custom_liquid","settings":{"custom_liquid":"<div class=\"essential-upsell-cross-sell-block\"><\/div>"}},"custom_liquid_ArQKYN":{"type":"custom_liquid","settings":{"custom_liquid":"{% assign today_wday = 'now' | date: \"%w\" | plus: 0 %}\n{% assign today_ts = 'now' | date: \"%s\" | plus: 0 %}\n\n{% case today_wday %}\n  {% when 1 %} {% assign days_until_delivery = 2 %}\n  {% when 2 %} {% assign days_until_delivery = 2 %}\n  {% when 3 %} {% assign days_until_delivery = 2 %}\n  {% when 4 %} {% assign days_until_delivery = 4 %}\n  {% when 5 %} {% assign days_until_delivery = 3 %}\n  {% when 6 %} {% assign days_until_delivery = 3 %}\n  {% when 0 %} {% assign days_until_delivery = 2 %}\n{% endcase %}\n\n{% assign delivery_seconds = days_until_delivery | times: 86400 %}\n{% assign delivery_timestamp = today_ts | plus: delivery_seconds %}\n{% assign day_name = delivery_timestamp | date: \"%A\" %}\n{% assign day_number = delivery_timestamp | date: \"%e\" %}\n{% assign month_name = delivery_timestamp | date: \"%B\" %}\n\n{% case request.locale.iso_code %}\n  {% when \"nl\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Maandag\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Dinsdag\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Woensdag\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Donderdag\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vrijdag\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Zaterdag\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Zondag\" %}\n    {% endcase %}\n    {% case month_name %}\n      {% when \"January\" %} {% assign month_name = \"januari\" %}\n      {% when \"February\" %} {% assign month_name = \"februari\" %}\n      {% when \"March\" %} {% assign month_name = \"maart\" %}\n      {% when \"April\" %} {% assign month_name = \"april\" %}\n      {% when \"May\" %} {% assign month_name = \"mei\" %}\n      {% when \"June\" %} {% assign month_name = \"juni\" %}\n      {% when \"July\" %} {% assign month_name = \"juli\" %}\n      {% when \"August\" %} {% assign month_name = \"augustus\" %}\n      {% when \"September\" %} {% assign month_name = \"september\" %}\n      {% when \"October\" %} {% assign month_name = \"oktober\" %}\n      {% when \"November\" %} {% assign month_name = \"november\" %}\n      {% when \"December\" %} {% assign month_name = \"december\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Bestel vandaag en ontvang het <strong>\" | append: delivery_date | append: \"<\/strong>\" %}\n\n  {% when \"fr\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Lundi\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Mardi\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Mercredi\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Jeudi\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vendredi\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Samedi\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Dimanche\" %}\n    {% endcase %}\n    {% case month_name %}\n      {% when \"January\" %} {% assign month_name = \"janvier\" %}\n      {% when \"February\" %} {% assign month_name = \"février\" %}\n      {% when \"March\" %} {% assign month_name = \"mars\" %}\n      {% when \"April\" %} {% assign month_name = \"avril\" %}\n      {% when \"May\" %} {% assign month_name = \"mai\" %}\n      {% when \"June\" %} {% assign month_name = \"juin\" %}\n      {% when \"July\" %} {% assign month_name = \"juillet\" %}\n      {% when \"August\" %} {% assign month_name = \"août\" %}\n      {% when \"September\" %} {% assign month_name = \"septembre\" %}\n      {% when \"October\" %} {% assign month_name = \"octobre\" %}\n      {% when \"November\" %} {% assign month_name = \"novembre\" %}\n      {% when \"December\" %} {% assign month_name = \"décembre\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Commandez aujourd’hui et recevez-le le <strong>\" | append: delivery_date | append: \"<\/strong>\" %}\n\n  {% else %}\n    {% assign formatted_date = delivery_timestamp | date: \"%A %e %B\" %}\n    {% assign delivery_message = \"Order today and receive by <strong>\" | append: formatted_date | append: \"<\/strong>\" %}\n{% endcase %}\n\n<style>\n  .el-cartel-delivery {\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    margin-top: 15px;\n    color: #ffffff;\n    font-family: inherit;\n  }\n\n  .el-cartel-dot {\n    width: 8px;\n    height: 8px;\n    border-radius: 50%;\n    background-color: #00e676;\n    margin-right: 10px;\n    animation: soft-flicker 1.6s infinite;\n    box-shadow: 0 0 6px rgba(0, 230, 118, 0.8);\n  }\n\n  @keyframes soft-flicker {\n    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(0, 230, 118, 0.8); }\n    50% { opacity: 0.4; box-shadow: 0 0 2px rgba(0, 230, 118, 0.4); }\n  }\n<\/style>\n\n<div class=\"el-cartel-delivery\">\n  <span class=\"el-cartel-dot\"><\/span>\n  <span>{{ delivery_message }}<\/span>\n<\/div>"}},"collapsible_tab_gH3yhx":{"type":"collapsible_tab","settings":{"heading":"Package includes:","icon":"check_mark","content":"<ul><li>12 different rum samples of 25ML each (34%-40% Vol.)<\/li><li>Booklet with detailed explanation of each rum sample<\/li><li>Luxury gift box<\/li><\/ul><p>🚩 Made in the Netherlands<\/p><p><\/p>","page":""}},"collapsible_tab_UWYCeN":{"type":"collapsible_tab","settings":{"heading":"Delivery information","icon":"check_mark","content":"<h3><em><strong>What are the usual delivery times?<br\/><\/strong><\/em><\/h3><p>For orders of in-stock products, the delivery time is usually fast and can vary between 1 to 4 business days, depending on the chosen shipping method and the destination.<\/p><h3><em><strong>Satisfaction Guaranteed or Your Money Back<\/strong><\/em><\/h3><p>If the product has not yet been shipped and you have not received the shipping confirmation email, you can request to cancel your order by contacting us.<\/p><p>If you have received the product and no longer like it or wish to exchange it, you have 30 days to return it to us.<\/p><p>Simply send us a message through the contact page so we can provide you with a return label, completely at our expense.<\/p><p>Once we receive the package, we can proceed with an exchange or issue you a full refund.<\/p>","page":""}},"icon_with_text_nYNNJG":{"type":"icon-with-text","disabled":true,"settings":{"layout":"horizontal","icon_1":"heart","image_1":"shopify:\/\/shop_images\/accept.png","heading_1":"4.8\/5 customer reviews on our website","icon_2":"return","image_2":"shopify:\/\/shop_images\/accept.png","heading_2":"30-day Free Return","icon_3":"truck","image_3":"shopify:\/\/shop_images\/accept.png","heading_3":"Delivery to BE & NL in 2 days"}}},"block_order":["title","judge_me_reviews_preview_badge_Ai46hQ","variant_picker","price","text_QfQ4En","description","text_GXhLJ7","quantity_selector","buy_buttons","custom_liquid_fFGPrh","custom_liquid_ArQKYN","collapsible_tab_gH3yhx","collapsible_tab_UWYCeN","icon_with_text_nYNNJG"],"settings":{"enable_sticky_info":true,"color_scheme":"scheme-4","media_size":"medium","constrain_to_viewport":true,"media_fit":"cover","gallery_layout":"thumbnail_slider","mobile_thumbnails":"hide","media_position":"left","image_zoom":"lightbox","hide_variants":true,"enable_video_looping":false,"padding_top":36,"padding_bottom":64}},"related-products":{"type":"related-products","disabled":true,"settings":{"heading":"You may also like","heading_size":"h2","products_to_show":4,"columns_desktop":4,"columns_mobile":"2","color_scheme":"scheme-1","image_ratio":"square","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"padding_top":36,"padding_bottom":28}},"custom_liquid_zAiBxc":{"type":"custom-liquid","settings":{"custom_liquid":"<style>\nvideo {\nwidth: 110%;\nheight: auto;\ndisplay: block;\nmargin: -38px;\n}\n<\/style>\n<video muted autoplay playsinline loop>\n    <source src=\"https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video\/mp4\">\n    <https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video\/mp4\">\n<\/video>","color_scheme":"","padding_top":0,"padding_bottom":0}},"collapsible_content_Httn43":{"type":"collapsible-content","blocks":{"collapsible_row_NEn98k":{"type":"collapsible_row","settings":{"heading":"Taste","icon":"bottle","row_content":"<p>Step into a world of exceptional rum, each with its own character and story. We have carefully gathered the finest flavors from various countries – from the tropical Caribbean to the rich sugarcane plantations of South America. Discover your favorite in this set of award-winning rums.<\/p>","page":""}},"collapsible_row_PtLdRG":{"type":"collapsible_row","settings":{"heading":"Learn","icon":"eye","row_content":"<p>We take you on a journey through the world of rum. Our team has carefully tasted each rum and mapped out its unique flavors for you. A handy booklet guides you through the different tastes – from the first aroma to the last drop. Perfect for discovering your own preferences, one sip at a time.<\/p>","page":""}},"collapsible_row_CkiniR":{"type":"collapsible_row","settings":{"heading":"Enjoy","icon":"fire","row_content":"<p>Give yourself or someone else a special moment of refinement and enjoyment. Our whisky tastings are carefully curated and beautifully packaged in elegant tubes, inspired by classic cigar boxes. This timeless presentation turns every tasting into a luxurious experience. Whether you're enjoying it with friends or surprising someone with a stylish gift, our collection makes every tasting moment special.<\/p>","page":""}}},"block_order":["collapsible_row_NEn98k","collapsible_row_PtLdRG","collapsible_row_CkiniR"],"settings":{"caption":"","heading":"","heading_size":"h1","heading_alignment":"center","layout":"none","container_color_scheme":"scheme-4","color_scheme":"scheme-4","open_first_collapsible_row":false,"image_ratio":"adapt","desktop_layout":"image_second","padding_top":36,"padding_bottom":36}},"rich_text_M7J8am":{"type":"rich-text","blocks":{"heading_wHh8tp":{"type":"heading","settings":{"heading":"Discover the collection","heading_size":"h1"}}},"block_order":["heading_wHh8tp"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-1","full_width":true,"padding_top":60,"padding_bottom":0}},"ss_featured_collection_15_jyUFtB":{"type":"ss-featured-collection-15","blocks":{"featured_ATB7ah":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/Image_for_bottle_8.jpg","title":"Available in set of 6&12 rums","text":"<p><strong>Takamaka Dark Spiced <\/strong>is a spiced rum from the Seychelles, crafted by the Trois Frères Distillery on the island of Mahé. Made from locally grown sugarcane and infused with a secret blend of natural spices and botanicals, this rum delivers a rich and warming profile. Expect notes of vanilla, cinnamon, nutmeg, and a hint of tropical fruit, rounded off with a subtle smokiness. <br\/><br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#e9e1fc"}},"featured_jmHbM3":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/7.jpg","title":"Available in set of 6&12 rums","text":"<p><strong>Plantation Gran Añejo<\/strong> is a premium rum blend from Guatemala and Belize, aged 3 to 6 years in ex-bourbon barrels and finished in French Ferrand cognac casks. It features a rich, smooth profile with notes of vanilla, caramel, tropical fruits, and subtle spices, complemented by hints of tobacco and oak.<br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#e0fcee"}},"featured_MBXx4w":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/6.jpg","title":"Available in set of 6&12 rums","text":"<p><strong>Appleton Estate Signature Blend<\/strong> is a Jamaican rum crafted from a blend of pot and column still rums, aged for an average of four years in ex-bourbon barrels. It offers a fruit-forward profile with notes of dried apricot, fresh peach, and subtle hints of molasses, complemented by vanilla and brown sugar .<br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_6yEWpC":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/Image_for_bottle_7.jpg","title":"Available in set of 6&12 rums","text":"<p><strong>Flor de Caña 7 Year Old<\/strong> is a premium Nicaraguan rum crafted by Compañía Licorera de Nicaragua, a family-owned distillery established in 1890 at the base of the San Cristóbal volcano. This rum is renowned for its commitment to sustainability, being both carbon-neutral and Fair Trade certified, and is distilled using 100% renewable energy.<br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_6hi76g":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/5.jpg","title":"Available in set of 6&12 rums","text":"<p><strong>Mount Gay Eclipse<\/strong> is a Barbadian rum produced by Mount Gay Distilleries, recognized as the world's oldest commercial rum producer, established in 1703. This rum is crafted from a blend of pot and column still distillates, aged for up to two years in ex-bourbon barrels. It offers a light-bodied profile with notes of vanilla, caramel, and subtle oak.<br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_FhLqyW":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/11.jpg","title":"Available in set of 6&12 rums","text":"<p><strong>El Dorado 12 Year Old<\/strong> is a premium Demerara rum from Guyana, crafted by Demerara Distillers Limited. It blends rums aged at least 12 years in ex-bourbon casks, utilizing both wooden and metal Coffey stills. This rum offers a rich profile with notes of tropical fruits, spice, honey, and dark sugar. <\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_DkVdkG":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/13_3a502cb6-4c72-488a-9cb6-5c6fb713f17a.jpg","title":"Available in set of 12 rums only","text":"<p><strong>Pampero Aniversario <\/strong>is a premium Venezuelan rum crafted by Industrias Pampero to commemorate the distillery's 25th anniversary in 1963. Blended from rums aged between 4 and 6 years in whisky and sherry casks, it offers a rich profile with notes of caramel, vanilla, cocoa, and subtle spices like cinnamon and nutmeg.<br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_f6xtmF":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/10.jpg","title":"Available in set of 12 rums only","text":"<p><strong>Diplomático Mantuano<\/strong> is a Venezuelan rum crafted from a blend of molasses and sugar cane honey, aged up to eight years in ex-bourbon and malt whisky casks. It features a rich flavor profile with notes of dried fruits, vanilla, and subtle spices, complemented by hints of oak and a touch of sweetness.<\/p>","button_text":"","url":"","slide_bg_color":"#e3edd0"}},"featured_eBif7U":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/12.jpg","title":"Available in set of 12 rums only","text":"<p><strong>Don Papa Masskara<\/strong> is a flavored rum from the Philippines, inspired by the vibrant Masskara Festival. Crafted from molasses and aged in American oak barrels, it is infused with calamansi (a native citrus), siling labuyo chili, and tropical honey . This blend results in a sweet, citrus-forward profile with notes of honey, caramel, and vanilla, complemented by a subtle chili warmth.<br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#eaf5f6"}},"featured_hYfDgQ":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/9.jpg","title":"Available in set of 12 rums only","text":"<p><strong>Ron Abuelo 7 Años<\/strong> is a Panamanian rum produced by Varela Hermanos, aged for seven years in ex-bourbon oak barrels. It offers a balanced flavor profile with notes of vanilla, caramel, dried fruits, and subtle spices, complemented by a smooth, medium-bodied texture. <br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fce0f6"}},"featured_xQJN4t":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/Image_for_bottle_9.jpg","title":"Available in set of 12 rums only","text":"<p><strong>Goslings Black Seal <\/strong>is a rich and full-bodied dark rum from Bermuda, produced by the Gosling family since the mid-1800s. Aged in charred oak barrels, this iconic rum is known for its deep flavor and smooth character. It offers layered notes of molasses, caramel, vanilla, and baking spices, with a hint of smoke and a dry, balanced finish. <br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_Hwpc9J":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/4.jpg","title":"Available in set of 12 rums only","text":"<p><strong>Bacardi Reserva Ocho<\/strong> is a Cuban golden rum aged for a minimum of eight years in American white oak barrels, inspired by a family recipe dating back to 1862. It offers a rich and mellow flavor profile featuring notes of dried apricot, banana leaf, oak, and spices, with a smooth, well-rounded finish.<\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}}},"block_order":["featured_ATB7ah","featured_jmHbM3","featured_MBXx4w","featured_6yEWpC","featured_6hi76g","featured_FhLqyW","featured_DkVdkG","featured_f6xtmF","featured_eBif7U","featured_hYfDgQ","featured_xQJN4t","featured_Hwpc9J"],"settings":{"heading":"","heading_custom":false,"heading_font":"serif","heading_size":40,"heading_size_mobile":34,"heading_height":130,"heading_align":"center","heading_align_mobile":"center","collection":"","collection_show":10,"slider_gap":32,"slider_gap_mobile":16,"slider_view_mobile":1.2,"slider_mt":48,"slider_mt_mobile":32,"image_width":300,"image_radius":0,"image_border_thickness":0,"image_ratio":"square","image_ratio_mobile":"square","slide_content_width":300,"content_align":"left","content_align_mobile":"center","content_vertical_align":"center","title_custom":false,"title_font":"bevan_n4","title_size":18,"title_size_mobile":18,"title_height":130,"text_custom":false,"text_font":"josefin_sans_n4","text_size":16,"text_size_mobile":14,"text_height":150,"text_mt":12,"text_mt_mobile":12,"button_text":"Shop now","button_custom":false,"button_font":"josefin_sans_n4","button_size":16,"button_size_mobile":16,"button_height":100,"button_padding_horizontal":36,"button_padding_horizontal_mobile":36,"button_padding_vertical":14,"button_padding_vertical_mobile":14,"button_radius":100,"button_border_thickness":1,"button_mt":24,"button_mt_mobile":24,"button_style":"outline","arrow_size":48,"arrow_size_mobile":40,"arrow_icon_size":10,"arrow_icon_size_mobile":8,"arrow_border_thickness":0,"arrow_radius":100,"arrow_hover_effect":"color","arrow_show_desktop":true,"arrow_show_mobile":false,"title_color":"#121212","text_color":"#121212","image_border_color":"#121212","button_color":"#ffffff","button_hover_color":"#121212","button_bg_color":"#121212","button_bg_hover_color":"#ffffff","button_border_color":"#121212","button_border_hover_color":"#121212","arrow_color":"#121212","arrow_hover_color":"#ffffff","arrow_bg_color":"#ffffff","arrow_bg_hover_color":"#121212","arrow_border_color":"#121212","arrow_border_hover_color":"#121212","heading_color":"#121212","background_color":"#ffffff","background_gradient":"","border_color":"#121212","margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":36,"padding_bottom":84,"padding_horizontal":5,"padding_horizontal_mobile":1.5,"full_width":true,"content_width":1200,"border_thickness":0,"section_radius":0,"lazy":true}},"ss_slider_2_aUEtMw":{"type":"ss-slider-2","blocks":{"slide_NxHbWJ":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_Doorly_s_XO.jpg","title":"","button":"","url":""}},"slide_m4kNMG":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_Bacardi_Reserva_Ocho.jpg","title":"","button":"","url":""}},"slide_cHcxaX":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration__Rum_Angostura_5_years_old.jpg","title":"","button":"","url":""}},"slide_rXnCCM":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_Appleton_Estate_Signature_blend.jpg","title":"","button":"","url":""}},"slide_xg7dPQ":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_Don_Papa_Masskara.jpg","title":"","button":"","url":""}},"slide_6yNepD":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_Plantation_Gran_Anejo.jpg","title":"","button":"","url":""}},"slide_zjkFEK":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_Diplomatico_Mantuano.jpg","title":"","button":"","url":""}},"slide_tDMzDt":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_El_Dorado_12_years_old.jpg","title":"","button":"","url":""}},"slide_hBmpUa":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_Legendario_Elixir_De_Cuba.jpg","title":"","button":"","url":""}},"slide_XfFyXP":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_-_Rum_Pampero_aniversario.jpg","title":"","button":"","url":""}},"slide_9KCGQp":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_Abuelo_7_years_old.jpg","title":"","button":"","url":""}},"slide_xdzx43":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Illustration_Rum_Mount_Gay_Eclipse.jpg","title":"","button":"","url":""}}},"block_order":["slide_NxHbWJ","slide_m4kNMG","slide_cHcxaX","slide_rXnCCM","slide_xg7dPQ","slide_6yNepD","slide_zjkFEK","slide_tDMzDt","slide_hBmpUa","slide_XfFyXP","slide_9KCGQp","slide_xdzx43"],"disabled":true,"settings":{"slider_view":4,"slider_view_mobile":1.5,"slider_rotate":0,"card_padding_vertical":40,"card_padding_vertical_mobile":0,"card_padding_horizontal":42,"card_padding_horizontal_mobile":36,"card_radius":0,"card_border_thickness":0,"card_shadow":true,"card_ratio":"landscape","card_ratio_mobile":"landscape","card_overlay":0,"content_horizontal_position":"end","content_horizontal_position_mobile":"end","content_vertical_position":"start","content_vertical_position_mobile":"end","title_custom":false,"title_font":"josefin_sans_n4","title_size":10,"title_size_mobile":8,"title_height":120,"button_custom":false,"button_font":"josefin_sans_n4","button_size":14,"button_size_mobile":14,"button_height":100,"button_mt":16,"button_padding_vertical":12,"button_padding_horizontal":20,"button_radius":0,"button_border_thickness":1,"arrow_size":50,"arrow_size_mobile":32,"arrow_icon_size":20,"arrow_icon_size_mobile":12,"arrow_border_thickness":0,"arrow_show_desktop":true,"arrow_show_mobile":true,"card_border_color":"#000000","card_shadow_color":"#000000","card_overlay_color":"#000000","title_color":"#ffffff","button_color":"#ffffff","button_hover_color":"#000000","button_bg_color":"","button_bg_hover_color":"#ffffff","button_border_color":"#ffffff","button_border_hover_color":"#ffffff","arrow_color":"#000000","arrow_hover_color":"#ffffff","arrow_bg_color":"#ffffff","arrow_bg_hover_color":"#000000","arrow_border_color":"#000000","arrow_border_hover_color":"#454545","background_color":"#ffffff","background_gradient":"","border_color":"#000000","margin_top":0,"margin_bottom":0,"padding_top":36,"padding_bottom":80,"padding_horizontal":0,"padding_horizontal_mobile":0,"full_width":true,"content_width":120,"border_thickness":0,"lazy":false}},"image_with_text_qzNVtE":{"type":"image-with-text","blocks":{"heading_LcA9db":{"type":"heading","settings":{"heading":"Perfect for a gift","heading_size":"h1"}},"text_BbP7fM":{"type":"text","settings":{"text":"<p><em>Give the gift your special person is waiting for, with an educational journey through the world of premium rum.<\/em><\/p>","text_style":"body"}}},"block_order":["heading_LcA9db","text_BbP7fM"],"settings":{"image":"shopify:\/\/shop_images\/Whisky_tasting_box_6.jpg","height":"adapt","desktop_image_width":"large","layout":"image_first","image_behavior":"none","content_layout":"overlap","desktop_content_position":"middle","desktop_content_alignment":"left","mobile_content_alignment":"left","section_color_scheme":"scheme-2","color_scheme":"","padding_top":36,"padding_bottom":36}},"rich_text_dd8TWE":{"type":"rich-text","blocks":{"heading_w89YyE":{"type":"heading","settings":{"heading":"See what our customers say:","heading_size":"h1"}}},"block_order":["heading_w89YyE"],"name":"t:sections.rich-text.presets.name","settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"","full_width":true,"padding_top":40,"padding_bottom":20}},"17291025049f4bad0a":{"type":"apps","blocks":{"judge_me_reviews_review_widget_dE8dag":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}},"judge_me_reviews_verified_badge_PG7K9m":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/verified_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","disabled":true,"settings":{}},"judge_me_reviews_featured_carousel_LPQTyn":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/featured_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","disabled":true,"settings":{"maxwidth":1080}}},"block_order":["judge_me_reviews_review_widget_dE8dag","judge_me_reviews_verified_badge_PG7K9m","judge_me_reviews_featured_carousel_LPQTyn"],"settings":{"include_margins":true}},"rich_text_QrXAMQ":{"type":"rich-text","blocks":{"heading_L7RB7H":{"type":"heading","settings":{"heading":"Enjoy a 30-day free return","heading_size":"h1"}},"text_pHaB9R":{"type":"text","settings":{"text":"<p>We understand sometimes you can't buy a product for the same reason you can't buy a house without looking on the inside first. That's why we guarantee a 30-day free return, giving you the chance to experience our product firsthand and decide if it’s the perfect fit for you.<\/p>"}}},"block_order":["heading_L7RB7H","text_pHaB9R"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-3","full_width":true,"padding_top":40,"padding_bottom":40}},"collapsible_content_UM4r7d":{"type":"collapsible-content","blocks":{"collapsible_row_Jxjcbj":{"type":"collapsible_row","settings":{"heading":"1. What is included in an El Cartel tasting gift set?","icon":"check_mark","row_content":"<p>Each El Cartel tasting gift set contains carefully curated liquor samples in 25ml bottles, arranged in a luxury box. You'll also find an informative guide detailing the origin, tasting notes, and unique characteristics of each selection, helping you experience each sample fully.<\/p>","page":""}},"collapsible_row_gnqRXx":{"type":"collapsible_row","settings":{"heading":"2. What types of tasting gift sets do you offer?","icon":"check_mark","row_content":"<p>El Cartel offers two distinct collections: a whisky tasting gift set and a rum tasting gift set. Each collection includes a variety of high-quality, hand-picked samples to ensure a refined tasting experience.<\/p>","page":""}},"collapsible_row_t8aqhp":{"type":"collapsible_row","settings":{"heading":"3. Is El Cartel suitable for corporate gifts or special events?","icon":"check_mark","row_content":"<p>Absolutely. Our tasting collections make thoughtful and elegant gifts for clients, partners, or event attendees. Contact us for bulk order options and to add a customized message.<\/p>","page":""}},"collapsible_row_Lk9Mzj":{"type":"collapsible_row","settings":{"heading":"4. Who is El Cartel's tasting gift set ideal for?","icon":"check_mark","row_content":"<p>Our tasting collections are perfect for anyone interested in exploring high-quality liquors in an accessible yet sophisticated way. They make great gifts for enthusiasts or anyone curious about whisky or rum.<\/p>","page":""}},"collapsible_row_dAU9zG":{"type":"collapsible_row","settings":{"heading":"5. Is 25ML enough for tasting?","icon":"check_mark","row_content":"<p>Yes, 25ml is generally considered a perfect amount for tasting. This portion size provides enough of the liquor to capture its full flavor profile, allowing you to appreciate its aroma, body, and finish without overwhelming the palate. It's also commonly used in professional tastings, where the goal is to sample and compare flavors rather than to consume in large quantities.<\/p>","page":""}}},"block_order":["collapsible_row_Jxjcbj","collapsible_row_gnqRXx","collapsible_row_t8aqhp","collapsible_row_Lk9Mzj","collapsible_row_dAU9zG"],"settings":{"caption":"","heading":"FAQs","heading_size":"h1","heading_alignment":"center","layout":"none","container_color_scheme":"","color_scheme":"scheme-2","open_first_collapsible_row":false,"image_ratio":"adapt","desktop_layout":"image_second","padding_top":36,"padding_bottom":40}},"image_with_text_x3EkNq":{"type":"image-with-text","blocks":{"heading_xU7GnR":{"type":"heading","settings":{"heading":"Whisky tasting gift set","heading_size":"h1"}},"text_dBQFyh":{"type":"text","settings":{"text":"<p>Discover our best-seller, a collection  of some of the best Single Malt whisky's. <\/p>","text_style":"body"}},"button_zc4Dni":{"type":"button","settings":{"button_label":"Discover whisky","button_link":"shopify:\/\/products\/whisky-tasting-gift-box-12-tubes","button_style_secondary":false}}},"block_order":["heading_xU7GnR","text_dBQFyh","button_zc4Dni"],"settings":{"image":"shopify:\/\/shop_images\/DSC00095.jpg","height":"small","desktop_image_width":"medium","layout":"image_first","image_behavior":"none","content_layout":"no-overlap","desktop_content_position":"top","desktop_content_alignment":"left","mobile_content_alignment":"left","section_color_scheme":"scheme-1","color_scheme":"scheme-1","padding_top":52,"padding_bottom":36}}},"order":["main","related-products","custom_liquid_zAiBxc","collapsible_content_Httn43","rich_text_M7J8am","ss_featured_collection_15_jyUFtB","ss_slider_2_aUEtMw","image_with_text_qzNVtE","rich_text_dd8TWE","17291025049f4bad0a","rich_text_QrXAMQ","collapsible_content_UM4r7d","image_with_text_x3EkNq"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_Ai46hQ": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "text_QfQ4En": {
+          "type": "text",
+          "settings": {
+            "text": "See more reviews on <a href=\"https://www.trustpilot.com/review/elcarteltastings.com\" target=\"_blank\" title=\"https://www.trustpilot.com/review/elcarteltastings.com\">Trustpilot</a>",
+            "text_style": "body"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "text_GXhLJ7": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Our rum tasting collection is a finely curated selection of some of the world's best rums.",
+            "text_style": "body"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "custom_liquid_fFGPrh": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"essential-upsell-cross-sell-block\"></div>"
+          }
+        },
+        "custom_liquid_ArQKYN": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% assign today_wday = 'now' | date: \"%w\" | plus: 0 %}\n{% assign today_ts = 'now' | date: \"%s\" | plus: 0 %}\n\n{% case today_wday %}\n  {% when 1 %} {% assign days_until_delivery = 2 %}\n  {% when 2 %} {% assign days_until_delivery = 2 %}\n  {% when 3 %} {% assign days_until_delivery = 2 %}\n  {% when 4 %} {% assign days_until_delivery = 4 %}\n  {% when 5 %} {% assign days_until_delivery = 3 %}\n  {% when 6 %} {% assign days_until_delivery = 3 %}\n  {% when 0 %} {% assign days_until_delivery = 2 %}\n{% endcase %}\n\n{% assign delivery_seconds = days_until_delivery | times: 86400 %}\n{% assign delivery_timestamp = today_ts | plus: delivery_seconds %}\n{% assign day_name = delivery_timestamp | date: \"%A\" %}\n{% assign day_number = delivery_timestamp | date: \"%e\" %}\n{% assign month_num = delivery_timestamp | date: \"%m\" %}\n\n{% case request.locale.iso_code %}\n  {% when \"nl\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Maandag\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Dinsdag\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Woensdag\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Donderdag\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vrijdag\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Zaterdag\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Zondag\" %}\n    {% endcase %}\n    {% case month_num %}\n      {% when \"01\" %} {% assign month_name = \"januari\" %}\n      {% when \"02\" %} {% assign month_name = \"februari\" %}\n      {% when \"03\" %} {% assign month_name = \"maart\" %}\n      {% when \"04\" %} {% assign month_name = \"april\" %}\n      {% when \"05\" %} {% assign month_name = \"mei\" %}\n      {% when \"06\" %} {% assign month_name = \"juni\" %}\n      {% when \"07\" %} {% assign month_name = \"juli\" %}\n      {% when \"08\" %} {% assign month_name = \"augustus\" %}\n      {% when \"09\" %} {% assign month_name = \"september\" %}\n      {% when \"10\" %} {% assign month_name = \"oktober\" %}\n      {% when \"11\" %} {% assign month_name = \"november\" %}\n      {% when \"12\" %} {% assign month_name = \"december\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Bestel vandaag en ontvang het <strong>\" | append: delivery_date | append: \"</strong>\" %}\n\n  {% when \"fr\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Lundi\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Mardi\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Mercredi\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Jeudi\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vendredi\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Samedi\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Dimanche\" %}\n    {% endcase %}\n    {% case month_num %}\n      {% when \"01\" %} {% assign month_name = \"janvier\" %}\n      {% when \"02\" %} {% assign month_name = \"février\" %}\n      {% when \"03\" %} {% assign month_name = \"mars\" %}\n      {% when \"04\" %} {% assign month_name = \"avril\" %}\n      {% when \"05\" %} {% assign month_name = \"mai\" %}\n      {% when \"06\" %} {% assign month_name = \"juin\" %}\n      {% when \"07\" %} {% assign month_name = \"juillet\" %}\n      {% when \"08\" %} {% assign month_name = \"août\" %}\n      {% when \"09\" %} {% assign month_name = \"septembre\" %}\n      {% when \"10\" %} {% assign month_name = \"octobre\" %}\n      {% when \"11\" %} {% assign month_name = \"novembre\" %}\n      {% when \"12\" %} {% assign month_name = \"décembre\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Commandez aujourd’hui et recevez-le le <strong>\" | append: delivery_date | append: \"</strong>\" %}\n\n  {% else %}\n    {% assign formatted_date = delivery_timestamp | date: \"%A %e %B\" %}\n    {% assign delivery_message = \"Order today and receive by <strong>\" | append: formatted_date | append: \"</strong>\" %}\n{% endcase %}\n\n<style>\n  .el-cartel-delivery {\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    margin-top: 15px;\n    color: #ffffff;\n    font-family: inherit;\n  }\n\n  .el-cartel-dot {\n    width: 8px;\n    height: 8px;\n    border-radius: 50%;\n    background-color: #00e676;\n    margin-right: 10px;\n    animation: soft-flicker 1.6s infinite;\n    box-shadow: 0 0 6px rgba(0, 230, 118, 0.8);\n  }\n\n  @keyframes soft-flicker {\n    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(0, 230, 118, 0.8); }\n    50% { opacity: 0.4; box-shadow: 0 0 2px rgba(0, 230, 118, 0.4); }\n  }\n</style>\n\n<div class=\"el-cartel-delivery\">\n  <span class=\"el-cartel-dot\"></span>\n  <span>{{ delivery_message }}</span>\n</div>"
+          }
+        },
+        "collapsible_tab_gH3yhx": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Package includes:",
+            "icon": "check_mark",
+            "content": "<ul><li>12 different rum samples of 25ML each (34%-40% Vol.)</li><li>Booklet with detailed explanation of each rum sample</li><li>Luxury gift box</li></ul><p>🚩 Made in the Netherlands</p><p></p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_UWYCeN": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Delivery information",
+            "icon": "check_mark",
+            "content": "<h3><em><strong>What are the usual delivery times?<br/></strong></em></h3><p>For orders of in-stock products, the delivery time is usually fast and can vary between 1 to 4 business days, depending on the chosen shipping method and the destination.</p><h3><em><strong>Satisfaction Guaranteed or Your Money Back</strong></em></h3><p>If the product has not yet been shipped and you have not received the shipping confirmation email, you can request to cancel your order by contacting us.</p><p>If you have received the product and no longer like it or wish to exchange it, you have 30 days to return it to us.</p><p>Simply send us a message through the contact page so we can provide you with a return label, completely at our expense.</p><p>Once we receive the package, we can proceed with an exchange or issue you a full refund.</p>",
+            "page": ""
+          }
+        },
+        "icon_with_text_nYNNJG": {
+          "type": "icon-with-text",
+          "disabled": true,
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "heart",
+            "image_1": "shopify://shop_images/accept.png",
+            "heading_1": "4.8/5 customer reviews on our website",
+            "icon_2": "return",
+            "image_2": "shopify://shop_images/accept.png",
+            "heading_2": "30-day Free Return",
+            "icon_3": "truck",
+            "image_3": "shopify://shop_images/accept.png",
+            "heading_3": "Delivery to BE & NL in 2 days"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "judge_me_reviews_preview_badge_Ai46hQ",
+        "variant_picker",
+        "price",
+        "text_QfQ4En",
+        "description",
+        "text_GXhLJ7",
+        "quantity_selector",
+        "buy_buttons",
+        "custom_liquid_fFGPrh",
+        "custom_liquid_ArQKYN",
+        "collapsible_tab_gH3yhx",
+        "collapsible_tab_UWYCeN",
+        "icon_with_text_nYNNJG"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-4",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 64
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "custom_liquid_zAiBxc": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\nvideo {\nwidth: 110%;\nheight: auto;\ndisplay: block;\nmargin: -38px;\n}\n</style>\n<video muted autoplay playsinline loop>\n    <source src=\"https://cdn.shopify.com/videos/c/o/v/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video/mp4\">\n    <https://cdn.shopify.com/videos/c/o/v/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video/mp4\">\n</video>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "collapsible_content_Httn43": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_NEn98k": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Taste",
+            "icon": "bottle",
+            "row_content": "<p>Step into a world of exceptional rum, each with its own character and story. We have carefully gathered the finest flavors from various countries – from the tropical Caribbean to the rich sugarcane plantations of South America. Discover your favorite in this set of award-winning rums.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_PtLdRG": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Learn",
+            "icon": "eye",
+            "row_content": "<p>We take you on a journey through the world of rum. Our team has carefully tasted each rum and mapped out its unique flavors for you. A handy booklet guides you through the different tastes – from the first aroma to the last drop. Perfect for discovering your own preferences, one sip at a time.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_CkiniR": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Enjoy",
+            "icon": "fire",
+            "row_content": "<p>Give yourself or someone else a special moment of refinement and enjoyment. Our whisky tastings are carefully curated and beautifully packaged in elegant tubes, inspired by classic cigar boxes. This timeless presentation turns every tasting into a luxurious experience. Whether you're enjoying it with friends or surprising someone with a stylish gift, our collection makes every tasting moment special.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_NEn98k",
+        "collapsible_row_PtLdRG",
+        "collapsible_row_CkiniR"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "scheme-4",
+        "color_scheme": "scheme-4",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_M7J8am": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_wHh8tp": {
+          "type": "heading",
+          "settings": {
+            "heading": "Discover the collection",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wHh8tp"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 60,
+        "padding_bottom": 0
+      }
+    },
+    "ss_featured_collection_15_jyUFtB": {
+      "type": "ss-featured-collection-15",
+      "blocks": {
+        "featured_ATB7ah": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/Image_for_bottle_8.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Takamaka Dark Spiced </strong>is a spiced rum from the Seychelles, crafted by the Trois Frères Distillery on the island of Mahé. Made from locally grown sugarcane and infused with a secret blend of natural spices and botanicals, this rum delivers a rich and warming profile. Expect notes of vanilla, cinnamon, nutmeg, and a hint of tropical fruit, rounded off with a subtle smokiness. <br/><br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#e9e1fc"
+          }
+        },
+        "featured_jmHbM3": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/7.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Plantation Gran Añejo</strong> is a premium rum blend from Guatemala and Belize, aged 3 to 6 years in ex-bourbon barrels and finished in French Ferrand cognac casks. It features a rich, smooth profile with notes of vanilla, caramel, tropical fruits, and subtle spices, complemented by hints of tobacco and oak.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#e0fcee"
+          }
+        },
+        "featured_MBXx4w": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/6.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Appleton Estate Signature Blend</strong> is a Jamaican rum crafted from a blend of pot and column still rums, aged for an average of four years in ex-bourbon barrels. It offers a fruit-forward profile with notes of dried apricot, fresh peach, and subtle hints of molasses, complemented by vanilla and brown sugar .<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_6yEWpC": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/Image_for_bottle_7.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Flor de Caña 7 Year Old</strong> is a premium Nicaraguan rum crafted by Compañía Licorera de Nicaragua, a family-owned distillery established in 1890 at the base of the San Cristóbal volcano. This rum is renowned for its commitment to sustainability, being both carbon-neutral and Fair Trade certified, and is distilled using 100% renewable energy.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_6hi76g": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/5.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>Mount Gay Eclipse</strong> is a Barbadian rum produced by Mount Gay Distilleries, recognized as the world's oldest commercial rum producer, established in 1703. This rum is crafted from a blend of pot and column still distillates, aged for up to two years in ex-bourbon barrels. It offers a light-bodied profile with notes of vanilla, caramel, and subtle oak.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_FhLqyW": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/11.jpg",
+            "title": "Available in set of 6&12 rums",
+            "text": "<p><strong>El Dorado 12 Year Old</strong> is a premium Demerara rum from Guyana, crafted by Demerara Distillers Limited. It blends rums aged at least 12 years in ex-bourbon casks, utilizing both wooden and metal Coffey stills. This rum offers a rich profile with notes of tropical fruits, spice, honey, and dark sugar. </p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_DkVdkG": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/13_3a502cb6-4c72-488a-9cb6-5c6fb713f17a.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Pampero Aniversario </strong>is a premium Venezuelan rum crafted by Industrias Pampero to commemorate the distillery's 25th anniversary in 1963. Blended from rums aged between 4 and 6 years in whisky and sherry casks, it offers a rich profile with notes of caramel, vanilla, cocoa, and subtle spices like cinnamon and nutmeg.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_f6xtmF": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/10.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Diplomático Mantuano</strong> is a Venezuelan rum crafted from a blend of molasses and sugar cane honey, aged up to eight years in ex-bourbon and malt whisky casks. It features a rich flavor profile with notes of dried fruits, vanilla, and subtle spices, complemented by hints of oak and a touch of sweetness.</p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#e3edd0"
+          }
+        },
+        "featured_eBif7U": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/12.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Don Papa Masskara</strong> is a flavored rum from the Philippines, inspired by the vibrant Masskara Festival. Crafted from molasses and aged in American oak barrels, it is infused with calamansi (a native citrus), siling labuyo chili, and tropical honey . This blend results in a sweet, citrus-forward profile with notes of honey, caramel, and vanilla, complemented by a subtle chili warmth.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#eaf5f6"
+          }
+        },
+        "featured_hYfDgQ": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/9.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Ron Abuelo 7 Años</strong> is a Panamanian rum produced by Varela Hermanos, aged for seven years in ex-bourbon oak barrels. It offers a balanced flavor profile with notes of vanilla, caramel, dried fruits, and subtle spices, complemented by a smooth, medium-bodied texture. <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fce0f6"
+          }
+        },
+        "featured_xQJN4t": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/Image_for_bottle_9.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Goslings Black Seal </strong>is a rich and full-bodied dark rum from Bermuda, produced by the Gosling family since the mid-1800s. Aged in charred oak barrels, this iconic rum is known for its deep flavor and smooth character. It offers layered notes of molasses, caramel, vanilla, and baking spices, with a hint of smoke and a dry, balanced finish. <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_Hwpc9J": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/4.jpg",
+            "title": "Available in set of 12 rums only",
+            "text": "<p><strong>Bacardi Reserva Ocho</strong> is a Cuban golden rum aged for a minimum of eight years in American white oak barrels, inspired by a family recipe dating back to 1862. It offers a rich and mellow flavor profile featuring notes of dried apricot, banana leaf, oak, and spices, with a smooth, well-rounded finish.</p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        }
+      },
+      "block_order": [
+        "featured_ATB7ah",
+        "featured_jmHbM3",
+        "featured_MBXx4w",
+        "featured_6yEWpC",
+        "featured_6hi76g",
+        "featured_FhLqyW",
+        "featured_DkVdkG",
+        "featured_f6xtmF",
+        "featured_eBif7U",
+        "featured_hYfDgQ",
+        "featured_xQJN4t",
+        "featured_Hwpc9J"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_custom": false,
+        "heading_font": "serif",
+        "heading_size": 40,
+        "heading_size_mobile": 34,
+        "heading_height": 130,
+        "heading_align": "center",
+        "heading_align_mobile": "center",
+        "collection": "",
+        "collection_show": 10,
+        "slider_gap": 32,
+        "slider_gap_mobile": 16,
+        "slider_view_mobile": 1.2,
+        "slider_mt": 48,
+        "slider_mt_mobile": 32,
+        "image_width": 300,
+        "image_radius": 0,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "slide_content_width": 300,
+        "content_align": "left",
+        "content_align_mobile": "center",
+        "content_vertical_align": "center",
+        "title_custom": false,
+        "title_font": "bevan_n4",
+        "title_size": 18,
+        "title_size_mobile": 18,
+        "title_height": 130,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "text_height": 150,
+        "text_mt": 12,
+        "text_mt_mobile": 12,
+        "button_text": "Shop now",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 16,
+        "button_size_mobile": 16,
+        "button_height": 100,
+        "button_padding_horizontal": 36,
+        "button_padding_horizontal_mobile": 36,
+        "button_padding_vertical": 14,
+        "button_padding_vertical_mobile": 14,
+        "button_radius": 100,
+        "button_border_thickness": 1,
+        "button_mt": 24,
+        "button_mt_mobile": 24,
+        "button_style": "outline",
+        "arrow_size": 48,
+        "arrow_size_mobile": 40,
+        "arrow_icon_size": 10,
+        "arrow_icon_size_mobile": 8,
+        "arrow_border_thickness": 0,
+        "arrow_radius": 100,
+        "arrow_hover_effect": "color",
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "title_color": "#121212",
+        "text_color": "#121212",
+        "image_border_color": "#121212",
+        "button_color": "#ffffff",
+        "button_hover_color": "#121212",
+        "button_bg_color": "#121212",
+        "button_bg_hover_color": "#ffffff",
+        "button_border_color": "#121212",
+        "button_border_hover_color": "#121212",
+        "arrow_color": "#121212",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#121212",
+        "arrow_border_color": "#121212",
+        "arrow_border_hover_color": "#121212",
+        "heading_color": "#121212",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 84,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "ss_slider_2_aUEtMw": {
+      "type": "ss-slider-2",
+      "blocks": {
+        "slide_NxHbWJ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_Doorly_s_XO.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_m4kNMG": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_Bacardi_Reserva_Ocho.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_cHcxaX": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration__Rum_Angostura_5_years_old.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_rXnCCM": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_Appleton_Estate_Signature_blend.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_xg7dPQ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_Don_Papa_Masskara.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_6yNepD": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_Plantation_Gran_Anejo.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_zjkFEK": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_Diplomatico_Mantuano.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_tDMzDt": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_El_Dorado_12_years_old.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_hBmpUa": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_Legendario_Elixir_De_Cuba.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_XfFyXP": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_-_Rum_Pampero_aniversario.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_9KCGQp": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_Abuelo_7_years_old.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_xdzx43": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Illustration_Rum_Mount_Gay_Eclipse.jpg",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_NxHbWJ",
+        "slide_m4kNMG",
+        "slide_cHcxaX",
+        "slide_rXnCCM",
+        "slide_xg7dPQ",
+        "slide_6yNepD",
+        "slide_zjkFEK",
+        "slide_tDMzDt",
+        "slide_hBmpUa",
+        "slide_XfFyXP",
+        "slide_9KCGQp",
+        "slide_xdzx43"
+      ],
+      "disabled": true,
+      "settings": {
+        "slider_view": 4,
+        "slider_view_mobile": 1.5,
+        "slider_rotate": 0,
+        "card_padding_vertical": 40,
+        "card_padding_vertical_mobile": 0,
+        "card_padding_horizontal": 42,
+        "card_padding_horizontal_mobile": 36,
+        "card_radius": 0,
+        "card_border_thickness": 0,
+        "card_shadow": true,
+        "card_ratio": "landscape",
+        "card_ratio_mobile": "landscape",
+        "card_overlay": 0,
+        "content_horizontal_position": "end",
+        "content_horizontal_position_mobile": "end",
+        "content_vertical_position": "start",
+        "content_vertical_position_mobile": "end",
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 10,
+        "title_size_mobile": 8,
+        "title_height": 120,
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 14,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_mt": 16,
+        "button_padding_vertical": 12,
+        "button_padding_horizontal": 20,
+        "button_radius": 0,
+        "button_border_thickness": 1,
+        "arrow_size": 50,
+        "arrow_size_mobile": 32,
+        "arrow_icon_size": 20,
+        "arrow_icon_size_mobile": 12,
+        "arrow_border_thickness": 0,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": true,
+        "card_border_color": "#000000",
+        "card_shadow_color": "#000000",
+        "card_overlay_color": "#000000",
+        "title_color": "#ffffff",
+        "button_color": "#ffffff",
+        "button_hover_color": "#000000",
+        "button_bg_color": "",
+        "button_bg_hover_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "button_border_hover_color": "#ffffff",
+        "arrow_color": "#000000",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#000000",
+        "arrow_border_color": "#000000",
+        "arrow_border_hover_color": "#454545",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 36,
+        "padding_bottom": 80,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": false
+      }
+    },
+    "image_with_text_qzNVtE": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_LcA9db": {
+          "type": "heading",
+          "settings": {
+            "heading": "Perfect for a gift",
+            "heading_size": "h1"
+          }
+        },
+        "text_BbP7fM": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>Give the gift your special person is waiting for, with an educational journey through the world of premium rum.</em></p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LcA9db",
+        "text_BbP7fM"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Whisky_tasting_box_6.jpg",
+        "height": "adapt",
+        "desktop_image_width": "large",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_dd8TWE": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_w89YyE": {
+          "type": "heading",
+          "settings": {
+            "heading": "See what our customers say:",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_w89YyE"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 20
+      }
+    },
+    "17291025049f4bad0a": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_dE8dag": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "judge_me_reviews_verified_badge_PG7K9m": {
+          "type": "shopify://apps/judge-me-reviews/blocks/verified_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        },
+        "judge_me_reviews_featured_carousel_LPQTyn": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_dE8dag",
+        "judge_me_reviews_verified_badge_PG7K9m",
+        "judge_me_reviews_featured_carousel_LPQTyn"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "rich_text_QrXAMQ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_L7RB7H": {
+          "type": "heading",
+          "settings": {
+            "heading": "Enjoy a 30-day free return",
+            "heading_size": "h1"
+          }
+        },
+        "text_pHaB9R": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We understand sometimes you can't buy a product for the same reason you can't buy a house without looking on the inside first. That's why we guarantee a 30-day free return, giving you the chance to experience our product firsthand and decide if it’s the perfect fit for you.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_L7RB7H",
+        "text_pHaB9R"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "collapsible_content_UM4r7d": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_Jxjcbj": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "1. What is included in an El Cartel tasting gift set?",
+            "icon": "check_mark",
+            "row_content": "<p>Each El Cartel tasting gift set contains carefully curated liquor samples in 25ml bottles, arranged in a luxury box. You'll also find an informative guide detailing the origin, tasting notes, and unique characteristics of each selection, helping you experience each sample fully.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_gnqRXx": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "2. What types of tasting gift sets do you offer?",
+            "icon": "check_mark",
+            "row_content": "<p>El Cartel offers two distinct collections: a whisky tasting gift set and a rum tasting gift set. Each collection includes a variety of high-quality, hand-picked samples to ensure a refined tasting experience.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_t8aqhp": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "3. Is El Cartel suitable for corporate gifts or special events?",
+            "icon": "check_mark",
+            "row_content": "<p>Absolutely. Our tasting collections make thoughtful and elegant gifts for clients, partners, or event attendees. Contact us for bulk order options and to add a customized message.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Lk9Mzj": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "4. Who is El Cartel's tasting gift set ideal for?",
+            "icon": "check_mark",
+            "row_content": "<p>Our tasting collections are perfect for anyone interested in exploring high-quality liquors in an accessible yet sophisticated way. They make great gifts for enthusiasts or anyone curious about whisky or rum.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_dAU9zG": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "5. Is 25ML enough for tasting?",
+            "icon": "check_mark",
+            "row_content": "<p>Yes, 25ml is generally considered a perfect amount for tasting. This portion size provides enough of the liquor to capture its full flavor profile, allowing you to appreciate its aroma, body, and finish without overwhelming the palate. It's also commonly used in professional tastings, where the goal is to sample and compare flavors rather than to consume in large quantities.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_Jxjcbj",
+        "collapsible_row_gnqRXx",
+        "collapsible_row_t8aqhp",
+        "collapsible_row_Lk9Mzj",
+        "collapsible_row_dAU9zG"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "FAQs",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 40
+      }
+    },
+    "image_with_text_x3EkNq": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_xU7GnR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Whisky tasting gift set",
+            "heading_size": "h1"
+          }
+        },
+        "text_dBQFyh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Discover our best-seller, a collection  of some of the best Single Malt whisky's. </p>",
+            "text_style": "body"
+          }
+        },
+        "button_zc4Dni": {
+          "type": "button",
+          "settings": {
+            "button_label": "Discover whisky",
+            "button_link": "shopify://products/whisky-tasting-gift-box-12-tubes",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_xU7GnR",
+        "text_dBQFyh",
+        "button_zc4Dni"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/DSC00095.jpg",
+        "height": "small",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "custom_liquid_zAiBxc",
+    "collapsible_content_Httn43",
+    "rich_text_M7J8am",
+    "ss_featured_collection_15_jyUFtB",
+    "ss_slider_2_aUEtMw",
+    "image_with_text_qzNVtE",
+    "rich_text_dd8TWE",
+    "17291025049f4bad0a",
+    "rich_text_QrXAMQ",
+    "collapsible_content_UM4r7d",
+    "image_with_text_x3EkNq"
+  ]
+}

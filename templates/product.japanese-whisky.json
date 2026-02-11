@@ -1,1 +1,791 @@
-{"sections":{"main":{"type":"main-product","blocks":{"title":{"type":"title","settings":{}},"text_gwCRYR":{"type":"text","settings":{"text":"NEW","text_style":"body"}},"judge_me_reviews_preview_badge_rMk6ri":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}},"popup_wBpPGG":{"type":"popup","disabled":true,"settings":{"text":"More reviews on Trustpilot","page":""}},"price":{"type":"price","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"description":{"type":"description","settings":{}},"text_BxeAKe":{"type":"text","settings":{"text":"See more reviews on <a href=\"https:\/\/www.trustpilot.com\/review\/elcarteltastings.com\" target=\"_blank\" title=\"https:\/\/www.trustpilot.com\/review\/elcarteltastings.com\">Trustpilot<\/a>","text_style":"body"}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":true,"show_gift_card_recipient":true}},"custom_liquid_8Kih79":{"type":"custom_liquid","settings":{"custom_liquid":"<div class=\"essential-upsell-cross-sell-block\"><\/div>"}},"custom_liquid_YiDRaa":{"type":"custom_liquid","settings":{"custom_liquid":"{% assign today_wday = 'now' | date: \"%w\" | plus: 0 %}\n{% assign today_ts = 'now' | date: \"%s\" | plus: 0 %}\n\n{% case today_wday %}\n  {% when 1 %} {% assign days_until_delivery = 2 %}\n  {% when 2 %} {% assign days_until_delivery = 2 %}\n  {% when 3 %} {% assign days_until_delivery = 2 %}\n  {% when 4 %} {% assign days_until_delivery = 4 %}\n  {% when 5 %} {% assign days_until_delivery = 3 %}\n  {% when 6 %} {% assign days_until_delivery = 3 %}\n  {% when 0 %} {% assign days_until_delivery = 2 %}\n{% endcase %}\n\n{% assign delivery_seconds = days_until_delivery | times: 86400 %}\n{% assign delivery_timestamp = today_ts | plus: delivery_seconds %}\n{% assign day_name = delivery_timestamp | date: \"%A\" %}\n{% assign day_number = delivery_timestamp | date: \"%e\" %}\n{% assign month_name = delivery_timestamp | date: \"%B\" %}\n\n{% case request.locale.iso_code %}\n  {% when \"nl\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Maandag\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Dinsdag\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Woensdag\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Donderdag\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vrijdag\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Zaterdag\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Zondag\" %}\n    {% endcase %}\n    {% case month_name %}\n      {% when \"January\" %} {% assign month_name = \"januari\" %}\n      {% when \"February\" %} {% assign month_name = \"februari\" %}\n      {% when \"March\" %} {% assign month_name = \"maart\" %}\n      {% when \"April\" %} {% assign month_name = \"april\" %}\n      {% when \"May\" %} {% assign month_name = \"mei\" %}\n      {% when \"June\" %} {% assign month_name = \"juni\" %}\n      {% when \"July\" %} {% assign month_name = \"juli\" %}\n      {% when \"August\" %} {% assign month_name = \"augustus\" %}\n      {% when \"September\" %} {% assign month_name = \"september\" %}\n      {% when \"October\" %} {% assign month_name = \"oktober\" %}\n      {% when \"November\" %} {% assign month_name = \"november\" %}\n      {% when \"December\" %} {% assign month_name = \"december\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Bestel vandaag en ontvang het <strong>\" | append: delivery_date | append: \"<\/strong>\" %}\n\n  {% when \"fr\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Lundi\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Mardi\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Mercredi\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Jeudi\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vendredi\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Samedi\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Dimanche\" %}\n    {% endcase %}\n    {% case month_name %}\n      {% when \"January\" %} {% assign month_name = \"janvier\" %}\n      {% when \"February\" %} {% assign month_name = \"février\" %}\n      {% when \"March\" %} {% assign month_name = \"mars\" %}\n      {% when \"April\" %} {% assign month_name = \"avril\" %}\n      {% when \"May\" %} {% assign month_name = \"mai\" %}\n      {% when \"June\" %} {% assign month_name = \"juin\" %}\n      {% when \"July\" %} {% assign month_name = \"juillet\" %}\n      {% when \"August\" %} {% assign month_name = \"août\" %}\n      {% when \"September\" %} {% assign month_name = \"septembre\" %}\n      {% when \"October\" %} {% assign month_name = \"octobre\" %}\n      {% when \"November\" %} {% assign month_name = \"novembre\" %}\n      {% when \"December\" %} {% assign month_name = \"décembre\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Commandez aujourd’hui et recevez-le le <strong>\" | append: delivery_date | append: \"<\/strong>\" %}\n\n  {% else %}\n    {% assign formatted_date = delivery_timestamp | date: \"%A %e %B\" %}\n    {% assign delivery_message = \"Order today and receive by <strong>\" | append: formatted_date | append: \"<\/strong>\" %}\n{% endcase %}\n\n<style>\n  .el-cartel-delivery {\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    margin-top: 15px;\n    color: #ffffff;\n    font-family: inherit;\n  }\n\n  .el-cartel-dot {\n    width: 8px;\n    height: 8px;\n    border-radius: 50%;\n    background-color: #00e676;\n    margin-right: 10px;\n    animation: soft-flicker 1.6s infinite;\n    box-shadow: 0 0 6px rgba(0, 230, 118, 0.8);\n  }\n\n  @keyframes soft-flicker {\n    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(0, 230, 118, 0.8); }\n    50% { opacity: 0.4; box-shadow: 0 0 2px rgba(0, 230, 118, 0.4); }\n  }\n<\/style>\n\n<div class=\"el-cartel-delivery\">\n  <span class=\"el-cartel-dot\"><\/span>\n  <span>{{ delivery_message }}<\/span>\n<\/div>"}},"icon_with_text_F6myi8":{"type":"icon-with-text","disabled":true,"settings":{"layout":"horizontal","icon_1":"heart","image_1":"shopify:\/\/shop_images\/imageedit_2_3160157255.png","heading_1":"shdhdhdh","icon_2":"return","heading_2":"","icon_3":"truck","heading_3":""}},"collapsible_tab_GLJYqE":{"type":"collapsible_tab","settings":{"heading":"Package includes:","icon":"check_mark","content":"<ul><li>12 different rum samples of 25ML each (34%-40% Vol.)<\/li><li>Booklet with detailed explanation of each rum sample<\/li><li>Luxury gift box<\/li><\/ul><p>🚩 Made in the Netherlands<\/p><p><\/p>","page":""}},"collapsible_tab_cMNkXd":{"type":"collapsible_tab","settings":{"heading":"Delivery information","icon":"check_mark","content":"<h3><em><strong>What are the usual delivery times?<br\/><\/strong><\/em><\/h3><p>For orders of in-stock products, the delivery time is usually fast and can vary between 1 to 4 business days, depending on the chosen shipping method and the destination.<\/p><h3><em><strong>Satisfaction Guaranteed or Your Money Back<\/strong><\/em><\/h3><p>If the product has not yet been shipped and you have not received the shipping confirmation email, you can request to cancel your order by contacting us.<\/p><p>If you have received the product and no longer like it or wish to exchange it, you have 30 days to return it to us.<\/p><p>Simply send us a message through the contact page so we can provide you with a return label, completely at our expense.<\/p><p>Once we receive the package, we can proceed with an exchange or issue you a full refund.<\/p>","page":""}},"text_VdDg7K":{"type":"text","disabled":true,"settings":{"text":"Our whisky tasting collection is a finely curated selection of some of the best Single malt whisky's.","text_style":"body"}}},"block_order":["title","text_gwCRYR","judge_me_reviews_preview_badge_rMk6ri","popup_wBpPGG","price","variant_picker","description","text_BxeAKe","buy_buttons","custom_liquid_8Kih79","custom_liquid_YiDRaa","icon_with_text_F6myi8","collapsible_tab_GLJYqE","collapsible_tab_cMNkXd","text_VdDg7K"],"custom_css":[],"settings":{"enable_sticky_info":true,"color_scheme":"scheme-4","media_size":"medium","constrain_to_viewport":true,"media_fit":"cover","gallery_layout":"thumbnail_slider","mobile_thumbnails":"hide","media_position":"left","image_zoom":"lightbox","hide_variants":true,"enable_video_looping":false,"padding_top":36,"padding_bottom":36}},"related-products":{"type":"related-products","disabled":true,"settings":{"heading":"You may also like","heading_size":"h2","products_to_show":4,"columns_desktop":4,"columns_mobile":"2","color_scheme":"scheme-1","image_ratio":"square","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"padding_top":36,"padding_bottom":28}},"custom_liquid_a3TKjQ":{"type":"custom-liquid","settings":{"custom_liquid":"<style>\nvideo {\nwidth: 110%;\nheight: auto;\ndisplay: block;\nmargin: -38px;\n}\n<\/style>\n<video muted autoplay playsinline loop>\n    <source src=\"https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video\/mp4\">\n    <https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video\/mp4\">\n<\/video>","color_scheme":"scheme-4","padding_top":84,"padding_bottom":0}},"rich_text_gbi6cK":{"type":"rich-text","blocks":{"heading_Xk7cJB":{"type":"heading","settings":{"heading":"Discover the whiskies","heading_size":"h1"}}},"block_order":["heading_Xk7cJB"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-1","full_width":true,"padding_top":72,"padding_bottom":0}},"ss_featured_collection_15_6BpDMf":{"type":"ss-featured-collection-15","blocks":{"featured_3YDiBy":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/30.jpg","title":"Available in set of 6&12 whiskies","text":"<p><strong>Hakushu Distiller’s Reserve<\/strong> is a refreshing Japanese single malt whisky from the forests of Mount Kaikomagatake, crafted at the Hakushu distillery. Known for its light and herbal character, it features a delicate balance of green apple, mint, cucumber, and subtle smoke. <\/p>","button_text":"","url":"","slide_bg_color":"#e3edd0"}},"featured_Jyqyt6":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/31_b78e8e24-50d7-40ea-8fae-e8d937a2c79d.jpg","title":"Available in set of 6&12 whiskies","text":"<p><strong>Ichiro’s Malt & Grain<\/strong> is a harmonious Japanese world blended whisky created by Ichiro Akuto, blending malt and grain whiskies from Japan with carefully selected spirits from Scotland, Ireland, the U.S., and Canada. Known for its smooth, elegant character, it offers notes of honey, orchard fruits, vanilla, and a gentle touch of spice. The whisky is matured in ex-bourbon barrels, enhancing its mellow sweetness and balance. <br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#eaf5f6"}},"featured_GK6i8f":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/28.jpg","title":"Available in set of 6&12 whiskies","text":"<p><strong>The Chita<\/strong> is a refined Japanese single grain whisky from Suntory’s Chita distillery, celebrated for its smoothness and delicate complexity. Crafted primarily from corn and distilled through continuous stills, it reveals a light, silky profile with notes of honey, crème brûlée, fresh herbs, and a hint of spice. Aged in a combination of wine, Spanish oak, and American white oak casks, The Chita develops a subtle depth while retaining its gentle elegance.<br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fce0f6"}},"featured_ctU4Hi":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/32.jpg","title":"Available in set of 6&12 whiskies","text":"<p><strong>Nikka Coffey Malt<\/strong> is a unique Japanese whisky made entirely from malted barley, but distilled in a traditional Coffey (column) still—typically used for grain whisky. This rare technique results in a creamy, smooth, and rich texture, with a flavor profile featuring banana bread, custard, milk chocolate, and tropical fruits, along with subtle spice. <br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_DRMhy9":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/33.jpg","title":"Available in set of 6&12 whiskies","text":"<p><strong>Nikka Taketsuru<\/strong> is a refined Japanese blended malt whisky honoring Masataka Taketsuru, the founder of Nikka and father of Japanese whisky. It’s a harmonious blend of single malts from the Yoichi and Miyagikyo distilleries, offering a balanced profile of dried fruit, malt sweetness, gentle peat, and soft spice. <br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_FCDRLB":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/29.jpg","title":"Available in set of 6&12 whiskies","text":"<p><strong>Hibiki Japanese Harmony<\/strong> is an elegant blended whisky from Suntory, crafted from a meticulous selection of malt and grain whiskies drawn from the Yamazaki, Hakushu, and Chita distilleries. It offers a beautifully balanced profile with notes of honey, orange peel, white chocolate, and a delicate floral undertone. <br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_dU7hMR":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/34_f82ae7a0-5624-46c0-9f60-a890d9165a90.jpg","title":"Only available in the set of 12 samples","text":"<p><strong>Nikka Miyagikyo<\/strong> is a delicate and elegant Japanese single malt from Nikka’s Miyagikyo distillery, located in the lush hills of Sendai. Unlike its bolder counterpart Yoichi, Miyagikyo is known for its fruity and floral character, with notes of ripe pear, apricot, toffee, and a whisper of smoke. Distilled in pot stills heated by indirect steam, the whisky retains a soft, refined profile. <br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#e0fcee"}},"featured_DtzCVH":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/39.jpg","title":"Only available in the set of 12 samples","text":"<p><strong>Nikka From The Barrel<\/strong> is a powerful and well-balanced Japanese blended whisky, crafted from a marriage of single malt and grain whiskies from Nikka’s Yoichi and Miyagikyo distilleries. Bottled at 51.4% ABV, it delivers a bold yet refined profile with rich notes of dried fruits, spice, caramel, oak, and a touch of smoke. <\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_8z6pPF":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/36.jpg","title":"Only available in the set of 12 tubes","text":"<p><strong>Mars Maltage Cosmo<\/strong> is a distinctive blended malt whisky from Japan’s Mars Shinshu distillery, nestled in the Japanese Alps. It combines Japanese and imported Scotch malts, resulting in a rich yet approachable profile with notes of dried berries, toffee, gentle smoke, and a touch of spice.<\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_tKaehH":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/38.jpg","title":"Only available in the set of 12 samples","text":"<p><strong>The Yamazaki Distiller’s Reserve<\/strong> is a vibrant and approachable Japanese single malt from Suntory’s legendary Yamazaki distillery. Crafted from a blend of young malts aged in American oak, ex-sherry, and Japanese Mizunara oak casks, it delivers a fresh yet layered profile with notes of red berries, honey, citrus zest, and subtle spice.<br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#e9e1fc"}},"featured_JFJbx9":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/37.jpg","title":"Only available in the set of 12 tubes","text":"<p><strong>Fujimi The 7 Virtues of the Samurai<\/strong> is a smooth and mellow Japanese blended whisky, inspired by the Bushido code’s seven virtues. Crafted primarily for the export market, it offers a gentle, approachable profile with notes of vanilla, light caramel, soft oak, and a hint of white pepper.  <br\/><br\/><\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}},"featured_DC36Xd":{"type":"featured","settings":{"product":"","image":"shopify:\/\/shop_images\/35.jpg","title":"Only available in the set of 12 tubes","text":"<p><strong>Nikka Yoichi<\/strong> is a bold Japanese single malt whisky from the rugged coast of Hokkaido, renowned for its robust, peated character and traditional coal-fired distillation. It offers a complex profile with notes of smoky malt, coastal brine, dried fruit, and hints of spice. <\/p>","button_text":"","url":"","slide_bg_color":"#fceae0"}}},"block_order":["featured_3YDiBy","featured_Jyqyt6","featured_GK6i8f","featured_ctU4Hi","featured_DRMhy9","featured_FCDRLB","featured_dU7hMR","featured_DtzCVH","featured_8z6pPF","featured_tKaehH","featured_JFJbx9","featured_DC36Xd"],"settings":{"heading":"","heading_custom":false,"heading_font":"serif","heading_size":30,"heading_size_mobile":34,"heading_height":130,"heading_align":"center","heading_align_mobile":"center","collection":"","collection_show":10,"slider_gap":32,"slider_gap_mobile":16,"slider_view_mobile":1.2,"slider_mt":0,"slider_mt_mobile":32,"image_width":300,"image_radius":0,"image_border_thickness":0,"image_ratio":"square","image_ratio_mobile":"square","slide_content_width":300,"content_align":"left","content_align_mobile":"center","content_vertical_align":"center","title_custom":false,"title_font":"serif","title_size":18,"title_size_mobile":18,"title_height":130,"text_custom":false,"text_font":"josefin_sans_n4","text_size":16,"text_size_mobile":14,"text_height":150,"text_mt":12,"text_mt_mobile":12,"button_text":"Shop now","button_custom":false,"button_font":"josefin_sans_n4","button_size":16,"button_size_mobile":16,"button_height":100,"button_padding_horizontal":36,"button_padding_horizontal_mobile":36,"button_padding_vertical":18,"button_padding_vertical_mobile":14,"button_radius":100,"button_border_thickness":1,"button_mt":36,"button_mt_mobile":24,"button_style":"outline","arrow_size":48,"arrow_size_mobile":40,"arrow_icon_size":10,"arrow_icon_size_mobile":8,"arrow_border_thickness":0,"arrow_radius":100,"arrow_hover_effect":"color","arrow_show_desktop":true,"arrow_show_mobile":false,"title_color":"#121212","text_color":"#121212","image_border_color":"#121212","button_color":"#ffffff","button_hover_color":"#121212","button_bg_color":"#121212","button_bg_hover_color":"#ffffff","button_border_color":"#121212","button_border_hover_color":"#121212","arrow_color":"#121212","arrow_hover_color":"#ffffff","arrow_bg_color":"#ffffff","arrow_bg_hover_color":"#121212","arrow_border_color":"#121212","arrow_border_hover_color":"#121212","heading_color":"#121212","background_color":"#ffffff","background_gradient":"","border_color":"#121212","margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":36,"padding_bottom":36,"padding_horizontal":5,"padding_horizontal_mobile":1.5,"full_width":true,"content_width":1200,"border_thickness":0,"section_radius":0,"lazy":true}},"image_with_text_ebnD66":{"type":"image-with-text","blocks":{"heading_bkYYGN":{"type":"heading","settings":{"heading":"<em>Only awarded whisky's <\/em>","heading_size":"h1"}},"text_iAC6jz":{"type":"text","settings":{"text":"<p>The carefully selected whiskies are all award winners and are renowned for their exceptional quality.<\/p>","text_style":"body"}}},"block_order":["heading_bkYYGN","text_iAC6jz"],"settings":{"image":"shopify:\/\/shop_images\/Image_for_bottle.svg","height":"small","desktop_image_width":"small","layout":"text_first","image_behavior":"none","content_layout":"no-overlap","desktop_content_position":"top","desktop_content_alignment":"left","mobile_content_alignment":"left","section_color_scheme":"","color_scheme":"","padding_top":32,"padding_bottom":32}},"image_with_text_TAeHFN":{"type":"image-with-text","blocks":{"heading_kdqNBA":{"type":"heading","settings":{"heading":"Perfect for a gift","heading_size":"h1"}},"text_a4zRmt":{"type":"text","settings":{"text":"<p><em>Give the gift your special person is waiting for, with an educational journey through the world of premium whisky. <\/em><\/p>","text_style":"subtitle"}},"button_9LTG4w":{"type":"button","settings":{"button_label":"","button_link":"shopify:\/\/products\/whisky-tasting-gift-box-12-tubes","button_style_secondary":false}}},"block_order":["heading_kdqNBA","text_a4zRmt","button_9LTG4w"],"settings":{"image":"shopify:\/\/shop_images\/Whisky_tasting_box_6.jpg","height":"adapt","desktop_image_width":"large","layout":"image_first","image_behavior":"none","content_layout":"overlap","desktop_content_position":"middle","desktop_content_alignment":"center","mobile_content_alignment":"left","section_color_scheme":"scheme-2","color_scheme":"","padding_top":36,"padding_bottom":36}},"rich_text_PWAVGY":{"type":"rich-text","blocks":{"heading_YC8a7U":{"type":"heading","settings":{"heading":"Talk about your brand","heading_size":"h1"}},"text_ndg9zz":{"type":"text","settings":{"text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"}},"button_gNfy6Y":{"type":"button","settings":{"button_label":"Button label","button_link":"","button_style_secondary":false,"button_label_2":"","button_link_2":"","button_style_secondary_2":false}}},"block_order":["heading_YC8a7U","text_ndg9zz","button_gNfy6Y"],"disabled":true,"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"","full_width":true,"padding_top":40,"padding_bottom":52}},"1729102473069f31fa":{"type":"apps","blocks":{"judge_me_reviews_review_widget_pAdaPR":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","settings":{}},"judge_me_reviews_featured_carousel_WiMWRM":{"type":"shopify:\/\/apps\/judge-me-reviews\/blocks\/featured_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8","disabled":true,"settings":{"maxwidth":1080}}},"block_order":["judge_me_reviews_review_widget_pAdaPR","judge_me_reviews_featured_carousel_WiMWRM"],"settings":{"include_margins":true}},"rich_text_c7hrwW":{"type":"rich-text","blocks":{"heading_WaRhkC":{"type":"heading","settings":{"heading":"Enjoy a 30-day free return","heading_size":"h1"}},"text_RECq4d":{"type":"text","settings":{"text":"<p>We understand sometimes you can't buy a product for the same reason you can't buy a house without looking on the inside first. That's why we guarantee a 30-day free return,  giving you the chance to experience our product firsthand and decide if it’s the perfect fit for you.<\/p>"}}},"block_order":["heading_WaRhkC","text_RECq4d"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-3","full_width":true,"padding_top":40,"padding_bottom":52}},"collapsible_content_LjJCtw":{"type":"collapsible-content","blocks":{"collapsible_row_6Q9LEp":{"type":"collapsible_row","settings":{"heading":"1. What is included in an El Cartel tasting gift box?","icon":"check_mark","row_content":"<p>Each El Cartel tasting gift box contains carefully curated liquor samples in 25ml bottles, arranged in a luxury box. You'll also find an informative guide detailing the origin, tasting notes, and unique characteristics of each selection, helping you experience each sample fully.<\/p>","page":""}},"collapsible_row_gq9XP4":{"type":"collapsible_row","settings":{"heading":"2. What types of tasting gift boxes do you offer?","icon":"check_mark","row_content":"<p>El Cartel offers two distinct tasting sets: a whisky tasting set and a rum tasting set. Each collection includes a variety of high-quality, hand-picked samples to ensure a refined tasting experience.<\/p>","page":""}},"collapsible_row_Uf8Yyy":{"type":"collapsible_row","settings":{"heading":"3. Is El Cartel suitable for corporate gifts or special events?","icon":"check_mark","row_content":"<p>Absolutely. Our whisky tasting box an rum tasting box make thoughtful and elegant gifts for clients, partners, or event attendees. Contact us for bulk order options and to add a customized message.<\/p>","page":""}},"collapsible_row_Kbtrp8":{"type":"collapsible_row","settings":{"heading":"4. Who is El Cartel's tasting box ideal for?","icon":"check_mark","row_content":"<p>Our tasting gift boxes are perfect for anyone interested in exploring high-quality liquors in an accessible yet sophisticated way. They make great gifts for enthusiasts or anyone curious about whisky or rum.<\/p>","page":""}},"collapsible_row_EgVHpe":{"type":"collapsible_row","settings":{"heading":"5. Is 25ML enough for tasting?","icon":"check_mark","row_content":"<p>Yes, 25ml is generally considered a perfect amount for tasting. This portion size provides enough of the liquor to capture its full flavor profile, allowing you to appreciate its aroma, body, and finish without overwhelming the palate. It's also commonly used in professional tastings, where the goal is to sample and compare flavors rather than to consume in large quantities.<\/p>","page":""}}},"block_order":["collapsible_row_6Q9LEp","collapsible_row_gq9XP4","collapsible_row_Uf8Yyy","collapsible_row_Kbtrp8","collapsible_row_EgVHpe"],"settings":{"caption":"","heading":"FAQs","heading_size":"h1","heading_alignment":"center","layout":"none","container_color_scheme":"scheme-1","color_scheme":"scheme-2","open_first_collapsible_row":false,"image_ratio":"adapt","desktop_layout":"image_second","padding_top":36,"padding_bottom":32}},"rich_text_aDdM4N":{"type":"rich-text","blocks":{"heading_gkQiid":{"type":"heading","settings":{"heading":"You may also like","heading_size":"h1"}}},"block_order":["heading_gkQiid"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"","full_width":true,"padding_top":48,"padding_bottom":48}},"image_with_text_Mq7Dmd":{"type":"image-with-text","blocks":{"heading_cE4Nmh":{"type":"heading","settings":{"heading":"Rum tasting gift box","heading_size":"h1"}},"text_LzA8tA":{"type":"text","settings":{"text":"<p>Discover a collection of some of the world's best rums. <\/p>","text_style":"body"}},"button_yH4nxt":{"type":"button","settings":{"button_label":"Discover rum","button_link":"shopify:\/\/products\/rum-tasting-gift-box-12-tubes","button_style_secondary":false}}},"block_order":["heading_cE4Nmh","text_LzA8tA","button_yH4nxt"],"settings":{"image":"shopify:\/\/shop_images\/DSC00095.jpg","height":"small","desktop_image_width":"medium","layout":"image_first","image_behavior":"none","content_layout":"no-overlap","desktop_content_position":"top","desktop_content_alignment":"left","mobile_content_alignment":"left","section_color_scheme":"","color_scheme":"","padding_top":36,"padding_bottom":36}}},"order":["main","related-products","custom_liquid_a3TKjQ","rich_text_gbi6cK","ss_featured_collection_15_6BpDMf","image_with_text_ebnD66","image_with_text_TAeHFN","rich_text_PWAVGY","1729102473069f31fa","rich_text_c7hrwW","collapsible_content_LjJCtw","rich_text_aDdM4N","image_with_text_Mq7Dmd"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "text_gwCRYR": {
+          "type": "text",
+          "settings": {
+            "text": "NEW",
+            "text_style": "body"
+          }
+        },
+        "judge_me_reviews_preview_badge_rMk6ri": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "popup_wBpPGG": {
+          "type": "popup",
+          "disabled": true,
+          "settings": {
+            "text": "More reviews on Trustpilot",
+            "page": ""
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "text_BxeAKe": {
+          "type": "text",
+          "settings": {
+            "text": "See more reviews on <a href=\"https://www.trustpilot.com/review/elcarteltastings.com\" target=\"_blank\" title=\"https://www.trustpilot.com/review/elcarteltastings.com\">Trustpilot</a>",
+            "text_style": "body"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "custom_liquid_8Kih79": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"essential-upsell-cross-sell-block\"></div>"
+          }
+        },
+        "custom_liquid_YiDRaa": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% assign today_wday = 'now' | date: \"%w\" | plus: 0 %}\n{% assign today_ts = 'now' | date: \"%s\" | plus: 0 %}\n\n{% case today_wday %}\n  {% when 1 %} {% assign days_until_delivery = 2 %}\n  {% when 2 %} {% assign days_until_delivery = 2 %}\n  {% when 3 %} {% assign days_until_delivery = 2 %}\n  {% when 4 %} {% assign days_until_delivery = 4 %}\n  {% when 5 %} {% assign days_until_delivery = 3 %}\n  {% when 6 %} {% assign days_until_delivery = 3 %}\n  {% when 0 %} {% assign days_until_delivery = 2 %}\n{% endcase %}\n\n{% assign delivery_seconds = days_until_delivery | times: 86400 %}\n{% assign delivery_timestamp = today_ts | plus: delivery_seconds %}\n{% assign day_name = delivery_timestamp | date: \"%A\" %}\n{% assign day_number = delivery_timestamp | date: \"%e\" %}\n{% assign month_num = delivery_timestamp | date: \"%m\" %}\n\n{% case request.locale.iso_code %}\n  {% when \"nl\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Maandag\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Dinsdag\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Woensdag\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Donderdag\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vrijdag\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Zaterdag\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Zondag\" %}\n    {% endcase %}\n    {% case month_num %}\n      {% when \"01\" %} {% assign month_name = \"januari\" %}\n      {% when \"02\" %} {% assign month_name = \"februari\" %}\n      {% when \"03\" %} {% assign month_name = \"maart\" %}\n      {% when \"04\" %} {% assign month_name = \"april\" %}\n      {% when \"05\" %} {% assign month_name = \"mei\" %}\n      {% when \"06\" %} {% assign month_name = \"juni\" %}\n      {% when \"07\" %} {% assign month_name = \"juli\" %}\n      {% when \"08\" %} {% assign month_name = \"augustus\" %}\n      {% when \"09\" %} {% assign month_name = \"september\" %}\n      {% when \"10\" %} {% assign month_name = \"oktober\" %}\n      {% when \"11\" %} {% assign month_name = \"november\" %}\n      {% when \"12\" %} {% assign month_name = \"december\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Bestel vandaag en ontvang het <strong>\" | append: delivery_date | append: \"</strong>\" %}\n\n  {% when \"fr\" %}\n    {% case day_name %}\n      {% when \"Monday\" %} {% assign day_name = \"Lundi\" %}\n      {% when \"Tuesday\" %} {% assign day_name = \"Mardi\" %}\n      {% when \"Wednesday\" %} {% assign day_name = \"Mercredi\" %}\n      {% when \"Thursday\" %} {% assign day_name = \"Jeudi\" %}\n      {% when \"Friday\" %} {% assign day_name = \"Vendredi\" %}\n      {% when \"Saturday\" %} {% assign day_name = \"Samedi\" %}\n      {% when \"Sunday\" %} {% assign day_name = \"Dimanche\" %}\n    {% endcase %}\n    {% case month_num %}\n      {% when \"01\" %} {% assign month_name = \"janvier\" %}\n      {% when \"02\" %} {% assign month_name = \"février\" %}\n      {% when \"03\" %} {% assign month_name = \"mars\" %}\n      {% when \"04\" %} {% assign month_name = \"avril\" %}\n      {% when \"05\" %} {% assign month_name = \"mai\" %}\n      {% when \"06\" %} {% assign month_name = \"juin\" %}\n      {% when \"07\" %} {% assign month_name = \"juillet\" %}\n      {% when \"08\" %} {% assign month_name = \"août\" %}\n      {% when \"09\" %} {% assign month_name = \"septembre\" %}\n      {% when \"10\" %} {% assign month_name = \"octobre\" %}\n      {% when \"11\" %} {% assign month_name = \"novembre\" %}\n      {% when \"12\" %} {% assign month_name = \"décembre\" %}\n    {% endcase %}\n    {% assign delivery_date = day_name | append: \" \" | append: day_number | append: \" \" | append: month_name %}\n    {% assign delivery_message = \"Commandez aujourd’hui et recevez-le le <strong>\" | append: delivery_date | append: \"</strong>\" %}\n\n  {% else %}\n    {% assign formatted_date = delivery_timestamp | date: \"%A %e %B\" %}\n    {% assign delivery_message = \"Order today and receive by <strong>\" | append: formatted_date | append: \"</strong>\" %}\n{% endcase %}\n\n<style>\n  .el-cartel-delivery {\n    display: flex;\n    align-items: center;\n    font-size: 14px;\n    margin-top: 15px;\n    color: #ffffff;\n    font-family: inherit;\n  }\n\n  .el-cartel-dot {\n    width: 8px;\n    height: 8px;\n    border-radius: 50%;\n    background-color: #00e676;\n    margin-right: 10px;\n    animation: soft-flicker 1.6s infinite;\n    box-shadow: 0 0 6px rgba(0, 230, 118, 0.8);\n  }\n\n  @keyframes soft-flicker {\n    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(0, 230, 118, 0.8); }\n    50% { opacity: 0.4; box-shadow: 0 0 2px rgba(0, 230, 118, 0.4); }\n  }\n</style>\n\n<div class=\"el-cartel-delivery\">\n  <span class=\"el-cartel-dot\"></span>\n  <span>{{ delivery_message }}</span>\n</div>"
+          }
+        },
+        "icon_with_text_F6myi8": {
+          "type": "icon-with-text",
+          "disabled": true,
+          "settings": {
+            "layout": "horizontal",
+            "icon_1": "heart",
+            "image_1": "shopify://shop_images/imageedit_2_3160157255.png",
+            "heading_1": "shdhdhdh",
+            "icon_2": "return",
+            "heading_2": "",
+            "icon_3": "truck",
+            "heading_3": ""
+          }
+        },
+        "collapsible_tab_GLJYqE": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Package includes:",
+            "icon": "check_mark",
+            "content": "<ul><li>12 different rum samples of 25ML each (34%-40% Vol.)</li><li>Booklet with detailed explanation of each rum sample</li><li>Luxury gift box</li></ul><p>🚩 Made in the Netherlands</p><p></p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_cMNkXd": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Delivery information",
+            "icon": "check_mark",
+            "content": "<h3><em><strong>What are the usual delivery times?<br/></strong></em></h3><p>For orders of in-stock products, the delivery time is usually fast and can vary between 1 to 4 business days, depending on the chosen shipping method and the destination.</p><h3><em><strong>Satisfaction Guaranteed or Your Money Back</strong></em></h3><p>If the product has not yet been shipped and you have not received the shipping confirmation email, you can request to cancel your order by contacting us.</p><p>If you have received the product and no longer like it or wish to exchange it, you have 30 days to return it to us.</p><p>Simply send us a message through the contact page so we can provide you with a return label, completely at our expense.</p><p>Once we receive the package, we can proceed with an exchange or issue you a full refund.</p>",
+            "page": ""
+          }
+        },
+        "text_VdDg7K": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Our whisky tasting collection is a finely curated selection of some of the best Single malt whisky's.",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "text_gwCRYR",
+        "judge_me_reviews_preview_badge_rMk6ri",
+        "popup_wBpPGG",
+        "price",
+        "variant_picker",
+        "description",
+        "text_BxeAKe",
+        "buy_buttons",
+        "custom_liquid_8Kih79",
+        "custom_liquid_YiDRaa",
+        "icon_with_text_F6myi8",
+        "collapsible_tab_GLJYqE",
+        "collapsible_tab_cMNkXd",
+        "text_VdDg7K"
+      ],
+      "custom_css": [],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-4",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "custom_liquid_a3TKjQ": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\nvideo {\nwidth: 110%;\nheight: auto;\ndisplay: block;\nmargin: -38px;\n}\n</style>\n<video muted autoplay playsinline loop>\n    <source src=\"https://cdn.shopify.com/videos/c/o/v/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video/mp4\">\n    <https://cdn.shopify.com/videos/c/o/v/8767ac1f54e84339aa11e9286feab240.mp4\"\n                  type=\"video/mp4\">\n</video>",
+        "color_scheme": "scheme-4",
+        "padding_top": 84,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_gbi6cK": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Xk7cJB": {
+          "type": "heading",
+          "settings": {
+            "heading": "Discover the whiskies",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Xk7cJB"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 72,
+        "padding_bottom": 0
+      }
+    },
+    "ss_featured_collection_15_6BpDMf": {
+      "type": "ss-featured-collection-15",
+      "blocks": {
+        "featured_3YDiBy": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/30.jpg",
+            "title": "Available in set of 6&12 whiskies",
+            "text": "<p><strong>Hakushu Distiller’s Reserve</strong> is a refreshing Japanese single malt whisky from the forests of Mount Kaikomagatake, crafted at the Hakushu distillery. Known for its light and herbal character, it features a delicate balance of green apple, mint, cucumber, and subtle smoke. </p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#e3edd0"
+          }
+        },
+        "featured_Jyqyt6": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/31_b78e8e24-50d7-40ea-8fae-e8d937a2c79d.jpg",
+            "title": "Available in set of 6&12 whiskies",
+            "text": "<p><strong>Ichiro’s Malt & Grain</strong> is a harmonious Japanese world blended whisky created by Ichiro Akuto, blending malt and grain whiskies from Japan with carefully selected spirits from Scotland, Ireland, the U.S., and Canada. Known for its smooth, elegant character, it offers notes of honey, orchard fruits, vanilla, and a gentle touch of spice. The whisky is matured in ex-bourbon barrels, enhancing its mellow sweetness and balance. <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#eaf5f6"
+          }
+        },
+        "featured_GK6i8f": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/28.jpg",
+            "title": "Available in set of 6&12 whiskies",
+            "text": "<p><strong>The Chita</strong> is a refined Japanese single grain whisky from Suntory’s Chita distillery, celebrated for its smoothness and delicate complexity. Crafted primarily from corn and distilled through continuous stills, it reveals a light, silky profile with notes of honey, crème brûlée, fresh herbs, and a hint of spice. Aged in a combination of wine, Spanish oak, and American white oak casks, The Chita develops a subtle depth while retaining its gentle elegance.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fce0f6"
+          }
+        },
+        "featured_ctU4Hi": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/32.jpg",
+            "title": "Available in set of 6&12 whiskies",
+            "text": "<p><strong>Nikka Coffey Malt</strong> is a unique Japanese whisky made entirely from malted barley, but distilled in a traditional Coffey (column) still—typically used for grain whisky. This rare technique results in a creamy, smooth, and rich texture, with a flavor profile featuring banana bread, custard, milk chocolate, and tropical fruits, along with subtle spice. <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_DRMhy9": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/33.jpg",
+            "title": "Available in set of 6&12 whiskies",
+            "text": "<p><strong>Nikka Taketsuru</strong> is a refined Japanese blended malt whisky honoring Masataka Taketsuru, the founder of Nikka and father of Japanese whisky. It’s a harmonious blend of single malts from the Yoichi and Miyagikyo distilleries, offering a balanced profile of dried fruit, malt sweetness, gentle peat, and soft spice. <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_FCDRLB": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/29.jpg",
+            "title": "Available in set of 6&12 whiskies",
+            "text": "<p><strong>Hibiki Japanese Harmony</strong> is an elegant blended whisky from Suntory, crafted from a meticulous selection of malt and grain whiskies drawn from the Yamazaki, Hakushu, and Chita distilleries. It offers a beautifully balanced profile with notes of honey, orange peel, white chocolate, and a delicate floral undertone. <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_dU7hMR": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/34_f82ae7a0-5624-46c0-9f60-a890d9165a90.jpg",
+            "title": "Only available in the set of 12 samples",
+            "text": "<p><strong>Nikka Miyagikyo</strong> is a delicate and elegant Japanese single malt from Nikka’s Miyagikyo distillery, located in the lush hills of Sendai. Unlike its bolder counterpart Yoichi, Miyagikyo is known for its fruity and floral character, with notes of ripe pear, apricot, toffee, and a whisper of smoke. Distilled in pot stills heated by indirect steam, the whisky retains a soft, refined profile. <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#e0fcee"
+          }
+        },
+        "featured_DtzCVH": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/39.jpg",
+            "title": "Only available in the set of 12 samples",
+            "text": "<p><strong>Nikka From The Barrel</strong> is a powerful and well-balanced Japanese blended whisky, crafted from a marriage of single malt and grain whiskies from Nikka’s Yoichi and Miyagikyo distilleries. Bottled at 51.4% ABV, it delivers a bold yet refined profile with rich notes of dried fruits, spice, caramel, oak, and a touch of smoke. </p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_8z6pPF": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/36.jpg",
+            "title": "Only available in the set of 12 tubes",
+            "text": "<p><strong>Mars Maltage Cosmo</strong> is a distinctive blended malt whisky from Japan’s Mars Shinshu distillery, nestled in the Japanese Alps. It combines Japanese and imported Scotch malts, resulting in a rich yet approachable profile with notes of dried berries, toffee, gentle smoke, and a touch of spice.</p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_tKaehH": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/38.jpg",
+            "title": "Only available in the set of 12 samples",
+            "text": "<p><strong>The Yamazaki Distiller’s Reserve</strong> is a vibrant and approachable Japanese single malt from Suntory’s legendary Yamazaki distillery. Crafted from a blend of young malts aged in American oak, ex-sherry, and Japanese Mizunara oak casks, it delivers a fresh yet layered profile with notes of red berries, honey, citrus zest, and subtle spice.<br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#e9e1fc"
+          }
+        },
+        "featured_JFJbx9": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/37.jpg",
+            "title": "Only available in the set of 12 tubes",
+            "text": "<p><strong>Fujimi The 7 Virtues of the Samurai</strong> is a smooth and mellow Japanese blended whisky, inspired by the Bushido code’s seven virtues. Crafted primarily for the export market, it offers a gentle, approachable profile with notes of vanilla, light caramel, soft oak, and a hint of white pepper.  <br/><br/></p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        },
+        "featured_DC36Xd": {
+          "type": "featured",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/35.jpg",
+            "title": "Only available in the set of 12 tubes",
+            "text": "<p><strong>Nikka Yoichi</strong> is a bold Japanese single malt whisky from the rugged coast of Hokkaido, renowned for its robust, peated character and traditional coal-fired distillation. It offers a complex profile with notes of smoky malt, coastal brine, dried fruit, and hints of spice. </p>",
+            "button_text": "",
+            "url": "",
+            "slide_bg_color": "#fceae0"
+          }
+        }
+      },
+      "block_order": [
+        "featured_3YDiBy",
+        "featured_Jyqyt6",
+        "featured_GK6i8f",
+        "featured_ctU4Hi",
+        "featured_DRMhy9",
+        "featured_FCDRLB",
+        "featured_dU7hMR",
+        "featured_DtzCVH",
+        "featured_8z6pPF",
+        "featured_tKaehH",
+        "featured_JFJbx9",
+        "featured_DC36Xd"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_custom": false,
+        "heading_font": "serif",
+        "heading_size": 30,
+        "heading_size_mobile": 34,
+        "heading_height": 130,
+        "heading_align": "center",
+        "heading_align_mobile": "center",
+        "collection": "",
+        "collection_show": 10,
+        "slider_gap": 32,
+        "slider_gap_mobile": 16,
+        "slider_view_mobile": 1.2,
+        "slider_mt": 0,
+        "slider_mt_mobile": 32,
+        "image_width": 300,
+        "image_radius": 0,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "slide_content_width": 300,
+        "content_align": "left",
+        "content_align_mobile": "center",
+        "content_vertical_align": "center",
+        "title_custom": false,
+        "title_font": "serif",
+        "title_size": 18,
+        "title_size_mobile": 18,
+        "title_height": 130,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "text_height": 150,
+        "text_mt": 12,
+        "text_mt_mobile": 12,
+        "button_text": "Shop now",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 16,
+        "button_size_mobile": 16,
+        "button_height": 100,
+        "button_padding_horizontal": 36,
+        "button_padding_horizontal_mobile": 36,
+        "button_padding_vertical": 18,
+        "button_padding_vertical_mobile": 14,
+        "button_radius": 100,
+        "button_border_thickness": 1,
+        "button_mt": 36,
+        "button_mt_mobile": 24,
+        "button_style": "outline",
+        "arrow_size": 48,
+        "arrow_size_mobile": 40,
+        "arrow_icon_size": 10,
+        "arrow_icon_size_mobile": 8,
+        "arrow_border_thickness": 0,
+        "arrow_radius": 100,
+        "arrow_hover_effect": "color",
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "title_color": "#121212",
+        "text_color": "#121212",
+        "image_border_color": "#121212",
+        "button_color": "#ffffff",
+        "button_hover_color": "#121212",
+        "button_bg_color": "#121212",
+        "button_bg_hover_color": "#ffffff",
+        "button_border_color": "#121212",
+        "button_border_hover_color": "#121212",
+        "arrow_color": "#121212",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#121212",
+        "arrow_border_color": "#121212",
+        "arrow_border_hover_color": "#121212",
+        "heading_color": "#121212",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "image_with_text_ebnD66": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_bkYYGN": {
+          "type": "heading",
+          "settings": {
+            "heading": "<em>Only awarded whisky's </em>",
+            "heading_size": "h1"
+          }
+        },
+        "text_iAC6jz": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The carefully selected whiskies are all award winners and are renowned for their exceptional quality.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_bkYYGN",
+        "text_iAC6jz"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Image_for_bottle.svg",
+        "height": "small",
+        "desktop_image_width": "small",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "image_with_text_TAeHFN": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_kdqNBA": {
+          "type": "heading",
+          "settings": {
+            "heading": "Perfect for a gift",
+            "heading_size": "h1"
+          }
+        },
+        "text_a4zRmt": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>Give the gift your special person is waiting for, with an educational journey through the world of premium whisky. </em></p>",
+            "text_style": "subtitle"
+          }
+        },
+        "button_9LTG4w": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "shopify://products/whisky-tasting-gift-box-12-tubes",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_kdqNBA",
+        "text_a4zRmt",
+        "button_9LTG4w"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Whisky_tasting_box_6.jpg",
+        "height": "adapt",
+        "desktop_image_width": "large",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_PWAVGY": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_YC8a7U": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_ndg9zz": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_gNfy6Y": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_YC8a7U",
+        "text_ndg9zz",
+        "button_gNfy6Y"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "1729102473069f31fa": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_pAdaPR": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "judge_me_reviews_featured_carousel_WiMWRM": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_pAdaPR",
+        "judge_me_reviews_featured_carousel_WiMWRM"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "rich_text_c7hrwW": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_WaRhkC": {
+          "type": "heading",
+          "settings": {
+            "heading": "Enjoy a 30-day free return",
+            "heading_size": "h1"
+          }
+        },
+        "text_RECq4d": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We understand sometimes you can't buy a product for the same reason you can't buy a house without looking on the inside first. That's why we guarantee a 30-day free return,  giving you the chance to experience our product firsthand and decide if it’s the perfect fit for you.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_WaRhkC",
+        "text_RECq4d"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "collapsible_content_LjJCtw": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_6Q9LEp": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "1. What is included in an El Cartel tasting gift box?",
+            "icon": "check_mark",
+            "row_content": "<p>Each El Cartel tasting gift box contains carefully curated liquor samples in 25ml bottles, arranged in a luxury box. You'll also find an informative guide detailing the origin, tasting notes, and unique characteristics of each selection, helping you experience each sample fully.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_gq9XP4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "2. What types of tasting gift boxes do you offer?",
+            "icon": "check_mark",
+            "row_content": "<p>El Cartel offers two distinct tasting sets: a whisky tasting set and a rum tasting set. Each collection includes a variety of high-quality, hand-picked samples to ensure a refined tasting experience.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Uf8Yyy": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "3. Is El Cartel suitable for corporate gifts or special events?",
+            "icon": "check_mark",
+            "row_content": "<p>Absolutely. Our whisky tasting box an rum tasting box make thoughtful and elegant gifts for clients, partners, or event attendees. Contact us for bulk order options and to add a customized message.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_Kbtrp8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "4. Who is El Cartel's tasting box ideal for?",
+            "icon": "check_mark",
+            "row_content": "<p>Our tasting gift boxes are perfect for anyone interested in exploring high-quality liquors in an accessible yet sophisticated way. They make great gifts for enthusiasts or anyone curious about whisky or rum.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_EgVHpe": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "5. Is 25ML enough for tasting?",
+            "icon": "check_mark",
+            "row_content": "<p>Yes, 25ml is generally considered a perfect amount for tasting. This portion size provides enough of the liquor to capture its full flavor profile, allowing you to appreciate its aroma, body, and finish without overwhelming the palate. It's also commonly used in professional tastings, where the goal is to sample and compare flavors rather than to consume in large quantities.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_6Q9LEp",
+        "collapsible_row_gq9XP4",
+        "collapsible_row_Uf8Yyy",
+        "collapsible_row_Kbtrp8",
+        "collapsible_row_EgVHpe"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "FAQs",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 32
+      }
+    },
+    "rich_text_aDdM4N": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_gkQiid": {
+          "type": "heading",
+          "settings": {
+            "heading": "You may also like",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_gkQiid"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "image_with_text_Mq7Dmd": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_cE4Nmh": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rum tasting gift box",
+            "heading_size": "h1"
+          }
+        },
+        "text_LzA8tA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Discover a collection of some of the world's best rums. </p>",
+            "text_style": "body"
+          }
+        },
+        "button_yH4nxt": {
+          "type": "button",
+          "settings": {
+            "button_label": "Discover rum",
+            "button_link": "shopify://products/rum-tasting-gift-box-12-tubes",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_cE4Nmh",
+        "text_LzA8tA",
+        "button_yH4nxt"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/DSC00095.jpg",
+        "height": "small",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "custom_liquid_a3TKjQ",
+    "rich_text_gbi6cK",
+    "ss_featured_collection_15_6BpDMf",
+    "image_with_text_ebnD66",
+    "image_with_text_TAeHFN",
+    "rich_text_PWAVGY",
+    "1729102473069f31fa",
+    "rich_text_c7hrwW",
+    "collapsible_content_LjJCtw",
+    "rich_text_aDdM4N",
+    "image_with_text_Mq7Dmd"
+  ]
+}
