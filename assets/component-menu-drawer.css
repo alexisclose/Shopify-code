@@ -292,4 +292,21 @@ details[open].menu-opening>.menu-drawer__submenu {
   #HeaderCountryMobileForm {
     display: none !important;
   }
+
+  /* White background for utility links (remove grey box) */
+  .menu-drawer__utility-links {
+    background-color: transparent;
+    padding: 1.5rem 2.4rem;
+  }
+
+  /* Larger touch target for language selector */
+  .menu-drawer__localization {
+    padding: 0.5rem 0;
+  }
+
+  .menu-drawer__localization .localization-form__select,
+  .menu-drawer__localization .disclosure__button {
+    min-height: 4.8rem;
+    padding: 1.2rem 3.6rem 1.2rem 1.2rem;
+  }
 }
