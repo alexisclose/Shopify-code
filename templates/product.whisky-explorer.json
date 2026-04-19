@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-whisky-subscription",
+      "settings": {
+        "tier": "explorer",
+        "hero_image": null,
+        "monthly_url": null,
+        "annual_url": null,
+        "other_tier_url": null,
+        "club_page_url": null
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,938 @@
+{% comment %}
+  Whisky Subscription Product Page
+  ——————————————————————————————————
+  Used by both product.whisky-explorer.json and product.whisky-advanced.json.
+  The "tier" setting drives all content differences.
+
+  Selling plan integration:
+  — After installing a subscriptions app (Recharge, Appstle, Seal…),
+    the app will inject its own selling-plan UI into the form automatically.
+  — If you prefer manual control, paste the plan IDs into the section settings
+    and this template will build the toggle itself.
+{% endcomment %}
+
+{%- assign tier = section.settings.tier | default: 'explorer' -%}
+{%- assign is_explorer = false -%}
+{%- if tier == 'explorer' -%}{%- assign is_explorer = true -%}{%- endif -%}
+
+{%- if is_explorer -%}
+  {%- assign tier_name       = 'Explorer' -%}
+  {%- assign tier_subtitle   = 'The starting dram' -%}
+  {%- assign tier_initial    = 'E' -%}
+  {%- assign price_monthly   = 40 -%}
+  {%- assign price_annual    = 34 -%}
+  {%- assign annual_total    = 408 -%}
+  {%- assign tier_desc       = 'The six-month foundation. Scotland to bourbon, gentle to smoke, curated in a fixed order. Everyone starts at Box 01 — the sequence is the point.' -%}
+  {%- assign other_tier_name = 'Advanced' -%}
+  {%- assign journey_box1_title = 'The Foundation' -%}
+  {%- assign journey_box1_hint  = 'Where most whisky palates begin. Gentle. Inviting. Instantly recognisable.' -%}
+  {%- assign journey_boxes = "02,Building on what you tasted last month. The arc continues.|03,Something shifts. We introduce a new dimension to your palate.|04,Not for the faint of heart. A defining month.|05,Density and depth. A different side of the same story.|06,We leave Scotland behind. The sweet counterpoint." | split: "|" -%}
+{%- else -%}
+  {%- assign tier_name       = 'Advanced' -%}
+  {%- assign tier_subtitle   = 'For the serious collector' -%}
+  {%- assign tier_initial    = 'A' -%}
+  {%- assign price_monthly   = 50 -%}
+  {%- assign price_annual    = 42 -%}
+  {%- assign annual_total    = 504 -%}
+  {%- assign tier_desc       = 'The rare-spirits curriculum. Single casks, cask-strength, lost distilleries, age statements. Same fixed journey, scarcer liquid — the kind you can\'t walk into a shop and buy.' -%}
+  {%- assign other_tier_name = 'Explorer' -%}
+  {%- assign journey_box1_title = 'Rare Openings' -%}
+  {%- assign journey_box1_hint  = 'Three scarce pours to set the tone. The kind of liquid that makes you slow down.' -%}
+  {%- assign journey_boxes = "02,An exercise in precision. Bring a pipette.|03,Finite liquid. Once it's gone it's gone.|04,A different continent, a different philosophy. Restraint over force.|05,What two extra decades in wood does to a spirit.|06,The frontier end of the category. Experimental grains, shuttered distilleries." | split: "|" -%}
+{%- endif -%}
+
+{%- assign other_tier_url = section.settings.other_tier_url | default: '/pages/whisky-club' -%}
+{%- assign club_page_url  = section.settings.club_page_url  | default: '/pages/whisky-club' -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   Whisky Club — Product page  (.wcp)
+   ============================================================ */
+.wcp {
+  --wcp-bg:          #f5efe3;
+  --wcp-bg-alt:      #ebe2cf;
+  --wcp-ink:         #1a1814;
+  --wcp-ink-soft:    #4a4538;
+  --wcp-ink-mute:    #7a7362;
+  --wcp-rule:        rgba(26,24,20,0.14);
+  --wcp-rule-strong: rgba(26,24,20,0.35);
+  --wcp-accent:      #2d4f8a;
+  --wcp-accent-ink:  #fcf9f2;
+  --wcp-paper:       #fcf9f2;
+  --wcp-hero-bg:     #1f1c17;
+  --wcp-hero-ink:    #f5efe3;
+  --wcp-gold:        #c49a4d;
+  --wcp-ph-a:        rgba(26,24,20,0.05);
+  --wcp-ph-b:        rgba(26,24,20,0.12);
+
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 400;
+  background: var(--wcp-bg);
+  color: var(--wcp-ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wcp *, .wcp *::before, .wcp *::after { box-sizing: border-box; }
+.wcp h1, .wcp h2, .wcp h3, .wcp h4 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500; letter-spacing: -0.01em; line-height: 1.08; margin: 0;
+}
+.wcp p { margin: 0; }
+.wcp button { font-family: inherit; cursor: pointer; }
+
+.wcp-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+.wcp-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--wcp-ink-mute);
+}
+.wcp-container { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+
+/* ---- HERO ---- */
+.wcp-hero {
+  background: var(--wcp-hero-bg); color: var(--wcp-hero-ink);
+  padding: 80px 0 100px;
+}
+.wcp-hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.wcp-hero h1 {
+  color: var(--wcp-hero-ink);
+  font-size: clamp(56px, 6vw, 96px);
+  letter-spacing: -0.02em; font-style: italic; font-weight: 400;
+  margin-bottom: 16px;
+}
+.wcp-hero-subtitle {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--wcp-gold);
+  margin-bottom: 12px; display: block;
+}
+
+/* ---- BILLING TOGGLE ---- */
+.wcp-billing-wrap {
+  margin: 32px 0 28px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.wcp-billing-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(245,239,227,0.5); margin-bottom: 16px;
+}
+.wcp-billing-toggle {
+  display: inline-flex; padding: 4px; border-radius: 100px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  position: relative; margin-bottom: 20px;
+}
+.wcp-billing-track {
+  position: absolute; top: 4px; bottom: 4px; left: 4px;
+  width: calc(50% - 6px); background: var(--wcp-hero-ink);
+  border-radius: 100px; transition: left 0.35s cubic-bezier(.65,.02,.3,1);
+}
+.wcp-billing-btn {
+  position: relative; background: transparent; border: 0;
+  padding: 10px 24px; font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(245,239,227,0.6); transition: color 0.3s ease; font-weight: 500;
+}
+.wcp-billing-btn.active { color: var(--wcp-ink); }
+.wcp-price-row {
+  display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px;
+}
+.wcp-price-currency {
+  font-family: 'EB Garamond', serif; font-size: 28px;
+  color: var(--wcp-hero-ink);
+}
+.wcp-price-amount {
+  font-family: 'EB Garamond', serif; font-size: 80px; line-height: 1;
+  letter-spacing: -0.02em; font-weight: 500; color: var(--wcp-hero-ink);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.wcp-price-period {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(245,239,227,0.55); margin-left: 4px;
+}
+.wcp-price-note {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(245,239,227,0.45);
+}
+
+/* ---- SUBSCRIBE FORM ---- */
+.wcp-form { margin-top: 8px; }
+.wcp-subscribe-btn {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 22px 32px;
+  background: var(--wcp-gold); color: #1a1814; border: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  border-radius: 100px; font-weight: 600;
+  transition: opacity 0.2s ease; text-decoration: none;
+}
+.wcp-subscribe-btn:hover { opacity: 0.9; }
+.wcp-trust {
+  display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap;
+}
+.wcp-trust-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(245,239,227,0.5);
+}
+
+/* ---- HERO RIGHT (image + tier badge) ---- */
+.wcp-hero-media {
+  position: relative; aspect-ratio: 4/5;
+  background: repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 10px, rgba(255,255,255,0.05) 10px 20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.35); font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; text-align: center;
+}
+.wcp-tier-badge {
+  position: absolute; bottom: 24px; left: 24px;
+  background: var(--wcp-hero-bg); border: 1px solid var(--wcp-gold);
+  padding: 16px 20px; display: flex; align-items: center; gap: 16px;
+}
+.wcp-tier-badge-initial {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--wcp-gold); display: flex; align-items: center; justify-content: center;
+  font-family: 'EB Garamond', serif; font-style: italic; font-size: 24px;
+  color: var(--wcp-gold);
+}
+
+/* ---- FEATURES ---- */
+.wcp-features { padding: 100px 0; background: var(--wcp-paper); }
+.wcp-features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.wcp-feature-list {
+  list-style: none; padding: 0; margin: 32px 0 0;
+  display: flex; flex-direction: column; gap: 0;
+}
+.wcp-feature-item {
+  display: flex; gap: 24px; align-items: flex-start;
+  padding: 20px 0; border-bottom: 1px solid var(--wcp-rule);
+  font-size: 15px;
+}
+.wcp-feature-item:first-child { border-top: 1px solid var(--wcp-ink); }
+.wcp-feature-item:last-child  { border-bottom-color: var(--wcp-ink); }
+.wcp-feature-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--wcp-ink-mute); flex-shrink: 0; padding-top: 2px; width: 24px;
+}
+.wcp-feature-text { color: var(--wcp-ink-soft); }
+.wcp-feature-text strong { color: var(--wcp-ink); font-weight: 600; }
+
+/* ---- CROSS-SELL ---- */
+.wcp-crosssell {
+  padding: 32px 36px; border: 1px solid var(--wcp-rule-strong);
+  background: var(--wcp-bg-alt);
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+/* ---- HOW IT WORKS ---- */
+.wcp-how {
+  padding: 100px 0;
+  background: var(--wcp-bg-alt);
+  border-top: 1px solid var(--wcp-rule); border-bottom: 1px solid var(--wcp-rule);
+}
+.wcp-how-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--wcp-rule-strong);
+}
+.wcp-how-step {
+  background: var(--wcp-bg-alt); padding: 36px 28px 44px;
+  display: flex; flex-direction: column; min-height: 280px;
+}
+.wcp-step-n {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 48px; color: var(--wcp-accent); line-height: 1; margin-bottom: 20px;
+}
+
+/* ---- JOURNEY ---- */
+.wcp-journey { padding: 100px 0; background: var(--wcp-paper); }
+.wcp-journey-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+  position: relative; margin-top: 60px;
+}
+.wcp-journey-line {
+  position: absolute; top: 48px; left: 0; right: 0; height: 1px;
+  background: var(--wcp-rule-strong);
+}
+.wcp-jbox { display: flex; flex-direction: column; gap: 16px; position: relative; }
+.wcp-jdot-row {
+  height: 96px; display: flex; align-items: center; padding-left: 24px; position: relative;
+}
+.wcp-jdot {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--wcp-paper); border: 2px solid var(--wcp-rule-strong);
+}
+.wcp-jdot--active { background: var(--wcp-accent); border-color: var(--wcp-accent); }
+.wcp-jstart {
+  position: absolute; top: -24px; left: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--wcp-accent); white-space: nowrap;
+}
+.wcp-jcard {
+  border: 1px solid var(--wcp-rule); padding: 20px 18px 24px;
+  min-height: 220px; display: flex; flex-direction: column; position: relative; overflow: hidden;
+}
+.wcp-jcard--locked {
+  background: transparent;
+}
+.wcp-jcard--locked::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(135deg, var(--wcp-ph-a) 0 8px, var(--wcp-ph-b) 8px 16px);
+  opacity: 0.5;
+}
+.wcp-jcard__inner { position: relative; flex: 1; display: flex; flex-direction: column; }
+.wcp-jbox-n {
+  font-family: 'EB Garamond', serif; font-style: italic; font-size: 36px;
+  line-height: 1; color: var(--wcp-accent); margin-bottom: 8px;
+}
+.wcp-jbox-n--locked { color: var(--wcp-ink-mute); }
+.wcp-jbox-mo {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--wcp-ink-mute);
+}
+.wcp-jbox-title { font-size: 17px; margin: 8px 0 6px; letter-spacing: -0.01em; }
+.wcp-jbox-title--locked { color: var(--wcp-ink-mute); font-style: italic; }
+.wcp-jbox-hint { font-size: 12px; color: var(--wcp-ink-soft); line-height: 1.5; font-style: italic; }
+.wcp-jbox-sealed {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-top: auto; padding-top: 12px; color: var(--wcp-ink-mute);
+}
+
+/* ---- IN THE BOX ---- */
+.wcp-inbox { padding: 100px 0; background: var(--wcp-bg-alt); border-top: 1px solid var(--wcp-rule); }
+.wcp-inbox-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+.wcp-inbox-sticky { position: sticky; top: 100px; }
+.wcp-inbox-item {
+  padding: 32px 0; display: grid; grid-template-columns: 80px 1fr; gap: 28px;
+  border-top: 1px solid var(--wcp-rule);
+}
+.wcp-inbox-item:first-child { border-top-color: var(--wcp-ink); }
+.wcp-inbox-item:last-child  { border-bottom: 1px solid var(--wcp-ink); }
+
+/* ---- FAQ ---- */
+.wcp-faq { padding: 100px 0; background: var(--wcp-paper); border-top: 1px solid var(--wcp-rule); }
+.wcp-faq-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+.wcp-faq-sticky { position: sticky; top: 100px; }
+.wcp-faq-item { border-top: 1px solid var(--wcp-rule-strong); }
+.wcp-faq-item:last-child { border-bottom: 1px solid var(--wcp-rule-strong); }
+.wcp-faq-btn {
+  width: 100%; text-align: left; padding: 24px 0;
+  background: transparent; border: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--wcp-ink);
+}
+.wcp-faq-q { font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 500; }
+.wcp-faq-icon {
+  font-size: 22px; font-family: 'EB Garamond', serif;
+  transition: transform 0.3s ease; color: var(--wcp-accent); flex-shrink: 0;
+}
+.wcp-faq-item.open .wcp-faq-icon { transform: rotate(45deg); }
+.wcp-faq-body {
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease, padding-bottom 0.3s ease;
+}
+.wcp-faq-item.open .wcp-faq-body { max-height: 300px; opacity: 1; padding-bottom: 24px; }
+.wcp-faq-body p { color: var(--wcp-ink-soft); font-size: 14px; line-height: 1.7; max-width: 560px; }
+
+/* ---- CLOSING CTA ---- */
+.wcp-closing {
+  padding: 120px 0; background: var(--wcp-hero-bg); color: var(--wcp-hero-ink);
+  text-align: center;
+}
+.wcp-closing h2 {
+  color: var(--wcp-hero-ink);
+  font-size: clamp(40px, 5.5vw, 88px);
+  max-width: 16ch; margin: 0 auto 40px; letter-spacing: -0.02em;
+}
+
+/* ---- STICKY CTA ---- */
+.wcp-sticky {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(120px); opacity: 0;
+  transition: transform 0.5s cubic-bezier(.65,.02,.3,1), opacity 0.3s ease;
+  z-index: 200; pointer-events: none;
+  background: var(--wcp-ink); color: var(--wcp-bg);
+  border-radius: 100px; padding: 10px 10px 10px 28px;
+  display: flex; align-items: center; gap: 20px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25); min-width: 460px;
+}
+.wcp-sticky.visible { transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto; }
+.wcp-sticky-price { font-family: 'EB Garamond', serif; font-size: 20px; font-style: italic; }
+.wcp-sticky-from {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,227,0.5);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .wcp-container { padding: 0 20px; }
+  .wcp-hero { padding: 60px 0 80px; }
+  .wcp-hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .wcp-hero h1 { font-size: 56px; }
+  .wcp-features-grid { grid-template-columns: 1fr; gap: 48px; }
+  .wcp-how-grid { grid-template-columns: 1fr 1fr; }
+  .wcp-journey-grid { grid-template-columns: repeat(6, 240px); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+  .wcp-journey-grid > div { scroll-snap-align: start; }
+  .wcp-inbox-grid { grid-template-columns: 1fr; gap: 40px; }
+  .wcp-inbox-sticky { position: static; }
+  .wcp-inbox-item { grid-template-columns: 1fr; gap: 8px; }
+  .wcp-faq-grid { grid-template-columns: 1fr; gap: 32px; }
+  .wcp-faq-sticky { position: static; }
+  .wcp h2 { font-size: 36px !important; }
+  .wcp-sticky { min-width: 0; width: calc(100vw - 24px); left: 12px; }
+  .wcp-sticky.visible { transform: translateY(0); opacity: 1; }
+}
+
+/* ---- Var: bg-alt needed for features section ---- */
+.wcp { --wcp-bg-alt: #ebe2cf; }
+</style>
+
+<div class="wcp" id="wcp-root">
+
+  {%- comment -%} ===== HERO ===== {%- endcomment -%}
+  <section class="wcp-hero">
+    <div class="wcp-container">
+      <div class="wcp-hero-grid">
+
+        {%- comment -%} Left: copy + form {%- endcomment -%}
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
+            <span style="width:32px;height:1px;background:var(--wcp-gold);display:block;"></span>
+            <span class="wcp-mono" style="color:var(--wcp-gold);">El Cartel / The Whisky Club</span>
+          </div>
+
+          <span class="wcp-hero-subtitle">{{ tier_subtitle }}</span>
+          <h1>{{ tier_name }}</h1>
+
+          <p style="font-size:16px;line-height:1.65;color:var(--wcp-hero-ink);opacity:0.78;max-width:480px;margin-top:20px;">
+            {{ tier_desc }}
+          </p>
+
+          {%- comment -%} ---- Billing toggle + price ---- {%- endcomment -%}
+          <div class="wcp-billing-wrap">
+            <div class="wcp-billing-label">Choose your billing</div>
+            <div class="wcp-billing-toggle" role="group">
+              <div class="wcp-billing-track" id="wcp-billing-track"></div>
+              <button class="wcp-billing-btn active" data-billing="monthly">Monthly</button>
+              <button class="wcp-billing-btn" data-billing="annual">Annual&nbsp;<span style="opacity:0.7;">&middot;&nbsp;save&nbsp;15%</span></button>
+            </div>
+            <div class="wcp-price-row">
+              <span class="wcp-price-currency">&euro;</span>
+              <span class="wcp-price-amount" id="wcp-price">{{ price_monthly }}</span>
+              <span class="wcp-price-period">/ month</span>
+            </div>
+            <div class="wcp-price-note" id="wcp-price-note">Billed monthly &middot; cancel any time</div>
+          </div>
+
+          {%- comment -%}
+            Subscribe button / form.
+            If this is a real Shopify product page (product template), use a cart form.
+            If using a page template with manual URLs, link directly.
+          {%- endcomment -%}
+          <div class="wcp-form">
+            {%- if product != blank -%}
+              <form action="/cart/add" method="post" id="wcp-product-form">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                {%- comment -%} Subscription app will inject selling_plan UI here automatically {%- endcomment -%}
+                {%- if product.selling_plan_groups.size > 0 -%}
+                  {%- for group in product.selling_plan_groups -%}
+                    {%- for plan in group.selling_plans -%}
+                      {%- if plan.name contains 'month' or plan.name contains 'Month' -%}
+                        <input type="hidden" id="wcp-plan-monthly" data-plan-id="{{ plan.id }}" data-plan-type="monthly">
+                      {%- elsif plan.name contains 'year' or plan.name contains 'Year' or plan.name contains 'annual' or plan.name contains 'Annual' -%}
+                        <input type="hidden" id="wcp-plan-annual" data-plan-id="{{ plan.id }}" data-plan-type="annual">
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endfor -%}
+                  <input type="hidden" name="selling_plan" id="wcp-selling-plan-input" value="">
+                {%- endif -%}
+                <button type="submit" class="wcp-subscribe-btn">
+                  <span>Subscribe to {{ tier_name }}</span><span>&rarr;</span>
+                </button>
+              </form>
+            {%- else -%}
+              {%- comment -%} Page template fallback: use configured URLs {%- endcomment -%}
+              <a id="wcp-subscribe-link"
+                 href="{{ section.settings.monthly_url | default: '#' }}"
+                 class="wcp-subscribe-btn">
+                <span>Subscribe to {{ tier_name }}</span><span>&rarr;</span>
+              </a>
+            {%- endif -%}
+
+            <div class="wcp-trust">
+              <span class="wcp-trust-item">&#10003;&nbsp;Pause any time</span>
+              <span class="wcp-trust-item">&#10003;&nbsp;30-day guarantee</span>
+              <span class="wcp-trust-item">&#10003;&nbsp;Ships within 48h</span>
+            </div>
+          </div>
+        </div>
+
+        {%- comment -%} Right: image {%- endcomment -%}
+        <div>
+          <div class="wcp-hero-media">
+            {%- if section.settings.hero_image != blank -%}
+              {{ section.settings.hero_image | image_url: width: 900 | image_tag: loading: 'eager', style: 'width:100%;height:100%;object-fit:cover;position:absolute;inset:0;' }}
+            {%- else -%}
+              {{ tier_name }} subscription<br>— product photography
+            {%- endif -%}
+            <div class="wcp-tier-badge">
+              <div class="wcp-tier-badge-initial">{{ tier_initial }}</div>
+              <div>
+                <div style="font-family:'EB Garamond',serif;font-size:22px;font-style:italic;color:var(--wcp-hero-ink);">{{ tier_name }}</div>
+                <div class="wcp-mono" style="color:var(--wcp-gold);margin-top:2px;">Whisky Club</div>
+              </div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.1);margin-top:1px;">
+            {%- assign stats = "1,842 Members|4.9 / 5 Rating|130+ Distilleries" | split: "|" -%}
+            {%- for stat in stats -%}
+              {%- assign stat_parts = stat | split: " " -%}
+              <div style="background:var(--wcp-hero-bg);padding:20px 24px;">
+                <div style="font-family:'EB Garamond',serif;font-size:24px;color:var(--wcp-hero-ink);">{{ stat | split: " " | first }}{% if stat contains "/" %} / {{ stat | split: "/" | last | strip | split: " " | first }}{% endif %}</div>
+                <div class="wcp-mono" style="color:rgba(245,239,227,0.45);margin-top:4px;font-size:10px;">
+                  {%- if forloop.index == 1 -%}Members this quarter
+                  {%- elsif forloop.index == 2 -%}Member rating
+                  {%- else -%}Distilleries featured{%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== FEATURES ===== {%- endcomment -%}
+  <section class="wcp-features">
+    <div class="wcp-container">
+      <div class="wcp-features-grid">
+        <div>
+          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 01 — What you get</div>
+          <h2 style="font-size:clamp(36px,4vw,60px);">Everything in<br><em>{{ tier_name }}.</em></h2>
+          <ul class="wcp-feature-list">
+            <li class="wcp-feature-item">
+              <span class="wcp-feature-num">01</span>
+              <span class="wcp-feature-text"><strong>6 &times; 25ml tubes</strong> — three whiskies, two of each. Taste solo or share.</span>
+            </li>
+            <li class="wcp-feature-item">
+              <span class="wcp-feature-num">02</span>
+              <span class="wcp-feature-text">
+                <strong>
+                  {%- if is_explorer -%}Core range & distillery staples{%- else -%}Single casks & limited editions{%- endif -%}
+                </strong>
+                — {%- if is_explorer -%}approachable expressions from &euro;50–90 bottle value{%- else -%}rare spirits with &euro;120–400+ bottle value{%- endif -%}.
+              </span>
+            </li>
+            <li class="wcp-feature-item">
+              <span class="wcp-feature-num">03</span>
+              <span class="wcp-feature-text"><strong>Printed info booklet</strong> — 16 pages per box: distillery, cask, ABV, region, food pairings.</span>
+            </li>
+            <li class="wcp-feature-item">
+              <span class="wcp-feature-num">04</span>
+              <span class="wcp-feature-text"><strong>Tasting-notes journal</strong> — blank pages with structured prompts. Fill it in by hand.</span>
+            </li>
+            <li class="wcp-feature-item">
+              <span class="wcp-feature-num">05</span>
+              <span class="wcp-feature-text"><strong>Digital dashboard + AI palate profile</strong> — scan, rate, log. Our model builds your profile across every box.</span>
+            </li>
+            {%- unless is_explorer -%}
+            <li class="wcp-feature-item">
+              <span class="wcp-feature-num">06</span>
+              <span class="wcp-feature-text"><strong>Signed certificate of authenticity</strong> per box.</span>
+            </li>
+            <li class="wcp-feature-item">
+              <span class="wcp-feature-num">07</span>
+              <span class="wcp-feature-text"><strong>Quarterly virtual tasting</strong> with a distiller. Priority on full-bottle drops.</span>
+            </li>
+            {%- endunless -%}
+          </ul>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:32px;">
+          <div style="background:var(--wcp-bg-alt);padding:40px;border:1px solid var(--wcp-rule);">
+            <div class="wcp-eyebrow" style="margin-bottom:16px;">30-day guarantee</div>
+            <h3 style="font-size:28px;margin-bottom:12px;font-style:italic;font-weight:400;">If Box 01 doesn't convert you, keep the drams. We'll refund it.</h3>
+            <p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">No returns to post. No forms to fill. One email to Niall and it's done.</p>
+          </div>
+
+          <div class="wcp-crosssell">
+            <div class="wcp-eyebrow" style="margin-bottom:8px;">Also available</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
+              <div>
+                <div style="font-family:'EB Garamond',serif;font-size:28px;font-style:italic;">{{ other_tier_name }}</div>
+                <div style="font-size:14px;color:var(--wcp-ink-soft);margin-top:4px;">
+                  {%- if is_explorer -%}Rare spirits track &middot; from &euro;42/mo{%- else -%}Foundation track &middot; from &euro;34/mo{%- endif -%}
+                </div>
+              </div>
+              <a href="{{ other_tier_url }}" class="wcp-mono" style="color:var(--wcp-ink);text-decoration:underline;text-underline-offset:4px;white-space:nowrap;">View {{ other_tier_name }} &rarr;</a>
+            </div>
+          </div>
+
+          <div style="padding:32px;border:1px solid var(--wcp-rule);background:var(--wcp-paper);">
+            <div style="font-family:'EB Garamond',serif;font-size:36px;font-style:italic;line-height:1;margin-bottom:8px;">4.9</div>
+            <div style="letter-spacing:2px;font-size:13px;margin-bottom:8px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="wcp-mono" style="color:var(--wcp-ink-mute);">617 verified member reviews</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== HOW IT WORKS ===== {%- endcomment -%}
+  <section class="wcp-how">
+    <div class="wcp-container">
+      <div style="max-width:640px;margin-bottom:60px;">
+        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 02 — The routine</div>
+        <h2 style="font-size:clamp(36px,4vw,60px);">Four steps.<br><em>Then it runs itself.</em></h2>
+      </div>
+      <div class="wcp-how-grid">
+        <div class="wcp-how-step">
+          <div class="wcp-step-n">01</div>
+          <h3 style="font-size:22px;margin-bottom:12px;letter-spacing:-0.01em;">Pick your tier</h3>
+          <p style="font-size:13px;color:var(--wcp-ink-soft);line-height:1.6;margin-top:auto;">You picked <strong style="color:var(--wcp-ink);">{{ tier_name }}</strong>. Monthly or annual — same curriculum, different cadence.</p>
+        </div>
+        <div class="wcp-how-step">
+          <div class="wcp-step-n">02</div>
+          <h3 style="font-size:22px;margin-bottom:12px;letter-spacing:-0.01em;">Everyone starts at Box 01</h3>
+          <p style="font-size:13px;color:var(--wcp-ink-soft);line-height:1.6;margin-top:auto;">Niall has built a six-month curriculum. Month one is foundational; each box after builds on the one before. You don't pick. He already did.</p>
+        </div>
+        <div class="wcp-how-step">
+          <div class="wcp-step-n">03</div>
+          <h3 style="font-size:22px;margin-bottom:12px;letter-spacing:-0.01em;">First box ships within 48h</h3>
+          <p style="font-size:13px;color:var(--wcp-ink-soft);line-height:1.6;margin-top:auto;">Order today and Box 01 is dispatched this week. After that, boxes arrive on the 5th of every month. Tracked, discreet, signed for.</p>
+        </div>
+        <div class="wcp-how-step">
+          <div class="wcp-step-n">04</div>
+          <h3 style="font-size:22px;margin-bottom:12px;letter-spacing:-0.01em;">Rate it, let AI listen</h3>
+          <p style="font-size:13px;color:var(--wcp-ink-soft);line-height:1.6;margin-top:auto;">Log each pour in the dashboard. Our model reads your notes, builds a palate profile, and recommends full bottles — once you know what you like.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== THE JOURNEY ===== {%- endcomment -%}
+  <section class="wcp-journey">
+    <div class="wcp-container">
+      <div style="max-width:680px;">
+        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 03 — The curriculum</div>
+        <h2 style="font-size:clamp(36px,4vw,60px);">A fixed journey.<br><em>Kept under wraps.</em></h2>
+        <p style="font-size:15px;color:var(--wcp-ink-soft);line-height:1.65;margin-top:24px;max-width:520px;">Every {{ tier_name }} member starts at Box 01 and moves through the same sequence. We won't tell you what's coming. That's half the point.</p>
+      </div>
+      <div class="wcp-journey-grid">
+        <div class="wcp-journey-line"></div>
+
+        {%- comment -%} Box 01 — revealed {%- endcomment -%}
+        <div class="wcp-jbox">
+          <div class="wcp-jdot-row">
+            <div class="wcp-jdot wcp-jdot--active"></div>
+            <div class="wcp-jstart">You start here &darr;</div>
+          </div>
+          <div class="wcp-jcard">
+            <div class="wcp-jcard__inner">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">
+                <span class="wcp-jbox-n">01</span>
+                <span class="wcp-jbox-mo">Your first box</span>
+              </div>
+              <h3 class="wcp-jbox-title">{{ journey_box1_title }}</h3>
+              <p class="wcp-jbox-hint">{{ journey_box1_hint }}</p>
+            </div>
+          </div>
+        </div>
+
+        {%- comment -%} Boxes 02–06 — sealed {%- endcomment -%}
+        {%- for box in journey_boxes -%}
+          {%- assign box_parts = box | split: "," -%}
+          {%- assign box_n = box_parts[0] -%}
+          {%- assign box_hint = box_parts[1] -%}
+          {%- assign month_labels = "Month 2,Month 3,Month 4,Month 5,Month 6" | split: "," -%}
+          <div class="wcp-jbox">
+            <div class="wcp-jdot-row"><div class="wcp-jdot"></div></div>
+            <div class="wcp-jcard wcp-jcard--locked">
+              <div class="wcp-jcard__inner">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">
+                  <span class="wcp-jbox-n wcp-jbox-n--locked">{{ box_n }}</span>
+                  <span class="wcp-jbox-mo">{{ month_labels[forloop.index0] }}</span>
+                </div>
+                <h3 class="wcp-jbox-title wcp-jbox-title--locked">Sealed</h3>
+                <p class="wcp-jbox-hint">{{ box_hint }}</p>
+                <div class="wcp-jbox-sealed">Revealed on arrival</div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+
+      </div>
+      <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--wcp-ink-soft);gap:24px;flex-wrap:wrap;">
+        <div><strong style="color:var(--wcp-ink);">Months 7–12 continue the arc.</strong>&nbsp;&nbsp;The curriculum deepens after month six. Cancel any time.</div>
+        <a href="{{ club_page_url }}" class="wcp-mono" style="color:var(--wcp-ink);text-decoration:underline;text-underline-offset:4px;">Compare tiers &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== WHAT'S IN THE BOX ===== {%- endcomment -%}
+  <section class="wcp-inbox">
+    <div class="wcp-container">
+      <div class="wcp-inbox-grid">
+        <div class="wcp-inbox-sticky">
+          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 04 — What arrives</div>
+          <h2 style="font-size:clamp(36px,4vw,60px);margin-bottom:28px;">A box, not a <em>parcel</em>.</h2>
+          <div style="aspect-ratio:1/1;width:100%;max-width:400px;background:repeating-linear-gradient(135deg,var(--wcp-ph-a) 0 10px,var(--wcp-ph-b) 10px 20px);display:flex;align-items:center;justify-content:center;color:var(--wcp-ink-mute);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;text-align:center;padding:1.5rem;">Top-down box shot<br>— contents laid out</div>
+        </div>
+        <div>
+          <div class="wcp-inbox-item" style="border-top-color:var(--wcp-ink);">
+            <div><div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-bottom:6px;">01</div><div class="wcp-mono" style="color:var(--wcp-accent);">the whisky</div></div>
+            <div><h3 style="font-size:26px;font-style:italic;font-weight:400;margin-bottom:10px;">Six 25ml tubes — three whiskies, paired</h3><p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">Two tubes of each whisky — taste twice, compare across sessions, or pour one for someone worth sharing with. Sealed, darkened, ordered light-to-heavy.</p></div>
+          </div>
+          <div class="wcp-inbox-item">
+            <div><div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-bottom:6px;">02</div><div class="wcp-mono" style="color:var(--wcp-accent);">the guide</div></div>
+            <div><h3 style="font-size:26px;font-style:italic;font-weight:400;margin-bottom:10px;">The info booklet</h3><p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">16 letterpress pages. Distillery, cask program, ABV, region, food pairings. Read it before you pour — or after, to check your instincts.</p></div>
+          </div>
+          <div class="wcp-inbox-item">
+            <div><div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-bottom:6px;">03</div><div class="wcp-mono" style="color:var(--wcp-accent);">the journal</div></div>
+            <div><h3 style="font-size:26px;font-style:italic;font-weight:400;margin-bottom:10px;">Tasting-notes booklet</h3><p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">Blank pages with structured prompts — nose, palate, finish, score. Fill it in by hand. Built to be kept.</p></div>
+          </div>
+          <div class="wcp-inbox-item" style="border-bottom:1px solid var(--wcp-ink);">
+            <div><div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-bottom:6px;">04</div><div class="wcp-mono" style="color:var(--wcp-accent);">the intelligence</div></div>
+            <div><h3 style="font-size:26px;font-style:italic;font-weight:400;margin-bottom:10px;">Digital dashboard + AI palate profile</h3><p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">Scan the tube, rate the pour, jot a line. Our model maps your palate and recommends full bottles — inside the club and outside it.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== FAQ ===== {%- endcomment -%}
+  <section class="wcp-faq">
+    <div class="wcp-container">
+      <div class="wcp-faq-grid">
+        <div class="wcp-faq-sticky">
+          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 05 — Fine print</div>
+          <h2 style="font-size:clamp(32px,3.5vw,52px);margin-bottom:20px;">Answers, <em>before you ask.</em></h2>
+          <p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">Still unsure? Email <span style="text-decoration:underline;text-underline-offset:3px;">niall@elcartel.co</span> — Niall usually replies by Thursday.</p>
+        </div>
+        <div id="wcp-faq-list">
+          <div class="wcp-faq-item open">
+            <button class="wcp-faq-btn" aria-expanded="true"><span class="wcp-faq-q">Can I pause or cancel?</span><span class="wcp-faq-icon">+</span></button>
+            <div class="wcp-faq-body"><p>Yes — from your account, one click. No emails, no retention team. Pause indefinitely; your palate profile stays put.</p></div>
+          </div>
+          <div class="wcp-faq-item">
+            <button class="wcp-faq-btn" aria-expanded="false"><span class="wcp-faq-q">Can I skip a month?</span><span class="wcp-faq-icon">+</span></button>
+            <div class="wcp-faq-body"><p>Any time before the 1st of the month. Skip as often as you like — your subscription just shifts forward.</p></div>
+          </div>
+          <div class="wcp-faq-item">
+            <button class="wcp-faq-btn" aria-expanded="false"><span class="wcp-faq-q">Do you ship outside Belgium?</span><span class="wcp-faq-icon">+</span></button>
+            <div class="wcp-faq-body"><p>Most of the EU + UK, Switzerland &amp; Norway. Checkout will confirm availability for your postcode.</p></div>
+          </div>
+          <div class="wcp-faq-item">
+            <button class="wcp-faq-btn" aria-expanded="false"><span class="wcp-faq-q">What if I don't like a dram?</span><span class="wcp-faq-icon">+</span></button>
+            <div class="wcp-faq-body"><p>Rate it 1 star in your journal. Dislike a whole box? First box is refundable under our 30-day palate guarantee.</p></div>
+          </div>
+          <div class="wcp-faq-item">
+            <button class="wcp-faq-btn" aria-expanded="false"><span class="wcp-faq-q">Who picks the whiskies?</span><span class="wcp-faq-icon">+</span></button>
+            <div class="wcp-faq-body"><p>Niall Harkin, our head taster. Twelve years at Bruichladdich, now selecting full-time. Notes vetted by Niall personally.</p></div>
+          </div>
+          <div class="wcp-faq-item">
+            <button class="wcp-faq-btn" aria-expanded="false"><span class="wcp-faq-q">Can I switch tiers later?</span><span class="wcp-faq-icon">+</span></button>
+            <div class="wcp-faq-body"><p>Yes — email us before your next billing date and we'll switch you to {{ other_tier_name }} from the next box.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== CLOSING CTA ===== {%- endcomment -%}
+  <section class="wcp-closing">
+    <div class="wcp-container">
+      <div class="wcp-mono" style="color:var(--wcp-gold);margin-bottom:28px;">— Take your seat —</div>
+      <h2>{{ tier_name }}.<br><em style="color:var(--wcp-gold);">Box 01 ships within 48 hours.</em></h2>
+      <p style="max-width:480px;margin:0 auto 40px;font-size:16px;line-height:1.6;color:rgba(245,239,227,0.72);">Subscribe today. Every box after that arrives on the 5th of the month. The contents stay sealed until they reach you.</p>
+      {%- if product != blank -%}
+        <button form="wcp-product-form" type="submit" class="wcp-subscribe-btn" style="max-width:360px;margin:0 auto;display:flex;">
+          <span>Subscribe to {{ tier_name }}</span><span>&rarr;</span>
+        </button>
+      {%- else -%}
+        <a id="wcp-subscribe-link-2" href="{{ section.settings.monthly_url | default: '#plans' }}" class="wcp-subscribe-btn" style="max-width:360px;margin:0 auto;">
+          <span>Subscribe to {{ tier_name }}</span><span>&rarr;</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </section>
+
+</div>
+
+{%- comment -%} ===== STICKY CTA ===== {%- endcomment -%}
+<div class="wcp-sticky" id="wcp-sticky" aria-hidden="true">
+  <div>
+    <div class="wcp-sticky-from" id="wcp-sticky-from">From &euro;{{ price_monthly }}/mo</div>
+    <div class="wcp-sticky-price">{{ tier_name }} — Join the Club</div>
+  </div>
+  {%- if product != blank -%}
+    <button form="wcp-product-form" type="submit" class="wcp-subscribe-btn" style="padding:14px 24px;font-size:11px;letter-spacing:0.15em;">
+      Subscribe &rarr;
+    </button>
+  {%- else -%}
+    <a id="wcp-sticky-cta" href="{{ section.settings.monthly_url | default: '#' }}" class="wcp-subscribe-btn" style="padding:14px 24px;font-size:11px;letter-spacing:0.15em;">
+      Subscribe &rarr;
+    </a>
+  {%- endif -%}
+</div>
+
+<script>
+(function() {
+  var billing = 'monthly';
+  var priceMonthly = {{ price_monthly }};
+  var priceAnnual  = {{ price_annual }};
+  var annualTotal  = {{ annual_total }};
+
+  var monthlyUrl = {{ section.settings.monthly_url | default: '#' | json }};
+  var annualUrl  = {{ section.settings.annual_url  | default: '#' | json }};
+
+  var track       = document.getElementById('wcp-billing-track');
+  var priceEl     = document.getElementById('wcp-price');
+  var noteEl      = document.getElementById('wcp-price-note');
+  var fromEl      = document.getElementById('wcp-sticky-from');
+  var link1       = document.getElementById('wcp-subscribe-link');
+  var link2       = document.getElementById('wcp-subscribe-link-2');
+  var stickyLink  = document.getElementById('wcp-sticky-cta');
+  var planInput   = document.getElementById('wcp-selling-plan-input');
+  var planMonthly = document.getElementById('wcp-plan-monthly');
+  var planAnnual  = document.getElementById('wcp-plan-annual');
+
+  function setBilling(b) {
+    billing = b;
+    var price = b === 'monthly' ? priceMonthly : priceAnnual;
+
+    // Animate price
+    if (priceEl) { priceEl.style.opacity = '0'; priceEl.style.transform = 'translateY(-8px)'; }
+    setTimeout(function() {
+      if (priceEl) { priceEl.textContent = price; priceEl.style.opacity = '1'; priceEl.style.transform = 'translateY(0)'; }
+    }, 180);
+
+    if (noteEl) noteEl.textContent = b === 'annual'
+      ? 'Billed annually \u00b7 \u20ac' + annualTotal + ' / yr'
+      : 'Billed monthly \u00b7 cancel any time';
+
+    if (fromEl) fromEl.textContent = 'From \u20ac' + price + '/mo';
+
+    // Toggle track
+    if (track) track.style.left = b === 'monthly' ? '4px' : 'calc(50% + 2px)';
+
+    // Button states
+    document.querySelectorAll('.wcp-billing-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.billing === b);
+    });
+
+    // Links (page template fallback)
+    var url = b === 'monthly' ? monthlyUrl : annualUrl;
+    [link1, link2, stickyLink].forEach(function(el) { if (el) el.href = url; });
+
+    // Selling plan (product template)
+    if (planInput) {
+      var planEl = b === 'monthly' ? planMonthly : planAnnual;
+      if (planEl) planInput.value = planEl.dataset.planId;
+    }
+  }
+
+  document.querySelectorAll('.wcp-billing-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { setBilling(btn.dataset.billing); });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.wcp-faq-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.wcp-faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.wcp-faq-item').forEach(function(i) {
+        i.classList.remove('open');
+        i.querySelector('.wcp-faq-btn').setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+
+  // Sticky CTA
+  var sticky = document.getElementById('wcp-sticky');
+  function onScroll() {
+    var y = window.scrollY;
+    var show = y > 700 && y < document.body.scrollHeight - window.innerHeight - 400;
+    if (sticky) { sticky.classList.toggle('visible', show); sticky.setAttribute('aria-hidden', show ? 'false' : 'true'); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Init
+  setBilling('monthly');
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Whisky Subscription Product",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tier",
+      "label": "Tier",
+      "options": [
+        { "value": "explorer", "label": "Explorer" },
+        { "value": "advanced", "label": "Advanced" }
+      ],
+      "default": "explorer"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero product image"
+    },
+    {
+      "type": "header",
+      "content": "Checkout URLs",
+      "info": "Used when this section is placed on a page (not a product) template."
+    },
+    {
+      "type": "url",
+      "id": "monthly_url",
+      "label": "Monthly checkout URL"
+    },
+    {
+      "type": "url",
+      "id": "annual_url",
+      "label": "Annual checkout URL"
+    },
+    {
+      "type": "header",
+      "content": "Links"
+    },
+    {
+      "type": "url",
+      "id": "other_tier_url",
+      "label": "Link to other tier's product page"
+    },
+    {
+      "type": "url",
+      "id": "club_page_url",
+      "label": "Link to main Whisky Club comparison page"
+    }
+  ],
+  "presets": [
+    { "name": "Whisky Explorer Product", "settings": { "tier": "explorer" } },
+    { "name": "Whisky Advanced Product", "settings": { "tier": "advanced" } }
+  ]
+}
+{% endschema %}
