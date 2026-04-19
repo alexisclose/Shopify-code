@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "whisky-subscription",
+      "settings": {
+        "explorer_monthly_url": null,
+        "explorer_annual_url": null,
+        "advanced_monthly_url": null,
+        "advanced_annual_url": null
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,1330 @@
+{% comment %}
+  Whisky Subscription Landing Page
+  —————————————————————————————————
+  After creating subscription products in Shopify + a subscriptions app,
+  paste the checkout URLs into the theme editor settings for this page.
+  URLs format: /cart/add?id=VARIANT_ID&selling_plan=SELLING_PLAN_ID
+  or simply: /products/PRODUCT-HANDLE
+{% endcomment %}
+
+{% assign explorer_monthly_url = section.settings.explorer_monthly_url | default: '#plans' %}
+{% assign explorer_annual_url   = section.settings.explorer_annual_url   | default: '#plans' %}
+{% assign advanced_monthly_url  = section.settings.advanced_monthly_url  | default: '#plans' %}
+{% assign advanced_annual_url   = section.settings.advanced_annual_url   | default: '#plans' %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   Whisky Club — scoped to .wc
+   ============================================================ */
+.wc {
+  --wc-bg:          #f5efe3;
+  --wc-bg-alt:      #ebe2cf;
+  --wc-surface:     #fcf9f2;
+  --wc-ink:         #1a1814;
+  --wc-ink-soft:    #4a4538;
+  --wc-ink-mute:    #7a7362;
+  --wc-rule:        rgba(26,24,20,0.14);
+  --wc-rule-strong: rgba(26,24,20,0.35);
+  --wc-accent:      #2d4f8a;
+  --wc-accent-ink:  #fcf9f2;
+  --wc-paper:       #fcf9f2;
+  --wc-hero-bg:     #1f1c17;
+  --wc-hero-ink:    #f5efe3;
+  --wc-hero-accent: #c49a4d;
+  --wc-ph-a:        rgba(26,24,20,0.05);
+  --wc-ph-b:        rgba(26,24,20,0.12);
+
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 400;
+  background: var(--wc-bg);
+  color: var(--wc-ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wc *, .wc *::before, .wc *::after { box-sizing: border-box; }
+
+.wc h1, .wc h2, .wc h3, .wc h4 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+  margin: 0;
+  color: var(--wc-ink);
+}
+.wc p { margin: 0; }
+.wc a { cursor: pointer; }
+.wc button { font-family: inherit; cursor: pointer; }
+
+.wc-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.wc-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wc-ink-mute);
+}
+
+.wc-ph {
+  background: repeating-linear-gradient(135deg, var(--wc-ph-a) 0 10px, var(--wc-ph-b) 10px 20px);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--wc-ink-mute);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; text-align: center;
+  padding: 1.5rem;
+}
+
+.wc-container { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+
+/* ---- HERO ---- */
+.wc-hero {
+  background: var(--wc-hero-bg);
+  color: var(--wc-hero-ink);
+  padding: 120px 0 100px;
+  position: relative; overflow: hidden;
+}
+.wc-hero-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center;
+}
+.wc-hero h1 {
+  color: var(--wc-hero-ink);
+  font-size: clamp(44px, 5.6vw, 88px);
+  letter-spacing: -0.02em;
+  max-width: 16ch; margin-bottom: 32px;
+}
+.wc-hero-media {
+  position: relative; height: 560px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 10px, rgba(255,255,255,0.05) 10px 20px);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.4);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; text-align: center;
+}
+.wc-hero-stamp {
+  position: absolute; top: -20px; right: -20px;
+  width: 140px; height: 140px; border-radius: 50%;
+  border: 1px solid var(--wc-hero-accent);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--wc-hero-accent);
+  font-family: 'EB Garamond', serif; font-style: italic; font-size: 18px;
+  transform: rotate(-12deg);
+  background: var(--wc-hero-bg);
+  text-align: center; line-height: 1.1;
+}
+.wc-hero-stamp .big { font-size: 32px; font-weight: 500; display: block; }
+.wc-hero-stamp .sub {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace; font-style: normal; display: block;
+}
+.wc-btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 32px;
+  background: var(--wc-hero-accent); color: #1a1814;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  border-radius: 100px; text-decoration: none; font-weight: 500; border: 0;
+}
+.wc-btn-ghost {
+  color: var(--wc-hero-ink);
+  text-decoration: underline; text-decoration-color: var(--wc-hero-accent);
+  text-underline-offset: 6px; font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.wc-hero-stats {
+  margin-top: 100px; padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+}
+.wc-hero-stat-n {
+  font-family: 'EB Garamond', serif; font-size: 36px;
+  letter-spacing: -0.01em; color: var(--wc-hero-ink);
+}
+.wc-hero-stat-l { color: rgba(255,255,255,0.5); margin-top: 8px; }
+
+/* ---- BILLING TOGGLE ---- */
+.wc-billing-toggle {
+  display: inline-flex; padding: 4px; border-radius: 100px;
+  background: var(--wc-bg-alt); border: 1px solid var(--wc-rule);
+  position: relative;
+}
+.wc-billing-track {
+  position: absolute; top: 4px; bottom: 4px;
+  width: calc(50% - 6px);
+  background: var(--wc-ink); border-radius: 100px;
+  transition: left 0.35s cubic-bezier(.65,.02,.3,1);
+  left: 4px; /* updated by JS */
+}
+.wc-billing-btn {
+  position: relative; background: transparent; border: 0;
+  padding: 10px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--wc-ink-soft); transition: color 0.3s ease; font-weight: 500;
+}
+.wc-billing-btn.active { color: var(--wc-bg); }
+
+/* ---- PLAN CARDS ---- */
+.wc-plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.wc-plan {
+  border: 1px solid var(--wc-rule);
+  padding: 48px 40px;
+  display: flex; flex-direction: column;
+  position: relative; min-height: 620px;
+  background: var(--wc-paper); color: var(--wc-ink);
+}
+.wc-plan--featured {
+  background: var(--wc-ink); color: var(--wc-bg);
+  border-color: var(--wc-ink);
+}
+.wc-plan-badge {
+  position: absolute; top: -12px; left: 40px;
+  background: var(--wc-accent); color: var(--wc-accent-ink);
+  padding: 6px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+}
+.wc-plan-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--wc-rule-strong);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'EB Garamond', serif; font-style: italic; font-size: 20px;
+}
+.wc-plan--featured .wc-plan-icon { border-color: rgba(245,239,227,0.3); }
+.wc-plan-price-block {
+  padding: 24px 0;
+  border-top: 1px solid var(--wc-rule);
+  border-bottom: 1px solid var(--wc-rule);
+  margin-bottom: 32px;
+}
+.wc-plan--featured .wc-plan-price-block {
+  border-color: rgba(245,239,227,0.15);
+}
+.wc-price-amount {
+  font-family: 'EB Garamond', serif; font-size: 72px;
+  line-height: 1; letter-spacing: -0.02em; font-weight: 500;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.wc-plan-features {
+  list-style: none; padding: 0; margin: 0 0 40px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.wc-plan-features li {
+  display: flex; gap: 14px; align-items: flex-start;
+  font-size: 14px; color: var(--wc-ink-soft);
+}
+.wc-plan--featured .wc-plan-features li { color: rgba(245,239,227,0.9); }
+.wc-plan-features li::before {
+  content: '';
+  margin-top: 6px; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--wc-accent); flex-shrink: 0;
+}
+.wc-plan--featured .wc-plan-features li::before { background: var(--wc-hero-accent); }
+.wc-plan-cta {
+  margin-top: auto;
+  background: var(--wc-ink); color: var(--wc-bg);
+  border: 0; padding: 20px 32px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  border-radius: 100px; font-weight: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  text-decoration: none;
+}
+.wc-plan--featured .wc-plan-cta {
+  background: var(--wc-hero-accent); color: #1a1814;
+}
+.wc-guarantee {
+  margin-top: 32px; padding: 20px 32px;
+  background: var(--wc-bg-alt); border-left: 2px solid var(--wc-accent);
+  display: flex; gap: 24px; align-items: center;
+  flex-wrap: wrap; justify-content: space-between;
+}
+
+/* ---- HOW IT WORKS ---- */
+.wc-how {
+  padding: 120px 0;
+  background: var(--wc-bg-alt);
+  border-top: 1px solid var(--wc-rule); border-bottom: 1px solid var(--wc-rule);
+}
+.wc-how-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--wc-rule-strong);
+}
+.wc-how-step {
+  background: var(--wc-bg-alt); padding: 40px 32px 48px;
+  display: flex; flex-direction: column; min-height: 320px;
+}
+.wc-step-n {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 56px; color: var(--wc-accent); line-height: 1; margin-bottom: 24px;
+}
+
+/* ---- JOURNEY / CURRICULUM ---- */
+.wc-journey { padding: 140px 0; background: var(--wc-bg); }
+.wc-journey-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 60px; gap: 40px; flex-wrap: wrap;
+}
+.wc-tier-toggle {
+  display: inline-flex; padding: 4px; border-radius: 100px;
+  background: var(--wc-bg-alt); border: 1px solid var(--wc-rule);
+  position: relative;
+}
+.wc-tier-track {
+  position: absolute; top: 4px; bottom: 4px;
+  width: calc(50% - 6px);
+  background: var(--wc-ink); border-radius: 100px;
+  transition: left 0.35s cubic-bezier(.65,.02,.3,1);
+  left: 4px;
+}
+.wc-tier-btn {
+  position: relative; background: transparent; border: 0;
+  padding: 10px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--wc-ink-soft); transition: color 0.3s ease; font-weight: 500;
+}
+.wc-tier-btn.active { color: var(--wc-bg); }
+.wc-curriculum {
+  position: relative;
+}
+.wc-curriculum-line {
+  position: absolute; top: 48px; left: 0; right: 0; height: 1px;
+  background: var(--wc-rule-strong);
+}
+.wc-curriculum-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px;
+}
+.wc-box-dot-row {
+  height: 96px; display: flex; align-items: center;
+  justify-content: flex-start; position: relative;
+}
+.wc-box-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--wc-bg); border: 2px solid var(--wc-rule-strong);
+  margin-left: 32px;
+}
+.wc-box-dot--active {
+  background: var(--wc-accent); border-color: var(--wc-accent);
+}
+.wc-box-start-label {
+  position: absolute; top: -24px; left: 24px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--wc-accent); white-space: nowrap;
+}
+.wc-box-card {
+  border: 1px solid var(--wc-rule);
+  padding: 24px 22px 28px;
+  background: var(--wc-paper);
+  min-height: 240px; display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+.wc-box-card--locked {
+  background: transparent;
+}
+.wc-box-card--locked::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(135deg, var(--wc-ph-a) 0 8px, var(--wc-ph-b) 8px 16px);
+  opacity: 0.5;
+}
+.wc-box-card__inner { position: relative; display: flex; flex-direction: column; height: 100%; }
+.wc-box-num {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 40px; line-height: 1; color: var(--wc-accent);
+}
+.wc-box-num--locked { color: var(--wc-ink-mute); }
+.wc-box-month {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--wc-ink-mute);
+}
+.wc-box-title { font-size: 20px; margin-bottom: 10px; letter-spacing: -0.01em; }
+.wc-box-title--locked { color: var(--wc-ink-mute); font-style: italic; }
+.wc-box-hint {
+  font-size: 12.5px; color: var(--wc-ink-soft);
+  line-height: 1.55; margin: 0; font-style: italic;
+}
+.wc-box-revealed {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-top: auto; padding-top: 16px; color: var(--wc-ink-mute);
+}
+
+/* ---- IN THE BOX ---- */
+.wc-inbox { padding: 140px 0; background: var(--wc-bg); }
+.wc-inbox-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: start;
+}
+.wc-inbox-sticky { position: sticky; top: 100px; }
+.wc-inbox-item {
+  padding: 36px 0; display: grid; grid-template-columns: 100px 1fr; gap: 32px;
+  border-top: 1px solid var(--wc-rule);
+}
+.wc-inbox-item:first-child { border-top-color: var(--wc-ink); }
+.wc-inbox-item:last-child { border-bottom: 1px solid var(--wc-ink); }
+
+/* ---- COMPARISON TABLE ---- */
+.wc-compare { padding: 120px 0; background: var(--wc-bg-alt); border-top: 1px solid var(--wc-rule); border-bottom: 1px solid var(--wc-rule); }
+.wc-compare-table { border: 1px solid var(--wc-rule-strong); background: var(--wc-paper); }
+.wc-compare-head {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+  border-bottom: 1px solid var(--wc-rule-strong);
+  background: var(--wc-ink); color: var(--wc-bg);
+}
+.wc-compare-row {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+  border-bottom: 1px solid var(--wc-rule); font-size: 14px;
+}
+.wc-compare-row:last-child { border-bottom: 0; }
+.wc-compare-cell { padding: 20px 32px; }
+.wc-compare-cell--exp { border-left: 1px solid var(--wc-rule); }
+.wc-compare-cell--adv {
+  border-left: 1px solid var(--wc-rule);
+  background: rgba(196,154,77,0.05);
+}
+.wc-compare-head .wc-compare-cell--adv { background: rgba(196,154,77,0.12); }
+.wc-dot { font-family: 'EB Garamond', serif; font-size: 22px; }
+.wc-dash { font-family: 'EB Garamond', serif; font-size: 22px; color: var(--wc-ink-mute); }
+
+/* ---- TESTIMONIALS ---- */
+.wc-testimonials { padding: 140px 0; background: var(--wc-bg); }
+.wc-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.wc-quote {
+  margin: 0; padding: 40px 36px 36px;
+  border: 1px solid var(--wc-rule); background: var(--wc-paper);
+  display: flex; flex-direction: column; min-height: 340px;
+}
+.wc-quote-mark {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 80px; line-height: 0.7; color: var(--wc-accent); margin-bottom: 12px;
+}
+.wc-quote blockquote {
+  margin: 0; font-family: 'EB Garamond', serif;
+  font-size: 22px; line-height: 1.35; color: var(--wc-ink); flex: 1;
+}
+.wc-quote figcaption {
+  margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--wc-rule);
+  display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+}
+.wc-tier-tag {
+  padding: 4px 10px; border: 1px solid var(--wc-rule-strong); color: var(--wc-ink-soft);
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+}
+
+/* ---- FAQ ---- */
+.wc-faq { padding: 120px 0; background: var(--wc-bg-alt); border-top: 1px solid var(--wc-rule); }
+.wc-faq-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+.wc-faq-sticky { position: sticky; top: 100px; }
+.wc-faq-item {
+  border-top: 1px solid var(--wc-rule-strong);
+}
+.wc-faq-item:last-child { border-bottom: 1px solid var(--wc-rule-strong); }
+.wc-faq-btn {
+  width: 100%; text-align: left; padding: 28px 0;
+  background: transparent; border: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--wc-ink);
+}
+.wc-faq-q { font-family: 'EB Garamond', serif; font-size: 24px; font-weight: 500; }
+.wc-faq-icon {
+  font-size: 24px; font-family: 'EB Garamond', serif;
+  transition: transform 0.3s ease; color: var(--wc-accent); flex-shrink: 0;
+}
+.wc-faq-item.open .wc-faq-icon { transform: rotate(45deg); }
+.wc-faq-body {
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease, padding-bottom 0.3s ease;
+  padding-bottom: 0;
+}
+.wc-faq-item.open .wc-faq-body {
+  max-height: 300px; opacity: 1; padding-bottom: 28px;
+}
+.wc-faq-body p { color: var(--wc-ink-soft); font-size: 15px; line-height: 1.7; max-width: 640px; }
+
+/* ---- CLOSING CTA ---- */
+.wc-closing {
+  padding: 140px 0;
+  background: var(--wc-hero-bg); color: var(--wc-hero-ink);
+  text-align: center; position: relative; overflow: hidden;
+}
+.wc-closing h2 {
+  color: var(--wc-hero-ink);
+  font-size: clamp(48px, 6.5vw, 104px);
+  max-width: 14ch; margin: 0 auto 40px; letter-spacing: -0.02em;
+}
+.wc-closing-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 22px 40px;
+  background: var(--wc-hero-accent); color: #1a1814;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  border-radius: 100px; text-decoration: none; font-weight: 600;
+}
+
+/* ---- STICKY CTA ---- */
+.wc-sticky {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(.65,.02,.3,1), opacity 0.3s ease;
+  z-index: 200;
+  background: var(--wc-ink); color: var(--wc-bg);
+  border-radius: 100px; padding: 10px 10px 10px 28px;
+  display: flex; align-items: center; gap: 24px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  min-width: 520px; pointer-events: none;
+}
+.wc-sticky.visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1; pointer-events: auto;
+}
+.wc-sticky-sub {
+  display: inline-flex; padding: 3px; border-radius: 100px;
+  background: rgba(255,255,255,0.1); position: relative;
+}
+.wc-sticky-track {
+  position: absolute; top: 3px; bottom: 3px;
+  width: calc(50% - 4px); background: var(--wc-bg); border-radius: 100px;
+  transition: left 0.3s cubic-bezier(.65,.02,.3,1); left: 3px;
+}
+.wc-sticky-btn {
+  position: relative; background: transparent; border: 0;
+  padding: 8px 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(245,239,227,0.7); transition: color 0.3s ease;
+}
+.wc-sticky-btn.active { color: var(--wc-ink); }
+.wc-sticky-cta {
+  background: var(--wc-hero-accent); color: #1a1814;
+  border-radius: 100px; padding: 14px 24px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  text-decoration: none; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 900px) {
+  .wc-container { padding: 0 20px; }
+  .wc-hero { padding: 72px 0 64px; }
+  .wc-hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .wc-hero h1 { font-size: 44px; }
+  .wc-hero-media { height: 360px; }
+  .wc-hero-stamp { width: 100px; height: 100px; top: -10px; right: -10px; font-size: 12px; }
+  .wc-hero-stamp .big { font-size: 24px; }
+  .wc-hero-stats { grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+  .wc-plans-grid { grid-template-columns: 1fr; gap: 16px; }
+  .wc-how-grid { grid-template-columns: 1fr 1fr; }
+  .wc-curriculum-grid {
+    grid-template-columns: repeat(6, 260px);
+    overflow-x: auto; padding-bottom: 12px;
+    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  }
+  .wc-curriculum-grid > div { scroll-snap-align: start; }
+  .wc-inbox-grid { grid-template-columns: 1fr; gap: 40px; }
+  .wc-inbox-sticky { position: static; }
+  .wc-inbox-item { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+  .wc-compare-head { grid-template-columns: 1fr 1fr; }
+  .wc-compare-head .wc-compare-cell:first-child { display: none; }
+  .wc-compare-row { grid-template-columns: 1fr; }
+  .wc-compare-cell--exp, .wc-compare-cell--adv { border-left: none; }
+  .wc-compare-row .wc-compare-cell:first-child {
+    background: var(--wc-bg-alt); font-weight: 600;
+    color: var(--wc-ink); border-bottom: 1px solid var(--wc-rule);
+  }
+  .wc-testimonials-grid { grid-template-columns: 1fr; }
+  .wc-faq-grid { grid-template-columns: 1fr; gap: 32px; }
+  .wc-faq-sticky { position: static; }
+  section.wc-how, section.wc-journey, section.wc-inbox,
+  section.wc-compare, section.wc-testimonials, section.wc-faq,
+  section.wc-closing { padding-top: 72px; padding-bottom: 72px; }
+  .wc h2 { font-size: 36px !important; }
+  .wc-closing h2 { font-size: 48px !important; }
+  .wc-sticky { min-width: 0; width: calc(100vw - 24px); left: 12px; transform: translateY(0); padding: 8px 8px 8px 20px; gap: 12px; }
+  .wc-sticky.visible { transform: translateY(0); opacity: 1; }
+  .wc-sticky-label, .wc-sticky-sub { display: none; }
+}
+</style>
+
+<div class="wc" id="wc-root" data-billing="monthly" data-tier="explorer">
+
+  {%- comment -%} ===== HERO ===== {%- endcomment -%}
+  <section class="wc-hero">
+    <div class="wc-container" style="position:relative;">
+      <div class="wc-hero-grid">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:32px;">
+            <span style="width:40px;height:1px;background:var(--wc-hero-accent);display:block;"></span>
+            <span class="wc-mono" style="color:var(--wc-hero-accent);">Members — Est. 2021 · Antwerp</span>
+          </div>
+          <h1>Whisky Club, the whisky subscription.</h1>
+          <p style="font-size:17px;line-height:1.6;max-width:520px;color:var(--wc-hero-ink);opacity:0.78;margin-bottom:40px;">
+            Six 25ml tubes each month — three whiskies, two tubes of each, so you can drink solo or share. Every box themed, every journey the same: start at Box 01, build your way up. Niall picks. You taste.
+          </p>
+          <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+            <a href="#plans" class="wc-btn-primary">See the Plans &rarr;</a>
+            <a href="#how" class="wc-btn-ghost">How it works</a>
+          </div>
+        </div>
+        <div style="position:relative;">
+          <div class="wc-hero-media">
+            Hero product shot<br>— monthly box, opened
+          </div>
+          <div class="wc-hero-stamp">
+            No.<br>
+            <span class="big">47</span>
+            <span class="sub">Apr · 26</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wc-hero-stats">
+        <div>
+          <div class="wc-hero-stat-n">1,842</div>
+          <div class="wc-mono wc-hero-stat-l">Members this quarter</div>
+        </div>
+        <div>
+          <div class="wc-hero-stat-n">130+</div>
+          <div class="wc-mono wc-hero-stat-l">Distilleries featured</div>
+        </div>
+        <div>
+          <div class="wc-hero-stat-n">4.9 / 5</div>
+          <div class="wc-mono wc-hero-stat-l">Member rating</div>
+        </div>
+        <div>
+          <div class="wc-hero-stat-n">Pause anytime</div>
+          <div class="wc-mono wc-hero-stat-l">No lock-in, no fuss</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== TIER CHOOSER ===== {%- endcomment -%}
+  <section id="plans" style="padding:140px 0 80px;background:var(--wc-bg);">
+    <div class="wc-container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;gap:40px;flex-wrap:wrap;">
+        <div>
+          <div class="wc-eyebrow" style="margin-bottom:16px;">&sect; 01 — Membership</div>
+          <h2 style="font-size:clamp(40px,4.5vw,68px);max-width:14ch;">Two tiers. One <em>obsession</em>.</h2>
+        </div>
+        {%- comment -%} Billing toggle {%- endcomment -%}
+        <div class="wc-billing-toggle" role="group" aria-label="Billing frequency">
+          <div class="wc-billing-track" id="wc-billing-track"></div>
+          <button class="wc-billing-btn active" data-billing="monthly">Monthly</button>
+          <button class="wc-billing-btn" data-billing="annual">Annual <span style="opacity:0.8;">&middot; save 15%</span></button>
+        </div>
+      </div>
+
+      <div class="wc-plans-grid">
+        {%- comment -%} Explorer {%- endcomment -%}
+        <div class="wc-plan">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+            <div>
+              <div class="wc-mono" style="color:var(--wc-ink-mute);">The starting dram</div>
+              <h3 style="font-size:48px;margin-top:8px;font-style:italic;font-weight:400;color:var(--wc-ink);">Explorer</h3>
+            </div>
+            <div class="wc-plan-icon">E</div>
+          </div>
+          <p style="font-size:14px;line-height:1.6;color:var(--wc-ink-soft);margin-bottom:32px;">
+            The six-month foundation. Scotland to bourbon, gentle to smoke, curated in a fixed order. Everyone starts at Box 01 — the sequence is the point.
+          </p>
+          <div class="wc-plan-price-block">
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <span style="font-family:'EB Garamond',serif;font-size:28px;line-height:1;">&euro;</span>
+              <span class="wc-price-amount" id="wc-price-explorer">40</span>
+              <span class="wc-mono" style="color:var(--wc-ink-mute);margin-left:6px;">/ month</span>
+            </div>
+            <div class="wc-mono" style="margin-top:8px;color:var(--wc-ink-mute);font-size:10px;">
+              <span id="wc-billing-note-explorer">Billed monthly &middot; cancel any time</span>
+            </div>
+          </div>
+          <ul class="wc-plan-features">
+            <li>6 &times; 25ml tubes (3 whiskies &times; 2)</li>
+            <li>Fixed 6-month curriculum — everyone starts at 01</li>
+            <li>Themed box: region, style, or technique</li>
+            <li>Core range &amp; distillery staples</li>
+            <li>Printed info booklet per box</li>
+            <li>Tasting-notes journal to fill in</li>
+            <li>Digital dashboard + AI palate profile</li>
+          </ul>
+          <a id="wc-explorer-cta" href="{{ explorer_monthly_url }}" class="wc-plan-cta">
+            <span>Join Explorer</span><span>&rarr;</span>
+          </a>
+        </div>
+
+        {%- comment -%} Advanced {%- endcomment -%}
+        <div class="wc-plan wc-plan--featured">
+          <div class="wc-plan-badge">Most Chosen</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+            <div>
+              <div class="wc-mono" style="color:rgba(245,239,227,0.55);">For the serious collector</div>
+              <h3 style="font-size:48px;margin-top:8px;font-style:italic;font-weight:400;color:var(--wc-bg);">Advanced</h3>
+            </div>
+            <div class="wc-plan-icon" style="color:var(--wc-bg);">A</div>
+          </div>
+          <p style="font-size:14px;line-height:1.6;color:rgba(245,239,227,0.75);margin-bottom:32px;">
+            The rare-spirits curriculum. Single casks, cask-strength, lost distilleries, age statements. Same fixed journey, scarcer liquid — the kind you can't walk into a shop and buy.
+          </p>
+          <div class="wc-plan-price-block">
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <span style="font-family:'EB Garamond',serif;font-size:28px;line-height:1;color:var(--wc-bg);">&euro;</span>
+              <span class="wc-price-amount" id="wc-price-advanced" style="color:var(--wc-bg);">50</span>
+              <span class="wc-mono" style="color:rgba(245,239,227,0.6);margin-left:6px;">/ month</span>
+            </div>
+            <div class="wc-mono" style="margin-top:8px;color:rgba(245,239,227,0.55);font-size:10px;">
+              <span id="wc-billing-note-advanced">Billed monthly &middot; cancel any time</span>
+            </div>
+          </div>
+          <ul class="wc-plan-features">
+            <li>6 &times; 25ml tubes (3 whiskies &times; 2)</li>
+            <li>Fixed 6-month curriculum — rare-spirits track</li>
+            <li>Single casks &amp; limited editions</li>
+            <li>Virtual tastings with distillers</li>
+            <li>Priority AI recommendations</li>
+            <li>Members-only bottle reservations</li>
+            <li>Signed certificate of authenticity</li>
+          </ul>
+          <a id="wc-advanced-cta" href="{{ advanced_monthly_url }}" class="wc-plan-cta">
+            <span>Join Advanced</span><span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="wc-guarantee">
+        <div style="font-size:13px;color:var(--wc-ink-soft);">
+          <strong style="color:var(--wc-ink);">Not sure yet?</strong>&nbsp;&nbsp;Every membership comes with a 30-day palate guarantee. If your first box doesn't convert you, we refund it. Keep the drams.
+        </div>
+        <a href="#faq" class="wc-mono" style="color:var(--wc-ink);text-decoration:underline;text-underline-offset:4px;">Read the fine print &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== HOW IT WORKS ===== {%- endcomment -%}
+  <section id="how" class="wc-how">
+    <div class="wc-container">
+      <div style="max-width:720px;margin-bottom:80px;">
+        <div class="wc-eyebrow" style="margin-bottom:16px;">&sect; 02 — The Routine</div>
+        <h2 style="font-size:clamp(40px,4.5vw,68px);">Four steps. <em>Then it runs itself.</em></h2>
+      </div>
+      <div class="wc-how-grid">
+        <div class="wc-how-step">
+          <div class="wc-step-n">01</div>
+          <h3 style="font-size:26px;margin-bottom:16px;letter-spacing:-0.01em;">Pick your tier</h3>
+          <p style="font-size:13.5px;color:var(--wc-ink-soft);line-height:1.6;margin-top:auto;">Explorer or Advanced. Monthly or annual. No quiz, no questionnaire — the journey is the same for everyone. That's the point.</p>
+        </div>
+        <div class="wc-how-step">
+          <div class="wc-step-n">02</div>
+          <h3 style="font-size:26px;margin-bottom:16px;letter-spacing:-0.01em;">Everyone starts at Box 01</h3>
+          <p style="font-size:13.5px;color:var(--wc-ink-soft);line-height:1.6;margin-top:auto;">Niall has built a six-month curriculum per tier. Month one is foundational; each box after builds on the one before. You don't pick. He already did.</p>
+        </div>
+        <div class="wc-how-step">
+          <div class="wc-step-n">03</div>
+          <h3 style="font-size:26px;margin-bottom:16px;letter-spacing:-0.01em;">First box ships now</h3>
+          <p style="font-size:13.5px;color:var(--wc-ink-soft);line-height:1.6;margin-top:auto;">Order today and your first box is dispatched within 48 hours. After that, boxes arrive on the 5th of every month. Tracked. Discreet. Signed for.</p>
+        </div>
+        <div class="wc-how-step">
+          <div class="wc-step-n">04</div>
+          <h3 style="font-size:26px;margin-bottom:16px;letter-spacing:-0.01em;">Rate it, let AI listen</h3>
+          <p style="font-size:13.5px;color:var(--wc-ink-soft);line-height:1.6;margin-top:auto;">Log each pour in the digital dashboard. Our model reads your notes, builds a palate profile, and quietly recommends full bottles outside the club — once you know what you like.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== THE JOURNEY ===== {%- endcomment -%}
+  <section class="wc-journey">
+    <div class="wc-container">
+      <div class="wc-journey-header">
+        <div style="max-width:680px;">
+          <div class="wc-eyebrow" style="margin-bottom:16px;">&sect; 02&frac12; — The curriculum</div>
+          <h2 style="font-size:clamp(40px,4.5vw,68px);padding-bottom:0.15em;">A fixed journey. <em>Kept under wraps.</em></h2>
+          <p style="font-size:16px;color:var(--wc-ink-soft);line-height:1.65;margin-top:28px;max-width:560px;">
+            Every member starts at Box 01 and moves through the same curated sequence. Niall has already built the arc — each box themed, each one preparing you for the next. We won't tell you what's coming. That's half the point. The boxes arrive. You taste. You find out.
+          </p>
+        </div>
+        <div class="wc-tier-toggle" role="group" aria-label="Curriculum tier">
+          <div class="wc-tier-track" id="wc-tier-track"></div>
+          <button class="wc-tier-btn active" data-tier="explorer">Explorer</button>
+          <button class="wc-tier-btn" data-tier="advanced">Advanced</button>
+        </div>
+      </div>
+
+      <div class="wc-curriculum">
+        <div class="wc-curriculum-line"></div>
+        <div class="wc-curriculum-grid" id="wc-curriculum-grid">
+          {%- comment -%} Explorer boxes (shown by default) {%- endcomment -%}
+          {%- assign explorer_boxes = "01,The Foundation,Where most whisky palates begin. Gentle. Inviting. Instantly recognisable.,Your first box|02,???,Building on what you tasted last month. The arc continues.,Month 2|03,???,Something shifts. We introduce a new dimension to your palate.,Month 3|04,???,Not for the faint of heart. A defining month.,Month 4|05,???,Density and depth. A different side of the same story.,Month 5|06,???,We leave Scotland behind. The sweet counterpoint.,Month 6" | split: "|" -%}
+          {%- assign advanced_boxes = "01,Rare Openings,Three scarce pours to set the tone. The kind of liquid that makes you slow down.,Your first box|02,???,An exercise in precision. Bring a pipette.,Month 2|03,???,Finite liquid. Once it's gone it's gone.,Month 3|04,???,A different continent a different philosophy. Restraint over force.,Month 4|05,???,What two extra decades in wood does to a spirit.,Month 5|06,???,The frontier end of the category. Experimental grains shuttered distilleries.,Month 6" | split: "|" -%}
+
+          {%- for box_data in explorer_boxes -%}
+            {%- assign box_parts = box_data | split: "," -%}
+            {%- assign box_n = box_parts[0] -%}
+            {%- assign box_t = box_parts[1] -%}
+            {%- assign box_hint = box_parts[2] -%}
+            {%- assign box_mo = box_parts[3] -%}
+            {%- assign is_locked = false -%}
+            {%- if forloop.index > 1 -%}{%- assign is_locked = true -%}{%- endif -%}
+            <div data-tier-content="explorer" style="display:flex;flex-direction:column;gap:20px;position:relative;">
+              <div class="wc-box-dot-row">
+                <div class="wc-box-dot{% unless is_locked %} wc-box-dot--active{% endunless %}"></div>
+                {%- unless is_locked -%}
+                  <div class="wc-box-start-label">You start here &darr;</div>
+                {%- endunless -%}
+              </div>
+              <div class="wc-box-card{% if is_locked %} wc-box-card--locked{% endif %}">
+                <div class="wc-box-card__inner">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:16px;align-items:baseline;">
+                    <span class="wc-box-num{% if is_locked %} wc-box-num--locked{% endif %}">{{ box_n }}</span>
+                    <span class="wc-box-month">{{ box_mo }}</span>
+                  </div>
+                  <h3 class="wc-box-title{% if is_locked %} wc-box-title--locked{% endif %}">{% if is_locked %}Sealed{% else %}{{ box_t }}{% endif %}</h3>
+                  <p class="wc-box-hint">{{ box_hint }}</p>
+                  {%- if is_locked -%}
+                    <div class="wc-box-revealed">Revealed on arrival</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+
+          {%- for box_data in advanced_boxes -%}
+            {%- assign box_parts = box_data | split: "," -%}
+            {%- assign box_n = box_parts[0] -%}
+            {%- assign box_t = box_parts[1] -%}
+            {%- assign box_hint = box_parts[2] -%}
+            {%- assign box_mo = box_parts[3] -%}
+            {%- assign is_locked = false -%}
+            {%- if forloop.index > 1 -%}{%- assign is_locked = true -%}{%- endif -%}
+            <div data-tier-content="advanced" style="display:none;flex-direction:column;gap:20px;position:relative;">
+              <div class="wc-box-dot-row">
+                <div class="wc-box-dot{% unless is_locked %} wc-box-dot--active{% endunless %}"></div>
+                {%- unless is_locked -%}
+                  <div class="wc-box-start-label">You start here &darr;</div>
+                {%- endunless -%}
+              </div>
+              <div class="wc-box-card{% if is_locked %} wc-box-card--locked{% endif %}">
+                <div class="wc-box-card__inner">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:16px;align-items:baseline;">
+                    <span class="wc-box-num{% if is_locked %} wc-box-num--locked{% endif %}">{{ box_n }}</span>
+                    <span class="wc-box-month">{{ box_mo }}</span>
+                  </div>
+                  <h3 class="wc-box-title{% if is_locked %} wc-box-title--locked{% endif %}">{% if is_locked %}Sealed{% else %}{{ box_t }}{% endif %}</h3>
+                  <p class="wc-box-hint">{{ box_hint }}</p>
+                  {%- if is_locked -%}
+                    <div class="wc-box-revealed">Revealed on arrival</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div style="margin-top:40px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--wc-ink-soft);gap:24px;flex-wrap:wrap;">
+        <div>
+          <strong style="color:var(--wc-ink);">Months 7–12 continue the arc.</strong>&nbsp;&nbsp;Finished the first six? The curriculum deepens. Cancel anytime — or keep going.
+        </div>
+        <a href="#plans" class="wc-mono" style="color:var(--wc-ink);text-decoration:underline;text-underline-offset:4px;">Start at Box 01 &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== WHAT'S IN THE BOX ===== {%- endcomment -%}
+  <section class="wc-inbox">
+    <div class="wc-container">
+      <div class="wc-inbox-grid">
+        <div class="wc-inbox-sticky">
+          <div class="wc-eyebrow" style="margin-bottom:16px;">&sect; 03 — What arrives</div>
+          <h2 style="font-size:clamp(40px,4.5vw,68px);margin-bottom:32px;">A box, not a <em>parcel</em>.</h2>
+          <p style="font-size:16px;color:var(--wc-ink-soft);line-height:1.7;max-width:420px;margin-bottom:40px;">
+            Everything that lands on your doorstep the first Tuesday of the month. Built to be lived with, not binned.
+          </p>
+          <div class="wc-ph" style="aspect-ratio:1/1;width:100%;max-width:420px;">
+            Top-down box shot<br>— contents laid out
+          </div>
+        </div>
+        <div>
+          <div class="wc-inbox-item" style="border-top-color:var(--wc-ink);">
+            <div>
+              <div class="wc-mono" style="color:var(--wc-ink-mute);margin-bottom:8px;">01</div>
+              <div class="wc-mono" style="color:var(--wc-accent);">the whisky</div>
+            </div>
+            <div>
+              <h3 style="font-size:32px;margin-bottom:12px;font-style:italic;font-weight:400;">Six 25ml tubes — three whiskies, paired</h3>
+              <p style="font-size:15px;color:var(--wc-ink-soft);line-height:1.65;">Each whisky comes as two tubes so you can taste twice, compare across sessions, or pour one for someone you like enough to share with. Sealed, darkened, ordered light-to-heavy.</p>
+            </div>
+          </div>
+          <div class="wc-inbox-item">
+            <div>
+              <div class="wc-mono" style="color:var(--wc-ink-mute);margin-bottom:8px;">02</div>
+              <div class="wc-mono" style="color:var(--wc-accent);">the guide</div>
+            </div>
+            <div>
+              <h3 style="font-size:32px;margin-bottom:12px;font-style:italic;font-weight:400;">The info booklet</h3>
+              <p style="font-size:15px;color:var(--wc-ink-soft);line-height:1.65;">16 letterpress pages. For each of the three whiskies: distillery, cask program, abv, region, suggested flight order, food pairings. Read it before you pour — or after, to check your instincts.</p>
+            </div>
+          </div>
+          <div class="wc-inbox-item">
+            <div>
+              <div class="wc-mono" style="color:var(--wc-ink-mute);margin-bottom:8px;">03</div>
+              <div class="wc-mono" style="color:var(--wc-accent);">the journal</div>
+            </div>
+            <div>
+              <h3 style="font-size:32px;margin-bottom:12px;font-style:italic;font-weight:400;">Your tasting-notes booklet</h3>
+              <p style="font-size:15px;color:var(--wc-ink-soft);line-height:1.65;">Blank pages with structured prompts — nose, palate, finish, score. Fill it in by hand. Built to be kept; the dashboard digitises the rest.</p>
+            </div>
+          </div>
+          <div class="wc-inbox-item" style="border-bottom:1px solid var(--wc-ink);">
+            <div>
+              <div class="wc-mono" style="color:var(--wc-ink-mute);margin-bottom:8px;">04</div>
+              <div class="wc-mono" style="color:var(--wc-accent);">the intelligence</div>
+            </div>
+            <div>
+              <h3 style="font-size:32px;margin-bottom:12px;font-style:italic;font-weight:400;">Digital dashboard + AI palate profile</h3>
+              <p style="font-size:15px;color:var(--wc-ink-soft);line-height:1.65;">Scan the tube, rate the pour, jot a line. Our model reads your notes across every box, maps your palate, and recommends future whiskies — inside the club and full bottles outside it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== COMPARISON TABLE ===== {%- endcomment -%}
+  <section class="wc-compare">
+    <div class="wc-container">
+      <div style="margin-bottom:60px;max-width:680px;">
+        <div class="wc-eyebrow" style="margin-bottom:16px;">&sect; 04 — Side by side</div>
+        <h2 style="font-size:clamp(40px,4.5vw,68px);">The <em>difference</em>, in full.</h2>
+      </div>
+      <div class="wc-compare-table">
+        <div class="wc-compare-head">
+          <div class="wc-compare-cell wc-mono">Feature</div>
+          <div class="wc-compare-cell wc-compare-cell--exp">
+            <div class="wc-mono" style="color:rgba(245,239,227,0.55);margin-bottom:4px;">Tier I</div>
+            <div style="font-family:'EB Garamond',serif;font-size:24px;font-style:italic;">Explorer</div>
+          </div>
+          <div class="wc-compare-cell wc-compare-cell--adv">
+            <div class="wc-mono" style="color:var(--wc-hero-accent);margin-bottom:4px;">Tier II &middot; Most chosen</div>
+            <div style="font-family:'EB Garamond',serif;font-size:24px;font-style:italic;">Advanced</div>
+          </div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Format</div>
+          <div class="wc-compare-cell wc-compare-cell--exp">6 &times; 25ml tubes (3 &times; 2)</div>
+          <div class="wc-compare-cell wc-compare-cell--adv">6 &times; 25ml tubes (3 &times; 2)</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Typical bottle value</div>
+          <div class="wc-compare-cell wc-compare-cell--exp">&euro;50–90</div>
+          <div class="wc-compare-cell wc-compare-cell--adv">&euro;120–400+</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Cask strength releases</div>
+          <div class="wc-compare-cell wc-compare-cell--exp wc-dash">&mdash;</div>
+          <div class="wc-compare-cell wc-compare-cell--adv wc-dot">&bull;</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Single casks &amp; indie bottlers</div>
+          <div class="wc-compare-cell wc-compare-cell--exp wc-dash">&mdash;</div>
+          <div class="wc-compare-cell wc-compare-cell--adv wc-dot">&bull;</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Age-stated whiskies (18+ yr)</div>
+          <div class="wc-compare-cell wc-compare-cell--exp">Occasional</div>
+          <div class="wc-compare-cell wc-compare-cell--adv">Frequent</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Printed info booklet</div>
+          <div class="wc-compare-cell wc-compare-cell--exp wc-dot">&bull;</div>
+          <div class="wc-compare-cell wc-compare-cell--adv wc-dot">&bull;</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Tasting-notes journal</div>
+          <div class="wc-compare-cell wc-compare-cell--exp wc-dot">&bull;</div>
+          <div class="wc-compare-cell wc-compare-cell--adv wc-dot">&bull;</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Digital dashboard + AI profile</div>
+          <div class="wc-compare-cell wc-compare-cell--exp wc-dot">&bull;</div>
+          <div class="wc-compare-cell wc-compare-cell--adv wc-dot">&bull;</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Priority AI recommendations</div>
+          <div class="wc-compare-cell wc-compare-cell--exp wc-dash">&mdash;</div>
+          <div class="wc-compare-cell wc-compare-cell--adv wc-dot">&bull;</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Virtual tasting with distiller</div>
+          <div class="wc-compare-cell wc-compare-cell--exp wc-dash">&mdash;</div>
+          <div class="wc-compare-cell wc-compare-cell--adv">Quarterly</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Priority on full-bottle drops</div>
+          <div class="wc-compare-cell wc-compare-cell--exp wc-dash">&mdash;</div>
+          <div class="wc-compare-cell wc-compare-cell--adv wc-dot">&bull;</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Signed certificate of origin</div>
+          <div class="wc-compare-cell wc-compare-cell--exp wc-dash">&mdash;</div>
+          <div class="wc-compare-cell wc-compare-cell--adv wc-dot">&bull;</div>
+        </div>
+        <div class="wc-compare-row">
+          <div class="wc-compare-cell" style="color:var(--wc-ink-soft);font-weight:500;">Starting from</div>
+          <div class="wc-compare-cell wc-compare-cell--exp" style="font-weight:600;">
+            <span data-compare-price="explorer-monthly">&euro;40/mo</span>
+            <span data-compare-price="explorer-annual" style="display:none;">&euro;34/mo (annual)</span>
+          </div>
+          <div class="wc-compare-cell wc-compare-cell--adv" style="font-weight:600;">
+            <span data-compare-price="advanced-monthly">&euro;50/mo</span>
+            <span data-compare-price="advanced-annual" style="display:none;">&euro;42/mo (annual)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== TESTIMONIALS ===== {%- endcomment -%}
+  <section class="wc-testimonials">
+    <div class="wc-container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:80px;gap:40px;flex-wrap:wrap;">
+        <div>
+          <div class="wc-eyebrow" style="margin-bottom:16px;">&sect; 05 — From the members</div>
+          <h2 style="font-size:clamp(40px,4.5vw,68px);max-width:16ch;">Not loud about it. <em>Just loyal.</em></h2>
+        </div>
+        <div style="padding:16px 24px;border:1px solid var(--wc-rule-strong);font-family:'EB Garamond',serif;display:flex;align-items:center;gap:16px;">
+          <span style="font-size:36px;font-style:italic;line-height:1;">4.9</span>
+          <div>
+            <div style="letter-spacing:2px;font-size:14px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="wc-mono" style="color:var(--wc-ink-mute);margin-top:4px;">617 verified reviews</div>
+          </div>
+        </div>
+      </div>
+      <div class="wc-testimonials-grid">
+        <figure class="wc-quote">
+          <div class="wc-quote-mark">&ldquo;</div>
+          <blockquote>I've been drinking whisky for twenty years and I'm still finding distilleries I'd never heard of. The AI recommendations actually get my palate right — not marketing fluff.</blockquote>
+          <figcaption>
+            <div>
+              <div style="font-weight:600;">Marc V.</div>
+              <div class="wc-mono" style="color:var(--wc-ink-mute);margin-top:4px;">Member since 2022 &middot; Brussels</div>
+            </div>
+            <div class="wc-tier-tag">Advanced</div>
+          </figcaption>
+        </figure>
+        <figure class="wc-quote">
+          <div class="wc-quote-mark">&ldquo;</div>
+          <blockquote>Replaced three different whisky clubs with this one. The curation is sharper — and the tasting-notes journal is the first one I've actually kept using.</blockquote>
+          <figcaption>
+            <div>
+              <div style="font-weight:600;">Stijn D.</div>
+              <div class="wc-mono" style="color:var(--wc-ink-mute);margin-top:4px;">Member since 2023 &middot; Antwerp</div>
+            </div>
+            <div class="wc-tier-tag">Advanced</div>
+          </figcaption>
+        </figure>
+        <figure class="wc-quote">
+          <div class="wc-quote-mark">&ldquo;</div>
+          <blockquote>Exactly what I wanted — three whiskies, six tubes so my wife and I taste together, a proper booklet, nobody trying to sell me a hoodie. Pauses easy when I'm travelling.</blockquote>
+          <figcaption>
+            <div>
+              <div style="font-weight:600;">Olivier L.</div>
+              <div class="wc-mono" style="color:var(--wc-ink-mute);margin-top:4px;">Member since 2024 &middot; Ghent</div>
+            </div>
+            <div class="wc-tier-tag">Explorer</div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== FAQ ===== {%- endcomment -%}
+  <section id="faq" class="wc-faq">
+    <div class="wc-container">
+      <div class="wc-faq-grid">
+        <div class="wc-faq-sticky">
+          <div class="wc-eyebrow" style="margin-bottom:16px;">&sect; 06 — Fine print</div>
+          <h2 style="font-size:clamp(36px,4vw,56px);margin-bottom:24px;">Answers, <em>before you ask.</em></h2>
+          <p style="font-size:15px;color:var(--wc-ink-soft);line-height:1.65;">
+            Still unsure? Email <span style="text-decoration:underline;text-underline-offset:3px;">niall@elcartel.co</span> — Niall reads them himself, usually replies by Thursday.
+          </p>
+        </div>
+        <div id="wc-faq-list">
+          <div class="wc-faq-item open">
+            <button class="wc-faq-btn" aria-expanded="true">
+              <span class="wc-faq-q">Can I pause or cancel?</span>
+              <span class="wc-faq-icon">+</span>
+            </button>
+            <div class="wc-faq-body"><p>Yes — from your account, one click. No emails, no retention team. Pause indefinitely; your palate profile stays put.</p></div>
+          </div>
+          <div class="wc-faq-item">
+            <button class="wc-faq-btn" aria-expanded="false">
+              <span class="wc-faq-q">Can I skip a month?</span>
+              <span class="wc-faq-icon">+</span>
+            </button>
+            <div class="wc-faq-body"><p>Any time before the 1st of the month. Skip as often as you like — your subscription just shifts forward.</p></div>
+          </div>
+          <div class="wc-faq-item">
+            <button class="wc-faq-btn" aria-expanded="false">
+              <span class="wc-faq-q">Do you ship outside Belgium?</span>
+              <span class="wc-faq-icon">+</span>
+            </button>
+            <div class="wc-faq-body"><p>Most of the EU + UK, Switzerland &amp; Norway. Checkout will confirm availability for your postcode.</p></div>
+          </div>
+          <div class="wc-faq-item">
+            <button class="wc-faq-btn" aria-expanded="false">
+              <span class="wc-faq-q">What if I don't like a dram?</span>
+              <span class="wc-faq-icon">+</span>
+            </button>
+            <div class="wc-faq-body"><p>Rate it 1 star in your journal and we'll steer away from that profile. Dislike a whole box? First box is refundable under our 30-day palate guarantee.</p></div>
+          </div>
+          <div class="wc-faq-item">
+            <button class="wc-faq-btn" aria-expanded="false">
+              <span class="wc-faq-q">Who picks the whiskies?</span>
+              <span class="wc-faq-icon">+</span>
+            </button>
+            <div class="wc-faq-body"><p>Niall Harkin, our head taster. Twelve years at Bruichladdich, now selecting for us full-time. Notes are written by distillers, vetted by Niall.</p></div>
+          </div>
+          <div class="wc-faq-item">
+            <button class="wc-faq-btn" aria-expanded="false">
+              <span class="wc-faq-q">Is there an age requirement?</span>
+              <span class="wc-faq-icon">+</span>
+            </button>
+            <div class="wc-faq-body"><p>18+ in Belgium, 21+ where applicable. Identity check at delivery for first box.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== CLOSING CTA ===== {%- endcomment -%}
+  <section class="wc-closing">
+    <div class="wc-container" style="position:relative;">
+      <div class="wc-mono" style="color:var(--wc-hero-accent);margin-bottom:32px;">— Take your seat —</div>
+      <h2>Your first box ships <em style="color:var(--wc-hero-accent);">within 48 hours.</em></h2>
+      <p style="max-width:540px;margin:0 auto 48px;font-size:17px;line-height:1.6;color:rgba(245,239,227,0.75);">
+        Subscribe today and Box 01 is dispatched this week. Every box after that arrives on the 5th of the month. The contents stay sealed until they reach you.
+      </p>
+      <a href="#plans" class="wc-closing-cta">Choose Your Tier &rarr;</a>
+    </div>
+  </section>
+
+</div>{%- comment -%} end .wc {%- endcomment -%}
+
+{%- comment -%} ===== STICKY CTA ===== {%- endcomment -%}
+<div class="wc-sticky" id="wc-sticky" aria-hidden="true">
+  <div class="wc-sticky-label">
+    <span class="wc-mono" style="color:rgba(245,239,227,0.55);" id="wc-sticky-from">From &euro;40/mo</span>
+    <span style="font-family:'EB Garamond',serif;font-size:20px;font-style:italic;">Join the Club</span>
+  </div>
+  <div class="wc-sticky-sub">
+    <div class="wc-sticky-track" id="wc-sticky-track"></div>
+    <button class="wc-sticky-btn active" data-sticky-billing="monthly">Monthly</button>
+    <button class="wc-sticky-btn" data-sticky-billing="annual">Annual</button>
+  </div>
+  <a href="#plans" id="wc-sticky-cta" class="wc-sticky-cta">Subscribe &rarr;</a>
+</div>
+
+<script>
+(function() {
+  // ---- State ----
+  var billing = 'monthly';
+  var tier = 'explorer';
+
+  var explorerUrls = {
+    monthly: {{ explorer_monthly_url | json }},
+    annual:  {{ explorer_annual_url | json }}
+  };
+  var advancedUrls = {
+    monthly: {{ advanced_monthly_url | json }},
+    annual:  {{ advanced_annual_url | json }}
+  };
+
+  // ---- Price data ----
+  var prices = {
+    explorer: { monthly: 40, annual: 34 },
+    advanced: { monthly: 50, annual: 42 }
+  };
+
+  // ---- Elements ----
+  var billingTrack  = document.getElementById('wc-billing-track');
+  var billingBtns   = document.querySelectorAll('.wc-billing-btn');
+  var priceExplorer = document.getElementById('wc-price-explorer');
+  var priceAdvanced = document.getElementById('wc-price-advanced');
+  var noteExplorer  = document.getElementById('wc-billing-note-explorer');
+  var noteAdvanced  = document.getElementById('wc-billing-note-advanced');
+  var explorerCta   = document.getElementById('wc-explorer-cta');
+  var advancedCta   = document.getElementById('wc-advanced-cta');
+
+  var tierTrack     = document.getElementById('wc-tier-track');
+  var tierBtns      = document.querySelectorAll('.wc-tier-btn');
+  var tierContents  = document.querySelectorAll('[data-tier-content]');
+
+  var sticky        = document.getElementById('wc-sticky');
+  var stickyTrack   = document.getElementById('wc-sticky-track');
+  var stickyBtns    = document.querySelectorAll('.wc-sticky-btn');
+  var stickyFrom    = document.getElementById('wc-sticky-from');
+  var stickyCta     = document.getElementById('wc-sticky-cta');
+
+  var comparePrices = document.querySelectorAll('[data-compare-price]');
+
+  // ---- Billing toggle ----
+  function setBilling(b) {
+    billing = b;
+
+    // Animate prices
+    [priceExplorer, priceAdvanced].forEach(function(el) { if (el) { el.style.opacity = '0'; el.style.transform = 'translateY(-8px)'; } });
+    setTimeout(function() {
+      if (priceExplorer) priceExplorer.textContent = prices.explorer[billing];
+      if (priceAdvanced) priceAdvanced.textContent = prices.advanced[billing];
+      [priceExplorer, priceAdvanced].forEach(function(el) { if (el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; } });
+    }, 200);
+
+    // Billing notes
+    if (noteExplorer) noteExplorer.textContent = billing === 'annual'
+      ? 'Billed annually \u00b7 \u20ac' + (prices.explorer.annual * 12) + ' / yr'
+      : 'Billed monthly \u00b7 cancel any time';
+    if (noteAdvanced) noteAdvanced.textContent = billing === 'annual'
+      ? 'Billed annually \u00b7 \u20ac' + (prices.advanced.annual * 12) + ' / yr'
+      : 'Billed monthly \u00b7 cancel any time';
+
+    // CTA URLs
+    if (explorerCta) explorerCta.href = explorerUrls[billing];
+    if (advancedCta) advancedCta.href = advancedUrls[billing];
+
+    // Billing toggle track
+    if (billingTrack) billingTrack.style.left = billing === 'monthly' ? '4px' : 'calc(50% + 2px)';
+
+    // Billing toggle buttons
+    billingBtns.forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.billing === billing);
+    });
+
+    // Sticky
+    if (stickyTrack) stickyTrack.style.left = billing === 'monthly' ? '3px' : 'calc(50% + 1px)';
+    stickyBtns.forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.stickyBilling === billing);
+    });
+    if (stickyFrom) stickyFrom.textContent = 'From \u20ac' + (billing === 'annual' ? '34' : '40') + '/mo';
+    if (stickyCta) stickyCta.href = explorerUrls[billing];
+
+    // Compare table prices
+    comparePrices.forEach(function(el) {
+      var key = el.dataset.comparePrice; // e.g. "explorer-monthly"
+      var parts = key.split('-');
+      var pTier = parts[0]; var pBill = parts[1];
+      el.style.display = (pBill === billing) ? '' : 'none';
+    });
+  }
+
+  billingBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() { setBilling(btn.dataset.billing); });
+  });
+  stickyBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() { setBilling(btn.dataset.stickyBilling); });
+  });
+
+  // ---- Tier (journey) toggle ----
+  function setTier(t) {
+    tier = t;
+    if (tierTrack) tierTrack.style.left = tier === 'explorer' ? '4px' : 'calc(50% + 2px)';
+    tierBtns.forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.tier === tier);
+    });
+    tierContents.forEach(function(el) {
+      el.style.display = el.dataset.tierContent === tier ? 'flex' : 'none';
+    });
+  }
+
+  tierBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() { setTier(btn.dataset.tier); });
+  });
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.wc-faq-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.wc-faq-item');
+      var isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.wc-faq-item').forEach(function(i) {
+        i.classList.remove('open');
+        i.querySelector('.wc-faq-btn').setAttribute('aria-expanded', 'false');
+      });
+      // Open clicked if was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ---- Sticky CTA scroll ----
+  function onScroll() {
+    var y = window.scrollY;
+    var h = document.body.scrollHeight;
+    var show = y > 900 && y < h - window.innerHeight - 400;
+    if (sticky) {
+      sticky.classList.toggle('visible', show);
+      sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Init
+  setBilling('monthly');
+  setTier('explorer');
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Whisky Subscription",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Checkout URLs",
+      "info": "Paste product checkout URLs once subscription products are created in Shopify. Format: /products/your-product-handle"
+    },
+    {
+      "type": "url",
+      "id": "explorer_monthly_url",
+      "label": "Explorer — monthly checkout URL"
+    },
+    {
+      "type": "url",
+      "id": "explorer_annual_url",
+      "label": "Explorer — annual checkout URL"
+    },
+    {
+      "type": "url",
+      "id": "advanced_monthly_url",
+      "label": "Advanced — monthly checkout URL"
+    },
+    {
+      "type": "url",
+      "id": "advanced_annual_url",
+      "label": "Advanced — annual checkout URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Whisky Subscription"
+    }
+  ]
+}
+{% endschema %}
