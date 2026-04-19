@@ -294,50 +294,34 @@
   {%- comment -%} FEATURES {%- endcomment -%}
   <section class="wcp-features">
     <div class="wcp-container">
-      <div class="wcp-features-grid">
-        <div>
-          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 01 — What you get</div>
-          <h2 style="font-size:clamp(36px,4vw,60px);">Everything in<br><em>{{ tier_name }}.</em></h2>
-          {%- if feature_blocks.size > 0 -%}
-            <ul class="wcp-feature-list">
-              {%- for block in feature_blocks -%}
-                <li class="wcp-feature-item" {{ block.shopify_attributes }}>
-                  <span class="wcp-feature-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
-                  <span class="wcp-feature-text">{{ block.settings.text }}</span>
-                </li>
-              {%- endfor -%}
-            </ul>
-          {%- endif -%}
-        </div>
+      <div style="max-width:680px;margin-bottom:48px;">
+        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 01 — What you get</div>
+        <h2 style="font-size:clamp(36px,4vw,60px);">Everything in<br><em>{{ tier_name }}.</em></h2>
+      </div>
+      {%- if feature_blocks.size > 0 -%}
+        <ul class="wcp-feature-list">
+          {%- for block in feature_blocks -%}
+            <li class="wcp-feature-item" {{ block.shopify_attributes }}>
+              <span class="wcp-feature-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <span class="wcp-feature-text">{{ block.settings.text }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
 
-        <div style="display:flex;flex-direction:column;gap:32px;">
-          <div style="background:var(--wcp-bg-alt);padding:40px;border:1px solid var(--wcp-rule);">
-            <div class="wcp-eyebrow" style="margin-bottom:16px;">30-day guarantee</div>
-            <h3 style="font-size:26px;margin-bottom:12px;font-style:italic;font-weight:400;">{{ section.settings.guarantee_headline }}</h3>
-            <p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">{{ section.settings.guarantee_text }}</p>
-          </div>
-          <div style="padding:28px 32px;border:1px solid var(--wcp-rule-strong);background:var(--wcp-bg-alt);display:flex;flex-direction:column;gap:16px;">
-            <div class="wcp-eyebrow">Also available</div>
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
-              <div>
-                <div style="font-family:'EB Garamond',serif;font-size:28px;font-style:italic;">
-                  {%- if is_explorer -%}Advanced{%- else -%}Explorer{%- endif -%}
-                </div>
-                <div style="font-size:14px;color:var(--wcp-ink-soft);margin-top:4px;">
-                  {%- if is_explorer -%}Rare spirits track &middot; from &euro;42/mo{%- else -%}Foundation track &middot; from &euro;34/mo{%- endif -%}
-                </div>
-              </div>
-              <a href="{{ other_tier_url }}" class="wcp-mono" style="color:var(--wcp-ink);text-decoration:underline;text-underline-offset:4px;white-space:nowrap;">
-                View {%- if is_explorer -%}&nbsp;Advanced{%- else -%}&nbsp;Explorer{%- endif -%} &rarr;
-              </a>
-            </div>
-          </div>
-          <div style="padding:32px;border:1px solid var(--wcp-rule);background:var(--wcp-paper);">
-            <div style="font-family:'EB Garamond',serif;font-size:36px;font-style:italic;line-height:1;margin-bottom:8px;">4.9</div>
-            <div style="letter-spacing:2px;font-size:13px;margin-bottom:8px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div class="wcp-mono" style="color:var(--wcp-ink-mute);">617 verified member reviews</div>
-          </div>
+      <div style="margin-top:40px;padding:20px 32px;background:var(--wcp-bg-alt);border-left:2px solid var(--wcp-accent);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <span class="wcp-eyebrow">Also available</span>
+          <span style="font-family:'EB Garamond',serif;font-size:22px;font-style:italic;">
+            {%- if is_explorer -%}Advanced{%- else -%}Explorer{%- endif -%}
+          </span>
+          <span style="font-size:13px;color:var(--wcp-ink-soft);">
+            &mdash;&nbsp;{%- if is_explorer -%}rare spirits track &middot; from &euro;42/mo{%- else -%}foundation track &middot; from &euro;34/mo{%- endif -%}
+          </span>
         </div>
+        <a href="{{ other_tier_url }}" class="wcp-mono" style="color:var(--wcp-ink);text-decoration:underline;text-underline-offset:4px;white-space:nowrap;">
+          View {%- if is_explorer -%}Advanced{%- else -%}Explorer{%- endif -%} &rarr;
+        </a>
       </div>
     </div>
   </section>
