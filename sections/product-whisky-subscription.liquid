@@ -291,11 +291,37 @@
     </div>
   </section>
 
+  {%- comment -%} WHAT'S IN THE BOX {%- endcomment -%}
+  {%- if box_blocks.size > 0 -%}
+  <section class="wcp-inbox">
+    <div class="wcp-container">
+      <div style="max-width:680px;margin-bottom:48px;">
+        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 01 &mdash; What arrives</div>
+        <h2 style="font-size:clamp(36px,4vw,60px);">{{ section.settings.inbox_headline }}</h2>
+      </div>
+      <div>
+        {%- for block in box_blocks -%}
+          <div class="wcp-inbox-item" {{ block.shopify_attributes }}>
+            <div>
+              <div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-bottom:6px;">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+              <div class="wcp-mono" style="color:var(--wcp-accent);">{{ block.settings.tag }}</div>
+            </div>
+            <div>
+              <h3 style="font-size:26px;font-style:italic;font-weight:400;margin-bottom:10px;">{{ block.settings.title }}</h3>
+              <p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">{{ block.settings.description }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
   {%- comment -%} FEATURES {%- endcomment -%}
   <section class="wcp-features">
     <div class="wcp-container">
       <div style="max-width:680px;margin-bottom:48px;">
-        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 01 — What you get</div>
+        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 02 — What you get</div>
         <h2 style="font-size:clamp(36px,4vw,60px);">Everything in<br><em>{{ tier_name }}.</em></h2>
       </div>
       {%- if feature_blocks.size > 0 -%}
@@ -331,7 +357,7 @@
   <section class="wcp-how">
     <div class="wcp-container">
       <div style="max-width:640px;margin-bottom:60px;">
-        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 02 — The routine</div>
+        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 03 — The routine</div>
         <h2 style="font-size:clamp(36px,4vw,60px);">{{ section.settings.how_headline }}</h2>
       </div>
       <div class="wcp-how-grid" style="grid-template-columns: repeat({{ how_blocks.size }}, 1fr);">
@@ -351,7 +377,7 @@
   <section class="wcp-journey">
     <div class="wcp-container">
       <div style="max-width:680px;">
-        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 03 — The curriculum</div>
+        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 04 — The curriculum</div>
         <h2 style="font-size:clamp(36px,4vw,60px);">{{ section.settings.journey_headline }}</h2>
         <p style="font-size:15px;color:var(--wcp-ink-soft);line-height:1.65;margin-top:24px;max-width:520px;">{{ section.settings.journey_description }}</p>
       </div>
@@ -405,38 +431,6 @@
     </div>
   </section>
 
-  {%- comment -%} WHAT'S IN THE BOX {%- endcomment -%}
-  {%- if box_blocks.size > 0 -%}
-  <section class="wcp-inbox">
-    <div class="wcp-container">
-      <div class="wcp-inbox-grid">
-        <div class="wcp-inbox-sticky">
-          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 04 — What arrives</div>
-          <h2 style="font-size:clamp(36px,4vw,60px);margin-bottom:28px;">{{ section.settings.inbox_headline }}</h2>
-          {%- if section.settings.inbox_image != blank -%}
-            {{ section.settings.inbox_image | image_url: width: 800 | image_tag: loading: 'lazy', style: 'width:100%;max-width:400px;' }}
-          {%- else -%}
-            <div style="aspect-ratio:1/1;width:100%;max-width:400px;background:repeating-linear-gradient(135deg,var(--wcp-ph-a) 0 10px,var(--wcp-ph-b) 10px 20px);display:flex;align-items:center;justify-content:center;color:var(--wcp-ink-mute);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;text-align:center;padding:1.5rem;">Top-down box shot<br>— contents laid out</div>
-          {%- endif -%}
-        </div>
-        <div>
-          {%- for block in box_blocks -%}
-            <div class="wcp-inbox-item" {{ block.shopify_attributes }}>
-              <div>
-                <div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-bottom:6px;">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
-                <div class="wcp-mono" style="color:var(--wcp-accent);">{{ block.settings.tag }}</div>
-              </div>
-              <div>
-                <h3 style="font-size:26px;font-style:italic;font-weight:400;margin-bottom:10px;">{{ block.settings.title }}</h3>
-                <p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">{{ block.settings.description }}</p>
-              </div>
-            </div>
-          {%- endfor -%}
-        </div>
-      </div>
-    </div>
-  </section>
-  {%- endif -%}
 
   {%- comment -%} TESTIMONIALS {%- endcomment -%}
   {%- if testimonial_blocks.size > 0 -%}
