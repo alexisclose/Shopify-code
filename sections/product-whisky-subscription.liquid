@@ -1,7 +1,8 @@
 {% comment %}
-  Whisky Subscription Product Page
-  All text is editable in the Shopify theme editor (Online Store → Customize).
-  Blocks: feature, how_step, box_item, faq, testimonial
+  Whisky Subscription — Product Page (Explorer or Advanced)
+  Design-faithful rebuild of the Claude Design prototype, split per tier.
+  All text editable via theme editor. Blocks: feature, how_step,
+  journey_box, box_item, compare_row, testimonial, faq.
 {% endcomment %}
 
 {%- assign tier = section.settings.tier | default: 'explorer' -%}
@@ -14,219 +15,419 @@
   {%- assign price_monthly = 40 -%}
   {%- assign price_annual  = 34 -%}
   {%- assign annual_total  = 408 -%}
+  {%- assign other_tier    = 'Advanced' -%}
+  {%- assign other_price   = 42 -%}
 {%- else -%}
   {%- assign tier_name     = 'Advanced' -%}
   {%- assign tier_initial  = 'A' -%}
   {%- assign price_monthly = 50 -%}
   {%- assign price_annual  = 42 -%}
   {%- assign annual_total  = 504 -%}
+  {%- assign other_tier    = 'Explorer' -%}
+  {%- assign other_price   = 34 -%}
 {%- endif -%}
 
 {%- assign feature_blocks     = section.blocks | where: "type", "feature" -%}
 {%- assign how_blocks         = section.blocks | where: "type", "how_step" -%}
+{%- assign journey_blocks     = section.blocks | where: "type", "journey_box" -%}
 {%- assign box_blocks         = section.blocks | where: "type", "box_item" -%}
-{%- assign faq_blocks         = section.blocks | where: "type", "faq" -%}
+{%- assign compare_blocks     = section.blocks | where: "type", "compare_row" -%}
 {%- assign testimonial_blocks = section.blocks | where: "type", "testimonial" -%}
+{%- assign faq_blocks         = section.blocks | where: "type", "faq" -%}
 
 {%- assign other_tier_url = section.settings.other_tier_url | default: '/pages/whisky-club' -%}
 {%- assign club_page_url  = section.settings.club_page_url  | default: '/pages/whisky-club' -%}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
+/* ==========================================================
+   Whisky Subscription — product page (scoped to .wcp)
+   ========================================================== */
 .wcp {
   --wcp-bg:          #f5efe3;
   --wcp-bg-alt:      #ebe2cf;
+  --wcp-surface:     #fcf9f2;
   --wcp-ink:         #1a1814;
   --wcp-ink-soft:    #4a4538;
   --wcp-ink-mute:    #7a7362;
   --wcp-rule:        rgba(26,24,20,0.14);
   --wcp-rule-strong: rgba(26,24,20,0.35);
   --wcp-accent:      #2d4f8a;
+  --wcp-accent-ink:  #fcf9f2;
   --wcp-paper:       #fcf9f2;
   --wcp-hero-bg:     #1f1c17;
   --wcp-hero-ink:    #f5efe3;
-  --wcp-gold:        #c49a4d;
+  --wcp-hero-accent: #c49a4d;
   --wcp-ph-a:        rgba(26,24,20,0.05);
   --wcp-ph-b:        rgba(26,24,20,0.12);
+
   font-family: 'Montserrat', system-ui, sans-serif;
-  font-weight: 400; background: var(--wcp-bg); color: var(--wcp-ink);
-  line-height: 1.55; -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+  background: var(--wcp-bg);
+  color: var(--wcp-ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 .wcp *, .wcp *::before, .wcp *::after { box-sizing: border-box; }
 .wcp h1, .wcp h2, .wcp h3, .wcp h4 {
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500; letter-spacing: -0.01em; line-height: 1.08; margin: 0;
+  color: var(--wcp-ink);
 }
 .wcp p { margin: 0; }
 .wcp button { font-family: inherit; cursor: pointer; }
-.wcp-mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
+.wcp a { cursor: pointer; }
+.wcp-mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
 .wcp-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--wcp-ink-mute); }
 .wcp-container { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
 
-/* HERO */
-.wcp-hero { background: var(--wcp-hero-bg); color: var(--wcp-hero-ink); padding: 80px 0 100px; }
-.wcp-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.wcp-hero h1 { color: var(--wcp-hero-ink); font-size: clamp(56px, 6vw, 96px); letter-spacing: -0.02em; font-style: italic; font-weight: 400; margin-bottom: 16px; }
-.wcp-hero-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--wcp-gold); margin-bottom: 12px; display: block; }
-.wcp-billing-wrap { margin: 32px 0 28px; padding: 28px 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
-.wcp-billing-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,239,227,0.5); margin-bottom: 16px; }
-.wcp-billing-toggle { display: inline-flex; padding: 4px; border-radius: 100px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3); position: relative; margin-bottom: 20px; }
-.wcp-billing-track { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 6px); background: var(--wcp-hero-ink); border-radius: 100px; transition: left 0.35s cubic-bezier(.65,.02,.3,1); }
-.wcp-billing-btn { position: relative; background: transparent; border: 0; padding: 10px 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,227,0.9); transition: color 0.3s ease; font-weight: 500; }
-.wcp-billing-btn.active { color: var(--wcp-ink); }
-.wcp-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
-.wcp-price-currency { font-family: 'EB Garamond', serif; font-size: 28px; color: var(--wcp-hero-ink); }
-.wcp-price-amount { font-family: 'EB Garamond', serif; font-size: 80px; line-height: 1; letter-spacing: -0.02em; font-weight: 500; color: var(--wcp-hero-ink); transition: opacity 0.2s ease, transform 0.2s ease; }
-.wcp-price-period { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,227,0.55); margin-left: 4px; }
-.wcp-price-note { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,227,0.45); }
-.wcp-subscribe-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 22px 32px; background: var(--wcp-gold); color: #1a1814; border: 0; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 100px; font-weight: 600; transition: opacity 0.2s ease; text-decoration: none; cursor: pointer; }
-.wcp-subscribe-btn:hover { opacity: 0.9; }
-.wcp-trust { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
-.wcp-trust-item { display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,227,0.5); }
-.wcp-hero-media { position: relative; aspect-ratio: 4/5; background: repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 10px, rgba(255,255,255,0.05) 10px 20px); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.35); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; text-align: center; overflow: hidden; }
-.wcp-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.wcp-tier-badge { position: absolute; bottom: 24px; left: 24px; background: var(--wcp-hero-bg); border: 1px solid var(--wcp-gold); padding: 16px 20px; display: flex; align-items: center; gap: 16px; }
-.wcp-tier-badge-initial { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--wcp-gold); display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-style: italic; font-size: 24px; color: var(--wcp-gold); }
+/* ---------- HERO ---------- */
+.wcp-hero { background: var(--wcp-hero-bg); color: var(--wcp-hero-ink); padding: 120px 0 100px; position: relative; overflow: hidden; }
+.wcp-hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+.wcp-hero-eyebrow-row { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+.wcp-hero-eyebrow-rule { width: 40px; height: 1px; background: var(--wcp-hero-accent); display: block; }
+.wcp-hero-eyebrow-text { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wcp-hero-accent); }
+.wcp-hero h1 { color: var(--wcp-hero-ink); font-size: clamp(44px, 5.6vw, 88px); letter-spacing: -0.02em; max-width: 16ch; margin-bottom: 32px; }
+.wcp-hero h1 em { font-style: italic; font-weight: 400; }
+.wcp-hero-lead { font-size: 17px; line-height: 1.6; max-width: 520px; color: var(--wcp-hero-ink); opacity: 0.78; margin-bottom: 40px; }
+.wcp-hero-cta-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.wcp-btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 18px 32px; background: var(--wcp-hero-accent); color: #1a1814; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; border-radius: 100px; text-decoration: none; font-weight: 500; border: 0; transition: opacity 0.2s ease; cursor: pointer; }
+.wcp-btn-primary:hover { opacity: 0.92; }
+.wcp-btn-ghost { color: var(--wcp-hero-ink); text-decoration: underline; text-decoration-color: var(--wcp-hero-accent); text-underline-offset: 6px; font-size: 13px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
+.wcp-hero-media { position: relative; height: 560px; }
+.wcp-hero-media-inner { position: absolute; inset: 0; border: 1px solid rgba(255,255,255,0.1); background: repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 10px, rgba(255,255,255,0.05) 10px 20px); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; overflow: hidden; }
+.wcp-hero-media-inner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wcp-hero-stamp { position: absolute; top: -20px; right: -20px; width: 140px; height: 140px; border-radius: 50%; border: 1px solid var(--wcp-hero-accent); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--wcp-hero-accent); font-family: 'EB Garamond', serif; font-style: italic; font-size: 18px; transform: rotate(-12deg); background: var(--wcp-hero-bg); text-align: center; line-height: 1.1; }
+.wcp-hero-stamp-big { font-size: 32px; font-weight: 500; display: block; }
+.wcp-hero-stamp-sub { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; font-style: normal; display: block; margin-top: 4px; }
+.wcp-hero-stats { margin-top: 100px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+.wcp-hero-stat-n { font-family: 'EB Garamond', serif; font-size: 36px; letter-spacing: -0.01em; color: var(--wcp-hero-ink); }
+.wcp-hero-stat-l { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 8px; }
 
-/* FEATURES */
-.wcp-features { padding: 100px 0; background: var(--wcp-paper); }
-.wcp-features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.wcp-feature-list { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-direction: column; }
-.wcp-feature-item { display: flex; gap: 24px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid var(--wcp-rule); font-size: 15px; }
-.wcp-feature-item:first-child { border-top: 1px solid var(--wcp-ink); }
-.wcp-feature-item:last-child { border-bottom-color: var(--wcp-ink); }
-.wcp-feature-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--wcp-ink-mute); flex-shrink: 0; padding-top: 2px; width: 24px; }
-.wcp-feature-text { color: var(--wcp-ink-soft); }
+/* ---------- PLAN / MEMBERSHIP SECTION ---------- */
+.wcp-plan-section { padding: 140px 0 80px; background: var(--wcp-bg); }
+.wcp-plan-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; gap: 40px; flex-wrap: wrap; }
+.wcp-plan-head h2 { font-size: clamp(40px, 4.5vw, 68px); max-width: 14ch; }
+.wcp-plan-head h2 em { font-style: italic; font-weight: 400; }
+.wcp-billing-toggle { display: inline-flex; padding: 4px; border-radius: 100px; background: var(--wcp-bg-alt); border: 1px solid var(--wcp-rule); position: relative; }
+.wcp-billing-track { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 6px); background: var(--wcp-ink); border-radius: 100px; transition: left 0.35s cubic-bezier(.65,.02,.3,1); }
+.wcp-billing-btn { position: relative; background: transparent; border: 0; padding: 10px 28px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wcp-ink-soft); transition: color 0.3s ease; font-weight: 500; }
+.wcp-billing-btn.active { color: var(--wcp-bg); }
+.wcp-plan-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: start; }
+.wcp-plan { border: 1px solid var(--wcp-rule); padding: 48px 40px; display: flex; flex-direction: column; position: relative; min-height: 620px; background: var(--wcp-paper); color: var(--wcp-ink); }
+.wcp-plan--featured { background: var(--wcp-ink); color: var(--wcp-bg); border-color: var(--wcp-ink); }
+.wcp-plan-badge { position: absolute; top: -12px; left: 40px; background: var(--wcp-accent); color: var(--wcp-accent-ink); padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; }
+.wcp-plan-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.wcp-plan-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wcp-ink-mute); }
+.wcp-plan--featured .wcp-plan-sub { color: rgba(245,239,227,0.55); }
+.wcp-plan-name { margin-top: 8px; font-family: 'EB Garamond', serif; font-size: 48px; font-style: italic; font-weight: 400; letter-spacing: -0.01em; line-height: 1; }
+.wcp-plan--featured .wcp-plan-name { color: var(--wcp-bg); }
+.wcp-plan-initial { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--wcp-rule-strong); display: flex; align-items: center; justify-content: center; font-family: 'EB Garamond', serif; font-style: italic; font-size: 20px; flex-shrink: 0; }
+.wcp-plan--featured .wcp-plan-initial { border-color: rgba(245,239,227,0.3); color: var(--wcp-bg); }
+.wcp-plan-desc { font-size: 14px; line-height: 1.6; color: var(--wcp-ink-soft); margin-bottom: 32px; }
+.wcp-plan--featured .wcp-plan-desc { color: rgba(245,239,227,0.75); }
+.wcp-price-block { padding: 24px 0; border-top: 1px solid var(--wcp-rule); border-bottom: 1px solid var(--wcp-rule); margin-bottom: 32px; }
+.wcp-plan--featured .wcp-price-block { border-color: rgba(245,239,227,0.15); }
+.wcp-price-row { display: flex; align-items: baseline; gap: 8px; }
+.wcp-price-currency { font-family: 'EB Garamond', serif; font-size: 28px; line-height: 1; }
+.wcp-price-amount { font-family: 'EB Garamond', serif; font-size: 72px; line-height: 1; letter-spacing: -0.02em; font-weight: 500; transition: opacity 0.22s cubic-bezier(.65,.02,.3,1), transform 0.22s cubic-bezier(.65,.02,.3,1); font-variant-numeric: tabular-nums; display: inline-block; }
+.wcp-price-unit { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wcp-ink-mute); margin-left: 6px; }
+.wcp-plan--featured .wcp-price-unit { color: rgba(245,239,227,0.6); }
+.wcp-price-note { margin-top: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wcp-ink-mute); }
+.wcp-plan--featured .wcp-price-note { color: rgba(245,239,227,0.55); }
+.wcp-plan-features { list-style: none; padding: 0; margin: 0 0 40px; display: flex; flex-direction: column; gap: 14px; }
+.wcp-plan-features li { display: flex; gap: 14px; align-items: flex-start; font-size: 14px; color: var(--wcp-ink-soft); }
+.wcp-plan--featured .wcp-plan-features li { color: rgba(245,239,227,0.9); }
+.wcp-plan-features li::before { content: ''; margin-top: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--wcp-accent); flex-shrink: 0; }
+.wcp-plan--featured .wcp-plan-features li::before { background: var(--wcp-hero-accent); }
+.wcp-plan-cta { margin-top: auto; background: var(--wcp-ink); color: var(--wcp-bg); border: 0; padding: 20px 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 100px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; text-decoration: none; cursor: pointer; width: 100%; }
+.wcp-plan--featured .wcp-plan-cta { background: var(--wcp-hero-accent); color: #1a1814; }
+.wcp-plan-side { background: var(--wcp-paper); border: 1px solid var(--wcp-rule); padding: 36px 32px; display: flex; flex-direction: column; align-self: stretch; }
+.wcp-plan-side-title { font-family: 'EB Garamond', serif; font-size: 28px; font-style: italic; font-weight: 400; margin-bottom: 12px; }
+.wcp-plan-side-body { font-size: 14px; color: var(--wcp-ink-soft); line-height: 1.6; margin-bottom: 24px; }
+.wcp-plan-side-price { font-family: 'EB Garamond', serif; font-size: 44px; line-height: 1; letter-spacing: -0.02em; margin-bottom: 24px; }
+.wcp-plan-side-price small { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wcp-ink-mute); margin-left: 6px; font-weight: 400; }
+.wcp-plan-side-link { margin-top: auto; padding: 18px 28px; border: 1px solid var(--wcp-ink); color: var(--wcp-ink); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; font-weight: 500; transition: background 0.2s ease, color 0.2s ease; }
+.wcp-plan-side-link:hover { background: var(--wcp-ink); color: var(--wcp-bg); }
+.wcp-guarantee { margin-top: 32px; padding: 20px 32px; background: var(--wcp-bg-alt); border-left: 2px solid var(--wcp-accent); display: flex; gap: 24px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+.wcp-guarantee-text { font-size: 13px; color: var(--wcp-ink-soft); max-width: 720px; }
+.wcp-guarantee-text strong { color: var(--wcp-ink); }
 
-/* HOW IT WORKS */
-.wcp-how { padding: 100px 0; background: var(--wcp-bg-alt); border-top: 1px solid var(--wcp-rule); border-bottom: 1px solid var(--wcp-rule); }
-.wcp-how-grid { display: grid; gap: 1px; background: var(--wcp-rule-strong); }
-.wcp-how-step { background: var(--wcp-bg-alt); padding: 36px 28px 44px; display: flex; flex-direction: column; min-height: 280px; }
-.wcp-step-n { font-family: 'EB Garamond', serif; font-style: italic; font-size: 48px; color: var(--wcp-accent); line-height: 1; margin-bottom: 20px; }
+/* ---------- HOW IT WORKS ---------- */
+.wcp-how { padding: 120px 0; background: var(--wcp-bg-alt); border-top: 1px solid var(--wcp-rule); border-bottom: 1px solid var(--wcp-rule); }
+.wcp-how-head { max-width: 720px; margin-bottom: 80px; }
+.wcp-how-head h2 { font-size: clamp(40px, 4.5vw, 68px); }
+.wcp-how-head h2 em { font-style: italic; font-weight: 400; }
+.wcp-how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--wcp-rule-strong); }
+.wcp-how-step { background: var(--wcp-bg-alt); padding: 40px 32px 48px; display: flex; flex-direction: column; min-height: 320px; }
+.wcp-step-n { font-family: 'EB Garamond', serif; font-style: italic; font-size: 56px; color: var(--wcp-accent); line-height: 1; margin-bottom: 24px; }
+.wcp-step-t { font-size: 26px; margin-bottom: 16px; letter-spacing: -0.01em; }
+.wcp-step-d { font-size: 13.5px; color: var(--wcp-ink-soft); line-height: 1.6; margin-top: auto; }
 
-/* JOURNEY */
-.wcp-journey { padding: 100px 0; background: var(--wcp-paper); }
-.wcp-journey-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; position: relative; margin-top: 60px; }
+/* ---------- JOURNEY ---------- */
+.wcp-journey { padding: 140px 0; background: var(--wcp-bg); }
+.wcp-journey-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; gap: 40px; flex-wrap: wrap; }
+.wcp-journey-head h2 { font-size: clamp(40px, 4.5vw, 68px); padding-bottom: 0.15em; max-width: 18ch; }
+.wcp-journey-head h2 em { font-style: italic; font-weight: 400; }
+.wcp-journey-head p { font-size: 16px; color: var(--wcp-ink-soft); line-height: 1.65; margin-top: 28px; max-width: 560px; }
+.wcp-journey-timeline { position: relative; }
 .wcp-journey-line { position: absolute; top: 48px; left: 0; right: 0; height: 1px; background: var(--wcp-rule-strong); }
-.wcp-jbox { display: flex; flex-direction: column; gap: 16px; position: relative; }
-.wcp-jdot-row { height: 96px; display: flex; align-items: center; padding-left: 24px; position: relative; }
-.wcp-jdot { width: 16px; height: 16px; border-radius: 50%; background: var(--wcp-paper); border: 2px solid var(--wcp-rule-strong); }
+.wcp-curriculum-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+.wcp-jbox { display: flex; flex-direction: column; gap: 20px; position: relative; }
+.wcp-jdot-row { height: 96px; display: flex; align-items: center; justify-content: flex-start; position: relative; }
+.wcp-jdot { width: 16px; height: 16px; border-radius: 50%; background: var(--wcp-bg); border: 2px solid var(--wcp-rule-strong); margin-left: 32px; }
 .wcp-jdot--active { background: var(--wcp-accent); border-color: var(--wcp-accent); }
-.wcp-jstart { position: absolute; top: -24px; left: 16px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wcp-accent); white-space: nowrap; }
-.wcp-jcard { border: 1px solid var(--wcp-rule); padding: 20px 18px 24px; min-height: 220px; display: flex; flex-direction: column; position: relative; overflow: hidden; background: var(--wcp-paper); }
+.wcp-jstart { position: absolute; top: -24px; left: 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wcp-accent); white-space: nowrap; }
+.wcp-jcard { border: 1px solid var(--wcp-rule); padding: 24px 22px 28px; background: var(--wcp-paper); min-height: 240px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
 .wcp-jcard--locked { background: transparent; }
 .wcp-jcard--locked::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(135deg, var(--wcp-ph-a) 0 8px, var(--wcp-ph-b) 8px 16px); opacity: 0.5; }
-.wcp-jcard__inner { position: relative; flex: 1; display: flex; flex-direction: column; }
-.wcp-jbox-n { font-family: 'EB Garamond', serif; font-style: italic; font-size: 36px; line-height: 1; color: var(--wcp-accent); margin-bottom: 8px; }
+.wcp-jcard__inner { position: relative; display: flex; flex-direction: column; height: 100%; }
+.wcp-jcard-top { display: flex; justify-content: space-between; margin-bottom: 16px; align-items: baseline; }
+.wcp-jbox-n { font-family: 'EB Garamond', serif; font-style: italic; font-size: 40px; line-height: 1; color: var(--wcp-accent); }
 .wcp-jbox-n--locked { color: var(--wcp-ink-mute); }
-.wcp-jbox-mo { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wcp-ink-mute); }
-.wcp-jbox-title { font-size: 17px; margin: 8px 0 6px; letter-spacing: -0.01em; font-family: 'EB Garamond', serif; }
+.wcp-jbox-mo { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wcp-ink-mute); }
+.wcp-jbox-title { font-size: 20px; margin-bottom: 10px; letter-spacing: -0.01em; }
 .wcp-jbox-title--locked { color: var(--wcp-ink-mute); font-style: italic; }
-.wcp-jbox-hint { font-size: 12px; color: var(--wcp-ink-soft); line-height: 1.5; font-style: italic; }
-.wcp-jbox-sealed { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; margin-top: auto; padding-top: 12px; color: var(--wcp-ink-mute); }
+.wcp-jbox-hint { font-size: 12.5px; color: var(--wcp-ink-soft); line-height: 1.55; margin: 0; font-style: italic; }
+.wcp-jbox-revealed { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; margin-top: auto; padding-top: 16px; color: var(--wcp-ink-mute); }
+.wcp-journey-foot { margin-top: 40px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--wcp-ink-soft); gap: 24px; flex-wrap: wrap; }
+.wcp-journey-foot strong { color: var(--wcp-ink); }
 
-/* IN THE BOX */
-.wcp-inbox { padding: 100px 0; background: var(--wcp-bg-alt); border-top: 1px solid var(--wcp-rule); }
-.wcp-inbox-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+/* ---------- IN THE BOX ---------- */
+.wcp-inbox { padding: 140px 0; background: var(--wcp-bg); }
+.wcp-inbox-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: start; }
 .wcp-inbox-sticky { position: sticky; top: 100px; }
-.wcp-inbox-item { padding: 32px 0; display: grid; grid-template-columns: 80px 1fr; gap: 28px; border-top: 1px solid var(--wcp-rule); }
+.wcp-inbox-sticky h2 { font-size: clamp(40px, 4.5vw, 68px); margin-bottom: 32px; }
+.wcp-inbox-sticky h2 em { font-style: italic; font-weight: 400; }
+.wcp-inbox-sticky p { font-size: 16px; color: var(--wcp-ink-soft); line-height: 1.7; max-width: 420px; margin-bottom: 40px; }
+.wcp-inbox-image { aspect-ratio: 1/1; width: 100%; max-width: 420px; position: relative; overflow: hidden; }
+.wcp-inbox-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.wcp-inbox-image-ph { aspect-ratio: 1/1; width: 100%; max-width: 420px; background: repeating-linear-gradient(135deg, var(--wcp-ph-a) 0 10px, var(--wcp-ph-b) 10px 20px); display: flex; align-items: center; justify-content: center; color: var(--wcp-ink-mute); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; text-align: center; padding: 1.5rem; }
+.wcp-inbox-item { padding: 36px 0; border-top: 1px solid var(--wcp-rule); display: grid; grid-template-columns: 100px 1fr; gap: 32px; }
 .wcp-inbox-item:first-child { border-top-color: var(--wcp-ink); }
 .wcp-inbox-item:last-child { border-bottom: 1px solid var(--wcp-ink); }
+.wcp-inbox-item-n { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wcp-ink-mute); margin-bottom: 8px; }
+.wcp-inbox-item-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wcp-accent); }
+.wcp-inbox-item h3 { font-size: 32px; margin-bottom: 12px; font-style: italic; font-weight: 400; }
+.wcp-inbox-item p { font-size: 15px; color: var(--wcp-ink-soft); line-height: 1.65; }
 
-/* FAQ */
-.wcp-faq { padding: 100px 0; background: var(--wcp-paper); border-top: 1px solid var(--wcp-rule); }
+/* ---------- COMPARE TABLE ---------- */
+.wcp-compare { padding: 120px 0; background: var(--wcp-bg-alt); border-top: 1px solid var(--wcp-rule); border-bottom: 1px solid var(--wcp-rule); }
+.wcp-compare-head { margin-bottom: 60px; max-width: 680px; }
+.wcp-compare-head h2 { font-size: clamp(40px, 4.5vw, 68px); }
+.wcp-compare-head h2 em { font-style: italic; font-weight: 400; }
+.wcp-compare-table { border: 1px solid var(--wcp-rule-strong); background: var(--wcp-paper); }
+.wcp-compare-th { display: grid; grid-template-columns: 1.4fr 1fr 1fr; border-bottom: 1px solid var(--wcp-rule-strong); background: var(--wcp-ink); color: var(--wcp-bg); }
+.wcp-compare-th-cell { padding: 24px 32px; }
+.wcp-compare-th-cell-border { border-left: 1px solid rgba(255,255,255,0.15); }
+.wcp-compare-th-cell-adv { border-left: 1px solid rgba(255,255,255,0.15); background: rgba(196,154,77,0.12); }
+.wcp-compare-th-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,239,227,0.55); margin-bottom: 4px; }
+.wcp-compare-th-label--adv { color: var(--wcp-hero-accent); }
+.wcp-compare-th-name { font-family: 'EB Garamond', serif; font-size: 24px; font-style: italic; }
+.wcp-compare-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; border-bottom: 1px solid var(--wcp-rule); font-size: 14px; }
+.wcp-compare-row:last-child { border-bottom: 0; }
+.wcp-compare-cell { padding: 20px 32px; }
+.wcp-compare-cell-feat { color: var(--wcp-ink-soft); font-weight: 500; }
+.wcp-compare-cell-exp { border-left: 1px solid var(--wcp-rule); }
+.wcp-compare-cell-adv { border-left: 1px solid var(--wcp-rule); background: rgba(196,154,77,0.05); }
+.wcp-dot { font-family: 'EB Garamond', serif; font-size: 22px; color: var(--wcp-ink); }
+.wcp-dash { font-family: 'EB Garamond', serif; font-size: 22px; color: var(--wcp-ink-mute); }
+
+/* ---------- TESTIMONIALS ---------- */
+.wcp-testimonials { padding: 140px 0; background: var(--wcp-bg); }
+.wcp-testimonials-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; gap: 40px; flex-wrap: wrap; }
+.wcp-testimonials-head h2 { font-size: clamp(40px, 4.5vw, 68px); max-width: 16ch; }
+.wcp-testimonials-head h2 em { font-style: italic; font-weight: 400; }
+.wcp-rating-badge { padding: 16px 24px; border: 1px solid var(--wcp-rule-strong); font-family: 'EB Garamond', serif; display: flex; align-items: center; gap: 16px; }
+.wcp-rating-n { font-size: 36px; font-style: italic; line-height: 1; }
+.wcp-rating-stars { letter-spacing: 2px; font-size: 14px; }
+.wcp-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.wcp-quote { margin: 0; padding: 40px 36px 36px; border: 1px solid var(--wcp-rule); background: var(--wcp-paper); display: flex; flex-direction: column; min-height: 340px; }
+.wcp-quote-mark { font-family: 'EB Garamond', serif; font-style: italic; font-size: 80px; line-height: 0.7; color: var(--wcp-accent); margin-bottom: 12px; }
+.wcp-quote blockquote { margin: 0; font-family: 'EB Garamond', serif; font-size: 22px; line-height: 1.35; color: var(--wcp-ink); flex: 1; }
+.wcp-quote figcaption { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--wcp-rule); display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+.wcp-quote-author { font-weight: 600; }
+.wcp-quote-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wcp-ink-mute); margin-top: 4px; }
+.wcp-tier-tag { padding: 4px 10px; border: 1px solid var(--wcp-rule-strong); color: var(--wcp-ink-soft); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* ---------- FAQ ---------- */
+.wcp-faq { padding: 120px 0; background: var(--wcp-bg-alt); border-top: 1px solid var(--wcp-rule); }
 .wcp-faq-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
 .wcp-faq-sticky { position: sticky; top: 100px; }
+.wcp-faq-sticky h2 { font-size: clamp(36px, 4vw, 56px); margin-bottom: 24px; }
+.wcp-faq-sticky h2 em { font-style: italic; font-weight: 400; }
+.wcp-faq-sticky p { font-size: 15px; color: var(--wcp-ink-soft); line-height: 1.65; }
 .wcp-faq-item { border-top: 1px solid var(--wcp-rule-strong); }
 .wcp-faq-item:last-child { border-bottom: 1px solid var(--wcp-rule-strong); }
-.wcp-faq-btn { width: 100%; text-align: left; padding: 24px 0; background: transparent; border: 0; display: flex; justify-content: space-between; align-items: center; color: var(--wcp-ink); }
-.wcp-faq-q { font-family: 'EB Garamond', serif; font-size: 22px; font-weight: 500; }
-.wcp-faq-icon { font-size: 22px; font-family: 'EB Garamond', serif; transition: transform 0.3s ease; color: var(--wcp-accent); flex-shrink: 0; }
+.wcp-faq-btn { width: 100%; text-align: left; padding: 28px 0; background: transparent; border: 0; display: flex; justify-content: space-between; align-items: center; color: var(--wcp-ink); gap: 24px; }
+.wcp-faq-q { font-family: 'EB Garamond', serif; font-size: 24px; font-weight: 500; }
+.wcp-faq-icon { font-size: 24px; font-family: 'EB Garamond', serif; transition: transform 0.3s ease; color: var(--wcp-accent); flex-shrink: 0; }
 .wcp-faq-item.open .wcp-faq-icon { transform: rotate(45deg); }
 .wcp-faq-body { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease, opacity 0.3s ease, padding-bottom 0.3s ease; }
-.wcp-faq-item.open .wcp-faq-body { max-height: 300px; opacity: 1; padding-bottom: 24px; }
-.wcp-faq-body p { color: var(--wcp-ink-soft); font-size: 14px; line-height: 1.7; max-width: 560px; }
+.wcp-faq-item.open .wcp-faq-body { max-height: 300px; opacity: 1; padding-bottom: 28px; }
+.wcp-faq-body p { margin: 0; color: var(--wcp-ink-soft); font-size: 15px; line-height: 1.7; max-width: 640px; }
 
-/* TESTIMONIALS */
-.wcp-testimonials { padding: 100px 0; background: var(--wcp-bg-alt); border-top: 1px solid var(--wcp-rule); }
-.wcp-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.wcp-quote { margin: 0; padding: 36px 32px 32px; border: 1px solid var(--wcp-rule); background: var(--wcp-paper); display: flex; flex-direction: column; min-height: 320px; }
-.wcp-quote-mark { font-family: 'EB Garamond', serif; font-style: italic; font-size: 72px; line-height: 0.7; color: var(--wcp-accent); margin-bottom: 12px; }
-.wcp-quote blockquote { margin: 0; font-family: 'EB Garamond', serif; font-size: 20px; line-height: 1.35; color: var(--wcp-ink); flex: 1; }
-.wcp-quote figcaption { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--wcp-rule); display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-.wcp-tier-tag { padding: 4px 10px; border: 1px solid var(--wcp-rule-strong); color: var(--wcp-ink-mute); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+/* ---------- CLOSING ---------- */
+.wcp-closing { padding: 140px 0; background: var(--wcp-hero-bg); color: var(--wcp-hero-ink); text-align: center; position: relative; overflow: hidden; }
+.wcp-closing-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--wcp-hero-accent); margin-bottom: 32px; }
+.wcp-closing h2 { color: var(--wcp-hero-ink); font-size: clamp(48px, 6.5vw, 104px); max-width: 14ch; margin: 0 auto 40px; letter-spacing: -0.02em; }
+.wcp-closing h2 em { color: var(--wcp-hero-accent); font-style: italic; font-weight: 400; }
+.wcp-closing p { max-width: 540px; margin: 0 auto 48px; font-size: 17px; line-height: 1.6; color: rgba(245,239,227,0.75); }
 
-/* CLOSING */
-.wcp-closing { padding: 120px 0; background: var(--wcp-hero-bg); color: var(--wcp-hero-ink); text-align: center; }
-.wcp-closing h2 { color: var(--wcp-hero-ink); font-size: clamp(40px, 5.5vw, 88px); max-width: 16ch; margin: 0 auto 40px; letter-spacing: -0.02em; }
-
-/* STICKY */
-.wcp-sticky { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120px); opacity: 0; transition: transform 0.5s cubic-bezier(.65,.02,.3,1), opacity 0.3s ease; z-index: 200; pointer-events: none; background: var(--wcp-ink); color: var(--wcp-bg); border-radius: 100px; padding: 10px 10px 10px 28px; display: flex; align-items: center; gap: 20px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); min-width: 460px; }
+/* ---------- STICKY CTA ---------- */
+.wcp-sticky { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120px); opacity: 0; transition: transform 0.5s cubic-bezier(.65,.02,.3,1), opacity 0.3s ease; z-index: 20; background: var(--wcp-ink); color: var(--wcp-bg); border-radius: 100px; padding: 10px 10px 10px 28px; display: flex; align-items: center; gap: 24px; box-shadow: 0 12px 40px rgba(0,0,0,0.25); min-width: 520px; pointer-events: none; }
 .wcp-sticky.visible { transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto; }
-.wcp-sticky-price { font-family: 'EB Garamond', serif; font-size: 20px; font-style: italic; }
-.wcp-sticky-from { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,227,0.5); }
+.wcp-sticky-label { display: flex; flex-direction: column; }
+.wcp-sticky-from { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,239,227,0.55); }
+.wcp-sticky-title { font-family: 'EB Garamond', serif; font-size: 20px; font-style: italic; }
+.wcp-sticky-toggle { display: flex; padding: 3px; border-radius: 100px; background: rgba(255,255,255,0.1); position: relative; }
+.wcp-sticky-track { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 4px); background: var(--wcp-bg); border-radius: 100px; transition: left 0.3s cubic-bezier(.65,.02,.3,1); }
+.wcp-sticky-btn { position: relative; background: transparent; border: 0; padding: 8px 16px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,227,0.7); transition: color 0.3s ease; }
+.wcp-sticky-btn.active { color: var(--wcp-ink); }
+.wcp-sticky-cta { background: var(--wcp-hero-accent); color: #1a1814; border-radius: 100px; padding: 14px 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; border: 0; cursor: pointer; }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 960px) {
   .wcp-container { padding: 0 20px; }
-  .wcp-hero { padding: 60px 0 80px; }
-  .wcp-hero-grid, .wcp-features-grid, .wcp-inbox-grid { grid-template-columns: 1fr; gap: 48px; }
-  .wcp-hero h1 { font-size: 56px; }
-  .wcp-how-grid { grid-template-columns: 1fr 1fr !important; }
-  .wcp-journey-grid { grid-template-columns: repeat(6, 240px) !important; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
-  .wcp-journey-grid > div { scroll-snap-align: start; }
+  .wcp-hero { padding: 72px 0 64px; }
+  .wcp-hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .wcp-hero h1 { font-size: 44px; }
+  .wcp-hero-media { height: 360px; }
+  .wcp-hero-stamp { width: 100px; height: 100px; top: -10px; right: -10px; font-size: 12px; }
+  .wcp-hero-stamp-big { font-size: 24px; }
+  .wcp-hero-stats { grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+  .wcp-plan-section, .wcp-how, .wcp-journey, .wcp-inbox, .wcp-compare, .wcp-testimonials, .wcp-faq, .wcp-closing { padding-top: 72px !important; padding-bottom: 72px !important; }
+  .wcp-plan-grid { grid-template-columns: 1fr; gap: 16px; }
+  .wcp-how-grid { grid-template-columns: 1fr 1fr; }
+  .wcp-curriculum-grid { grid-template-columns: repeat(6, 260px); overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .wcp-curriculum-grid > div { scroll-snap-align: start; }
+  .wcp-inbox-grid { grid-template-columns: 1fr; gap: 40px; }
   .wcp-inbox-sticky { position: static; }
-  .wcp-inbox-item { grid-template-columns: 1fr; gap: 8px; }
-  .wcp-faq-grid { grid-template-columns: 1fr; gap: 32px; }
-  .wcp-faq-sticky, .wcp-inbox-sticky { position: static; }
+  .wcp-inbox-item { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+  .wcp-compare-row { grid-template-columns: 1fr; }
+  .wcp-compare-cell { border-left: 0 !important; padding: 14px 20px; }
+  .wcp-compare-cell-feat { background: var(--wcp-bg-alt); font-weight: 600; color: var(--wcp-ink); border-bottom: 1px solid var(--wcp-rule); }
+  .wcp-compare-th { grid-template-columns: 1fr 1fr; }
+  .wcp-compare-th-cell:first-child { display: none; }
   .wcp-testimonials-grid { grid-template-columns: 1fr; }
-  .wcp h2 { font-size: 36px !important; }
-  .wcp-sticky { min-width: 0; width: calc(100vw - 24px); left: 12px; transform: translateY(120px); }
-  .wcp-sticky.visible { transform: translateY(0); opacity: 1; }
+  .wcp-quote { min-height: 260px; padding: 28px 24px; }
+  .wcp-quote blockquote { font-size: 18px; }
+  .wcp-faq-grid { grid-template-columns: 1fr; gap: 32px; }
+  .wcp-faq-sticky { position: static; }
+  .wcp-faq-q { font-size: 18px; }
+  .wcp-closing h2 { font-size: 48px; }
+  .wcp-sticky { min-width: 0; width: calc(100vw - 24px); left: 12px; transform: translateY(120px); padding: 8px 8px 8px 20px; gap: 12px; }
+  .wcp-sticky.visible { transform: translateY(0); }
+  .wcp-sticky-label, .wcp-sticky-toggle { display: none; }
 }
 </style>
 
 <div class="wcp" id="wcp-root">
 
-  {%- comment -%} HERO {%- endcomment -%}
+  {%- comment -%} ===== HERO ===== {%- endcomment -%}
   <section class="wcp-hero">
     <div class="wcp-container">
       <div class="wcp-hero-grid">
         <div>
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:28px;">
-            <span style="width:32px;height:1px;background:var(--wcp-gold);display:block;"></span>
-            <span class="wcp-mono" style="color:var(--wcp-gold);">El Cartel / The Whisky Club</span>
+          <div class="wcp-hero-eyebrow-row">
+            <span class="wcp-hero-eyebrow-rule"></span>
+            <span class="wcp-hero-eyebrow-text">{{ section.settings.hero_eyebrow }}</span>
           </div>
-          <span class="wcp-hero-subtitle">{{ section.settings.hero_subtitle }}</span>
-          <h1>{{ tier_name }}</h1>
-          <div style="display:inline-flex;align-items:center;gap:12px;margin:16px 0 0;padding:10px 20px;border:1px solid rgba(196,154,77,0.4);border-radius:100px;background:rgba(196,154,77,0.08);">
-            <span style="font-family:'EB Garamond',serif;font-size:20px;font-style:italic;color:var(--wcp-gold);">6 &times; 25ml</span>
-            <span style="width:1px;height:16px;background:rgba(196,154,77,0.3);display:block;"></span>
-            <span class="wcp-mono" style="color:rgba(245,239,227,0.65);font-size:10px;">3 different whiskies</span>
+          <h1>{{ section.settings.hero_headline }}</h1>
+          <p class="wcp-hero-lead">{{ section.settings.hero_description }}</p>
+          <div class="wcp-hero-cta-row">
+            <a href="#plans" class="wcp-btn-primary">{{ section.settings.hero_cta_label | default: 'See the plan' }} <span>&rarr;</span></a>
+            <a href="#how" class="wcp-btn-ghost">How it works</a>
           </div>
-          <p style="font-size:16px;line-height:1.65;color:var(--wcp-hero-ink);opacity:0.78;max-width:480px;margin-top:20px;">
-            {{ section.settings.hero_description }}
-          </p>
+        </div>
+        <div class="wcp-hero-media">
+          <div class="wcp-hero-media-inner">
+            {%- if section.settings.hero_image != blank -%}
+              {{ section.settings.hero_image | image_url: width: 1000 | image_tag: loading: 'eager', alt: tier_name }}
+            {%- else -%}
+              Hero product shot<br>&mdash; monthly box, opened
+            {%- endif -%}
+          </div>
+          <div class="wcp-hero-stamp">
+            <span>{{ section.settings.stamp_prefix | default: 'No.' }}</span>
+            <span class="wcp-hero-stamp-big">{{ section.settings.stamp_number | default: '47' }}</span>
+            <span class="wcp-hero-stamp-sub">{{ section.settings.stamp_date | default: 'Apr &middot; 26' }}</span>
+          </div>
+        </div>
+      </div>
 
-          <div class="wcp-billing-wrap">
-            <div class="wcp-billing-label">Choose your billing</div>
-            <div class="wcp-billing-toggle" role="group">
-              <div class="wcp-billing-track" id="wcp-billing-track"></div>
-              <button class="wcp-billing-btn active" data-billing="monthly">Monthly</button>
-              <button class="wcp-billing-btn" data-billing="annual">Annual&nbsp;<span style="opacity:0.7;">&middot;&nbsp;save&nbsp;15%</span></button>
+      <div class="wcp-hero-stats">
+        <div>
+          <div class="wcp-hero-stat-n">{{ section.settings.stat_1_value }}</div>
+          <div class="wcp-hero-stat-l">{{ section.settings.stat_1_label }}</div>
+        </div>
+        <div>
+          <div class="wcp-hero-stat-n">{{ section.settings.stat_2_value }}</div>
+          <div class="wcp-hero-stat-l">{{ section.settings.stat_2_label }}</div>
+        </div>
+        <div>
+          <div class="wcp-hero-stat-n">{{ section.settings.stat_3_value }}</div>
+          <div class="wcp-hero-stat-l">{{ section.settings.stat_3_label }}</div>
+        </div>
+        <div>
+          <div class="wcp-hero-stat-n">{{ section.settings.stat_4_value }}</div>
+          <div class="wcp-hero-stat-l">{{ section.settings.stat_4_label }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== MEMBERSHIP / PLAN ===== {%- endcomment -%}
+  <section class="wcp-plan-section" id="plans">
+    <div class="wcp-container">
+      <div class="wcp-plan-head">
+        <div>
+          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 01 &mdash; Membership</div>
+          <h2>{{ section.settings.plan_headline }}</h2>
+        </div>
+        <div class="wcp-billing-toggle" role="group">
+          <div class="wcp-billing-track" id="wcp-billing-track"></div>
+          <button class="wcp-billing-btn active" data-billing="monthly">Monthly</button>
+          <button class="wcp-billing-btn" data-billing="annual">Annual&nbsp;<span style="margin-left:6px;opacity:0.8;">&middot;&nbsp;save&nbsp;15%</span></button>
+        </div>
+      </div>
+
+      <div class="wcp-plan-grid">
+        <div class="wcp-plan{% unless is_explorer %} wcp-plan--featured{% endunless %}">
+          {%- unless is_explorer -%}
+            <div class="wcp-plan-badge">Most Chosen</div>
+          {%- endunless -%}
+          <div class="wcp-plan-top">
+            <div>
+              <div class="wcp-plan-sub">{{ section.settings.plan_subtitle }}</div>
+              <h3 class="wcp-plan-name">{{ tier_name }}</h3>
             </div>
+            <div class="wcp-plan-initial">{{ tier_initial }}</div>
+          </div>
+          <p class="wcp-plan-desc">{{ section.settings.plan_description }}</p>
+
+          <div class="wcp-price-block">
             <div class="wcp-price-row">
               <span class="wcp-price-currency">&euro;</span>
               <span class="wcp-price-amount" id="wcp-price">{{ price_monthly }}</span>
-              <span class="wcp-price-period">/ month</span>
+              <span class="wcp-price-unit">/ month</span>
             </div>
             <div class="wcp-price-note" id="wcp-price-note">Billed monthly &middot; cancel any time</div>
           </div>
 
+          {%- if feature_blocks.size > 0 -%}
+            <ul class="wcp-plan-features">
+              {%- for block in feature_blocks -%}
+                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
           {%- if product != blank -%}
-            <form action="/cart/add" method="post" id="wcp-product-form">
+            <form action="/cart/add" method="post" id="wcp-product-form" style="margin-top:auto;">
               <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
               {%- if product.selling_plan_groups.size > 0 -%}
                 {%- for group in product.selling_plan_groups -%}
@@ -240,273 +441,260 @@
                 {%- endfor -%}
                 <input type="hidden" name="selling_plan" id="wcp-selling-plan-input" value="">
               {%- endif -%}
-              <button type="submit" class="wcp-subscribe-btn">
-                <span>Subscribe to {{ tier_name }}</span><span>&rarr;</span>
+              <button type="submit" class="wcp-plan-cta">
+                <span>Join {{ tier_name }}</span><span>&rarr;</span>
               </button>
             </form>
           {%- else -%}
-            <a id="wcp-subscribe-link" href="{{ section.settings.monthly_url | default: '#' }}" class="wcp-subscribe-btn">
-              <span>Subscribe to {{ tier_name }}</span><span>&rarr;</span>
+            <a id="wcp-subscribe-link" href="{{ section.settings.monthly_url | default: '#' }}" class="wcp-plan-cta">
+              <span>Join {{ tier_name }}</span><span>&rarr;</span>
             </a>
           {%- endif -%}
-
-          <div class="wcp-trust">
-            <span class="wcp-trust-item">&#10003;&nbsp;Free Belgium shipping</span>
-            <span class="wcp-trust-item">&#10003;&nbsp;Pause, skip or cancel</span>
-            <span class="wcp-trust-item">&#10003;&nbsp;30-day guarantee</span>
-          </div>
         </div>
 
-        <div>
-          <div class="wcp-hero-media">
-            {%- if section.settings.hero_image != blank -%}
-              {{ section.settings.hero_image | image_url: width: 900 | image_tag: loading: 'eager' }}
-            {%- else -%}
-              {{ tier_name }} — product photography
-            {%- endif -%}
-            <div class="wcp-tier-badge">
-              <div class="wcp-tier-badge-initial">{{ tier_initial }}</div>
-              <div>
-                <div style="font-family:'EB Garamond',serif;font-size:22px;font-style:italic;color:var(--wcp-hero-ink);">{{ tier_name }}</div>
-                <div class="wcp-mono" style="color:var(--wcp-gold);margin-top:2px;">Whisky Club</div>
-              </div>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.1);margin-top:1px;">
-            <div style="background:var(--wcp-hero-bg);padding:20px 24px;">
-              <div style="font-family:'EB Garamond',serif;font-size:24px;color:var(--wcp-hero-ink);">{{ section.settings.stat_1_value }}</div>
-              <div class="wcp-mono" style="color:rgba(245,239,227,0.45);margin-top:4px;font-size:10px;">{{ section.settings.stat_1_label }}</div>
-            </div>
-            <div style="background:var(--wcp-hero-bg);padding:20px 24px;">
-              <div style="font-family:'EB Garamond',serif;font-size:24px;color:var(--wcp-hero-ink);">{{ section.settings.stat_2_value }}</div>
-              <div class="wcp-mono" style="color:rgba(245,239,227,0.45);margin-top:4px;font-size:10px;">{{ section.settings.stat_2_label }}</div>
-            </div>
-            <div style="background:var(--wcp-hero-bg);padding:20px 24px;">
-              <div style="font-family:'EB Garamond',serif;font-size:24px;color:var(--wcp-hero-ink);">{{ section.settings.stat_3_value }}</div>
-              <div class="wcp-mono" style="color:rgba(245,239,227,0.45);margin-top:4px;font-size:10px;">{{ section.settings.stat_3_label }}</div>
-            </div>
-          </div>
+        <aside class="wcp-plan-side">
+          <div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-bottom:12px;">Also available</div>
+          <div class="wcp-plan-side-title">{{ other_tier }}</div>
+          <p class="wcp-plan-side-body">{{ section.settings.other_tier_blurb }}</p>
+          <div class="wcp-plan-side-price">&euro;{{ other_price }}<small>/ mo &middot; from</small></div>
+          <a href="{{ other_tier_url }}" class="wcp-plan-side-link">View {{ other_tier }} &rarr;</a>
+        </aside>
+      </div>
+
+      <div class="wcp-guarantee">
+        <div class="wcp-guarantee-text">
+          <strong>Not sure yet?</strong>&nbsp;&nbsp;{{ section.settings.guarantee_text }}
         </div>
+        <a href="#faq" class="wcp-mono" style="color:var(--wcp-ink);text-decoration:underline;text-underline-offset:4px;">Read the fine print &rarr;</a>
       </div>
     </div>
   </section>
 
-  {%- comment -%} WHAT'S IN THE BOX {%- endcomment -%}
-  {%- if box_blocks.size > 0 -%}
-  <section class="wcp-inbox">
-    <div class="wcp-container">
-      <div style="max-width:680px;margin-bottom:48px;">
-        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 01 &mdash; What arrives</div>
-        <h2 style="font-size:clamp(36px,4vw,60px);">{{ section.settings.inbox_headline }}</h2>
-      </div>
-      <div>
-        {%- for block in box_blocks -%}
-          <div class="wcp-inbox-item" {{ block.shopify_attributes }}>
-            <div>
-              <div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-bottom:6px;">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
-              <div class="wcp-mono" style="color:var(--wcp-accent);">{{ block.settings.tag }}</div>
-            </div>
-            <div>
-              <h3 style="font-size:26px;font-style:italic;font-weight:400;margin-bottom:10px;">{{ block.settings.title }}</h3>
-              <p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">{{ block.settings.description }}</p>
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
-    </div>
-  </section>
-  {%- endif -%}
-
-  {%- comment -%} FEATURES {%- endcomment -%}
-  <section class="wcp-features">
-    <div class="wcp-container">
-      <div style="max-width:680px;margin-bottom:48px;">
-        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 02 — What you get</div>
-        <h2 style="font-size:clamp(36px,4vw,60px);">Everything in<br><em>{{ tier_name }}.</em></h2>
-      </div>
-      {%- if feature_blocks.size > 0 -%}
-        <ul class="wcp-feature-list">
-          {%- for block in feature_blocks -%}
-            <li class="wcp-feature-item" {{ block.shopify_attributes }}>
-              <span class="wcp-feature-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
-              <span class="wcp-feature-text">{{ block.settings.text }}</span>
-            </li>
-          {%- endfor -%}
-        </ul>
-      {%- endif -%}
-
-      <div style="margin-top:40px;padding:20px 32px;background:var(--wcp-bg-alt);border-left:2px solid var(--wcp-accent);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
-        <div style="display:flex;align-items:center;gap:16px;">
-          <span class="wcp-eyebrow">Also available</span>
-          <span style="font-family:'EB Garamond',serif;font-size:22px;font-style:italic;">
-            {%- if is_explorer -%}Advanced{%- else -%}Explorer{%- endif -%}
-          </span>
-          <span style="font-size:13px;color:var(--wcp-ink-soft);">
-            &mdash;&nbsp;{%- if is_explorer -%}rare spirits track &middot; from &euro;42/mo{%- else -%}foundation track &middot; from &euro;34/mo{%- endif -%}
-          </span>
-        </div>
-        <a href="{{ other_tier_url }}" class="wcp-mono" style="color:var(--wcp-ink);text-decoration:underline;text-underline-offset:4px;white-space:nowrap;">
-          View {%- if is_explorer -%}Advanced{%- else -%}Explorer{%- endif -%} &rarr;
-        </a>
-      </div>
-    </div>
-  </section>
-
-  {%- comment -%} HOW IT WORKS {%- endcomment -%}
+  {%- comment -%} ===== HOW IT WORKS ===== {%- endcomment -%}
   {%- if how_blocks.size > 0 -%}
-  <section class="wcp-how">
-    <div class="wcp-container">
-      <div style="max-width:640px;margin-bottom:60px;">
-        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 03 — The routine</div>
-        <h2 style="font-size:clamp(36px,4vw,60px);">{{ section.settings.how_headline }}</h2>
-      </div>
-      <div class="wcp-how-grid" style="grid-template-columns: repeat({{ how_blocks.size }}, 1fr);">
-        {%- for block in how_blocks -%}
-          <div class="wcp-how-step" {{ block.shopify_attributes }}>
-            <div class="wcp-step-n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
-            <h3 style="font-size:22px;margin-bottom:12px;letter-spacing:-0.01em;">{{ block.settings.title }}</h3>
-            <p style="font-size:13px;color:var(--wcp-ink-soft);line-height:1.6;margin-top:auto;">{{ block.settings.description }}</p>
-          </div>
-        {%- endfor -%}
-      </div>
-    </div>
-  </section>
-  {%- endif -%}
-
-  {%- comment -%} JOURNEY {%- endcomment -%}
-  <section class="wcp-journey">
-    <div class="wcp-container">
-      <div style="max-width:680px;">
-        <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 04 — The curriculum</div>
-        <h2 style="font-size:clamp(36px,4vw,60px);">{{ section.settings.journey_headline }}</h2>
-        <p style="font-size:15px;color:var(--wcp-ink-soft);line-height:1.65;margin-top:24px;max-width:520px;">{{ section.settings.journey_description }}</p>
-      </div>
-      <div class="wcp-journey-grid">
-        <div class="wcp-journey-line"></div>
-        <div class="wcp-jbox">
-          <div class="wcp-jdot-row">
-            <div class="wcp-jdot wcp-jdot--active"></div>
-            <div class="wcp-jstart">You start here &darr;</div>
-          </div>
-          <div class="wcp-jcard">
-            <div class="wcp-jcard__inner">
-              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">
-                <span class="wcp-jbox-n">01</span>
-                <span class="wcp-jbox-mo">Your first box</span>
-              </div>
-              <h3 class="wcp-jbox-title">{{ section.settings.journey_box1_title }}</h3>
-              <p class="wcp-jbox-hint">{{ section.settings.journey_box1_hint }}</p>
-            </div>
-          </div>
+    <section class="wcp-how" id="how">
+      <div class="wcp-container">
+        <div class="wcp-how-head">
+          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 02 &mdash; The routine</div>
+          <h2>{{ section.settings.how_headline }}</h2>
         </div>
-        {%- assign journey_months = "Month 2,Month 3,Month 4,Month 5,Month 6" | split: "," -%}
-        {%- assign journey_hints_explorer = "Building on what you tasted last month. The arc continues.,Something shifts. We introduce a new dimension to your palate.,Not for the faint of heart. A defining month.,Density and depth. A different side of the same story.,We leave Scotland behind. The sweet counterpoint." | split: "," -%}
-        {%- assign journey_hints_advanced = "An exercise in precision. Bring a pipette.,Finite liquid. Once it is gone it is gone.,A different continent, a different philosophy. Restraint over force.,What two extra decades in wood does to a spirit.,The frontier end of the category. Experimental grains, shuttered distilleries." | split: "," -%}
-        {%- for i in (1..5) -%}
-          {%- assign idx = forloop.index0 -%}
-          <div class="wcp-jbox">
-            <div class="wcp-jdot-row"><div class="wcp-jdot"></div></div>
-            <div class="wcp-jcard wcp-jcard--locked">
-              <div class="wcp-jcard__inner">
-                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">
-                  <span class="wcp-jbox-n wcp-jbox-n--locked">0{{ forloop.index | plus: 1 }}</span>
-                  <span class="wcp-jbox-mo">{{ journey_months[idx] }}</span>
-                </div>
-                <h3 class="wcp-jbox-title wcp-jbox-title--locked">Sealed</h3>
-                {%- if is_explorer -%}
-                  <p class="wcp-jbox-hint">{{ journey_hints_explorer[idx] }}</p>
-                {%- else -%}
-                  <p class="wcp-jbox-hint">{{ journey_hints_advanced[idx] }}</p>
-                {%- endif -%}
-                <div class="wcp-jbox-sealed">Revealed on arrival</div>
-              </div>
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
-      <div style="margin-top:32px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--wcp-ink-soft);gap:24px;flex-wrap:wrap;">
-        <div><strong style="color:var(--wcp-ink);">Months 7–12 continue the arc.</strong>&nbsp;&nbsp;The curriculum deepens after month six. Cancel any time.</div>
-        <a href="{{ club_page_url }}" class="wcp-mono" style="color:var(--wcp-ink);text-decoration:underline;text-underline-offset:4px;">Compare tiers &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-
-  {%- comment -%} TESTIMONIALS {%- endcomment -%}
-  {%- if testimonial_blocks.size > 0 -%}
-  <section class="wcp-testimonials">
-    <div class="wcp-container">
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;gap:40px;flex-wrap:wrap;">
-        <div>
-          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 05 — From the members</div>
-          <h2 style="font-size:clamp(36px,4vw,60px);">{{ section.settings.testimonials_headline }}</h2>
-        </div>
-        <div style="padding:16px 24px;border:1px solid var(--wcp-rule-strong);font-family:'EB Garamond',serif;display:flex;align-items:center;gap:16px;">
-          <span style="font-size:36px;font-style:italic;line-height:1;">4.9</span>
-          <div>
-            <div style="letter-spacing:2px;font-size:13px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-top:4px;">617 verified reviews</div>
-          </div>
-        </div>
-      </div>
-      <div class="wcp-testimonials-grid">
-        {%- for block in testimonial_blocks -%}
-          <figure class="wcp-quote" {{ block.shopify_attributes }}>
-            <div class="wcp-quote-mark">&ldquo;</div>
-            <blockquote>{{ block.settings.quote }}</blockquote>
-            <figcaption>
-              <div>
-                <div style="font-weight:600;">{{ block.settings.author }}</div>
-                <div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-top:4px;">{{ block.settings.meta }}</div>
-              </div>
-              <div class="wcp-tier-tag">{{ block.settings.tier_label }}</div>
-            </figcaption>
-          </figure>
-        {%- endfor -%}
-      </div>
-    </div>
-  </section>
-  {%- endif -%}
-
-  {%- comment -%} FAQ {%- endcomment -%}
-  {%- if faq_blocks.size > 0 -%}
-  <section class="wcp-faq">
-    <div class="wcp-container">
-      <div class="wcp-faq-grid">
-        <div class="wcp-faq-sticky">
-          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 06 — Fine print</div>
-          <h2 style="font-size:clamp(32px,3.5vw,52px);margin-bottom:20px;">{{ section.settings.faq_headline }}</h2>
-          <p style="font-size:14px;color:var(--wcp-ink-soft);line-height:1.65;">{{ section.settings.faq_contact }}</p>
-        </div>
-        <div>
-          {%- for block in faq_blocks -%}
-            <div class="wcp-faq-item{% if forloop.first %} open{% endif %}" {{ block.shopify_attributes }}>
-              <button class="wcp-faq-btn" aria-expanded="{{ forloop.first }}">
-                <span class="wcp-faq-q">{{ block.settings.question }}</span>
-                <span class="wcp-faq-icon">+</span>
-              </button>
-              <div class="wcp-faq-body"><p>{{ block.settings.answer }}</p></div>
+        <div class="wcp-how-grid" style="grid-template-columns: repeat({{ how_blocks.size }}, 1fr);">
+          {%- for block in how_blocks -%}
+            <div class="wcp-how-step" {{ block.shopify_attributes }}>
+              <div class="wcp-step-n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+              <h3 class="wcp-step-t">{{ block.settings.title }}</h3>
+              <p class="wcp-step-d">{{ block.settings.description }}</p>
             </div>
           {%- endfor -%}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   {%- endif -%}
 
-  {%- comment -%} CLOSING CTA {%- endcomment -%}
+  {%- comment -%} ===== JOURNEY ===== {%- endcomment -%}
+  {%- if journey_blocks.size > 0 -%}
+    <section class="wcp-journey">
+      <div class="wcp-container">
+        <div class="wcp-journey-head">
+          <div>
+            <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 02&frac12; &mdash; The curriculum</div>
+            <h2>{{ section.settings.journey_headline }}</h2>
+            <p>{{ section.settings.journey_description }}</p>
+          </div>
+        </div>
+        <div class="wcp-journey-timeline">
+          <div class="wcp-journey-line"></div>
+          <div class="wcp-curriculum-grid">
+            {%- for block in journey_blocks -%}
+              {%- assign locked = true -%}
+              {%- if forloop.first -%}{%- assign locked = false -%}{%- endif -%}
+              <div class="wcp-jbox" {{ block.shopify_attributes }}>
+                <div class="wcp-jdot-row">
+                  <div class="wcp-jdot{% unless locked %} wcp-jdot--active{% endunless %}"></div>
+                  {%- if forloop.first -%}<div class="wcp-jstart">You start here &darr;</div>{%- endif -%}
+                </div>
+                <div class="wcp-jcard{% if locked %} wcp-jcard--locked{% endif %}">
+                  <div class="wcp-jcard__inner">
+                    <div class="wcp-jcard-top">
+                      <span class="wcp-jbox-n{% if locked %} wcp-jbox-n--locked{% endif %}">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                      <span class="wcp-jbox-mo">{{ block.settings.month_label }}</span>
+                    </div>
+                    <h3 class="wcp-jbox-title{% if locked %} wcp-jbox-title--locked{% endif %}">
+                      {%- if locked -%}Sealed{%- else -%}{{ block.settings.title }}{%- endif -%}
+                    </h3>
+                    <p class="wcp-jbox-hint">{{ block.settings.hint }}</p>
+                    {%- if locked -%}<div class="wcp-jbox-revealed">Revealed on arrival</div>{%- endif -%}
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+        <div class="wcp-journey-foot">
+          <div><strong>{{ section.settings.journey_foot_strong }}</strong>&nbsp;&nbsp;{{ section.settings.journey_foot_text }}</div>
+          <a href="#plans" class="wcp-mono" style="color:var(--wcp-ink);text-decoration:underline;text-underline-offset:4px;">Start at Box 01 &rarr;</a>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== IN THE BOX ===== {%- endcomment -%}
+  {%- if box_blocks.size > 0 -%}
+    <section class="wcp-inbox">
+      <div class="wcp-container">
+        <div class="wcp-inbox-grid">
+          <div class="wcp-inbox-sticky">
+            <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 03 &mdash; What arrives</div>
+            <h2>{{ section.settings.inbox_headline }}</h2>
+            <p>{{ section.settings.inbox_description }}</p>
+            {%- if section.settings.inbox_image != blank -%}
+              <div class="wcp-inbox-image">
+                {{ section.settings.inbox_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+              </div>
+            {%- else -%}
+              <div class="wcp-inbox-image-ph">Top-down box shot<br>&mdash; contents laid out</div>
+            {%- endif -%}
+          </div>
+          <div>
+            {%- for block in box_blocks -%}
+              <div class="wcp-inbox-item" {{ block.shopify_attributes }}>
+                <div>
+                  <div class="wcp-inbox-item-n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+                  <div class="wcp-inbox-item-tag">{{ block.settings.tag }}</div>
+                </div>
+                <div>
+                  <h3>{{ block.settings.title }}</h3>
+                  <p>{{ block.settings.description }}</p>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== COMPARE TABLE ===== {%- endcomment -%}
+  {%- if compare_blocks.size > 0 -%}
+    <section class="wcp-compare">
+      <div class="wcp-container">
+        <div class="wcp-compare-head">
+          <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 04 &mdash; Side by side</div>
+          <h2>{{ section.settings.compare_headline }}</h2>
+        </div>
+        <div class="wcp-compare-table">
+          <div class="wcp-compare-th">
+            <div class="wcp-compare-th-cell"><span class="wcp-mono">Feature</span></div>
+            <div class="wcp-compare-th-cell wcp-compare-th-cell-border">
+              <div class="wcp-compare-th-label">Tier I</div>
+              <div class="wcp-compare-th-name">Explorer</div>
+            </div>
+            <div class="wcp-compare-th-cell wcp-compare-th-cell-adv">
+              <div class="wcp-compare-th-label wcp-compare-th-label--adv">Tier II &middot; Most chosen</div>
+              <div class="wcp-compare-th-name">Advanced</div>
+            </div>
+          </div>
+          {%- for block in compare_blocks -%}
+            <div class="wcp-compare-row" {{ block.shopify_attributes }}>
+              <div class="wcp-compare-cell wcp-compare-cell-feat">{{ block.settings.label }}</div>
+              <div class="wcp-compare-cell wcp-compare-cell-exp">
+                {%- assign v_exp = block.settings.explorer_value -%}
+                {%- if v_exp == '•' or v_exp == '-' or v_exp == '—' -%}
+                  <span class="{% if v_exp == '•' %}wcp-dot{% else %}wcp-dash{% endif %}">{{ v_exp }}</span>
+                {%- else -%}
+                  {{ v_exp }}
+                {%- endif -%}
+              </div>
+              <div class="wcp-compare-cell wcp-compare-cell-adv">
+                {%- assign v_adv = block.settings.advanced_value -%}
+                {%- if v_adv == '•' or v_adv == '-' or v_adv == '—' -%}
+                  <span class="{% if v_adv == '•' %}wcp-dot{% else %}wcp-dash{% endif %}">{{ v_adv }}</span>
+                {%- else -%}
+                  {{ v_adv }}
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== TESTIMONIALS ===== {%- endcomment -%}
+  {%- if testimonial_blocks.size > 0 -%}
+    <section class="wcp-testimonials">
+      <div class="wcp-container">
+        <div class="wcp-testimonials-head">
+          <div>
+            <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 05 &mdash; From the members</div>
+            <h2>{{ section.settings.testimonials_headline }}</h2>
+          </div>
+          <div class="wcp-rating-badge">
+            <span class="wcp-rating-n">{{ section.settings.rating_value | default: '4.9' }}</span>
+            <div>
+              <div class="wcp-rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <div class="wcp-mono" style="color:var(--wcp-ink-mute);margin-top:4px;">{{ section.settings.rating_label }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="wcp-testimonials-grid">
+          {%- for block in testimonial_blocks -%}
+            <figure class="wcp-quote" {{ block.shopify_attributes }}>
+              <span class="wcp-quote-mark">&ldquo;</span>
+              <blockquote>{{ block.settings.quote }}</blockquote>
+              <figcaption>
+                <div>
+                  <div class="wcp-quote-author">{{ block.settings.author }}</div>
+                  <div class="wcp-quote-meta">{{ block.settings.meta }}</div>
+                </div>
+                <div class="wcp-tier-tag">{{ block.settings.tier_label }}</div>
+              </figcaption>
+            </figure>
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== FAQ ===== {%- endcomment -%}
+  {%- if faq_blocks.size > 0 -%}
+    <section class="wcp-faq" id="faq">
+      <div class="wcp-container">
+        <div class="wcp-faq-grid">
+          <div class="wcp-faq-sticky">
+            <div class="wcp-eyebrow" style="margin-bottom:16px;">&sect; 06 &mdash; Fine print</div>
+            <h2>{{ section.settings.faq_headline }}</h2>
+            <p>{{ section.settings.faq_contact }}</p>
+          </div>
+          <div>
+            {%- for block in faq_blocks -%}
+              <div class="wcp-faq-item{% if forloop.first %} open{% endif %}" {{ block.shopify_attributes }}>
+                <button class="wcp-faq-btn" aria-expanded="{{ forloop.first }}">
+                  <span class="wcp-faq-q">{{ block.settings.question }}</span>
+                  <span class="wcp-faq-icon">+</span>
+                </button>
+                <div class="wcp-faq-body"><p>{{ block.settings.answer }}</p></div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== CLOSING CTA ===== {%- endcomment -%}
   <section class="wcp-closing">
     <div class="wcp-container">
-      <div class="wcp-mono" style="color:var(--wcp-gold);margin-bottom:28px;">— Take your seat —</div>
+      <div class="wcp-closing-eyebrow">&mdash; {{ section.settings.closing_eyebrow | default: 'Take your seat' }} &mdash;</div>
       <h2>{{ section.settings.closing_headline }}</h2>
-      <p style="max-width:480px;margin:0 auto 40px;font-size:16px;line-height:1.6;color:rgba(245,239,227,0.72);">{{ section.settings.closing_subtext }}</p>
+      <p>{{ section.settings.closing_subtext }}</p>
       {%- if product != blank -%}
-        <button form="wcp-product-form" type="submit" class="wcp-subscribe-btn" style="max-width:360px;margin:0 auto;display:flex;">
-          <span>Subscribe to {{ tier_name }}</span><span>&rarr;</span>
+        <button form="wcp-product-form" type="submit" class="wcp-btn-primary" style="font-size:12px;padding:22px 40px;">
+          <span>Join {{ tier_name }}</span><span>&rarr;</span>
         </button>
       {%- else -%}
-        <a id="wcp-subscribe-link-2" href="{{ section.settings.monthly_url | default: '#' }}" class="wcp-subscribe-btn" style="max-width:360px;margin:0 auto;">
-          <span>Subscribe to {{ tier_name }}</span><span>&rarr;</span>
+        <a id="wcp-subscribe-link-2" href="{{ section.settings.monthly_url | default: '#' }}" class="wcp-btn-primary" style="font-size:12px;padding:22px 40px;">
+          <span>Join {{ tier_name }}</span><span>&rarr;</span>
         </a>
       {%- endif -%}
     </div>
@@ -514,60 +702,79 @@
 
 </div>
 
+{%- comment -%} ===== STICKY CTA ===== {%- endcomment -%}
 <div class="wcp-sticky" id="wcp-sticky" aria-hidden="true">
-  <div>
-    <div class="wcp-sticky-from" id="wcp-sticky-from">From &euro;{{ price_monthly }}/mo</div>
-    <div class="wcp-sticky-price">{{ tier_name }} — Join the Club</div>
+  <div class="wcp-sticky-label">
+    <span class="wcp-sticky-from" id="wcp-sticky-from">From &euro;{{ price_monthly }}/mo</span>
+    <span class="wcp-sticky-title">{{ tier_name }} &mdash; Join the Club</span>
+  </div>
+  <div class="wcp-sticky-toggle">
+    <div class="wcp-sticky-track" id="wcp-sticky-track"></div>
+    <button class="wcp-sticky-btn active" data-billing="monthly">Monthly</button>
+    <button class="wcp-sticky-btn" data-billing="annual">Annual</button>
   </div>
   {%- if product != blank -%}
-    <button form="wcp-product-form" type="submit" class="wcp-subscribe-btn" style="padding:14px 24px;font-size:11px;letter-spacing:0.15em;">Subscribe &rarr;</button>
+    <button form="wcp-product-form" type="submit" class="wcp-sticky-cta">Subscribe &rarr;</button>
   {%- else -%}
-    <a id="wcp-sticky-cta" href="{{ section.settings.monthly_url | default: '#' }}" class="wcp-subscribe-btn" style="padding:14px 24px;font-size:11px;letter-spacing:0.15em;">Subscribe &rarr;</a>
+    <a id="wcp-sticky-link" href="{{ section.settings.monthly_url | default: '#' }}" class="wcp-sticky-cta">Subscribe &rarr;</a>
   {%- endif -%}
 </div>
 
 <script>
 (function() {
-  var billing = 'monthly';
+  var billing      = 'monthly';
   var priceMonthly = {{ price_monthly }};
   var priceAnnual  = {{ price_annual }};
   var annualTotal  = {{ annual_total }};
-  var monthlyUrl = {{ section.settings.monthly_url | default: '#' | json }};
-  var annualUrl  = {{ section.settings.annual_url  | default: '#' | json }};
+  var monthlyUrl   = {{ section.settings.monthly_url | default: '#' | json }};
+  var annualUrl    = {{ section.settings.annual_url  | default: '#' | json }};
 
-  var track      = document.getElementById('wcp-billing-track');
-  var priceEl    = document.getElementById('wcp-price');
-  var noteEl     = document.getElementById('wcp-price-note');
-  var fromEl     = document.getElementById('wcp-sticky-from');
-  var link1      = document.getElementById('wcp-subscribe-link');
-  var link2      = document.getElementById('wcp-subscribe-link-2');
-  var stickyLink = document.getElementById('wcp-sticky-cta');
-  var planInput  = document.getElementById('wcp-selling-plan-input');
+  var track       = document.getElementById('wcp-billing-track');
+  var priceEl     = document.getElementById('wcp-price');
+  var noteEl      = document.getElementById('wcp-price-note');
+  var fromEl      = document.getElementById('wcp-sticky-from');
+  var stickyTrack = document.getElementById('wcp-sticky-track');
+  var link1       = document.getElementById('wcp-subscribe-link');
+  var link2       = document.getElementById('wcp-subscribe-link-2');
+  var stickyLink  = document.getElementById('wcp-sticky-link');
+  var planInput   = document.getElementById('wcp-selling-plan-input');
 
   function setBilling(b) {
     billing = b;
     var price = b === 'monthly' ? priceMonthly : priceAnnual;
-    if (priceEl) { priceEl.style.opacity = '0'; priceEl.style.transform = 'translateY(-8px)'; }
-    setTimeout(function() {
-      if (priceEl) { priceEl.textContent = price; priceEl.style.opacity = '1'; priceEl.style.transform = 'translateY(0)'; }
-    }, 180);
+
+    if (priceEl) {
+      priceEl.style.opacity = '0';
+      priceEl.style.transform = 'translateY(-10px)';
+      setTimeout(function() {
+        priceEl.textContent = price;
+        priceEl.style.opacity = '1';
+        priceEl.style.transform = 'translateY(0)';
+      }, 180);
+    }
+
     if (noteEl) noteEl.textContent = b === 'annual'
       ? 'Billed annually \u00b7 \u20ac' + annualTotal + ' / yr'
       : 'Billed monthly \u00b7 cancel any time';
     if (fromEl) fromEl.textContent = 'From \u20ac' + price + '/mo';
+
     if (track) track.style.left = b === 'monthly' ? '4px' : 'calc(50% + 2px)';
-    document.querySelectorAll('.wcp-billing-btn').forEach(function(btn) {
+    if (stickyTrack) stickyTrack.style.left = b === 'monthly' ? '3px' : 'calc(50% + 1px)';
+
+    document.querySelectorAll('.wcp-billing-btn, .wcp-sticky-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.billing === b);
     });
+
     var url = b === 'monthly' ? monthlyUrl : annualUrl;
     [link1, link2, stickyLink].forEach(function(el) { if (el) el.href = url; });
+
     if (planInput) {
       var planEl = document.getElementById(b === 'monthly' ? 'wcp-plan-monthly' : 'wcp-plan-annual');
       if (planEl) planInput.value = planEl.dataset.planId;
     }
   }
 
-  document.querySelectorAll('.wcp-billing-btn').forEach(function(btn) {
+  document.querySelectorAll('.wcp-billing-btn, .wcp-sticky-btn').forEach(function(btn) {
     btn.addEventListener('click', function() { setBilling(btn.dataset.billing); });
   });
 
@@ -577,7 +784,8 @@
       var wasOpen = item.classList.contains('open');
       document.querySelectorAll('.wcp-faq-item').forEach(function(i) {
         i.classList.remove('open');
-        i.querySelector('.wcp-faq-btn').setAttribute('aria-expanded', 'false');
+        var b = i.querySelector('.wcp-faq-btn');
+        if (b) b.setAttribute('aria-expanded', 'false');
       });
       if (!wasOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
     });
@@ -585,8 +793,12 @@
 
   var sticky = document.getElementById('wcp-sticky');
   function onScroll() {
-    var show = window.scrollY > 700 && window.scrollY < document.body.scrollHeight - window.innerHeight - 400;
-    if (sticky) { sticky.classList.toggle('visible', show); sticky.setAttribute('aria-hidden', show ? 'false' : 'true'); }
+    var y = window.scrollY;
+    var show = y > 900 && y < document.body.scrollHeight - window.innerHeight - 400;
+    if (sticky) {
+      sticky.classList.toggle('visible', show);
+      sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -599,314 +811,114 @@
   "name": "Whisky Subscription",
   "tag": "div",
   "settings": [
-    {
-      "type": "select",
-      "id": "tier",
-      "label": "Tier",
+    { "type": "select", "id": "tier", "label": "Tier",
       "options": [
         { "value": "explorer", "label": "Explorer" },
         { "value": "advanced", "label": "Advanced" }
       ],
       "default": "explorer"
     },
-    {
-      "type": "header",
-      "content": "Hero"
-    },
-    {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero image"
-    },
-    {
-      "type": "text",
-      "id": "hero_subtitle",
-      "label": "Hero subtitle (above tier name)",
-      "default": "The starting dram"
-    },
-    {
-      "type": "textarea",
-      "id": "hero_description",
-      "label": "Hero description",
-      "default": "The six-month foundation. Scotland to bourbon, gentle to smoke, curated in a fixed order. Everyone starts at Box 01 — the sequence is the point."
-    },
-    {
-      "type": "text",
-      "id": "stat_1_value",
-      "label": "Stat 1 — value",
-      "default": "1,842"
-    },
-    {
-      "type": "text",
-      "id": "stat_1_label",
-      "label": "Stat 1 — label",
-      "default": "Members this quarter"
-    },
-    {
-      "type": "text",
-      "id": "stat_2_value",
-      "label": "Stat 2 — value",
-      "default": "4.9 / 5"
-    },
-    {
-      "type": "text",
-      "id": "stat_2_label",
-      "label": "Stat 2 — label",
-      "default": "Member rating"
-    },
-    {
-      "type": "text",
-      "id": "stat_3_value",
-      "label": "Stat 3 — value",
-      "default": "130+"
-    },
-    {
-      "type": "text",
-      "id": "stat_3_label",
-      "label": "Stat 3 — label",
-      "default": "Distilleries featured"
-    },
-    {
-      "type": "header",
-      "content": "Guarantee"
-    },
-    {
-      "type": "text",
-      "id": "guarantee_headline",
-      "label": "Guarantee headline",
-      "default": "If Box 01 doesn't convert you, keep the drams. We'll refund it."
-    },
-    {
-      "type": "textarea",
-      "id": "guarantee_text",
-      "label": "Guarantee body text",
-      "default": "No returns to post. No forms to fill. One email to Niall and it's done."
-    },
-    {
-      "type": "header",
-      "content": "How it works"
-    },
-    {
-      "type": "text",
-      "id": "how_headline",
-      "label": "Section headline",
-      "default": "Four steps. Then it runs itself."
-    },
-    {
-      "type": "header",
-      "content": "The journey"
-    },
-    {
-      "type": "text",
-      "id": "journey_headline",
-      "label": "Section headline",
-      "default": "A fixed journey. Kept under wraps."
-    },
-    {
-      "type": "textarea",
-      "id": "journey_description",
-      "label": "Section description",
-      "default": "Every member starts at Box 01 and moves through the same sequence. We won't tell you what's coming. That's half the point."
-    },
-    {
-      "type": "text",
-      "id": "journey_box1_title",
-      "label": "Box 01 title (revealed)",
-      "default": "The Foundation"
-    },
-    {
-      "type": "textarea",
-      "id": "journey_box1_hint",
-      "label": "Box 01 hint text",
-      "default": "Where most whisky palates begin. Gentle. Inviting. Instantly recognisable."
-    },
-    {
-      "type": "header",
-      "content": "What's in the box"
-    },
-    {
-      "type": "image_picker",
-      "id": "inbox_image",
-      "label": "Box contents photo"
-    },
-    {
-      "type": "text",
-      "id": "inbox_headline",
-      "label": "Section headline",
-      "default": "A box, not a parcel."
-    },
-    {
-      "type": "header",
-      "content": "Testimonials"
-    },
-    {
-      "type": "text",
-      "id": "testimonials_headline",
-      "label": "Section headline",
-      "default": "Not loud about it. Just loyal."
-    },
-    {
-      "type": "header",
-      "content": "FAQ"
-    },
-    {
-      "type": "text",
-      "id": "faq_headline",
-      "label": "FAQ headline",
-      "default": "Answers, before you ask."
-    },
-    {
-      "type": "textarea",
-      "id": "faq_contact",
-      "label": "Contact note below headline",
-      "default": "Still unsure? Email niall@elcartel.co — Niall usually replies by Thursday."
-    },
-    {
-      "type": "header",
-      "content": "Closing CTA"
-    },
-    {
-      "type": "text",
-      "id": "closing_headline",
-      "label": "Closing headline",
-      "default": "Explorer. Box 01 ships within 48 hours."
-    },
-    {
-      "type": "textarea",
-      "id": "closing_subtext",
-      "label": "Closing subtext",
-      "default": "Subscribe today. Every box after that arrives on the 5th of the month. The contents stay sealed until they reach you."
-    },
-    {
-      "type": "header",
-      "content": "Checkout URLs"
-    },
-    {
-      "type": "url",
-      "id": "monthly_url",
-      "label": "Monthly checkout URL"
-    },
-    {
-      "type": "url",
-      "id": "annual_url",
-      "label": "Annual checkout URL"
-    },
-    {
-      "type": "header",
-      "content": "Links"
-    },
-    {
-      "type": "url",
-      "id": "other_tier_url",
-      "label": "Other tier page URL"
-    },
-    {
-      "type": "url",
-      "id": "club_page_url",
-      "label": "Main club comparison page URL"
-    }
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Members — Est. 2021 · Antwerp" },
+    { "type": "text", "id": "hero_headline", "label": "Hero headline", "default": "Whisky Club, the whisky subscription." },
+    { "type": "textarea", "id": "hero_description", "label": "Hero description", "default": "Six 25ml tubes each month — three whiskies, two tubes of each, so you can drink solo or share. Every box themed, every journey the same: start at Box 01, build your way up. Niall picks. You taste." },
+    { "type": "text", "id": "hero_cta_label", "label": "Hero CTA label", "default": "See the plan" },
+    { "type": "header", "content": "Hero stamp" },
+    { "type": "text", "id": "stamp_prefix", "label": "Stamp prefix", "default": "No." },
+    { "type": "text", "id": "stamp_number", "label": "Stamp number", "default": "47" },
+    { "type": "text", "id": "stamp_date", "label": "Stamp date", "default": "Apr · 26" },
+    { "type": "header", "content": "Hero stats" },
+    { "type": "text", "id": "stat_1_value", "label": "Stat 1 — value", "default": "1,842" },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 — label", "default": "Members this quarter" },
+    { "type": "text", "id": "stat_2_value", "label": "Stat 2 — value", "default": "130+" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 — label", "default": "Distilleries featured" },
+    { "type": "text", "id": "stat_3_value", "label": "Stat 3 — value", "default": "4.9 / 5" },
+    { "type": "text", "id": "stat_3_label", "label": "Stat 3 — label", "default": "Member rating" },
+    { "type": "text", "id": "stat_4_value", "label": "Stat 4 — value", "default": "Pause anytime" },
+    { "type": "text", "id": "stat_4_label", "label": "Stat 4 — label", "default": "No lock-in, no fuss" },
+    { "type": "header", "content": "Plan / Membership" },
+    { "type": "text", "id": "plan_headline", "label": "Plan section headline", "default": "Your tier, your terms." },
+    { "type": "text", "id": "plan_subtitle", "label": "Plan subtitle", "default": "The starting dram" },
+    { "type": "textarea", "id": "plan_description", "label": "Plan description", "default": "The six-month foundation. Scotland to bourbon, gentle to smoke, curated in a fixed order. Everyone starts at Box 01 — the sequence is the point." },
+    { "type": "textarea", "id": "other_tier_blurb", "label": "Other tier blurb", "default": "The rare-spirits curriculum. Single casks, cask-strength, lost distilleries, age statements. The kind of liquid you can't walk into a shop and buy." },
+    { "type": "textarea", "id": "guarantee_text", "label": "Guarantee text", "default": "Every membership comes with a 30-day palate guarantee. If your first box doesn't convert you, we refund it. Keep the drams." },
+    { "type": "header", "content": "How it works" },
+    { "type": "text", "id": "how_headline", "label": "Section headline", "default": "Four steps. Then it runs itself." },
+    { "type": "header", "content": "The curriculum" },
+    { "type": "text", "id": "journey_headline", "label": "Headline", "default": "A fixed journey. Kept under wraps." },
+    { "type": "textarea", "id": "journey_description", "label": "Description", "default": "Every member starts at Box 01 and moves through the same curated sequence. Niall has already built the arc — each box themed, each one preparing you for the next. We won't tell you what's coming. That's half the point. The boxes arrive. You taste. You find out." },
+    { "type": "text", "id": "journey_foot_strong", "label": "Footer strong text", "default": "Months 7–12 continue the arc." },
+    { "type": "textarea", "id": "journey_foot_text", "label": "Footer text", "default": "Finished the first six? The curriculum deepens. Cancel anytime — or keep going." },
+    { "type": "header", "content": "What arrives" },
+    { "type": "image_picker", "id": "inbox_image", "label": "Box contents photo" },
+    { "type": "text", "id": "inbox_headline", "label": "Headline", "default": "A box, not a parcel." },
+    { "type": "textarea", "id": "inbox_description", "label": "Description", "default": "Everything that lands on your doorstep the first Tuesday of the month. Built to be lived with, not binned." },
+    { "type": "header", "content": "Compare" },
+    { "type": "text", "id": "compare_headline", "label": "Headline", "default": "The difference, in full." },
+    { "type": "header", "content": "Testimonials" },
+    { "type": "text", "id": "testimonials_headline", "label": "Headline", "default": "Not loud about it. Just loyal." },
+    { "type": "text", "id": "rating_value", "label": "Rating number", "default": "4.9" },
+    { "type": "text", "id": "rating_label", "label": "Rating label", "default": "617 verified reviews" },
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_headline", "label": "Headline", "default": "Answers, before you ask." },
+    { "type": "textarea", "id": "faq_contact", "label": "Contact note", "default": "Still unsure? Email niall@elcartel.co — Niall reads them himself, usually replies by Thursday." },
+    { "type": "header", "content": "Closing CTA" },
+    { "type": "text", "id": "closing_eyebrow", "label": "Closing eyebrow", "default": "Take your seat" },
+    { "type": "text", "id": "closing_headline", "label": "Closing headline", "default": "Your first box ships within 48 hours." },
+    { "type": "textarea", "id": "closing_subtext", "label": "Closing subtext", "default": "Subscribe today and Box 01 is dispatched this week. Every box after that arrives on the 5th of the month. The contents stay sealed until they reach you." },
+    { "type": "header", "content": "Checkout URLs" },
+    { "type": "url", "id": "monthly_url", "label": "Monthly checkout URL" },
+    { "type": "url", "id": "annual_url", "label": "Annual checkout URL" },
+    { "type": "header", "content": "Links" },
+    { "type": "url", "id": "other_tier_url", "label": "Other tier page URL" },
+    { "type": "url", "id": "club_page_url", "label": "Club comparison page URL" }
   ],
   "blocks": [
-    {
-      "type": "feature",
-      "name": "Feature",
+    { "type": "feature", "name": "Plan feature",
       "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Feature text",
-          "default": "6 x 25ml tubes (3 whiskies x 2)"
-        }
+        { "type": "text", "id": "text", "label": "Feature text", "default": "6 × 25ml tubes (3 whiskies × 2)" }
       ]
     },
-    {
-      "type": "how_step",
-      "name": "How it works step",
+    { "type": "how_step", "name": "How-it-works step",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Step title",
-          "default": "Pick your tier"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Step description",
-          "default": "Explorer or Advanced. Monthly or annual."
-        }
+        { "type": "text", "id": "title", "label": "Step title", "default": "Pick your tier" },
+        { "type": "textarea", "id": "description", "label": "Step description", "default": "Explorer or Advanced. Monthly or annual." }
       ]
     },
-    {
-      "type": "box_item",
-      "name": "Box item",
+    { "type": "journey_box", "name": "Journey box",
       "settings": [
-        {
-          "type": "text",
-          "id": "tag",
-          "label": "Tag (e.g. the whisky)",
-          "default": "the whisky"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Item title",
-          "default": "Six 25ml tubes — three whiskies, paired"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Item description",
-          "default": "Two tubes of each whisky — taste twice, compare across sessions, or pour one for someone worth sharing with."
-        }
+        { "type": "text", "id": "month_label", "label": "Month label", "default": "Month 2" },
+        { "type": "text", "id": "title", "label": "Box title (only shown for first box)", "default": "The Foundation" },
+        { "type": "textarea", "id": "hint", "label": "Hint text", "default": "Building on what you tasted last month. The arc continues." }
       ]
     },
-    {
-      "type": "testimonial",
-      "name": "Testimonial",
+    { "type": "box_item", "name": "Box item",
       "settings": [
-        {
-          "type": "textarea",
-          "id": "quote",
-          "label": "Quote text",
-          "default": "The curation is sharper than any other club I've tried."
-        },
-        {
-          "type": "text",
-          "id": "author",
-          "label": "Author name",
-          "default": "Marc V."
-        },
-        {
-          "type": "text",
-          "id": "meta",
-          "label": "Member info",
-          "default": "Member since 2022 · Brussels"
-        },
-        {
-          "type": "text",
-          "id": "tier_label",
-          "label": "Tier label",
-          "default": "Advanced"
-        }
+        { "type": "text", "id": "tag", "label": "Tag", "default": "the whisky" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Six 25ml tubes — three whiskies, paired" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Two tubes of each whisky — taste twice, compare across sessions, or pour one for someone worth sharing with." }
       ]
     },
-    {
-      "type": "faq",
-      "name": "FAQ item",
+    { "type": "compare_row", "name": "Comparison row",
       "settings": [
-        {
-          "type": "text",
-          "id": "question",
-          "label": "Question",
-          "default": "Can I pause or cancel?"
-        },
-        {
-          "type": "textarea",
-          "id": "answer",
-          "label": "Answer",
-          "default": "Yes — from your account, one click. No emails, no retention team."
-        }
+        { "type": "text", "id": "label", "label": "Feature label", "default": "Format" },
+        { "type": "text", "id": "explorer_value", "label": "Explorer value", "default": "•" },
+        { "type": "text", "id": "advanced_value", "label": "Advanced value", "default": "•" }
+      ]
+    },
+    { "type": "testimonial", "name": "Testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "The curation is sharper than any other club I've tried." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Marc V." },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "Member since 2022 · Brussels" },
+        { "type": "text", "id": "tier_label", "label": "Tier tag", "default": "Advanced" }
+      ]
+    },
+    { "type": "faq", "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Can I pause or cancel?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Yes — from your account, one click. No emails, no retention team." }
       ]
     }
   ],
@@ -915,73 +927,108 @@
       "name": "Whisky Explorer",
       "settings": {
         "tier": "explorer",
-        "hero_subtitle": "The starting dram",
-        "hero_description": "The six-month foundation. Scotland to bourbon, gentle to smoke, curated in a fixed order. Everyone starts at Box 01 — the sequence is the point.",
-        "journey_box1_title": "The Foundation",
-        "journey_box1_hint": "Where most whisky palates begin. Gentle. Inviting. Instantly recognisable.",
-        "closing_headline": "Explorer. Box 01 ships within 48 hours."
+        "plan_subtitle": "The starting dram",
+        "plan_description": "The six-month foundation. Scotland to bourbon, gentle to smoke, curated in a fixed order. Everyone starts at Box 01 — the sequence is the point.",
+        "other_tier_blurb": "The rare-spirits curriculum. Single casks, cask-strength, lost distilleries, age statements. The kind of liquid you can't walk into a shop and buy."
       },
       "blocks": [
-        { "type": "feature", "settings": { "text": "6 x 25ml tubes (3 whiskies x 2)" } },
-        { "type": "feature", "settings": { "text": "Fixed 6-month curriculum — everyone starts at Box 01" } },
+        { "type": "feature", "settings": { "text": "6 × 25ml tubes (3 whiskies × 2)" } },
+        { "type": "feature", "settings": { "text": "Fixed 6-month curriculum — everyone starts at 01" } },
+        { "type": "feature", "settings": { "text": "Themed box: region, style, or technique" } },
         { "type": "feature", "settings": { "text": "Core range & distillery staples" } },
         { "type": "feature", "settings": { "text": "Printed info booklet per box" } },
         { "type": "feature", "settings": { "text": "Tasting-notes journal to fill in" } },
         { "type": "feature", "settings": { "text": "Digital dashboard + AI palate profile" } },
         { "type": "how_step", "settings": { "title": "Pick your tier", "description": "Explorer or Advanced. Monthly or annual. No quiz, no questionnaire — the journey is the same for everyone. That's the point." } },
-        { "type": "how_step", "settings": { "title": "Everyone starts at Box 01", "description": "Niall has built a six-month curriculum. Month one is foundational; each box after builds on the one before. You don't pick. He already did." } },
-        { "type": "how_step", "settings": { "title": "First box ships within 48h", "description": "Order today and Box 01 is dispatched this week. After that, boxes arrive on the 5th of every month. Tracked, discreet, signed for." } },
-        { "type": "how_step", "settings": { "title": "Rate it, let AI listen", "description": "Log each pour in the dashboard. Our model reads your notes, builds a palate profile, and recommends full bottles once you know what you like." } },
-        { "type": "box_item", "settings": { "tag": "the whisky", "title": "Six 25ml tubes — three whiskies, paired", "description": "Two tubes of each whisky — taste twice, compare across sessions, or pour one for someone worth sharing with. Sealed, darkened, ordered light-to-heavy." } },
-        { "type": "box_item", "settings": { "tag": "the guide", "title": "The info booklet", "description": "16 letterpress pages. Distillery, cask program, ABV, region, food pairings. Read it before you pour — or after, to check your instincts." } },
-        { "type": "box_item", "settings": { "tag": "the journal", "title": "Tasting-notes booklet", "description": "Blank pages with structured prompts — nose, palate, finish, score. Fill it in by hand. Built to be kept." } },
-        { "type": "box_item", "settings": { "tag": "the intelligence", "title": "Digital dashboard + AI palate profile", "description": "Scan the tube, rate the pour, jot a line. Our model maps your palate and recommends full bottles — inside the club and outside it." } },
-        { "type": "testimonial", "settings": { "quote": "Exactly what I wanted — three whiskies, six tubes so my wife and I taste together, a proper booklet, nobody trying to sell me a hoodie.", "author": "Olivier L.", "meta": "Member since 2024 · Ghent", "tier_label": "Explorer" } },
-        { "type": "testimonial", "settings": { "quote": "I have been drinking whisky for twenty years and I am still finding distilleries I had never heard of. The AI recommendations actually get my palate right.", "author": "Marc V.", "meta": "Member since 2022 · Brussels", "tier_label": "Explorer" } },
-        { "type": "testimonial", "settings": { "quote": "The tasting-notes journal is the first one I have actually kept using. Simple, well-made, and it pairs perfectly with the dashboard.", "author": "Stijn D.", "meta": "Member since 2023 · Antwerp", "tier_label": "Explorer" } },
+        { "type": "how_step", "settings": { "title": "Everyone starts at Box 01", "description": "Niall has built a six-month curriculum per tier. Month one is foundational; each box after builds on the one before. You don't pick. He already did." } },
+        { "type": "how_step", "settings": { "title": "First box ships now", "description": "Order today and your first box is dispatched within 48 hours. After that, boxes arrive on the 5th of every month. Tracked. Discreet. Signed for." } },
+        { "type": "how_step", "settings": { "title": "Rate it, let AI listen", "description": "Log each pour in the digital dashboard. Our model reads your notes, builds a palate profile, and quietly recommends full bottles outside the club — once you know what you like." } },
+        { "type": "journey_box", "settings": { "month_label": "Your first box", "title": "The Foundation", "hint": "Where most whisky palates begin. Gentle. Inviting. Instantly recognisable." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 2", "title": "???", "hint": "Building on what you tasted last month. The arc continues." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 3", "title": "???", "hint": "Something shifts. We introduce a new dimension to your palate." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 4", "title": "???", "hint": "Not for the faint of heart. A defining month." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 5", "title": "???", "hint": "Density and depth. A different side of the same story." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 6", "title": "???", "hint": "We leave Scotland behind. The sweet counterpoint." } },
+        { "type": "box_item", "settings": { "tag": "the whisky", "title": "Six 25ml tubes — three whiskies, paired", "description": "Each whisky comes as two tubes so you can taste twice, compare across sessions, or pour one for someone you like enough to share with. Sealed, darkened, ordered light-to-heavy." } },
+        { "type": "box_item", "settings": { "tag": "the guide", "title": "The info booklet", "description": "16 letterpress pages. For each of the three whiskies: distillery, cask program, abv, region, suggested flight order, food pairings. Read it before you pour — or after, to check your instincts." } },
+        { "type": "box_item", "settings": { "tag": "the journal", "title": "Your tasting-notes booklet", "description": "Blank pages with structured prompts — nose, palate, finish, score. Fill it in by hand. Built to be kept; the dashboard digitises the rest." } },
+        { "type": "box_item", "settings": { "tag": "the intelligence", "title": "Digital dashboard + AI palate profile", "description": "Scan the tube, rate the pour, jot a line. Our model reads your notes across every box, maps your palate, and recommends future whiskies — inside the club and full bottles outside it." } },
+        { "type": "compare_row", "settings": { "label": "Format", "explorer_value": "6 × 25ml tubes (3 × 2)", "advanced_value": "6 × 25ml tubes (3 × 2)" } },
+        { "type": "compare_row", "settings": { "label": "Typical bottle value", "explorer_value": "€50–90", "advanced_value": "€120–400+" } },
+        { "type": "compare_row", "settings": { "label": "Cask strength releases", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Single casks & indie bottlers", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Age-stated whiskies (18+ yr)", "explorer_value": "Occasional", "advanced_value": "Frequent" } },
+        { "type": "compare_row", "settings": { "label": "Printed info booklet", "explorer_value": "•", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Tasting-notes journal", "explorer_value": "•", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Digital dashboard + AI profile", "explorer_value": "•", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Priority AI recommendations", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Virtual tasting with distiller", "explorer_value": "—", "advanced_value": "Quarterly" } },
+        { "type": "compare_row", "settings": { "label": "Priority on full-bottle drops", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Signed certificate of origin", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Starting from", "explorer_value": "€34/mo", "advanced_value": "€42/mo" } },
+        { "type": "testimonial", "settings": { "quote": "Exactly what I wanted — three whiskies, six tubes so my wife and I taste together, a proper booklet, nobody trying to sell me a hoodie. Pauses easy when I'm travelling.", "author": "Olivier L.", "meta": "Member since 2024 · Ghent", "tier_label": "Explorer" } },
+        { "type": "testimonial", "settings": { "quote": "I've been drinking whisky for twenty years and I'm still finding distilleries I'd never heard of. The AI recommendations actually get my palate right — not marketing fluff.", "author": "Marc V.", "meta": "Member since 2022 · Brussels", "tier_label": "Explorer" } },
+        { "type": "testimonial", "settings": { "quote": "Replaced three different whisky clubs with this one. The curation is sharper — and the tasting-notes journal is the first one I've actually kept using.", "author": "Stijn D.", "meta": "Member since 2023 · Antwerp", "tier_label": "Explorer" } },
         { "type": "faq", "settings": { "question": "Can I pause or cancel?", "answer": "Yes — from your account, one click. No emails, no retention team. Pause indefinitely; your palate profile stays put." } },
         { "type": "faq", "settings": { "question": "Can I skip a month?", "answer": "Any time before the 1st of the month. Skip as often as you like — your subscription just shifts forward." } },
-        { "type": "faq", "settings": { "question": "Do you ship outside Belgium?", "answer": "Most of the EU + UK, Switzerland and Norway. Checkout will confirm availability for your postcode." } },
-        { "type": "faq", "settings": { "question": "What if I don't like a dram?", "answer": "Rate it 1 star in your journal. Dislike a whole box? First box is refundable under our 30-day palate guarantee." } },
-        { "type": "faq", "settings": { "question": "Who picks the whiskies?", "answer": "Niall Harkin, our head taster. Twelve years at Bruichladdich, now selecting full-time." } },
-        { "type": "faq", "settings": { "question": "Can I switch to Advanced later?", "answer": "Yes — email us before your next billing date and we will switch you from the next box." } }
+        { "type": "faq", "settings": { "question": "Do you ship outside Belgium?", "answer": "Most of the EU + UK, Switzerland & Norway. Checkout will confirm availability for your postcode." } },
+        { "type": "faq", "settings": { "question": "What if I don't like a dram?", "answer": "Rate it 1 star in your journal and we'll steer away from that profile. Dislike a whole box? First box is refundable under our 30-day palate guarantee." } },
+        { "type": "faq", "settings": { "question": "Who picks the whiskies?", "answer": "Niall Harkin, our head taster. Twelve years at Bruichladdich, now selecting for us full-time. Notes are written by distillers, vetted by Niall." } },
+        { "type": "faq", "settings": { "question": "Is there an age requirement?", "answer": "18+ in Belgium, 21+ where applicable. Identity check at delivery for first box." } }
       ]
     },
     {
       "name": "Whisky Advanced",
       "settings": {
         "tier": "advanced",
-        "hero_subtitle": "For the serious collector",
-        "hero_description": "The rare-spirits curriculum. Single casks, cask-strength, lost distilleries, age statements. Same fixed journey, scarcer liquid — the kind you cannot walk into a shop and buy.",
-        "journey_box1_title": "Rare Openings",
-        "journey_box1_hint": "Three scarce pours to set the tone. The kind of liquid that makes you slow down.",
-        "closing_headline": "Advanced. Box 01 ships within 48 hours."
+        "plan_subtitle": "For the serious collector",
+        "plan_description": "The rare-spirits curriculum. Single casks, cask-strength, lost distilleries, age statements. Same fixed journey, scarcer liquid — the kind you can't walk into a shop and buy.",
+        "other_tier_blurb": "The six-month foundation. Scotland to bourbon, gentle to smoke, curated in a fixed order. Everyone starts at Box 01 — the sequence is the point."
       },
       "blocks": [
-        { "type": "feature", "settings": { "text": "6 x 25ml tubes (3 whiskies x 2)" } },
+        { "type": "feature", "settings": { "text": "6 × 25ml tubes (3 whiskies × 2)" } },
         { "type": "feature", "settings": { "text": "Fixed 6-month curriculum — rare-spirits track" } },
         { "type": "feature", "settings": { "text": "Single casks & limited editions" } },
-        { "type": "feature", "settings": { "text": "Virtual tastings with distillers" } },
+        { "type": "feature", "settings": { "text": "Signed certificate of authenticity" } },
         { "type": "feature", "settings": { "text": "Priority AI recommendations" } },
         { "type": "feature", "settings": { "text": "Members-only bottle reservations" } },
-        { "type": "feature", "settings": { "text": "Signed certificate of authenticity" } },
+        { "type": "feature", "settings": { "text": "Virtual tastings with distillers" } },
         { "type": "how_step", "settings": { "title": "Pick your tier", "description": "You chose Advanced — the rare-spirits track. Monthly or annual. The journey is fixed; Niall already built the arc." } },
         { "type": "how_step", "settings": { "title": "Everyone starts at Box 01", "description": "Six months of increasingly scarce liquid. Month one sets the benchmark; each box after raises it. You don't pick. He already did." } },
-        { "type": "how_step", "settings": { "title": "First box ships within 48h", "description": "Order today and Box 01 is dispatched this week. After that, boxes arrive on the 5th of every month. Tracked, discreet, signed for." } },
+        { "type": "how_step", "settings": { "title": "First box ships now", "description": "Order today and your first box is dispatched within 48 hours. After that, boxes arrive on the 5th of every month. Tracked. Discreet. Signed for." } },
         { "type": "how_step", "settings": { "title": "Rate it, let AI listen", "description": "Log each pour in the dashboard. Our model reads your notes, builds a palate profile, and surfaces full-bottle recommendations from rare releases." } },
+        { "type": "journey_box", "settings": { "month_label": "Your first box", "title": "Rare Openings", "hint": "Three scarce pours to set the tone. The kind of liquid that makes you slow down." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 2", "title": "???", "hint": "An exercise in precision. Bring a pipette." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 3", "title": "???", "hint": "Finite liquid. Once it's gone, it's gone." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 4", "title": "???", "hint": "A different continent, a different philosophy. Restraint over force." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 5", "title": "???", "hint": "What two extra decades in wood does to a spirit." } },
+        { "type": "journey_box", "settings": { "month_label": "Month 6", "title": "???", "hint": "The frontier end of the category. Experimental grains, shuttered distilleries." } },
         { "type": "box_item", "settings": { "tag": "the whisky", "title": "Six 25ml tubes — three rare pours, paired", "description": "Two tubes of each whisky — taste twice, compare across sessions, or pour one for someone worth sharing with. Cask-strength and single-cask releases included." } },
         { "type": "box_item", "settings": { "tag": "the guide", "title": "The info booklet", "description": "16 letterpress pages. Distillery, independent bottler notes, cask number, ABV, region. Read it before you pour — or after, to check your instincts." } },
         { "type": "box_item", "settings": { "tag": "the journal", "title": "Tasting-notes booklet + certificate", "description": "Structured tasting prompts and a signed certificate of authenticity for each release. Built to be kept." } },
         { "type": "box_item", "settings": { "tag": "the intelligence", "title": "Digital dashboard + priority AI profile", "description": "Scan the tube, rate the pour, jot a line. Priority recommendations, early access to full-bottle drops, and quarterly virtual tastings with distillers." } },
-        { "type": "testimonial", "settings": { "quote": "I have been drinking whisky for twenty years and I am still finding distilleries I had never heard of. The AI recommendations actually get my palate right.", "author": "Marc V.", "meta": "Member since 2022 · Brussels", "tier_label": "Advanced" } },
+        { "type": "compare_row", "settings": { "label": "Format", "explorer_value": "6 × 25ml tubes (3 × 2)", "advanced_value": "6 × 25ml tubes (3 × 2)" } },
+        { "type": "compare_row", "settings": { "label": "Typical bottle value", "explorer_value": "€50–90", "advanced_value": "€120–400+" } },
+        { "type": "compare_row", "settings": { "label": "Cask strength releases", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Single casks & indie bottlers", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Age-stated whiskies (18+ yr)", "explorer_value": "Occasional", "advanced_value": "Frequent" } },
+        { "type": "compare_row", "settings": { "label": "Printed info booklet", "explorer_value": "•", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Tasting-notes journal", "explorer_value": "•", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Digital dashboard + AI profile", "explorer_value": "•", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Priority AI recommendations", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Virtual tasting with distiller", "explorer_value": "—", "advanced_value": "Quarterly" } },
+        { "type": "compare_row", "settings": { "label": "Priority on full-bottle drops", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Signed certificate of origin", "explorer_value": "—", "advanced_value": "•" } },
+        { "type": "compare_row", "settings": { "label": "Starting from", "explorer_value": "€34/mo", "advanced_value": "€42/mo" } },
+        { "type": "testimonial", "settings": { "quote": "I've been drinking whisky for twenty years and I'm still finding distilleries I'd never heard of. The AI recommendations actually get my palate right — not marketing fluff.", "author": "Marc V.", "meta": "Member since 2022 · Brussels", "tier_label": "Advanced" } },
         { "type": "testimonial", "settings": { "quote": "Replaced three different whisky clubs with this one. The curation is sharper — single casks I would never have found on my own.", "author": "Stijn D.", "meta": "Member since 2023 · Antwerp", "tier_label": "Advanced" } },
         { "type": "testimonial", "settings": { "quote": "The virtual tasting with the distiller was worth the subscription alone. That kind of access just doesn't exist elsewhere.", "author": "Pieter V.", "meta": "Member since 2023 · Brussels", "tier_label": "Advanced" } },
         { "type": "faq", "settings": { "question": "Can I pause or cancel?", "answer": "Yes — from your account, one click. No emails, no retention team. Pause indefinitely; your palate profile stays put." } },
         { "type": "faq", "settings": { "question": "Can I skip a month?", "answer": "Any time before the 1st of the month. Skip as often as you like — your subscription just shifts forward." } },
-        { "type": "faq", "settings": { "question": "Do you ship outside Belgium?", "answer": "Most of the EU + UK, Switzerland and Norway. Checkout will confirm availability for your postcode." } },
-        { "type": "faq", "settings": { "question": "What if I don't like a dram?", "answer": "Rate it 1 star in your journal. Dislike a whole box? First box is refundable under our 30-day palate guarantee." } },
-        { "type": "faq", "settings": { "question": "Who picks the whiskies?", "answer": "Niall Harkin, our head taster. Twelve years at Bruichladdich, now selecting full-time. Every Advanced release is vetted personally." } },
-        { "type": "faq", "settings": { "question": "Can I switch to Explorer later?", "answer": "Yes — email us before your next billing date and we will switch you from the next box." } }
+        { "type": "faq", "settings": { "question": "Do you ship outside Belgium?", "answer": "Most of the EU + UK, Switzerland & Norway. Checkout will confirm availability for your postcode." } },
+        { "type": "faq", "settings": { "question": "What if I don't like a dram?", "answer": "Rate it 1 star in your journal and we'll steer away from that profile. Dislike a whole box? First box is refundable under our 30-day palate guarantee." } },
+        { "type": "faq", "settings": { "question": "Who picks the whiskies?", "answer": "Niall Harkin, our head taster. Twelve years at Bruichladdich, now selecting for us full-time. Every Advanced release is vetted personally." } },
+        { "type": "faq", "settings": { "question": "Is there an age requirement?", "answer": "18+ in Belgium, 21+ where applicable. Identity check at delivery for first box." } }
       ]
     }
   ]
