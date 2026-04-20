@@ -112,10 +112,10 @@
 .wcp-plan-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; gap: 40px; flex-wrap: wrap; }
 .wcp-plan-head h2 { font-size: clamp(40px, 4.5vw, 68px); max-width: 14ch; }
 .wcp-plan-head h2 em { font-style: italic; font-weight: 400; }
-.wcp-billing-toggle { display: inline-flex; padding: 4px; border-radius: 100px; background: var(--wcp-bg-alt); border: 1px solid var(--wcp-rule); position: relative; }
-.wcp-billing-track { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 6px); background: var(--wcp-ink); border-radius: 100px; transition: left 0.35s cubic-bezier(.65,.02,.3,1); }
-.wcp-billing-btn { position: relative; background: transparent; border: 0; padding: 10px 28px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wcp-ink-soft); transition: color 0.3s ease; font-weight: 500; }
-.wcp-billing-btn.active { color: var(--wcp-bg); }
+.wcp-billing-toggle { display: inline-flex; padding: 5px; border-radius: 100px; background: var(--wcp-surface); border: 1px solid var(--wcp-rule); position: relative; box-shadow: inset 0 1px 3px rgba(26,24,20,0.08); }
+.wcp-billing-track { position: absolute; top: 5px; bottom: 5px; left: 5px; width: calc(50% - 7px); background: var(--wcp-ink); border-radius: 100px; transition: left 0.35s cubic-bezier(.65,.02,.3,1); box-shadow: 0 2px 8px rgba(26,24,20,0.18); }
+.wcp-billing-btn { position: relative; background: transparent; border: 0; padding: 12px 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--wcp-ink-mute); transition: color 0.3s ease; font-weight: 500; white-space: nowrap; }
+.wcp-billing-btn.active { color: var(--wcp-surface); }
 .wcp-plan-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: start; }
 .wcp-plan { border: 1px solid var(--wcp-rule); padding: 48px 40px; display: flex; flex-direction: column; position: relative; min-height: 620px; background: var(--wcp-paper); color: var(--wcp-ink); }
 .wcp-plan--featured { background: var(--wcp-ink); color: var(--wcp-bg); border-color: var(--wcp-ink); }
@@ -461,12 +461,6 @@
         </aside>
       </div>
 
-      <div class="wcp-guarantee">
-        <div class="wcp-guarantee-text">
-          <strong>Not sure yet?</strong>&nbsp;&nbsp;{{ section.settings.guarantee_text }}
-        </div>
-        <a href="#faq" class="wcp-mono" style="color:var(--wcp-ink);text-decoration:underline;text-underline-offset:4px;">Read the fine print &rarr;</a>
-      </div>
     </div>
   </section>
 
