@@ -1,0 +1,455 @@
+{{ 'section-gift-comparison.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .gc-section-{{ section.id }} {
+    --gc-bg: {{ section.settings.bg_color | default: '#F5EFE3' }};
+    --gc-ink: {{ section.settings.ink_color | default: '#1a1a1a' }};
+    --gc-left-bg: {{ section.settings.left_col_bg | default: '#6B1F2A' }};
+    --gc-left-ink: {{ section.settings.left_col_ink | default: '#FFFFFF' }};
+    --gc-right-bg: {{ section.settings.right_col_bg | default: '#EFE6D3' }};
+    --gc-right-ink: {{ section.settings.right_col_ink | default: '#1a1a1a' }};
+    --gc-accent: {{ section.settings.check_color | default: '#3CA05A' }};
+    --gc-muted: {{ section.settings.x_color | default: '#9a9a9a' }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: var(--gc-bg);
+    color: var(--gc-ink);
+  }
+
+  .gc-section-{{ section.id }} .gc-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .gc-section-{{ section.id }} .gc-heading {
+    text-align: center;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4vw, 54px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 auto 80px;
+    max-width: 22ch;
+  }
+  .gc-section-{{ section.id }} .gc-heading em {
+    font-style: italic;
+  }
+
+  .gc-section-{{ section.id }} .gc-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+    position: relative;
+  }
+
+  .gc-section-{{ section.id }} .gc-col {
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .gc-section-{{ section.id }} .gc-col--left { background: var(--gc-left-bg); color: var(--gc-left-ink); }
+  .gc-section-{{ section.id }} .gc-col--right { background: var(--gc-right-bg); color: var(--gc-right-ink); }
+
+  .gc-section-{{ section.id }} .gc-col-image {
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px 0;
+    position: relative;
+  }
+  .gc-section-{{ section.id }} .gc-col-image img {
+    max-height: 220px;
+    max-width: 80%;
+    width: auto;
+    object-fit: contain;
+  }
+  .gc-section-{{ section.id }} .gc-image-placeholder {
+    width: 70%;
+    height: 180px;
+    border: 1px dashed rgba(255,255,255,0.4);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.6);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .gc-section-{{ section.id }} .gc-label-overlay {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #1a1a1a;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    white-space: nowrap;
+  }
+
+  .gc-section-{{ section.id }} .gc-col-header {
+    padding: 38px 24px 20px;
+    text-align: center;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .gc-section-{{ section.id }} .gc-rows {
+    display: flex;
+    flex-direction: column;
+  }
+  .gc-section-{{ section.id }} .gc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .gc-section-{{ section.id }} .gc-row:last-child { border-bottom: 0; }
+
+  .gc-section-{{ section.id }} .gc-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 28px;
+    text-align: center;
+    gap: 12px;
+  }
+  .gc-section-{{ section.id }} .gc-cell--left { color: var(--gc-left-ink); }
+  .gc-section-{{ section.id }} .gc-cell--right { color: var(--gc-right-ink); }
+
+  .gc-section-{{ section.id }} .gc-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .gc-section-{{ section.id }} .gc-mark--check {
+    background: var(--gc-accent);
+    color: #fff;
+  }
+  .gc-section-{{ section.id }} .gc-mark--x {
+    background: transparent;
+    border: 1.5px solid var(--gc-muted);
+    color: var(--gc-muted);
+  }
+  .gc-section-{{ section.id }} .gc-mark svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .gc-section-{{ section.id }} .gc-row-label {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.4;
+    max-width: 28ch;
+  }
+
+  /* alternating row shading via parent backgrounds only — keep clean */
+
+  @media (max-width: 749px) {
+    .gc-section-{{ section.id }} .gc-heading { margin-bottom: 56px; }
+    .gc-section-{{ section.id }} .gc-table { gap: 10px; }
+    .gc-section-{{ section.id }} .gc-col { border-radius: 18px; }
+    .gc-section-{{ section.id }} .gc-col-image { height: 160px; padding: 20px 12px 0; }
+    .gc-section-{{ section.id }} .gc-col-image img { max-height: 140px; }
+    .gc-section-{{ section.id }} .gc-image-placeholder { height: 120px; }
+    .gc-section-{{ section.id }} .gc-col-header { font-size: 20px; padding: 28px 12px 16px; }
+    .gc-section-{{ section.id }} .gc-row { padding: 16px 0; gap: 8px; }
+    .gc-section-{{ section.id }} .gc-cell { padding: 0 10px; gap: 8px; }
+    .gc-section-{{ section.id }} .gc-mark { width: 26px; height: 26px; }
+    .gc-section-{{ section.id }} .gc-mark svg { width: 12px; height: 12px; }
+    .gc-section-{{ section.id }} .gc-row-label { font-size: 13px; }
+    .gc-section-{{ section.id }} .gc-label-overlay { font-size: 12px; padding: 6px 12px; }
+  }
+</style>
+
+{%- liquid
+  assign check_icon = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5L10 17.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  assign x_icon = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+-%}
+
+<section class="gc-section-{{ section.id }}">
+  <div class="gc-container">
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="gc-heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="gc-table">
+      {%- comment -%} LEFT COLUMN — Bottle (user's product) {%- endcomment -%}
+      <div class="gc-col gc-col--left">
+        <div class="gc-col-image">
+          {%- if section.settings.left_image != blank -%}
+            <img src="{{ section.settings.left_image | image_url: width: 600 }}"
+                 alt="{{ section.settings.left_title | escape }}"
+                 width="600"
+                 height="auto"
+                 loading="lazy">
+          {%- else -%}
+            <div class="gc-image-placeholder">
+              Upload your<br>product image
+            </div>
+          {%- endif -%}
+          {%- if section.settings.left_label != blank -%}
+            <span class="gc-label-overlay">{{ section.settings.left_label }}</span>
+          {%- endif -%}
+        </div>
+        <div class="gc-col-header">{{ section.settings.left_title }}</div>
+        <div class="gc-rows">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'row' -%}
+              <div class="gc-row" {{ block.shopify_attributes }} style="grid-template-columns: 1fr;">
+                <div class="gc-cell gc-cell--left">
+                  <span class="gc-mark {% if block.settings.left_check %}gc-mark--check{% else %}gc-mark--x{% endif %}">
+                    {% if block.settings.left_check %}{{ check_icon }}{% else %}{{ x_icon }}{% endif %}
+                  </span>
+                  <span class="gc-row-label">{{ block.settings.label }}</span>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- comment -%} RIGHT COLUMN — Whisky Gift (competitor) {%- endcomment -%}
+      <div class="gc-col gc-col--right">
+        <div class="gc-col-image">
+          {%- if section.settings.right_image != blank -%}
+            <img src="{{ section.settings.right_image | image_url: width: 600 }}"
+                 alt="{{ section.settings.right_title | escape }}"
+                 width="600"
+                 height="auto"
+                 loading="lazy">
+          {%- else -%}
+            <div class="gc-image-placeholder" style="border-color: rgba(0,0,0,0.25); color: rgba(0,0,0,0.5);">
+              Upload competitor<br>image
+            </div>
+          {%- endif -%}
+          {%- if section.settings.right_label != blank -%}
+            <span class="gc-label-overlay">{{ section.settings.right_label }}</span>
+          {%- endif -%}
+        </div>
+        <div class="gc-col-header">{{ section.settings.right_title }}</div>
+        <div class="gc-rows">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'row' -%}
+              <div class="gc-row" style="grid-template-columns: 1fr;">
+                <div class="gc-cell gc-cell--right">
+                  <span class="gc-mark {% if block.settings.right_check %}gc-mark--check{% else %}gc-mark--x{% endif %}">
+                    {% if block.settings.right_check %}{{ check_icon }}{% else %}{{ x_icon }}{% endif %}
+                  </span>
+                  <span class="gc-row-label">{{ block.settings.label }}</span>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gift Comparison",
+  "tag": "section",
+  "class": "section-gift-comparison",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Why is Bottle the best <em>gift</em>?"
+    },
+    {
+      "type": "header",
+      "content": "Left column (your product)"
+    },
+    {
+      "type": "text",
+      "id": "left_title",
+      "label": "Column title",
+      "default": "Bottle"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Image above the column",
+      "info": "Leave empty to show a white-space placeholder."
+    },
+    {
+      "type": "text",
+      "id": "left_label",
+      "label": "Floating label on image",
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "Right column (competitor)"
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Column title",
+      "default": "Other brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Image above the column"
+    },
+    {
+      "type": "text",
+      "id": "right_label",
+      "label": "Floating label on image",
+      "default": "Whisky Gift"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#F5EFE3"
+    },
+    {
+      "type": "color",
+      "id": "ink_color",
+      "label": "Heading colour",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "left_col_bg",
+      "label": "Left column background",
+      "default": "#6B1F2A"
+    },
+    {
+      "type": "color",
+      "id": "left_col_ink",
+      "label": "Left column text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "right_col_bg",
+      "label": "Right column background",
+      "default": "#EFE6D3"
+    },
+    {
+      "type": "color",
+      "id": "right_col_ink",
+      "label": "Right column text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "check_color",
+      "label": "Checkmark colour",
+      "default": "#3CA05A"
+    },
+    {
+      "type": "color",
+      "id": "x_color",
+      "label": "X-mark colour",
+      "default": "#9a9a9a"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Row label",
+          "default": "Premium spirits at an affordable price"
+        },
+        {
+          "type": "checkbox",
+          "id": "left_check",
+          "label": "Left column: check?",
+          "default": true,
+          "info": "Unchecked shows an X mark."
+        },
+        {
+          "type": "checkbox",
+          "id": "right_check",
+          "label": "Right column: check?",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Gift Comparison",
+      "blocks": [
+        { "type": "row", "settings": { "label": "Premium spirits at an affordable price", "left_check": true, "right_check": false } },
+        { "type": "row", "settings": { "label": "Spirits from all over the world", "left_check": true, "right_check": false } },
+        { "type": "row", "settings": { "label": "Rare spirit", "left_check": true, "right_check": false } },
+        { "type": "row", "settings": { "label": "Reasonable and moderate consumption", "left_check": true, "right_check": false } },
+        { "type": "row", "settings": { "label": "Accessories included", "left_check": true, "right_check": false } },
+        { "type": "row", "settings": { "label": "Several different spirits", "left_check": true, "right_check": false } },
+        { "type": "row", "settings": { "label": "Guided tasting experience", "left_check": true, "right_check": false } },
+        { "type": "row", "settings": { "label": "The Best Sommelier of France in your living room", "left_check": true, "right_check": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}
