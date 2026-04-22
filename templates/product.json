@@ -212,6 +212,7 @@
       "block_order": [
         "heading_xzhpTA"
       ],
+      "name": "Discover the Whiskies",
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -370,6 +371,7 @@
         "featured_8cfJ3L",
         "featured_WTEDAn"
       ],
+      "name": "Carousel",
       "settings": {
         "heading": "",
         "heading_custom": false,
