@@ -308,10 +308,15 @@
     line-height: 1.3;
   }
 
-  /* ─── Left border: dark emerald ─── */
+  /* ─── Left border: dark emerald — single solid band ─── */
+  /* Strip ALL borders off drawer__inner (they were creating a second line) */
   cart-drawer .drawer__inner {
-    border-left-color: #0D3B2E !important;
-    border-left-width: 2px !important;
+    border: none !important;
+  }
+  /* Single source of truth: left border on the outer #CartDrawer wrapper */
+  cart-drawer #CartDrawer {
+    border-left: 4px solid #0D3B2E;
+    box-sizing: border-box;
   }
 
   /* ─── iDEAL + Wero: white background instead of brand colour ─── */
