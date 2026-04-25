@@ -146,7 +146,7 @@
 
   /* ─── Upsell ─── */
   cart-drawer .el-cart-upsell {
-    padding: 18px 24px 20px;
+    padding: 10px 24px 16px;
     background: #f5efe3;
     border-top: 1px solid #eee3d1;
   }
@@ -303,7 +303,7 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 10px;
     font-weight: 500;
-    color: #6a6a6a;
+    color: #1a1a1a;
     line-height: 1.3;
   }
 
@@ -531,7 +531,7 @@
       {%- comment -%} ─── UPSELL (glass etc.) ─── {%- endcomment -%}
       {%- if cart != empty and settings.cart_drawer_collection != blank and settings.cart_drawer_collection.products_count > 0 -%}
         <div class="el-cart-upsell">
-          <p class="el-cart-upsell-title">Complete your set</p>
+          <p class="el-cart-upsell-title">Extra options</p>
           {%- for up_product in settings.cart_drawer_collection.products limit: 2 -%}
             {%- assign up_variant = up_product.selected_or_first_available_variant -%}
             <div class="el-upsell-item">
@@ -633,8 +633,11 @@
 
           {%- comment -%} Payment icons {%- endcomment -%}
           <div class="el-cart-payment-icons" aria-hidden="true">
+            {%- assign excluded_payments = 'american_express,unionpay,shopify_pay,google_pay' | split: ',' -%}
             {%- for type in shop.enabled_payment_types -%}
-              {{ type | payment_type_svg_tag: scale: 1 }}
+              {%- unless excluded_payments contains type -%}
+                {{ type | payment_type_svg_tag: scale: 1 }}
+              {%- endunless -%}
             {%- endfor -%}
           </div>
 
