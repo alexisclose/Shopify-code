@@ -308,6 +308,27 @@
     line-height: 1.3;
   }
 
+  /* ─── Left border: dark emerald ─── */
+  cart-drawer .drawer__inner {
+    border-left-color: #0D3B2E !important;
+    border-left-width: 2px !important;
+  }
+
+  /* ─── iDEAL + Wero: white background instead of brand colour ─── */
+  cart-drawer .el-cart-payment-icons .payment-icon--ideal,
+  cart-drawer .el-cart-payment-icons .payment-icon--wero,
+  cart-drawer .el-cart-payment-icons [class*="ideal"],
+  cart-drawer .el-cart-payment-icons [class*="wero"] {
+    background: #fff !important;
+    border-radius: 4px;
+  }
+  cart-drawer .el-cart-payment-icons .payment-icon--ideal rect:first-child,
+  cart-drawer .el-cart-payment-icons .payment-icon--wero rect:first-child,
+  cart-drawer .el-cart-payment-icons [class*="ideal"] rect:first-child,
+  cart-drawer .el-cart-payment-icons [class*="wero"] rect:first-child {
+    fill: #fff !important;
+  }
+
   /* Hide stock/tax noise */
   cart-drawer .tax-note,
   cart-drawer small.tax-note,
