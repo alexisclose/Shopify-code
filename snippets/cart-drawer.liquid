@@ -591,3 +591,65 @@
     </div>
   </div>
 </cart-drawer>
+
+{%- comment -%}
+  ─── GLOBAL ADD-TO-CART INTERCEPTOR ───
+  Safety-net: ensures any product-add form opens the cart drawer instead of
+  navigating to /cart. Dawn's <product-form> normally handles this, but if
+  for any reason it fails to bind (custom sections, third-party blocks,
+  etc.) this guarantees the drawer opens.
+{%- endcomment -%}
+<script>
+  (function() {
+    if (window.__elCartInterceptorBound) return;
+    window.__elCartInterceptorBound = true;
+
+    document.addEventListener('submit', function(evt) {
+      var form = evt.target;
+      if (!(form instanceof HTMLFormElement)) return;
+      // Only intercept Shopify product add-to-cart forms (Dawn marks them with data-type)
+      if (form.dataset.type !== 'add-to-cart-form') return;
+      // If <product-form> already handled this, evt.defaultPrevented is true → bail
+      if (evt.defaultPrevented) return;
+
+      evt.preventDefault();
+
+      var drawer = document.querySelector('cart-drawer');
+      var submitBtn = form.querySelector('[type="submit"]');
+      var originalDisabled = submitBtn ? submitBtn.disabled : false;
+      if (submitBtn) submitBtn.disabled = true;
+
+      var formData = new FormData(form);
+      // Ask Shopify to also return the cart-drawer + icon sections so we can re-render
+      formData.append('sections', 'cart-drawer,cart-icon-bubble');
+      formData.append('sections_url', window.location.pathname);
+
+      fetch('{{ routes.cart_add_url }}.js', {
+        method: 'POST',
+        headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
+        body: formData
+      })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.status) {
+            // Error path — fall back to native submit so user sees the error UI
+            form.submit();
+            return;
+          }
+          if (drawer && typeof drawer.renderContents === 'function') {
+            drawer.renderContents(data);
+          } else {
+            // No drawer → fall back to navigating to cart page
+            window.location.href = '{{ routes.cart_url }}';
+          }
+        })
+        .catch(function() {
+          // Network error → let native submit happen
+          form.submit();
+        })
+        .finally(function() {
+          if (submitBtn) submitBtn.disabled = originalDisabled;
+        });
+    }); // bubble phase: product-form's handler runs first; if it called preventDefault we bail
+  })();
+</script>
