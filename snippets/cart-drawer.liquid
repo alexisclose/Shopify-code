@@ -607,48 +607,6 @@
           {%- endfor -%}
         </div>
 
-        <script>
-          (function() {
-            var drawer = document.currentScript.closest('cart-drawer');
-            if (!drawer || drawer.__elUpsellBound) return;
-            drawer.__elUpsellBound = true;
-            drawer.addEventListener('click', function(e) {
-              var card = e.target.closest('.el-upsell-card');
-              if (!card || card.disabled || card.classList.contains('is-loading')) return;
-              if (card.classList.contains('is-selected')) return; // already in cart
-              e.preventDefault();
-              var variantId = card.getAttribute('data-variant-id');
-              card.classList.add('is-loading');
-
-              var sectionsToRender = ['cart-drawer', 'cart-icon-bubble'];
-              fetch('{{ routes.cart_add_url }}', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({
-                  items: [{ id: variantId, quantity: 1 }],
-                  sections: sectionsToRender.join(','),
-                  sections_url: window.location.pathname
-                })
-              })
-              .then(function(r) { return r.json(); })
-              .then(function(data) {
-                if (data.status) {
-                  card.classList.remove('is-loading');
-                  return;
-                }
-                var cd = document.querySelector('cart-drawer');
-                if (cd && typeof cd.renderContents === 'function') {
-                  cd.renderContents(data);
-                } else {
-                  window.location.reload();
-                }
-              })
-              .catch(function() {
-                card.classList.remove('is-loading');
-              });
-            });
-          })();
-        </script>
       {%- endif -%}
 
       {%- comment -%} ─── FOOTER ─── {%- endcomment -%}
@@ -743,6 +701,58 @@
         document.addEventListener('DOMContentLoaded', patch);
       }
     }
+  })();
+</script>
+
+{%- comment -%}
+  ─── UPSELL CARD CLICK HANDLER (delegated, survives re-renders) ───
+  Inline scripts injected by renderContents (innerHTML) do NOT execute,
+  so we can't bind inside the upsell block. Delegate from document
+  instead — this handler is bound once and works for any current or
+  future upsell card.
+{%- endcomment -%}
+<script>
+  (function() {
+    if (window.__elUpsellBound) return;
+    window.__elUpsellBound = true;
+    document.addEventListener('click', function(e) {
+      var card = e.target.closest('.el-upsell-card');
+      if (!card) return;
+      if (card.disabled || card.classList.contains('is-loading')) return;
+      if (card.classList.contains('is-selected')) return; // already in cart
+      e.preventDefault();
+      var variantId = card.getAttribute('data-variant-id');
+      if (!variantId) return;
+      card.classList.add('is-loading');
+
+      var formData = new FormData();
+      formData.append('id', variantId);
+      formData.append('quantity', '1');
+      formData.append('sections', 'cart-drawer,cart-icon-bubble');
+      formData.append('sections_url', window.location.pathname);
+
+      fetch('{{ routes.cart_add_url }}.js', {
+        method: 'POST',
+        headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
+        body: formData
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.status) {
+          card.classList.remove('is-loading');
+          return;
+        }
+        var cd = document.querySelector('cart-drawer');
+        if (cd && typeof cd.renderContents === 'function') {
+          cd.renderContents(data);
+        } else {
+          window.location.reload();
+        }
+      })
+      .catch(function() {
+        card.classList.remove('is-loading');
+      });
+    });
   })();
 </script>
 
