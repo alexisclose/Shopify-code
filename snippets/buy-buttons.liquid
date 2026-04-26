@@ -84,6 +84,7 @@
             <span>{{ 'products.product.add_to_cart' | t }}</span>
             <span class="button-separator">•</span>
             <span class="button-price">{{ product.selected_or_first_available_variant.price | money }}</span>
+            {%- render 'loading-spinner' -%}
           </button>
           {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
