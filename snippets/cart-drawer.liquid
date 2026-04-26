@@ -784,9 +784,40 @@
             return;
           }
 
-          // ── Surgical update: only the subtotal text, nothing else ──
+          // ── Surgical update: subtotal text only ──
           var curSubtotal = document.querySelector('.el-cart-subtotal-value');
           if (curSubtotal) curSubtotal.textContent = newSubtotal.textContent;
+
+          // ── Re-sync data-index on every cart item so line numbers stay
+          //    correct after upsell items shift positions in the cart ──
+          //    We copy attributes only — no innerHTML swap, no image reload.
+          var newRows = doc.querySelectorAll('.cart-item');
+          var curRows = document.querySelectorAll('#CartDrawer-CartItems .cart-item');
+          newRows.forEach(function(newRow, i) {
+            var curRow = curRows[i];
+            if (!curRow) return;
+            // Sync the row id
+            if (newRow.id) curRow.id = newRow.id;
+            // Sync data-index on quantity input
+            ['data-index', 'id', 'data-quantity-variant-id'].forEach(function(attr) {
+              var newInput = newRow.querySelector('.quantity__input');
+              var curInput = curRow.querySelector('.quantity__input');
+              if (newInput && curInput && newInput.getAttribute(attr)) {
+                curInput.setAttribute(attr, newInput.getAttribute(attr));
+              }
+            });
+            // Sync data-index on the remove button wrapper
+            var newRemove = newRow.querySelector('cart-remove-button');
+            var curRemove = curRow.querySelector('cart-remove-button');
+            if (newRemove && curRemove) {
+              if (newRemove.dataset.index) curRemove.dataset.index = newRemove.dataset.index;
+              if (newRemove.id) curRemove.id = newRemove.id;
+            }
+            // Sync error div id
+            var newErr = newRow.querySelector('[id^="CartDrawer-LineItemError"]');
+            var curErr = curRow.querySelector('[id^="CartDrawer-LineItemError"]');
+            if (newErr && curErr && newErr.id) curErr.id = newErr.id;
+          });
         }
 
         // Update cart icon bubble (header count)
