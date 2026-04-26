@@ -419,6 +419,18 @@
         </div>
       {%- endif -%}
 
+      {%- comment -%}
+        Build a list of upsell variant IDs so we can hide them from the
+        main cart items list — they're visually represented by the
+        "Extra options" card with its gold selected-state line instead.
+      {%- endcomment -%}
+      {%- assign el_upsell_ids = '' -%}
+      {%- if settings.cart_drawer_collection != blank -%}
+        {%- for up in settings.cart_drawer_collection.products limit: 2 -%}
+          {%- assign el_upsell_ids = el_upsell_ids | append: up.selected_or_first_available_variant.id | append: '|' -%}
+        {%- endfor -%}
+      {%- endif -%}
+
       {%- comment -%} ─── ITEMS ─── {%- endcomment -%}
       <cart-drawer-items {% if cart == empty %}class="is-empty"{% endif %}>
         <form
@@ -442,6 +454,8 @@
 
                   <tbody role="rowgroup">
                     {%- for item in cart.items -%}
+                      {%- assign el_item_id_str = item.variant.id | append: '|' -%}
+                      {%- if el_upsell_ids contains el_item_id_str -%}{%- continue -%}{%- endif -%}
                       <tr
                         id="CartDrawer-Item-{{ item.index | plus: 1 }}"
                         class="cart-item{% if item.parent_relationship.parent != null %} cart-item__nested-line{% endif %}"
