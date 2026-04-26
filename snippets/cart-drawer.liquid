@@ -729,43 +729,65 @@
   (function() {
     if (window.__elUpsellBound) return;
     window.__elUpsellBound = true;
+
+    function refreshDrawer(data) {
+      var cd = document.querySelector('cart-drawer');
+      if (cd && typeof cd.renderContents === 'function') {
+        cd.renderContents(data);
+      } else {
+        window.location.reload();
+      }
+    }
+
     document.addEventListener('click', function(e) {
       var card = e.target.closest('.el-upsell-card');
       if (!card) return;
       if (card.disabled || card.classList.contains('is-loading')) return;
-      if (card.classList.contains('is-selected')) return; // already in cart
       e.preventDefault();
+
       var variantId = card.getAttribute('data-variant-id');
       if (!variantId) return;
       card.classList.add('is-loading');
 
-      var formData = new FormData();
-      formData.append('id', variantId);
-      formData.append('quantity', '1');
-      formData.append('sections', 'cart-drawer,cart-icon-bubble');
-      formData.append('sections_url', window.location.pathname);
+      var isSelected = card.classList.contains('is-selected');
 
-      fetch('{{ routes.cart_add_url }}.js', {
-        method: 'POST',
-        headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
-        body: formData
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data.status) {
-          card.classList.remove('is-loading');
-          return;
-        }
-        var cd = document.querySelector('cart-drawer');
-        if (cd && typeof cd.renderContents === 'function') {
-          cd.renderContents(data);
-        } else {
-          window.location.reload();
-        }
-      })
-      .catch(function() {
-        card.classList.remove('is-loading');
-      });
+      if (isSelected) {
+        // ── Remove from cart ──
+        var formData = new FormData();
+        formData.append('id', variantId);
+        formData.append('quantity', '0');
+        formData.append('sections', 'cart-drawer,cart-icon-bubble');
+        formData.append('sections_url', window.location.pathname);
+
+        fetch('{{ routes.cart_change_url }}.js', {
+          method: 'POST',
+          headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
+          body: formData
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) { refreshDrawer(data); })
+        .catch(function() { card.classList.remove('is-loading'); });
+
+      } else {
+        // ── Add to cart ──
+        var formData = new FormData();
+        formData.append('id', variantId);
+        formData.append('quantity', '1');
+        formData.append('sections', 'cart-drawer,cart-icon-bubble');
+        formData.append('sections_url', window.location.pathname);
+
+        fetch('{{ routes.cart_add_url }}.js', {
+          method: 'POST',
+          headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
+          body: formData
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.status) { card.classList.remove('is-loading'); return; }
+          refreshDrawer(data);
+        })
+        .catch(function() { card.classList.remove('is-loading'); });
+      }
     });
   })();
 </script>
