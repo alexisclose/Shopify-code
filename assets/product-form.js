@@ -1,3 +1,24 @@
+// Inject styles to keep ATC button responsive even in loading/disabled state
+(function injectProductFormStyles() {
+  if (document.getElementById('product-form-overrides')) return;
+  var style = document.createElement('style');
+  style.id = 'product-form-overrides';
+  style.textContent = [
+    '.product-form__submit[loading],',
+    '.product-form__submit[aria-disabled="true"] {',
+    '  pointer-events: auto !important;',
+    '  opacity: 1 !important;',
+    '  cursor: pointer !important;',
+    '}',
+    '.product-form__buttons { pointer-events: auto !important; }',
+    '.shopify-payment-button {',
+    '  pointer-events: auto !important;',
+    '  opacity: 1 !important;',
+    '}'
+  ].join('\n');
+  document.head.appendChild(style);
+})();
+
 if (!customElements.get('product-form')) {
   customElements.define(
     'product-form',
@@ -139,22 +160,4 @@ if (!customElements.get('product-form')) {
       }
     }
   );
-}
-/* Override the loading/disabled state */
-.product-form__submit[loading],
-.product-form__submit[aria-disabled="true"] {
-  pointer-events: auto !important;
-  opacity: 1 !important;
-  cursor: pointer !important;
-}
-
-/* Ensure the form itself is clickable */
-.product-form__buttons {
-  pointer-events: auto !important;
-}
-
-/* Don't grey out Apple Pay */
-.shopify-payment-button {
-  pointer-events: auto !important;
-  opacity: 1 !important;
 }
