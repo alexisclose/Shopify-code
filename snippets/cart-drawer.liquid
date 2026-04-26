@@ -730,15 +730,6 @@
     if (window.__elUpsellBound) return;
     window.__elUpsellBound = true;
 
-    function refreshDrawer(data) {
-      var cd = document.querySelector('cart-drawer');
-      if (cd && typeof cd.renderContents === 'function') {
-        cd.renderContents(data);
-      } else {
-        window.location.reload();
-      }
-    }
-
     document.addEventListener('click', function(e) {
       var card = e.target.closest('.el-upsell-card');
       if (!card) return;
@@ -747,47 +738,71 @@
 
       var variantId = card.getAttribute('data-variant-id');
       if (!variantId) return;
-      card.classList.add('is-loading');
 
       var isSelected = card.classList.contains('is-selected');
 
-      if (isSelected) {
-        // ── Remove from cart ──
-        var formData = new FormData();
-        formData.append('id', variantId);
-        formData.append('quantity', '0');
-        formData.append('sections', 'cart-drawer,cart-icon-bubble');
-        formData.append('sections_url', window.location.pathname);
+      // ── Optimistic visual toggle — instant, no flicker ──
+      card.classList.toggle('is-selected');
+      card.classList.add('is-loading');
 
-        fetch('{{ routes.cart_change_url }}.js', {
-          method: 'POST',
-          headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
-          body: formData
-        })
-        .then(function(r) { return r.json(); })
-        .then(function(data) { refreshDrawer(data); })
-        .catch(function() { card.classList.remove('is-loading'); });
+      var formData = new FormData();
+      formData.append('id', variantId);
+      formData.append('quantity', isSelected ? '0' : '1');
+      formData.append('sections', 'cart-drawer,cart-icon-bubble');
+      formData.append('sections_url', window.location.pathname);
 
-      } else {
-        // ── Add to cart ──
-        var formData = new FormData();
-        formData.append('id', variantId);
-        formData.append('quantity', '1');
-        formData.append('sections', 'cart-drawer,cart-icon-bubble');
-        formData.append('sections_url', window.location.pathname);
+      var url = isSelected
+        ? '{{ routes.cart_change_url }}.js'
+        : '{{ routes.cart_add_url }}.js';
 
-        fetch('{{ routes.cart_add_url }}.js', {
-          method: 'POST',
-          headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
-          body: formData
-        })
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-          if (data.status) { card.classList.remove('is-loading'); return; }
-          refreshDrawer(data);
-        })
-        .catch(function() { card.classList.remove('is-loading'); });
-      }
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
+        body: formData
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        card.classList.remove('is-loading');
+
+        if (data.status) {
+          // Error — revert optimistic toggle
+          card.classList.toggle('is-selected');
+          return;
+        }
+
+        var parser = new DOMParser();
+
+        // Parse the re-rendered cart-drawer section
+        if (data.sections && data.sections['cart-drawer']) {
+          var doc = parser.parseFromString(data.sections['cart-drawer'], 'text/html');
+
+          // If cart is now empty, do a full re-render (edge case: last item removed)
+          var newSubtotal = doc.querySelector('.el-cart-subtotal-value');
+          if (!newSubtotal) {
+            var cd = document.querySelector('cart-drawer');
+            if (cd && typeof cd.renderContents === 'function') cd.renderContents(data);
+            return;
+          }
+
+          // ── Surgical update: only the subtotal text, nothing else ──
+          var curSubtotal = document.querySelector('.el-cart-subtotal-value');
+          if (curSubtotal) curSubtotal.textContent = newSubtotal.textContent;
+        }
+
+        // Update cart icon bubble (header count)
+        if (data.sections && data.sections['cart-icon-bubble']) {
+          var iconSection = document.getElementById('cart-icon-bubble');
+          if (iconSection) {
+            var iconDoc = parser.parseFromString(data.sections['cart-icon-bubble'], 'text/html');
+            var iconInner = iconDoc.querySelector('.shopify-section');
+            if (iconInner) iconSection.innerHTML = iconInner.innerHTML;
+          }
+        }
+      })
+      .catch(function() {
+        card.classList.remove('is-loading');
+        card.classList.toggle('is-selected'); // revert on network error
+      });
     });
   })();
 </script>
