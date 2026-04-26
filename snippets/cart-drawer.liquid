@@ -20,92 +20,7 @@
     padding: 0 !important;
     display: flex;
     flex-direction: column;
-    width: 100vw !important;
-    max-width: 100vw !important;
   }
-
-  /* ─── Step toggle (controlled by classes on <cart-drawer>) ─── */
-  cart-drawer .el-step--upsell,
-  cart-drawer .el-step--cart { display: none; }
-  /* Default with upsell available: show upsell */
-  cart-drawer.has-upsell:not(.is-cart-step) .el-step--upsell {
-    display: flex; flex-direction: column; flex: 1; min-height: 0;
-  }
-  /* Cart step: shown when user clicked Next, OR no upsell collection set */
-  cart-drawer.is-cart-step .el-step--cart,
-  cart-drawer:not(.has-upsell) .el-step--cart {
-    display: flex; flex-direction: column; flex: 1; min-height: 0;
-  }
-  /* Back button only visible on cart step when upsell exists */
-  cart-drawer .el-step-back { display: none; }
-  cart-drawer.has-upsell.is-cart-step .el-step-back { display: inline-flex; }
-  /* Title text swap */
-  cart-drawer .el-cart-title--cart { display: none; }
-  cart-drawer.has-upsell:not(.is-cart-step) .el-cart-title--upsell { display: block; }
-  cart-drawer.is-cart-step .el-cart-title--upsell,
-  cart-drawer:not(.has-upsell) .el-cart-title--upsell { display: none; }
-  cart-drawer.is-cart-step .el-cart-title--cart,
-  cart-drawer:not(.has-upsell) .el-cart-title--cart { display: block; }
-
-  /* Cart step layout (items area scrollable, footer fixed) */
-  cart-drawer .el-step--cart cart-drawer-items {
-    flex: 1; overflow-y: auto; min-height: 0; display: block;
-  }
-  cart-drawer .el-step--cart .drawer__footer { flex-shrink: 0; }
-
-  /* Upsell step layout */
-  cart-drawer .el-step--upsell .el-step-body {
-    flex: 1; overflow-y: auto; min-height: 0;
-    max-width: 800px; width: 100%; margin: 0 auto;
-    box-sizing: border-box;
-    padding: 24px;
-  }
-  cart-drawer .el-step--upsell .el-step-foot {
-    flex-shrink: 0;
-    padding: 16px 24px 24px;
-    border-top: 1px solid #eee3d1;
-    background: #FDFBF6;
-    max-width: 800px; width: 100%; margin: 0 auto;
-    box-sizing: border-box;
-  }
-  cart-drawer .el-upsell-intro {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: 18px; font-style: italic; font-weight: 400;
-    color: #6a6a6a;
-    margin: 0 0 20px;
-  }
-  cart-drawer .el-next-btn {
-    display: block; width: 100%;
-    padding: 16px 24px;
-    background: #1a1a1a; color: #FDFBF6;
-    border: 0; border-radius: 4px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px; font-weight: 600;
-    letter-spacing: 0.05em; text-transform: uppercase;
-    cursor: pointer; transition: background 0.2s ease;
-    text-align: center;
-  }
-  cart-drawer .el-next-btn:hover { background: #000; }
-
-  /* Constrain cart-step content to a comfortable max width */
-  cart-drawer .el-step--cart .drawer__cart-items-wrapper,
-  cart-drawer .el-step--cart .drawer__footer {
-    max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box;
-  }
-
-  /* Header alignment for full-width drawer */
-  cart-drawer .el-cart-header { max-width: 800px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 20px 24px; }
-  cart-drawer .el-cart-header-left { min-width: 80px; }
-  cart-drawer .el-cart-header-right { min-width: 80px; display: flex; justify-content: flex-end; }
-  cart-drawer .el-step-back {
-    appearance: none; background: transparent; border: 0; padding: 0;
-    cursor: pointer; align-items: center; gap: 6px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px; font-weight: 600; color: #6a6a6a;
-    transition: color 0.2s;
-  }
-  cart-drawer .el-step-back:hover { color: #1a1a1a; }
-  cart-drawer .el-step-back svg { width: 14px; height: 14px; }
 
   /* Hide old column headers entirely */
   cart-drawer .cart-items thead { display: none; }
@@ -200,6 +115,7 @@
   /* ─── Header ─── */
   cart-drawer .el-cart-header {
     display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 24px 20px;
     border-bottom: 1px solid #eee3d1;
   }
   cart-drawer .el-cart-title {
@@ -209,8 +125,6 @@
     color: #1a1a1a;
     margin: 0;
     letter-spacing: -0.01em;
-    text-align: center;
-    flex: 1;
   }
   cart-drawer .el-cart-close {
     width: 36px; height: 36px;
@@ -455,12 +369,7 @@
   cart-drawer .drawer__inner-empty .drawer__close { display: none !important; }
 </style>
 
-{%- assign cart_has_upsell = false -%}
-{%- if cart != empty and settings.cart_drawer_collection != blank and settings.cart_drawer_collection.products_count > 0 -%}
-  {%- assign cart_has_upsell = true -%}
-{%- endif -%}
-
-<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}{% if cart_has_upsell %} has-upsell{% endif %}">
+<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="cart-drawer">
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
     <div
@@ -473,30 +382,17 @@
 
       {%- comment -%} ─── HEADER ─── {%- endcomment -%}
       <div class="el-cart-header">
-        <div class="el-cart-header-left">
-          <button type="button" class="el-step-back" id="el-step-back">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M19 12H5M12 5l-7 7 7 7"/>
-            </svg>
-            Back
-          </button>
-        </div>
-        <h2 class="el-cart-title">
-          <span class="el-cart-title--upsell">Extra options</span>
-          <span class="el-cart-title--cart">{{ 'sections.cart.title' | t | default: 'Cart' }}</span>
-        </h2>
-        <div class="el-cart-header-right">
-          <button
-            type="button"
-            class="el-cart-close"
-            onclick="this.closest('cart-drawer').close()"
-            aria-label="{{ 'accessibility.close' | t }}"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-              <path d="M6 6L18 18M18 6L6 18" />
-            </svg>
-          </button>
-        </div>
+        <h2 class="el-cart-title">{{ 'sections.cart.title' | t | default: 'Cart' }}</h2>
+        <button
+          type="button"
+          class="el-cart-close"
+          onclick="this.closest('cart-drawer').close()"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M6 6L18 18M18 6L6 18" />
+          </svg>
+        </button>
       </div>
 
       {%- comment -%} ─── EMPTY STATE ─── {%- endcomment -%}
@@ -509,8 +405,7 @@
         </div>
       {%- endif -%}
 
-      {%- comment -%} ─── STEP 2: CART ITEMS + FOOTER ─── {%- endcomment -%}
-      <div class="el-step el-step--cart">
+      {%- comment -%} ─── ITEMS ─── {%- endcomment -%}
       <cart-drawer-items {% if cart == empty %}class="is-empty"{% endif %}>
         <form
           action="{{ routes.cart_url }}"
@@ -660,7 +555,91 @@
         </form>
       </cart-drawer-items>
 
-      {%- comment -%} ─── FOOTER (still inside el-step--cart) ─── {%- endcomment -%}
+      {%- comment -%} ─── UPSELL (glass etc.) ─── {%- endcomment -%}
+      {%- if cart != empty and settings.cart_drawer_collection != blank and settings.cart_drawer_collection.products_count > 0 -%}
+        <div class="el-cart-upsell">
+          <p class="el-cart-upsell-title">Extra options</p>
+          {%- for up_product in settings.cart_drawer_collection.products limit: 2 -%}
+            {%- assign up_variant = up_product.selected_or_first_available_variant -%}
+            <div class="el-upsell-item">
+              <a href="{{ up_product.url }}" tabindex="-1" aria-hidden="true">
+                {% if up_product.featured_image %}
+                  <img class="el-upsell-img" src="{{ up_product.featured_image | image_url: width: 160 }}" alt="{{ up_product.featured_image.alt | escape }}" loading="lazy" width="56" height="56">
+                {% endif %}
+              </a>
+              <div class="el-upsell-text">
+                <a href="{{ up_product.url }}" class="el-upsell-name">{{ up_product.title | escape }}</a>
+                <span class="el-upsell-price">{{ up_variant.price | money }}</span>
+              </div>
+              <button
+                type="button"
+                class="el-upsell-add"
+                data-variant-id="{{ up_variant.id }}"
+                {% unless up_variant.available %}disabled{% endunless %}
+              >
+                {% if up_variant.available %}+ Add{% else %}Sold out{% endif %}
+              </button>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <script>
+          (function() {
+            var drawer = document.currentScript.closest('cart-drawer');
+            if (!drawer || drawer.__elUpsellBound) return;
+            drawer.__elUpsellBound = true;
+            drawer.addEventListener('click', function(e) {
+              var btn = e.target.closest('.el-upsell-add');
+              if (!btn || btn.disabled) return;
+              e.preventDefault();
+              var variantId = btn.getAttribute('data-variant-id');
+              var originalText = btn.textContent;
+              btn.disabled = true;
+              btn.textContent = 'Adding…';
+
+              var sectionsToRender = ['cart-drawer', 'cart-icon-bubble'];
+              fetch('{{ routes.cart_add_url }}', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                  items: [{ id: variantId, quantity: 1 }],
+                  sections: sectionsToRender.join(','),
+                  sections_url: window.location.pathname
+                })
+              })
+              .then(function(r) { return r.json(); })
+              .then(function(data) {
+                if (data.status) {
+                  btn.textContent = originalText;
+                  btn.disabled = false;
+                  return;
+                }
+                // Refresh cart drawer via Dawn's CartDrawer web component
+                var cd = document.querySelector('cart-drawer');
+                if (cd && typeof cd.renderContents === 'function') {
+                  cd.renderContents(data);
+                } else {
+                  window.location.reload();
+                  return;
+                }
+                btn.textContent = '✓ Added';
+                btn.classList.add('is-added');
+                setTimeout(function() {
+                  btn.textContent = originalText;
+                  btn.classList.remove('is-added');
+                  btn.disabled = false;
+                }, 1400);
+              })
+              .catch(function() {
+                btn.textContent = originalText;
+                btn.disabled = false;
+              });
+            });
+          })();
+        </script>
+      {%- endif -%}
+
+      {%- comment -%} ─── FOOTER ─── {%- endcomment -%}
       {%- if cart != empty -%}
         <div class="drawer__footer">
           <div class="el-cart-subtotal">
@@ -717,130 +696,10 @@
           </div>
         </div>
       {%- endif -%}
-      </div>{%- comment -%} /el-step--cart {%- endcomment -%}
-
-      {%- comment -%} ─── STEP 1: UPSELL ─── {%- endcomment -%}
-      {%- if cart_has_upsell -%}
-        <div class="el-step el-step--upsell">
-          <div class="el-step-body">
-            <p class="el-upsell-intro">Would you like to add anything else to your order?</p>
-            {%- for up_product in settings.cart_drawer_collection.products limit: 6 -%}
-              {%- assign up_variant = up_product.selected_or_first_available_variant -%}
-              <div class="el-upsell-item">
-                <a href="{{ up_product.url }}" tabindex="-1" aria-hidden="true">
-                  {% if up_product.featured_image %}
-                    <img class="el-upsell-img" src="{{ up_product.featured_image | image_url: width: 200 }}" alt="{{ up_product.featured_image.alt | escape }}" loading="lazy" width="64" height="64">
-                  {% endif %}
-                </a>
-                <div class="el-upsell-text">
-                  <a href="{{ up_product.url }}" class="el-upsell-name">{{ up_product.title | escape }}</a>
-                  <span class="el-upsell-price">{{ up_variant.price | money }}</span>
-                </div>
-                <button
-                  type="button"
-                  class="el-upsell-add"
-                  data-variant-id="{{ up_variant.id }}"
-                  {% unless up_variant.available %}disabled{% endunless %}
-                >
-                  {% if up_variant.available %}+ Add{% else %}Sold out{% endif %}
-                </button>
-              </div>
-            {%- endfor -%}
-          </div>
-          <div class="el-step-foot">
-            <button type="button" class="el-next-btn" id="el-next-btn">View cart &rarr;</button>
-          </div>
-        </div>
-      {%- endif -%}
 
     </div>
   </div>
 </cart-drawer>
-
-{%- comment -%} ─── STEP NAVIGATION + UPSELL ADD-TO-CART ─── {%- endcomment -%}
-<script>
-  (function() {
-    if (window.__elCartStepsBound) return;
-    window.__elCartStepsBound = true;
-
-    // Click handler — uses event delegation so it survives renderContents replacements
-    document.addEventListener('click', function(e) {
-      // Next button (upsell → cart)
-      var nextBtn = e.target.closest('#el-next-btn');
-      if (nextBtn) {
-        var cd = document.querySelector('cart-drawer');
-        if (cd) cd.classList.add('is-cart-step');
-        return;
-      }
-
-      // Back button (cart → upsell)
-      var backBtn = e.target.closest('#el-step-back');
-      if (backBtn) {
-        var cd2 = document.querySelector('cart-drawer');
-        if (cd2) cd2.classList.remove('is-cart-step');
-        return;
-      }
-
-      // Upsell add — AJAX add, do NOT switch step (stay on upsell)
-      var addBtn = e.target.closest('.el-upsell-add');
-      if (!addBtn || addBtn.disabled) return;
-      e.preventDefault();
-      var variantId  = addBtn.getAttribute('data-variant-id');
-      var origText   = addBtn.textContent.trim();
-      addBtn.disabled = true;
-      addBtn.textContent = 'Adding…';
-
-      fetch('{{ routes.cart_add_url }}', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          items: [{ id: parseInt(variantId, 10), quantity: 1 }],
-          sections: 'cart-drawer,cart-icon-bubble',
-          sections_url: window.location.pathname
-        })
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data.status) {
-          addBtn.textContent = origText; addBtn.disabled = false; return;
-        }
-        // Re-render cart drawer (preserves the cart-drawer element + its classes)
-        var cd = document.querySelector('cart-drawer');
-        if (cd && typeof cd.renderContents === 'function') {
-          // Stash the current step so it survives the re-render
-          var wasCartStep = cd.classList.contains('is-cart-step');
-          cd.renderContents(data);
-          // After re-render, restore (renderContents preserves the cart-drawer element class)
-          if (wasCartStep) cd.classList.add('is-cart-step');
-          else cd.classList.remove('is-cart-step');
-        }
-      })
-      .catch(function() {
-        addBtn.textContent = origText; addBtn.disabled = false;
-      });
-    });
-
-    // Reset to step 1 when drawer is opened from cart icon
-    function patchOpen() {
-      var cd = document.querySelector('cart-drawer');
-      if (!cd || cd.__elOpenPatched) return;
-      cd.__elOpenPatched = true;
-      var origOpen = cd.open.bind(cd);
-      cd.open = function(triggeredBy) {
-        // Only reset if has-upsell — otherwise leave it alone
-        if (cd.classList.contains('has-upsell')) {
-          cd.classList.remove('is-cart-step');
-        }
-        origOpen(triggeredBy);
-      };
-    }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', patchOpen);
-    } else {
-      patchOpen();
-    }
-  })();
-</script>
 
 {%- comment -%}
   ─── GLOBAL ADD-TO-CART INTERCEPTOR ───
