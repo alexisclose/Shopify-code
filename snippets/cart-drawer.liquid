@@ -159,64 +159,81 @@
     margin: 0 0 12px;
     font-weight: 400;
   }
-  cart-drawer .el-upsell-item {
+  cart-drawer .el-upsell-card {
+    position: relative;
     display: grid;
-    grid-template-columns: 56px 1fr auto;
-    gap: 14px;
+    grid-template-columns: 64px 1fr auto;
+    gap: 16px;
     align-items: center;
+    width: 100%;
     background: #fff;
-    border-radius: 6px;
-    padding: 10px 12px 10px 10px;
     border: 1px solid #eee3d1;
+    border-radius: 8px;
+    padding: 12px 18px 12px 14px;
+    cursor: pointer;
+    text-align: left;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    appearance: none;
+    font-family: inherit;
   }
-  cart-drawer .el-upsell-item + .el-upsell-item { margin-top: 8px; }
+  cart-drawer .el-upsell-card + .el-upsell-card { margin-top: 10px; }
+  cart-drawer .el-upsell-card:hover {
+    border-color: #d8d0c0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  cart-drawer .el-upsell-card:active { transform: scale(0.995); }
+  cart-drawer .el-upsell-card[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+  /* Left accent: always visible — gold band */
+  cart-drawer .el-upsell-card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: #C9A646;
+  }
+  /* Right accent: appears when product is in cart */
+  cart-drawer .el-upsell-card::after {
+    content: "";
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: #C9A646;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  cart-drawer .el-upsell-card.is-selected::after { opacity: 1; }
+  cart-drawer .el-upsell-card.is-selected { border-color: #d8d0c0; }
+
   cart-drawer .el-upsell-img {
-    width: 56px; height: 56px;
-    object-fit: cover;
+    width: 64px; height: 64px;
+    object-fit: contain;
     border-radius: 4px;
-    background: #f5efe3;
+    background: #fff;
     display: block;
   }
   cart-drawer .el-upsell-text { min-width: 0; }
   cart-drawer .el-upsell-name {
     font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     color: #1a1a1a;
-    line-height: 1.2;
-    margin: 0 0 2px;
-    text-decoration: none;
+    line-height: 1.25;
+    margin: 0;
     display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
   cart-drawer .el-upsell-price {
     font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    color: #6a6a6a;
-  }
-  cart-drawer .el-upsell-add {
-    appearance: none;
-    border: 1px solid #1a1a1a;
-    background: transparent;
+    font-size: 15px;
+    font-weight: 700;
     color: #1a1a1a;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 8px 14px;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: all 0.2s ease;
     white-space: nowrap;
+    padding-left: 8px;
   }
-  cart-drawer .el-upsell-add:hover { background: #1a1a1a; color: #FDFBF6; }
-  cart-drawer .el-upsell-add[disabled] { opacity: 0.5; cursor: default; }
-  cart-drawer .el-upsell-add.is-added {
-    background: #1a1a1a;
-    color: #FDFBF6;
+  cart-drawer .el-upsell-card.is-loading {
+    opacity: 0.7;
+    pointer-events: none;
   }
 
   /* ─── Footer ─── */
@@ -561,25 +578,35 @@
           <p class="el-cart-upsell-title">Extra options</p>
           {%- for up_product in settings.cart_drawer_collection.products limit: 2 -%}
             {%- assign up_variant = up_product.selected_or_first_available_variant -%}
-            <div class="el-upsell-item">
-              <a href="{{ up_product.url }}" tabindex="-1" aria-hidden="true">
-                {% if up_product.featured_image %}
-                  <img class="el-upsell-img" src="{{ up_product.featured_image | image_url: width: 160 }}" alt="{{ up_product.featured_image.alt | escape }}" loading="lazy" width="56" height="56">
-                {% endif %}
-              </a>
+            {%- assign up_in_cart = false -%}
+            {%- for ci in cart.items -%}
+              {%- if ci.variant.id == up_variant.id -%}
+                {%- assign up_in_cart = true -%}
+              {%- endif -%}
+            {%- endfor -%}
+            <button
+              type="button"
+              class="el-upsell-card{% if up_in_cart %} is-selected{% endif %}"
+              data-variant-id="{{ up_variant.id }}"
+              aria-pressed="{% if up_in_cart %}true{% else %}false{% endif %}"
+              {% unless up_variant.available %}disabled{% endunless %}
+            >
+              {% if up_product.featured_image %}
+                <img class="el-upsell-img" src="{{ up_product.featured_image | image_url: width: 160 }}" alt="{{ up_product.featured_image.alt | escape }}" loading="lazy" width="64" height="64">
+              {% else %}
+                <span class="el-upsell-img"></span>
+              {% endif %}
               <div class="el-upsell-text">
-                <a href="{{ up_product.url }}" class="el-upsell-name">{{ up_product.title | escape }}</a>
-                <span class="el-upsell-price">{{ up_variant.price | money }}</span>
+                <span class="el-upsell-name">{{ up_product.title | escape }}</span>
               </div>
-              <button
-                type="button"
-                class="el-upsell-add"
-                data-variant-id="{{ up_variant.id }}"
-                {% unless up_variant.available %}disabled{% endunless %}
-              >
-                {% if up_variant.available %}+ Add{% else %}Sold out{% endif %}
-              </button>
-            </div>
+              <span class="el-upsell-price">
+                {%- if up_variant.available -%}
+                  {{ up_variant.price | money }}
+                {%- else -%}
+                  Sold out
+                {%- endif -%}
+              </span>
+            </button>
           {%- endfor -%}
         </div>
 
@@ -589,13 +616,12 @@
             if (!drawer || drawer.__elUpsellBound) return;
             drawer.__elUpsellBound = true;
             drawer.addEventListener('click', function(e) {
-              var btn = e.target.closest('.el-upsell-add');
-              if (!btn || btn.disabled) return;
+              var card = e.target.closest('.el-upsell-card');
+              if (!card || card.disabled || card.classList.contains('is-loading')) return;
+              if (card.classList.contains('is-selected')) return; // already in cart
               e.preventDefault();
-              var variantId = btn.getAttribute('data-variant-id');
-              var originalText = btn.textContent;
-              btn.disabled = true;
-              btn.textContent = 'Adding…';
+              var variantId = card.getAttribute('data-variant-id');
+              card.classList.add('is-loading');
 
               var sectionsToRender = ['cart-drawer', 'cart-icon-bubble'];
               fetch('{{ routes.cart_add_url }}', {
@@ -610,29 +636,18 @@
               .then(function(r) { return r.json(); })
               .then(function(data) {
                 if (data.status) {
-                  btn.textContent = originalText;
-                  btn.disabled = false;
+                  card.classList.remove('is-loading');
                   return;
                 }
-                // Refresh cart drawer via Dawn's CartDrawer web component
                 var cd = document.querySelector('cart-drawer');
                 if (cd && typeof cd.renderContents === 'function') {
                   cd.renderContents(data);
                 } else {
                   window.location.reload();
-                  return;
                 }
-                btn.textContent = '✓ Added';
-                btn.classList.add('is-added');
-                setTimeout(function() {
-                  btn.textContent = originalText;
-                  btn.classList.remove('is-added');
-                  btn.disabled = false;
-                }, 1400);
               })
               .catch(function() {
-                btn.textContent = originalText;
-                btn.disabled = false;
+                card.classList.remove('is-loading');
               });
             });
           })();
