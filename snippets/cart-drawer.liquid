@@ -1,5 +1,7 @@
 {% comment %}
-  Renders cart drawer — redesigned, editorial.
+  Renders cart drawer — full-width, two-step flow.
+  Step 1: Extra options (upsell)
+  Step 2: Cart items + subtotal + checkout
 
   Usage: {% render 'cart-drawer' %}
 {% endcomment %}
@@ -13,25 +15,229 @@
 <style>
   .drawer { visibility: hidden; }
 
-  /* ─── Reset the generic Dawn cart drawer styles we don't want ─── */
+  /* ─── Full-width drawer panel ─── */
   cart-drawer .drawer__inner {
     font-family: 'Montserrat', -apple-system, sans-serif;
     background: #FDFBF6 !important;
     padding: 0 !important;
     display: flex;
     flex-direction: column;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    border: none !important;
   }
 
-  /* Hide old column headers entirely */
+  /* Emerald left border on outer wrapper */
+  cart-drawer #CartDrawer {
+    border-left: 4px solid #0D3B2E;
+    box-sizing: border-box;
+  }
+
+  /* ─── Shared header ─── */
+  cart-drawer .el-cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    border-bottom: 1px solid #eee3d1;
+    flex-shrink: 0;
+  }
+  cart-drawer .el-cart-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 80px;
+  }
+  cart-drawer .el-cart-back {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6a6a6a;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  cart-drawer .el-cart-back:hover { color: #1a1a1a; }
+  cart-drawer .el-cart-back svg { width: 14px; height: 14px; }
+  cart-drawer .el-cart-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-align: center;
+    flex: 1;
+  }
+  cart-drawer .el-cart-header-right {
+    display: flex;
+    justify-content: flex-end;
+    min-width: 80px;
+  }
+  cart-drawer .el-cart-close {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid #d8d0c0;
+    background: transparent;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: #1a1a1a;
+    transition: background 0.2s ease;
+  }
+  cart-drawer .el-cart-close:hover { background: rgba(0,0,0,0.04); }
+  cart-drawer .el-cart-close svg { width: 14px; height: 14px; }
+
+  /* ─── Step containers ─── */
+  cart-drawer .el-step {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+  }
+  cart-drawer .el-step[hidden] { display: none !important; }
+
+  /* ─── Step 1: Upsell ─── */
+  cart-drawer .el-step--upsell .el-step-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  cart-drawer .el-upsell-intro {
+    margin: 0 0 28px;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    color: #6a6a6a;
+  }
+  cart-drawer .el-upsell-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  cart-drawer .el-upsell-item {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px 16px 14px 14px;
+    border: 1px solid #eee3d1;
+  }
+  cart-drawer .el-upsell-img {
+    width: 72px; height: 72px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #f5efe3;
+    display: block;
+  }
+  cart-drawer .el-upsell-text { min-width: 0; }
+  cart-drawer .el-upsell-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.3;
+    margin: 0 0 4px;
+    text-decoration: none;
+    display: block;
+  }
+  cart-drawer .el-upsell-price {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6a6a6a;
+  }
+  cart-drawer .el-upsell-add {
+    appearance: none;
+    border: 1px solid #1a1a1a;
+    background: transparent;
+    color: #1a1a1a;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  cart-drawer .el-upsell-add:hover { background: #1a1a1a; color: #FDFBF6; }
+  cart-drawer .el-upsell-add[disabled] { opacity: 0.5; cursor: default; }
+  cart-drawer .el-upsell-add.is-added { background: #1a1a1a; color: #FDFBF6; }
+
+  cart-drawer .el-step--upsell .el-step-footer {
+    flex-shrink: 0;
+    padding: 20px 32px 28px;
+    border-top: 1px solid #eee3d1;
+    background: #FDFBF6;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  cart-drawer .el-next-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background: #1a1a1a;
+    color: #FDFBF6;
+    border: 0;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    text-align: center;
+  }
+  cart-drawer .el-next-btn:hover { background: #000; }
+
+  /* ─── Step 2: Cart items ─── */
+  cart-drawer .el-step--cart .el-step-body {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  /* Cart items table reset */
   cart-drawer .cart-items thead { display: none; }
   cart-drawer table.cart-items { border: 0; margin: 0; }
   cart-drawer .cart-items tbody { display: block; }
-  cart-drawer .cart-items tr.cart-item { display: grid; grid-template-columns: 72px 1fr auto; gap: 16px; padding: 20px 24px; border-bottom: 1px solid #eee3d1; align-items: flex-start; }
-  cart-drawer .cart-item__media { padding: 0 !important; width: 72px; height: 72px; }
+  cart-drawer .cart-items tr.cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 16px;
+    padding: 20px 32px;
+    border-bottom: 1px solid #eee3d1;
+    align-items: flex-start;
+    max-width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  cart-drawer .cart-item__media { padding: 0 !important; width: 80px; height: 80px; }
   cart-drawer .cart-item__media img {
-    width: 72px; height: 72px;
+    width: 80px; height: 80px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 6px;
     background: #f5efe3;
   }
   cart-drawer .cart-item__details {
@@ -61,14 +267,21 @@
   cart-drawer .cart-item__details dl .product-option { display: inline; }
   cart-drawer .cart-item__details dl dt { display: inline; font-weight: 400; color: #6a6a6a; }
   cart-drawer .cart-item__details dl dd { display: inline; margin: 0 8px 0 4px; color: #1a1a1a; }
+  cart-drawer .el-cart-item-price {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-top: 8px;
+  }
 
-  /* Quantity + remove column */
+  /* Quantity + remove */
   cart-drawer .cart-item__totals { display: none !important; }
   cart-drawer .cart-item__quantity { padding: 0 !important; }
   cart-drawer .cart-item__quantity-wrapper { gap: 10px; align-items: center; flex-direction: row; }
   cart-drawer .cart-item__quantity-wrapper .cart-remove-button { order: -1; }
   cart-drawer .quantity.cart-quantity {
-    min-height: 32px;
+    min-height: 34px;
     border: 1px solid #d8d0c0;
     border-radius: 100px;
     background: #fff;
@@ -78,30 +291,16 @@
   }
   cart-drawer .quantity.cart-quantity::before,
   cart-drawer .quantity.cart-quantity::after { display: none !important; }
-  cart-drawer .quantity__button {
-    width: 28px; min-width: 28px;
-    height: 28px;
-    color: #1a1a1a;
-  }
+  cart-drawer .quantity__button { width: 30px; min-width: 30px; height: 30px; color: #1a1a1a; }
   cart-drawer .quantity__button svg { width: 10px; height: 10px; }
   cart-drawer .quantity__input {
     color: #1a1a1a !important;
     font-family: 'Montserrat', sans-serif !important;
     font-size: 13px !important;
-    width: 28px !important;
-    min-width: 28px !important;
+    width: 30px !important;
+    min-width: 30px !important;
     padding: 0 !important;
   }
-
-  /* Line price — shown inline with item, not in a separate column */
-  cart-drawer .el-cart-item-price {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-top: 8px;
-  }
-
   cart-drawer .cart-remove-button {
     margin: 0 !important;
     padding: 0 !important;
@@ -112,118 +311,16 @@
   cart-drawer .cart-remove-button:hover { color: #1a1a1a !important; }
   cart-drawer .cart-remove-button svg { width: 16px; height: 16px; }
 
-  /* ─── Header ─── */
-  cart-drawer .el-cart-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 24px 24px 20px;
-    border-bottom: 1px solid #eee3d1;
-  }
-  cart-drawer .el-cart-title {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: 26px;
-    font-weight: 400;
-    color: #1a1a1a;
-    margin: 0;
-    letter-spacing: -0.01em;
-  }
-  cart-drawer .el-cart-close {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    border: 1px solid #d8d0c0;
-    background: transparent;
-    display: inline-flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    color: #1a1a1a;
-    transition: background 0.2s ease;
-  }
-  cart-drawer .el-cart-close:hover { background: rgba(0,0,0,0.04); }
-  cart-drawer .el-cart-close svg { width: 14px; height: 14px; }
-
-  /* ─── Items area ─── */
-  cart-drawer cart-drawer-items { flex: 1; overflow-y: auto; }
-  cart-drawer .cart__contents { padding: 0; }
-  cart-drawer .drawer__contents { padding: 0; }
-  cart-drawer .drawer__cart-items-wrapper { padding: 0; }
-
-  /* ─── Upsell ─── */
-  cart-drawer .el-cart-upsell {
-    padding: 10px 24px 16px;
-    background: #f5efe3;
-    border-top: 1px solid #eee3d1;
-  }
-  cart-drawer .el-cart-upsell-title {
-    font-family: 'EB Garamond', Georgia, serif;
-    font-size: 17px;
-    font-style: italic;
-    color: #1a1a1a;
-    margin: 0 0 12px;
-    font-weight: 400;
-  }
-  cart-drawer .el-upsell-item {
-    display: grid;
-    grid-template-columns: 56px 1fr auto;
-    gap: 14px;
-    align-items: center;
-    background: #fff;
-    border-radius: 6px;
-    padding: 10px 12px 10px 10px;
-    border: 1px solid #eee3d1;
-  }
-  cart-drawer .el-upsell-item + .el-upsell-item { margin-top: 8px; }
-  cart-drawer .el-upsell-img {
-    width: 56px; height: 56px;
-    object-fit: cover;
-    border-radius: 4px;
-    background: #f5efe3;
-    display: block;
-  }
-  cart-drawer .el-upsell-text { min-width: 0; }
-  cart-drawer .el-upsell-name {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #1a1a1a;
-    line-height: 1.2;
-    margin: 0 0 2px;
-    text-decoration: none;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  cart-drawer .el-upsell-price {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    color: #6a6a6a;
-  }
-  cart-drawer .el-upsell-add {
-    appearance: none;
-    border: 1px solid #1a1a1a;
-    background: transparent;
-    color: #1a1a1a;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 8px 14px;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-  cart-drawer .el-upsell-add:hover { background: #1a1a1a; color: #FDFBF6; }
-  cart-drawer .el-upsell-add[disabled] { opacity: 0.5; cursor: default; }
-  cart-drawer .el-upsell-add.is-added {
-    background: #1a1a1a;
-    color: #FDFBF6;
-  }
-
-  /* ─── Footer ─── */
-  cart-drawer .drawer__footer {
-    padding: 20px 24px 24px;
+  /* ─── Step 2 footer ─── */
+  cart-drawer .el-step--cart .el-step-footer {
+    flex-shrink: 0;
+    padding: 20px 32px 28px;
     border-top: 1px solid #eee3d1;
     background: #FDFBF6;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
   }
   cart-drawer .el-cart-subtotal {
     display: flex; align-items: baseline; justify-content: space-between;
@@ -234,8 +331,6 @@
     font-size: 16px;
     font-weight: 700;
     color: #1a1a1a;
-    letter-spacing: 0;
-    text-transform: none;
   }
   cart-drawer .el-cart-subtotal-value {
     font-family: 'Montserrat', sans-serif;
@@ -263,7 +358,7 @@
   cart-drawer .el-cart-checkout:hover:not(:disabled) { background: #000; }
   cart-drawer .el-cart-checkout:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  /* ─── Payment icons ─── */
+  /* Payment icons */
   cart-drawer .el-cart-payment-icons {
     display: flex;
     flex-wrap: wrap;
@@ -271,13 +366,20 @@
     gap: 6px;
     margin-top: 14px;
   }
-  cart-drawer .el-cart-payment-icons svg {
-    height: 22px;
-    width: auto;
-    display: block;
+  cart-drawer .el-cart-payment-icons svg { height: 22px; width: auto; display: block; }
+  cart-drawer .el-cart-payment-icons .payment-icon--ideal,
+  cart-drawer .el-cart-payment-icons .payment-icon--wero,
+  cart-drawer .el-cart-payment-icons [class*="ideal"],
+  cart-drawer .el-cart-payment-icons [class*="wero"] {
+    background: #fff !important;
+    border-radius: 4px;
   }
+  cart-drawer .el-cart-payment-icons .payment-icon--ideal rect:first-child,
+  cart-drawer .el-cart-payment-icons .payment-icon--wero rect:first-child,
+  cart-drawer .el-cart-payment-icons [class*="ideal"] rect:first-child,
+  cart-drawer .el-cart-payment-icons [class*="wero"] rect:first-child { fill: #fff !important; }
 
-  /* ─── Trust bar ─── */
+  /* Trust bar */
   cart-drawer .el-cart-trust {
     display: flex;
     justify-content: space-between;
@@ -294,12 +396,7 @@
     flex: 1;
     text-align: center;
   }
-  cart-drawer .el-trust-item svg {
-    width: 20px;
-    height: 20px;
-    color: #1a1a1a;
-    flex-shrink: 0;
-  }
+  cart-drawer .el-trust-item svg { width: 20px; height: 20px; color: #1a1a1a; flex-shrink: 0; }
   cart-drawer .el-trust-item span {
     font-family: 'Montserrat', sans-serif;
     font-size: 10px;
@@ -308,52 +405,35 @@
     line-height: 1.3;
   }
 
-  /* ─── Left border: dark emerald — single solid band ─── */
-  /* Strip ALL borders off drawer__inner (they were creating a second line) */
-  cart-drawer .drawer__inner {
-    border: none !important;
-  }
-  /* Single source of truth: left border on the outer #CartDrawer wrapper */
-  cart-drawer #CartDrawer {
-    border-left: 4px solid #0D3B2E;
-    box-sizing: border-box;
-  }
-
-  /* ─── iDEAL + Wero: white background instead of brand colour ─── */
-  cart-drawer .el-cart-payment-icons .payment-icon--ideal,
-  cart-drawer .el-cart-payment-icons .payment-icon--wero,
-  cart-drawer .el-cart-payment-icons [class*="ideal"],
-  cart-drawer .el-cart-payment-icons [class*="wero"] {
-    background: #fff !important;
-    border-radius: 4px;
-  }
-  cart-drawer .el-cart-payment-icons .payment-icon--ideal rect:first-child,
-  cart-drawer .el-cart-payment-icons .payment-icon--wero rect:first-child,
-  cart-drawer .el-cart-payment-icons [class*="ideal"] rect:first-child,
-  cart-drawer .el-cart-payment-icons [class*="wero"] rect:first-child {
-    fill: #fff !important;
-  }
-
-  /* Hide stock/tax noise */
+  /* Hide noise */
   cart-drawer .tax-note,
   cart-drawer small.tax-note,
   cart-drawer .caption-with-letter-spacing { display: none !important; }
+  cart-drawer .cart__contents { padding: 0; }
+  cart-drawer .drawer__contents { padding: 0; }
+  cart-drawer .drawer__cart-items-wrapper { padding: 0; }
+  cart-drawer cart-drawer-items { display: flex; flex-direction: column; flex: 1; min-height: 0; }
 
   /* Empty state */
   cart-drawer .drawer__inner-empty {
-    padding: 60px 24px;
+    padding: 80px 32px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
   }
   cart-drawer .cart__empty-text {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 400;
     color: #1a1a1a;
-    margin: 0 0 20px;
+    margin: 0 0 24px;
   }
   cart-drawer .drawer__inner-empty .button {
     display: inline-block;
-    padding: 14px 28px;
+    padding: 14px 32px;
     background: #1a1a1a;
     color: #FDFBF6;
     border-radius: 4px;
@@ -364,8 +444,6 @@
     text-transform: uppercase;
     text-decoration: none;
   }
-
-  /* Hide the duplicate close button from empty state that ships with Dawn */
   cart-drawer .drawer__inner-empty .drawer__close { display: none !important; }
 </style>
 
@@ -382,17 +460,35 @@
 
       {%- comment -%} ─── HEADER ─── {%- endcomment -%}
       <div class="el-cart-header">
-        <h2 class="el-cart-title">{{ 'sections.cart.title' | t | default: 'Cart' }}</h2>
-        <button
-          type="button"
-          class="el-cart-close"
-          onclick="this.closest('cart-drawer').close()"
-          aria-label="{{ 'accessibility.close' | t }}"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <path d="M6 6L18 18M18 6L6 18" />
-          </svg>
-        </button>
+        <div class="el-cart-header-left">
+          {%- if cart != empty and settings.cart_drawer_collection != blank and settings.cart_drawer_collection.products_count > 0 -%}
+            <button type="button" class="el-cart-back" id="el-cart-back" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 5l-7 7 7 7"/>
+              </svg>
+              Back
+            </button>
+          {%- endif -%}
+        </div>
+        <h2 class="el-cart-title" id="el-cart-title">
+          {%- if cart != empty and settings.cart_drawer_collection != blank and settings.cart_drawer_collection.products_count > 0 -%}
+            Extra options
+          {%- else -%}
+            {{ 'sections.cart.title' | t | default: 'Cart' }}
+          {%- endif -%}
+        </h2>
+        <div class="el-cart-header-right">
+          <button
+            type="button"
+            class="el-cart-close"
+            onclick="this.closest('cart-drawer').close()"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M6 6L18 18M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {%- comment -%} ─── EMPTY STATE ─── {%- endcomment -%}
@@ -405,360 +501,409 @@
         </div>
       {%- endif -%}
 
-      {%- comment -%} ─── ITEMS ─── {%- endcomment -%}
-      <cart-drawer-items {% if cart == empty %}class="is-empty"{% endif %}>
-        <form
-          action="{{ routes.cart_url }}"
-          id="CartDrawer-Form"
-          class="cart__contents cart-drawer__form"
-          method="post"
-        >
-          <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
-            {%- if cart != empty -%}
-              <div class="drawer__cart-items-wrapper">
-                <table class="cart-items" role="table">
-                  <thead role="rowgroup">
-                    <tr role="row">
-                      <th id="CartDrawer-ColumnProductImage" role="columnheader"><span class="visually-hidden">Image</span></th>
-                      <th id="CartDrawer-ColumnProduct" scope="col" role="columnheader"><span class="visually-hidden">Product</span></th>
-                      <th id="CartDrawer-ColumnTotal" scope="col" role="columnheader"><span class="visually-hidden">Total</span></th>
-                      <th id="CartDrawer-ColumnQuantity" role="columnheader"><span class="visually-hidden">Quantity</span></th>
-                    </tr>
-                  </thead>
+      {%- if cart != empty -%}
 
-                  <tbody role="rowgroup">
-                    {%- for item in cart.items -%}
-                      <tr
-                        id="CartDrawer-Item-{{ item.index | plus: 1 }}"
-                        class="cart-item{% if item.parent_relationship.parent != null %} cart-item__nested-line{% endif %}"
-                        role="row"
-                      >
-                        <td class="cart-item__media" role="cell" headers="CartDrawer-ColumnProductImage">
-                          {% if item.image %}
-                            <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true"> </a>
-                            <img
-                              class="cart-item__image"
-                              src="{{ item.image | image_url: width: 200 }}"
-                              alt="{{ item.image.alt | escape }}"
-                              loading="lazy"
-                              width="72"
-                              height="72"
-                            >
-                          {% endif %}
-                        </td>
+        {%- assign has_upsell = false -%}
+        {%- if settings.cart_drawer_collection != blank and settings.cart_drawer_collection.products_count > 0 -%}
+          {%- assign has_upsell = true -%}
+        {%- endif -%}
 
-                        <td class="cart-item__details" role="cell" headers="CartDrawer-ColumnProduct">
-                          <a href="{{ item.url }}" class="cart-item__name break">
-                            {{- item.product.title | escape -}}
-                          </a>
-
-                          {%- if item.product.has_only_default_variant == false -%}
-                            <dl>
-                              {%- for option in item.options_with_values -%}
-                                <div class="product-option">
-                                  <dt>{{ option.name }}:</dt>
-                                  <dd>{{ option.value }}{%- unless forloop.last %}, {% endunless %}</dd>
-                                </div>
-                              {%- endfor -%}
-                            </dl>
-                          {%- endif -%}
-
-                          {%- if item.selling_plan_allocation != null -%}
-                            <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
-                          {%- endif -%}
-
-                          <span class="el-cart-item-price">
-                            {%- if item.original_line_price != item.final_line_price -%}
-                              <s style="color:#9a9a9a; margin-right:6px;">{{ item.original_line_price | money }}</s>
-                              {{ item.final_line_price | money }}
-                            {%- else -%}
-                              {{ item.original_line_price | money }}
-                            {%- endif -%}
-                          </span>
-                        </td>
-
-                        {%- comment -%} Invisible total cell (kept for Dawn's cart.js DOM assumptions) {%- endcomment -%}
-                        <td class="cart-item__totals right" role="cell" headers="CartDrawer-ColumnTotal">
-                          {%- render 'loading-spinner' -%}
-                          <div class="cart-item__price-wrapper">
-                            <span class="price price--end">{{ item.original_line_price | money }}</span>
-                          </div>
-                        </td>
-
-                        <td class="cart-item__quantity" role="cell" headers="CartDrawer-ColumnQuantity">
-                          <quantity-popover>
-                            <div class="cart-item__quantity-wrapper quantity-popover-wrapper">
-                              <div class="quantity-popover-container">
-                                <quantity-input class="quantity cart-quantity">
-                                  <button class="quantity__button" name="minus" type="button">
-                                    <span class="visually-hidden">Decrease</span>
-                                    <span class="svg-wrapper">{{- 'icon-minus.svg' | inline_asset_content -}}</span>
-                                  </button>
-                                  <input
-                                    class="quantity__input"
-                                    type="number"
-                                    data-quantity-variant-id="{{ item.variant.id }}"
-                                    name="updates[]"
-                                    value="{{ item.quantity }}"
-                                    data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
-                                    min="0"
-                                    data-min="{{ item.variant.quantity_rule.min }}"
-                                    {% if item.variant.quantity_rule.max != null %}max="{{ item.variant.quantity_rule.max }}"{% endif %}
-                                    step="{{ item.variant.quantity_rule.increment }}"
-                                    aria-label="Quantity"
-                                    id="Drawer-quantity-{{ item.index | plus: 1 }}"
-                                    data-index="{{ item.index | plus: 1 }}"
-                                  >
-                                  <button class="quantity__button" name="plus" type="button">
-                                    <span class="visually-hidden">Increase</span>
-                                    <span class="svg-wrapper">{{- 'icon-plus.svg' | inline_asset_content -}}</span>
-                                  </button>
-                                </quantity-input>
-                              </div>
-                              <cart-remove-button
-                                id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
-                                data-index="{{ item.index | plus: 1 }}"
-                              >
-                                <button
-                                  type="button"
-                                  class="button button--tertiary cart-remove-button"
-                                  aria-label="Remove"
-                                  data-variant-id="{{ item.variant.id }}"
-                                >
-                                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M3 6h18" />
-                                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-                                    <path d="M10 11v6" />
-                                    <path d="M14 11v6" />
-                                  </svg>
-                                </button>
-                              </cart-remove-button>
-                            </div>
-                            <div id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}" class="cart-item__error" role="alert">
-                              <small class="cart-item__error-text"></small>
-                            </div>
-                          </quantity-popover>
-                        </td>
-                      </tr>
-                    {%- endfor -%}
-                  </tbody>
-                </table>
+        {%- comment -%} ─── STEP 1: UPSELL ─── {%- endcomment -%}
+        {%- if has_upsell -%}
+          <div class="el-step el-step--upsell" id="el-step-upsell">
+            <div class="el-step-body">
+              <p class="el-upsell-intro">Would you like to add anything to your order?</p>
+              <div class="el-upsell-grid">
+                {%- for up_product in settings.cart_drawer_collection.products limit: 6 -%}
+                  {%- assign up_variant = up_product.selected_or_first_available_variant -%}
+                  <div class="el-upsell-item">
+                    <a href="{{ up_product.url }}" tabindex="-1" aria-hidden="true">
+                      {% if up_product.featured_image %}
+                        <img class="el-upsell-img" src="{{ up_product.featured_image | image_url: width: 200 }}" alt="{{ up_product.featured_image.alt | escape }}" loading="lazy" width="72" height="72">
+                      {% endif %}
+                    </a>
+                    <div class="el-upsell-text">
+                      <a href="{{ up_product.url }}" class="el-upsell-name">{{ up_product.title | escape }}</a>
+                      <span class="el-upsell-price">{{ up_variant.price | money }}</span>
+                    </div>
+                    <button
+                      type="button"
+                      class="el-upsell-add"
+                      data-variant-id="{{ up_variant.id }}"
+                      {% unless up_variant.available %}disabled{% endunless %}
+                    >
+                      {% if up_variant.available %}+ Add{% else %}Sold out{% endif %}
+                    </button>
+                  </div>
+                {%- endfor -%}
               </div>
-            {%- endif -%}
-            <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
-            <p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">
-              {{ 'accessibility.loading' | t }}
-            </p>
-          </div>
-          <div id="CartDrawer-CartErrors" role="alert"></div>
-        </form>
-      </cart-drawer-items>
-
-      {%- comment -%} ─── UPSELL (glass etc.) ─── {%- endcomment -%}
-      {%- if cart != empty and settings.cart_drawer_collection != blank and settings.cart_drawer_collection.products_count > 0 -%}
-        <div class="el-cart-upsell">
-          <p class="el-cart-upsell-title">Extra options</p>
-          {%- for up_product in settings.cart_drawer_collection.products limit: 2 -%}
-            {%- assign up_variant = up_product.selected_or_first_available_variant -%}
-            <div class="el-upsell-item">
-              <a href="{{ up_product.url }}" tabindex="-1" aria-hidden="true">
-                {% if up_product.featured_image %}
-                  <img class="el-upsell-img" src="{{ up_product.featured_image | image_url: width: 160 }}" alt="{{ up_product.featured_image.alt | escape }}" loading="lazy" width="56" height="56">
-                {% endif %}
-              </a>
-              <div class="el-upsell-text">
-                <a href="{{ up_product.url }}" class="el-upsell-name">{{ up_product.title | escape }}</a>
-                <span class="el-upsell-price">{{ up_variant.price | money }}</span>
-              </div>
-              <button
-                type="button"
-                class="el-upsell-add"
-                data-variant-id="{{ up_variant.id }}"
-                {% unless up_variant.available %}disabled{% endunless %}
-              >
-                {% if up_variant.available %}+ Add{% else %}Sold out{% endif %}
+            </div>
+            <div class="el-step-footer">
+              <button type="button" class="el-next-btn" id="el-next-btn">
+                View cart &rarr;
               </button>
             </div>
-          {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} ─── STEP 2: CART ITEMS ─── {%- endcomment -%}
+        <div class="el-step el-step--cart" id="el-step-cart" {% if has_upsell %}hidden{% endif %}>
+          <div class="el-step-body">
+            <cart-drawer-items {% if cart == empty %}class="is-empty"{% endif %}>
+              <form
+                action="{{ routes.cart_url }}"
+                id="CartDrawer-Form"
+                class="cart__contents cart-drawer__form"
+                method="post"
+              >
+                <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
+                  <div class="drawer__cart-items-wrapper">
+                    <table class="cart-items" role="table">
+                      <thead role="rowgroup">
+                        <tr role="row">
+                          <th id="CartDrawer-ColumnProductImage" role="columnheader"><span class="visually-hidden">Image</span></th>
+                          <th id="CartDrawer-ColumnProduct" scope="col" role="columnheader"><span class="visually-hidden">Product</span></th>
+                          <th id="CartDrawer-ColumnTotal" scope="col" role="columnheader"><span class="visually-hidden">Total</span></th>
+                          <th id="CartDrawer-ColumnQuantity" role="columnheader"><span class="visually-hidden">Quantity</span></th>
+                        </tr>
+                      </thead>
+                      <tbody role="rowgroup">
+                        {%- for item in cart.items -%}
+                          <tr
+                            id="CartDrawer-Item-{{ item.index | plus: 1 }}"
+                            class="cart-item{% if item.parent_relationship.parent != null %} cart-item__nested-line{% endif %}"
+                            role="row"
+                          >
+                            <td class="cart-item__media" role="cell" headers="CartDrawer-ColumnProductImage">
+                              {% if item.image %}
+                                <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true"> </a>
+                                <img
+                                  class="cart-item__image"
+                                  src="{{ item.image | image_url: width: 200 }}"
+                                  alt="{{ item.image.alt | escape }}"
+                                  loading="lazy"
+                                  width="80"
+                                  height="80"
+                                >
+                              {% endif %}
+                            </td>
+                            <td class="cart-item__details" role="cell" headers="CartDrawer-ColumnProduct">
+                              <a href="{{ item.url }}" class="cart-item__name break">
+                                {{- item.product.title | escape -}}
+                              </a>
+                              {%- if item.product.has_only_default_variant == false -%}
+                                <dl>
+                                  {%- for option in item.options_with_values -%}
+                                    <div class="product-option">
+                                      <dt>{{ option.name }}:</dt>
+                                      <dd>{{ option.value }}{%- unless forloop.last %}, {% endunless %}</dd>
+                                    </div>
+                                  {%- endfor -%}
+                                </dl>
+                              {%- endif -%}
+                              {%- if item.selling_plan_allocation != null -%}
+                                <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                              {%- endif -%}
+                              <span class="el-cart-item-price">
+                                {%- if item.original_line_price != item.final_line_price -%}
+                                  <s style="color:#9a9a9a; margin-right:6px;">{{ item.original_line_price | money }}</s>
+                                  {{ item.final_line_price | money }}
+                                {%- else -%}
+                                  {{ item.original_line_price | money }}
+                                {%- endif -%}
+                              </span>
+                            </td>
+                            {%- comment -%} Invisible total cell (kept for Dawn cart.js) {%- endcomment -%}
+                            <td class="cart-item__totals right" role="cell" headers="CartDrawer-ColumnTotal">
+                              {%- render 'loading-spinner' -%}
+                              <div class="cart-item__price-wrapper">
+                                <span class="price price--end">{{ item.original_line_price | money }}</span>
+                              </div>
+                            </td>
+                            <td class="cart-item__quantity" role="cell" headers="CartDrawer-ColumnQuantity">
+                              <quantity-popover>
+                                <div class="cart-item__quantity-wrapper quantity-popover-wrapper">
+                                  <div class="quantity-popover-container">
+                                    <quantity-input class="quantity cart-quantity">
+                                      <button class="quantity__button" name="minus" type="button">
+                                        <span class="visually-hidden">Decrease</span>
+                                        <span class="svg-wrapper">{{- 'icon-minus.svg' | inline_asset_content -}}</span>
+                                      </button>
+                                      <input
+                                        class="quantity__input"
+                                        type="number"
+                                        data-quantity-variant-id="{{ item.variant.id }}"
+                                        name="updates[]"
+                                        value="{{ item.quantity }}"
+                                        data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                                        min="0"
+                                        data-min="{{ item.variant.quantity_rule.min }}"
+                                        {% if item.variant.quantity_rule.max != null %}max="{{ item.variant.quantity_rule.max }}"{% endif %}
+                                        step="{{ item.variant.quantity_rule.increment }}"
+                                        aria-label="Quantity"
+                                        id="Drawer-quantity-{{ item.index | plus: 1 }}"
+                                        data-index="{{ item.index | plus: 1 }}"
+                                      >
+                                      <button class="quantity__button" name="plus" type="button">
+                                        <span class="visually-hidden">Increase</span>
+                                        <span class="svg-wrapper">{{- 'icon-plus.svg' | inline_asset_content -}}</span>
+                                      </button>
+                                    </quantity-input>
+                                  </div>
+                                  <cart-remove-button
+                                    id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
+                                    data-index="{{ item.index | plus: 1 }}"
+                                  >
+                                    <button
+                                      type="button"
+                                      class="button button--tertiary cart-remove-button"
+                                      aria-label="Remove"
+                                      data-variant-id="{{ item.variant.id }}"
+                                    >
+                                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M3 6h18" />
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                                        <path d="M10 11v6" />
+                                        <path d="M14 11v6" />
+                                      </svg>
+                                    </button>
+                                  </cart-remove-button>
+                                </div>
+                                <div id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}" class="cart-item__error" role="alert">
+                                  <small class="cart-item__error-text"></small>
+                                </div>
+                              </quantity-popover>
+                            </td>
+                          </tr>
+                        {%- endfor -%}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
+                  <p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">
+                    {{ 'accessibility.loading' | t }}
+                  </p>
+                </div>
+                <div id="CartDrawer-CartErrors" role="alert"></div>
+              </form>
+            </cart-drawer-items>
+          </div>
+
+          <div class="el-step-footer">
+            <div class="el-cart-subtotal">
+              <span class="el-cart-subtotal-label">Subtotal</span>
+              <span class="el-cart-subtotal-value">{{ cart.total_price | money }}</span>
+            </div>
+            <button
+              type="submit"
+              id="CartDrawer-Checkout"
+              class="el-cart-checkout"
+              name="checkout"
+              form="CartDrawer-Form"
+            >
+              {{ 'sections.cart.checkout' | t }}
+            </button>
+            <div class="el-cart-payment-icons" aria-hidden="true">
+              {%- assign excluded_payments = 'american_express,unionpay,shopify_pay,google_pay' | split: ',' -%}
+              {%- for type in shop.enabled_payment_types -%}
+                {%- unless excluded_payments contains type -%}
+                  {{ type | payment_type_svg_tag: scale: 1 }}
+                {%- endunless -%}
+              {%- endfor -%}
+            </div>
+            <div class="el-cart-trust">
+              <div class="el-trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M15 7l5 5-5 5"/>
+                  <rect x="1" y="9" width="6" height="6" rx="1"/>
+                </svg>
+                <span>Free delivery</span>
+              </div>
+              <div class="el-trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+                <span>100% secure payment</span>
+              </div>
+              <div class="el-trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 21h8M12 17v4"/>
+                  <path d="M7 4H4a1 1 0 0 0-1 1v2a4 4 0 0 0 4 4"/>
+                  <path d="M17 4h3a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4"/>
+                  <path d="M12 2C9.8 2 8 5 8 8c0 3.3 1.8 6 4 6s4-2.7 4-6c0-3-1.8-6-4-6z"/>
+                </svg>
+                <span>Satisfaction guaranteed or your money back</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <script>
-          (function() {
-            var drawer = document.currentScript.closest('cart-drawer');
-            if (!drawer || drawer.__elUpsellBound) return;
-            drawer.__elUpsellBound = true;
-            drawer.addEventListener('click', function(e) {
-              var btn = e.target.closest('.el-upsell-add');
-              if (!btn || btn.disabled) return;
-              e.preventDefault();
-              var variantId = btn.getAttribute('data-variant-id');
-              var originalText = btn.textContent;
-              btn.disabled = true;
-              btn.textContent = 'Adding…';
-
-              var sectionsToRender = ['cart-drawer', 'cart-icon-bubble'];
-              fetch('{{ routes.cart_add_url }}', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({
-                  items: [{ id: variantId, quantity: 1 }],
-                  sections: sectionsToRender.join(','),
-                  sections_url: window.location.pathname
-                })
-              })
-              .then(function(r) { return r.json(); })
-              .then(function(data) {
-                if (data.status) {
-                  btn.textContent = originalText;
-                  btn.disabled = false;
-                  return;
-                }
-                // Refresh cart drawer via Dawn's CartDrawer web component
-                var cd = document.querySelector('cart-drawer');
-                if (cd && typeof cd.renderContents === 'function') {
-                  cd.renderContents(data);
-                } else {
-                  window.location.reload();
-                  return;
-                }
-                btn.textContent = '✓ Added';
-                btn.classList.add('is-added');
-                setTimeout(function() {
-                  btn.textContent = originalText;
-                  btn.classList.remove('is-added');
-                  btn.disabled = false;
-                }, 1400);
-              })
-              .catch(function() {
-                btn.textContent = originalText;
-                btn.disabled = false;
-              });
-            });
-          })();
-        </script>
-      {%- endif -%}
-
-      {%- comment -%} ─── FOOTER ─── {%- endcomment -%}
-      {%- if cart != empty -%}
-        <div class="drawer__footer">
-          <div class="el-cart-subtotal">
-            <span class="el-cart-subtotal-label">Subtotal</span>
-            <span class="el-cart-subtotal-value">{{ cart.total_price | money }}</span>
-          </div>
-
-          <button
-            type="submit"
-            id="CartDrawer-Checkout"
-            class="el-cart-checkout"
-            name="checkout"
-            form="CartDrawer-Form"
-            {% if cart == empty %}disabled{% endif %}
-          >
-            {{ 'sections.cart.checkout' | t }}
-          </button>
-
-          {%- comment -%} Payment icons {%- endcomment -%}
-          <div class="el-cart-payment-icons" aria-hidden="true">
-            {%- assign excluded_payments = 'american_express,unionpay,shopify_pay,google_pay' | split: ',' -%}
-            {%- for type in shop.enabled_payment_types -%}
-              {%- unless excluded_payments contains type -%}
-                {{ type | payment_type_svg_tag: scale: 1 }}
-              {%- endunless -%}
-            {%- endfor -%}
-          </div>
-
-          {%- comment -%} Trust bar {%- endcomment -%}
-          <div class="el-cart-trust">
-            <div class="el-trust-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M15 7l5 5-5 5"/>
-                <rect x="1" y="9" width="6" height="6" rx="1"/>
-              </svg>
-              <span>Free delivery</span>
-            </div>
-            <div class="el-trust-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="M9 12l2 2 4-4"/>
-              </svg>
-              <span>100% secure payment</span>
-            </div>
-            <div class="el-trust-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M8 21h8M12 17v4"/>
-                <path d="M7 4H4a1 1 0 0 0-1 1v2a4 4 0 0 0 4 4"/>
-                <path d="M17 4h3a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4"/>
-                <path d="M12 2C9.8 2 8 5 8 8c0 3.3 1.8 6 4 6s4-2.7 4-6c0-3-1.8-6-4-6z"/>
-              </svg>
-              <span>Satisfaction guaranteed or your money back</span>
-            </div>
-          </div>
-        </div>
       {%- endif -%}
 
     </div>
   </div>
 </cart-drawer>
 
-{%- comment -%}
-  ─── GLOBAL ADD-TO-CART INTERCEPTOR ───
-  Safety-net: ensures any product-add form opens the cart drawer instead of
-  navigating to /cart. Dawn's <product-form> normally handles this, but if
-  for any reason it fails to bind (custom sections, third-party blocks,
-  etc.) this guarantees the drawer opens.
-{%- endcomment -%}
 <script>
   (function() {
-    if (window.__elCartInterceptorBound) return;
-    window.__elCartInterceptorBound = true;
+    /* ─── Two-step navigation ─── */
+    function initCartSteps() {
+      var stepUpsell = document.getElementById('el-step-upsell');
+      var stepCart   = document.getElementById('el-step-cart');
+      var nextBtn    = document.getElementById('el-next-btn');
+      var backBtn    = document.getElementById('el-cart-back');
+      var title      = document.getElementById('el-cart-title');
 
-    document.addEventListener('submit', function(evt) {
-      var form = evt.target;
-      if (!(form instanceof HTMLFormElement)) return;
-      // Only intercept Shopify product add-to-cart forms (Dawn marks them with data-type)
-      if (form.dataset.type !== 'add-to-cart-form') return;
-      // If <product-form> already handled this, evt.defaultPrevented is true → bail
-      if (evt.defaultPrevented) return;
+      if (!stepCart) return; // cart is empty or no steps
 
-      evt.preventDefault();
+      function goToCart() {
+        if (stepUpsell) stepUpsell.hidden = true;
+        stepCart.hidden = false;
+        if (backBtn) backBtn.hidden = false;
+        if (title) title.textContent = 'Your cart';
+      }
 
-      var drawer = document.querySelector('cart-drawer');
-      var submitBtn = form.querySelector('[type="submit"]');
-      var originalDisabled = submitBtn ? submitBtn.disabled : false;
-      if (submitBtn) submitBtn.disabled = true;
+      function goToUpsell() {
+        if (stepUpsell) stepUpsell.hidden = false;
+        stepCart.hidden = true;
+        if (backBtn) backBtn.hidden = true;
+        if (title) title.textContent = 'Extra options';
+      }
 
-      var formData = new FormData(form);
-      // Ask Shopify to also return the cart-drawer + icon sections so we can re-render
-      formData.append('sections', 'cart-drawer,cart-icon-bubble');
-      formData.append('sections_url', window.location.pathname);
+      if (nextBtn) nextBtn.addEventListener('click', goToCart);
+      if (backBtn) backBtn.addEventListener('click', goToUpsell);
 
-      fetch('{{ routes.cart_add_url }}.js', {
+      // Reset to step 1 whenever the drawer opens
+      var drawerEl = document.querySelector('cart-drawer');
+      if (drawerEl) {
+        var origOpen = drawerEl.open.bind(drawerEl);
+        drawerEl.open = function(triggeredBy) {
+          // Only reset if we have an upsell step
+          if (stepUpsell && !stepUpsell.hidden === false) {
+            // already on upsell — no change needed
+          }
+          // Re-read DOM in case renderContents replaced elements
+          var su = document.getElementById('el-step-upsell');
+          var sc = document.getElementById('el-step-cart');
+          if (su && sc) {
+            su.hidden = false;
+            sc.hidden = true;
+            var bb = document.getElementById('el-cart-back');
+            var tt = document.getElementById('el-cart-title');
+            if (bb) bb.hidden = true;
+            if (tt) tt.textContent = 'Extra options';
+          }
+          origOpen(triggeredBy);
+        };
+      }
+    }
+
+    // Init now + re-init after Dawn re-renders the drawer via renderContents
+    document.addEventListener('DOMContentLoaded', initCartSteps);
+    // Also hook into Dawn's cart re-render cycle
+    var _origRenderContents = null;
+    function patchRenderContents() {
+      var cd = document.querySelector('cart-drawer');
+      if (!cd || cd.__elStepPatched) return;
+      cd.__elStepPatched = true;
+      var orig = cd.renderContents.bind(cd);
+      cd.renderContents = function(state) {
+        orig(state);
+        // After DOM is replaced, re-initialise step wiring
+        setTimeout(initCartSteps, 50);
+      };
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', patchRenderContents);
+    } else {
+      patchRenderContents();
+      initCartSteps();
+    }
+
+    /* ─── Upsell add-to-cart ─── */
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.el-upsell-add');
+      if (!btn || btn.disabled) return;
+      e.preventDefault();
+      var variantId   = btn.getAttribute('data-variant-id');
+      var originalText = btn.textContent.trim();
+      btn.disabled = true;
+      btn.textContent = 'Adding…';
+
+      fetch('{{ routes.cart_add_url }}', {
         method: 'POST',
-        headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
-        body: formData
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          items: [{ id: parseInt(variantId), quantity: 1 }],
+          sections: 'cart-drawer,cart-icon-bubble',
+          sections_url: window.location.pathname
+        })
       })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.status) {
+          btn.textContent = originalText;
+          btn.disabled = false;
+          return;
+        }
+        btn.textContent = '✓ Added';
+        btn.classList.add('is-added');
+        setTimeout(function() {
+          btn.textContent = originalText;
+          btn.classList.remove('is-added');
+          btn.disabled = false;
+        }, 1400);
+        // Update icon bubble only — keep drawer open on step 1
+        var cd = document.querySelector('cart-drawer');
+        if (cd && data.sections && data.sections['cart-icon-bubble']) {
+          var bubble = document.getElementById('cart-icon-bubble');
+          if (bubble) bubble.innerHTML = cd.getSectionInnerHTML(data.sections['cart-icon-bubble']);
+        }
+      })
+      .catch(function() {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      });
+    });
+
+    /* ─── Global add-to-cart interceptor ─── */
+    if (!window.__elCartInterceptorBound) {
+      window.__elCartInterceptorBound = true;
+      document.addEventListener('submit', function(evt) {
+        var form = evt.target;
+        if (!(form instanceof HTMLFormElement)) return;
+        if (form.dataset.type !== 'add-to-cart-form') return;
+        if (evt.defaultPrevented) return;
+        evt.preventDefault();
+
+        var drawer    = document.querySelector('cart-drawer');
+        var submitBtn = form.querySelector('[type="submit"]');
+        var originalDisabled = submitBtn ? submitBtn.disabled : false;
+        if (submitBtn) submitBtn.disabled = true;
+
+        var formData = new FormData(form);
+        formData.append('sections', 'cart-drawer,cart-icon-bubble');
+        formData.append('sections_url', window.location.pathname);
+
+        fetch('{{ routes.cart_add_url }}.js', {
+          method: 'POST',
+          headers: { 'Accept': 'application/javascript', 'X-Requested-With': 'XMLHttpRequest' },
+          body: formData
+        })
         .then(function(r) { return r.json(); })
         .then(function(data) {
-          if (data.status) {
-            // Error path — fall back to native submit so user sees the error UI
-            form.submit();
-            return;
-          }
+          if (data.status) { form.submit(); return; }
           if (drawer && typeof drawer.renderContents === 'function') {
             drawer.renderContents(data);
           } else {
-            // No drawer → fall back to navigating to cart page
             window.location.href = '{{ routes.cart_url }}';
           }
         })
-        .catch(function() {
-          // Network error → let native submit happen
-          form.submit();
-        })
-        .finally(function() {
-          if (submitBtn) submitBtn.disabled = originalDisabled;
-        });
-    }); // bubble phase: product-form's handler runs first; if it called preventDefault we bail
+        .catch(function() { form.submit(); })
+        .finally(function() { if (submitBtn) submitBtn.disabled = originalDisabled; });
+      });
+    }
   })();
 </script>
