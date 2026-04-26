@@ -708,6 +708,48 @@
 </cart-drawer>
 
 {%- comment -%}
+  ─── PATCH: keep cart-drawer wrapper class in sync on every render ───
+  Dawn's CartDrawer.renderContents() only swaps innerHTML — it never updates
+  the `is-empty` class on the outer <cart-drawer>. So if the page loaded
+  with an empty cart and the user adds a product, the drawer re-renders
+  but Dawn's CSS keeps it looking empty. We override renderContents to
+  toggle the class based on the response item_count, and force-open the
+  drawer so the user actually sees the new item.
+{%- endcomment -%}
+<script>
+  (function() {
+    if (window.__elCartDrawerPatched) return;
+    function patch() {
+      var drawer = document.querySelector('cart-drawer');
+      if (!drawer || drawer.__elPatched) return false;
+      drawer.__elPatched = true;
+      window.__elCartDrawerPatched = true;
+      var original = drawer.renderContents.bind(drawer);
+      drawer.renderContents = function(parsedState) {
+        var result = original(parsedState);
+        if (parsedState && typeof parsedState.item_count === 'number') {
+          drawer.classList.toggle('is-empty', parsedState.item_count === 0);
+        }
+        // Ensure drawer opens after add-to-cart even if focus path differs
+        setTimeout(function() {
+          if (!drawer.classList.contains('active')) drawer.open();
+        });
+        return result;
+      };
+      return true;
+    }
+    if (!patch()) {
+      // Custom element may not be defined yet; retry once defined
+      if (window.customElements && customElements.whenDefined) {
+        customElements.whenDefined('cart-drawer').then(function() { patch(); });
+      } else {
+        document.addEventListener('DOMContentLoaded', patch);
+      }
+    }
+  })();
+</script>
+
+{%- comment -%}
   ─── GLOBAL ADD-TO-CART INTERCEPTOR ───
   Safety-net: ensures any product-add form opens the cart drawer instead of
   navigating to /cart. Dawn's <product-form> normally handles this, but if
